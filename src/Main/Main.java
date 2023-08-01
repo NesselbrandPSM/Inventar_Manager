@@ -18,8 +18,5 @@ public class Main {
         connector = new SQLConnector();
         mainGui= new MainGui(connector);
         mainGui.init();
-
-
-        //System.out.println(Arrays.deepToString(Utils.convertResultSetTo2DArray(connector.query(new SQLSelectAllStatement()))));
     }
 }
