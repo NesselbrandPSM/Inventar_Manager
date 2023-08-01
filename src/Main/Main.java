@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) {
         m = new Main();
         m.init();
-        //this is the master
     }
 
     private void init(){
