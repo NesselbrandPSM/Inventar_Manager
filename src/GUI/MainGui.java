@@ -2,18 +2,12 @@ package GUI;
 
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
-import Main.utility.Utils;
 import SQL.SQLConnector;
-import SQL.Statements.SQLStatement;
-import SQL.util.IllegalSQLStatementException;
-import SQL.util.TableAttributes;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainGui {
@@ -36,8 +30,6 @@ public class MainGui {
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
-    private int flags;
-
     private static boolean showAll = true;
 
     public MainGui(SQLConnector connector) {
@@ -46,9 +38,7 @@ public class MainGui {
         statusList.start();
 
         textArea1.setText("");
-        for (TableAttributes attr : TableAttributes.values()) {
-            textArea1.append(attr.toGermanString() + ":\n");
-        }
+        //TODO set attributes to textArea1
 
         JTableHeader tableHeader = table1.getTableHeader();
         tableHeader.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -62,7 +52,7 @@ public class MainGui {
                     if (isShowAll()) {
                         try {
                             int i = table1.getSelectedRow();
-                            updateShowAllTableModel();
+                            //TODO update Table
                             table1.getSelectionModel().setSelectionInterval(0, i);
                             Thread.sleep(60 * 1000);
                         } catch (InterruptedException e) {
@@ -83,7 +73,7 @@ public class MainGui {
                 textArea2.setText("");
                 textArea2.setDisabledTextColor(new Color(2, 126, 254));
             }
-            updateShowAllTableModel();
+            //TODO update table model
             table1.getSelectionModel().setSelectionInterval(0, i);
         });
 
@@ -93,11 +83,11 @@ public class MainGui {
             public void actionPerformed(ActionEvent e) {
                 if (searchTextField.getText().equals("")) {
                     setShowAll(true);
-                    //TODO
+                    //TODO updateTableModel to show all
                 } else {
                     setShowAll(false);
                     try {
-                        //TODO
+                        //TODO updateTableModel with search parameters
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -109,7 +99,7 @@ public class MainGui {
         suchenButton.addActionListener(new searchAction());
         searchTextField.addActionListener(new searchAction());
 
-        AtomicInteger temp = new AtomicInteger();
+        AtomicInteger temp = new AtomicInteger(); //so no doubleclicking
         //region tableListener
         ListSelectionModel selectionModel = table1.getSelectionModel();
         selectionModel.addListSelectionListener(x -> {
@@ -117,16 +107,7 @@ public class MainGui {
                 temp.set(1);
                 int selectedRow = table1.getSelectedRow();
                 if (selectedRow >= 0) {
-                    String[] selected = (String[]) tableModel.getRow(selectedRow);
-                    String fullIV = selected[0].toLowerCase();
-                    System.out.println(fullIV);
-                    String ivnumber = selected[0].substring(0, 2).toLowerCase();
-                    //ResultSet res = connector.query(new SQLStatement("select * from inventory_company join inventory_" + ivnumber + " where inventory_" + ivnumber + ".iv_number = " + "\"" + fullIV + "\""));
-
-                    selectedItemTextPane.setText(selected[0] + "\n");
-                    selectedItemTextPane.setBackground(null);
-                    textArea2.setText("");
-                    textArea2.setDisabledTextColor(new Color(2, 126, 254));
+                    //TODO get infos from select + show on the right
                 }
             } else {
                 temp.set(0);
@@ -155,7 +136,7 @@ public class MainGui {
                     public void actionPerformed(ActionEvent e) {
                         if (!showAll) {
                             setShowAll(true);
-                            //TODO
+                            //TODO update table model to show all / default view
                         }
                     }
                 }
@@ -164,6 +145,7 @@ public class MainGui {
 
         PCcheckBox1.addActionListener(e -> {
             if (PCcheckBox1.isSelected()) {
+                //TODO show only checkbox specific entrys => update Table Model
             }
         });
     }
@@ -239,14 +221,7 @@ public class MainGui {
                             options,
                             options[1]);
                     if (result == 0) {
-                        //TODO
-                        //connector.query(new SQLDeleteKeyStatement(toDeleteKey));
-//                        statusList.add("deleting key " + toDeleteKey, 1);
-//                        String s = (String) tableModel.getRow(table1.getSelectedRow())[1] + " (deleted)";
-//                        updateShowAllTableModel(0);
-//                        selectedItemTextPane.setText(s);
-//                        selectedItemTextPane.setBackground(new Color(255, 0, 0));
-//                        textArea2.setDisabledTextColor(new Color(255, 0, 0));
+                        //TODO delete entry => set active to 0
                     }
                 }
             }

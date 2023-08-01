@@ -1,7 +1,6 @@
 package GUI.util;
 
 import SQL.SQLConnector;
-import SQL.util.TableAttributes;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -14,7 +13,8 @@ public class ShowAllTableModel extends AbstractTableModel {
 
     public ShowAllTableModel(SQLConnector connector) {
         this.connector = connector;
-        columnNames = TableAttributes.toStringArray();
+        //TODO set columnNames
+        columnNames = null;
     }
 
 
