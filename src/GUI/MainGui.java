@@ -3,6 +3,7 @@ package GUI;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import SQL.SQLConnector;
+import SQL.Statements.SQLSequenzStatements;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
@@ -27,13 +28,15 @@ public class MainGui {
     private JCheckBox PCcheckBox1;
 
     private SQLConnector connector;
+    private SQLSequenzStatements sqlSequenzStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
     private static boolean showAll = true;
 
-    public MainGui(SQLConnector connector) {
+    public MainGui(SQLConnector connector, SQLSequenzStatements sqlSequenzStatements) {
         this.connector = connector;
+        this.sqlSequenzStatements = sqlSequenzStatements;
         this.statusList = new StatusList(statusLabel);
         statusList.start();
 
@@ -158,7 +161,7 @@ public class MainGui {
             throw new RuntimeException(e);
         }
         JFrame frame = new JFrame("Inventar Manager");
-        frame.setContentPane(new MainGui(connector).panel1);
+        frame.setContentPane(new MainGui(connector, sqlSequenzStatements).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -166,7 +169,7 @@ public class MainGui {
     }
 
     private void createUIComponents() {
-        tableModel = new ShowAllTableModel(connector);
+        tableModel = new ShowAllTableModel(connector, sqlSequenzStatements);
         table1 = new JTable(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -209,20 +212,7 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    int toDeleteKey = Integer.parseInt((String) tableModel.getRow(table1.getSelectedRow())[0]);
-                    String[] options = {"Ja", "Abbrechen"};
-                    int result = JOptionPane.showOptionDialog(
-                            panel1,
-                            "Sind sie sich sicher, dass sie den Eintrag mit key = " + toDeleteKey + " löschen wollen?",
-                            "Warnung",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.WARNING_MESSAGE,
-                            null,
-                            options,
-                            options[1]);
-                    if (result == 0) {
-                        //TODO delete entry => set active to 0
-                    }
+                    //TODO delete (active => 0)
                 }
             }
         });

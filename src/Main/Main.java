@@ -2,9 +2,11 @@ package Main;
 
 import GUI.MainGui;
 import SQL.SQLConnector;
+import SQL.Statements.SQLSequenzStatements;
 
 public class Main {
     private SQLConnector connector;
+    private SQLSequenzStatements sqlSequenzStatements;
     public MainGui mainGui;
 
     public static Main m;
@@ -16,7 +18,8 @@ public class Main {
 
     private void init(){
         connector = new SQLConnector();
-        mainGui= new MainGui(connector);
+        sqlSequenzStatements = new SQLSequenzStatements(connector);
+        mainGui= new MainGui(connector, sqlSequenzStatements);
         mainGui.init();
     }
 }

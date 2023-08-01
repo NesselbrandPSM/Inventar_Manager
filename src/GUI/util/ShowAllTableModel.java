@@ -1,8 +1,11 @@
 package GUI.util;
 
+import Main.Main;
 import SQL.SQLConnector;
+import SQL.Statements.SQLSequenzStatements;
 
 import javax.swing.table.AbstractTableModel;
+import java.sql.ResultSet;
 
 public class ShowAllTableModel extends AbstractTableModel {
 
@@ -10,13 +13,18 @@ public class ShowAllTableModel extends AbstractTableModel {
     Object[][] data;
 
     final SQLConnector connector;
+    final SQLSequenzStatements sqlSequenzStatements;
 
-    public ShowAllTableModel(SQLConnector connector) {
+    public ShowAllTableModel(SQLConnector connector, SQLSequenzStatements sqlSequenzStatements) {
         this.connector = connector;
-        //TODO set columnNames
-        columnNames = null;
+        this.sqlSequenzStatements = sqlSequenzStatements;
+        columnNames = ColumNames.columnNamesStandardView;
+        initData();
     }
 
+    private void initData() {
+        data = sqlSequenzStatements.getDefaultView();
+    }
 
     public void update(String[][] data){
         this.data = data;
