@@ -6,7 +6,6 @@ import SQL.SQLConnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SQLSequenzStatements {
     private SQLConnector connector;
@@ -37,7 +36,6 @@ public class SQLSequenzStatements {
                 i++;
             }
             //endregion
-
             //region Printer
             resultSet = connector.query(new SQLStatement("select printer.iv_number, company.company " +
                     "from company " +
@@ -52,7 +50,6 @@ public class SQLSequenzStatements {
                 i++;
             }
             //endregion
-
             //region Scanner
             resultSet = connector.query(new SQLStatement("select scanner.iv_number, company.company " +
                     "from company " +
