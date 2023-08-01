@@ -25,7 +25,7 @@ public class MainGui {
     private JTextPane selectedItemTextPane;
     private JLabel statusLabel;
     private JScrollPane tableScrollPane;
-    private JCheckBox PCcheckBox1;
+    private JCheckBox PCCheckBox;
 
     private SQLConnector connector;
     private SQLSequenzStatements sqlSequenzStatements;
@@ -146,8 +146,8 @@ public class MainGui {
         );
         //endregion
 
-        PCcheckBox1.addActionListener(e -> {
-            if (PCcheckBox1.isSelected()) {
+        PCCheckBox.addActionListener(e -> {
+            if (PCCheckBox.isSelected()) {
                 //TODO show only checkbox specific entrys => update Table Model
             }
         });
