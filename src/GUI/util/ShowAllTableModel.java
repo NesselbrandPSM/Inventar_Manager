@@ -1,12 +1,9 @@
 package GUI.util;
 
-import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.TableAttributes;
 
 import javax.swing.table.AbstractTableModel;
-import java.sql.ResultSet;
-import java.util.Arrays;
 
 public class ShowAllTableModel extends AbstractTableModel {
 

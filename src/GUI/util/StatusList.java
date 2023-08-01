@@ -61,6 +61,4 @@ public class StatusList extends Thread {
             }
         }
     }
-
-
 }
