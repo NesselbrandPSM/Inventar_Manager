@@ -3,6 +3,7 @@ package SQL;
 import SQL.Statements.SQLStatement;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLConnector {
 
