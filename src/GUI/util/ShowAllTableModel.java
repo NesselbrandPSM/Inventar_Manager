@@ -1,14 +1,13 @@
 package GUI.util;
 
-import Main.Main;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSequenzStatements;
 
 import javax.swing.table.AbstractTableModel;
-import java.sql.ResultSet;
 
 public class ShowAllTableModel extends AbstractTableModel {
 
+    //TODO array in dem die primary keys mit passendem index zu data + welche tabelle für den zugriff falls man ein element auswählen will
     String[] columnNames;
     Object[][] data;
 
