@@ -10,7 +10,6 @@ public class Main {
     public static Main m;
 
     public static void main(String[] args) {
-        //Testing git
         m = new Main();
         m.init();
     }
