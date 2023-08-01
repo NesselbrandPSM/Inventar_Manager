@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) {
         m = new Main();
         m.init();
-        //This is the sqlClone testing testing
     }
 
     private void init(){
