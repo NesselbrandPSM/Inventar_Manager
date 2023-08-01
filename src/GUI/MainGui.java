@@ -122,22 +122,11 @@ public class MainGui {
                     System.out.println(fullIV);
                     String ivnumber = selected[0].substring(0, 2).toLowerCase();
                     //ResultSet res = connector.query(new SQLStatement("select * from inventory_company join inventory_" + ivnumber + " where inventory_" + ivnumber + ".iv_number = " + "\"" + fullIV + "\""));
-                    ResultSet res = connector.query(new SQLStatement("select * from inventory_" + ivnumber + " join inventory_company"));
-
-                    String[] in = Utils.convertPCResultSetTo2DArray(res)[0];
-                    System.out.println(Arrays.toString(in));
 
                     selectedItemTextPane.setText(selected[0] + "\n");
                     selectedItemTextPane.setBackground(null);
                     textArea2.setText("");
                     textArea2.setDisabledTextColor(new Color(2, 126, 254));
-                    for (String s : in) {
-                        if (s.equals("")) {
-                            textArea2.append(" -\n");
-                        } else {
-                            textArea2.append(s + "\n");
-                        }
-                    }
                 }
             } else {
                 temp.set(0);
