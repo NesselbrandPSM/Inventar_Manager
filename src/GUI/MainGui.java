@@ -55,7 +55,7 @@ public class MainGui {
                     if (isShowAll()) {
                         try {
                             int i = table1.getSelectedRow();
-                            //TODO update Table
+                            updateShowAllTableModel(0);
                             table1.getSelectionModel().setSelectionInterval(0, i);
                             Thread.sleep(60 * 1000);
                         } catch (InterruptedException e) {
@@ -76,7 +76,7 @@ public class MainGui {
                 textArea2.setText("");
                 textArea2.setDisabledTextColor(new Color(2, 126, 254));
             }
-            //TODO update table model
+            updateShowAllTableModel(0);
             table1.getSelectionModel().setSelectionInterval(0, i);
         });
 
@@ -139,7 +139,7 @@ public class MainGui {
                     public void actionPerformed(ActionEvent e) {
                         if (!showAll) {
                             setShowAll(true);
-                            //TODO update table model to show all / default view
+                            updateShowAllTableModel(0);
                         }
                     }
                 }
@@ -174,9 +174,13 @@ public class MainGui {
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    public void updateShowAllTableModel() {
-        statusList.add("updating table ...", 0.2);
-        //TODO
+    public void updateShowAllTableModel(int flags) {
+        switch (flags) {
+            case 0 -> { // show Default View
+                statusList.add("updating table ...", 0.2);
+                tableModel.update(sqlSequenzStatements.getDefaultView());
+            }
+        }
     }
 
     private void openLeftClickPopUpForTable(MouseEvent e) {
