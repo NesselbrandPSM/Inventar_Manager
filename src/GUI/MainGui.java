@@ -62,7 +62,7 @@ public class MainGui {
                     if (isShowAll()) {
                         try {
                             int i = table1.getSelectedRow();
-                            updateShowAllTableModel(flags);
+                            updateShowAllTableModel();
                             table1.getSelectionModel().setSelectionInterval(0, i);
                             Thread.sleep(60 * 1000);
                         } catch (InterruptedException e) {
@@ -83,7 +83,7 @@ public class MainGui {
                 textArea2.setText("");
                 textArea2.setDisabledTextColor(new Color(2, 126, 254));
             }
-            updateShowAllTableModel(0);
+            updateShowAllTableModel();
             table1.getSelectionModel().setSelectionInterval(0, i);
         });
 
@@ -93,16 +93,11 @@ public class MainGui {
             public void actionPerformed(ActionEvent e) {
                 if (searchTextField.getText().equals("")) {
                     setShowAll(true);
-                    tableModel.update(0);
+                    //TODO
                 } else {
                     setShowAll(false);
                     try {
                         //TODO
-//                        tableModel.update(Utils.convertResultSetTo2DArray(connector.query(new SQLSelectAllWhereStatement(
-//                                TableAttributes.getFromGermanString((String) searchSelectorComboBox.getSelectedItem()).toString(),
-//                                "=",
-//                                searchTextField.getText()
-//                        ))));
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -171,7 +166,7 @@ public class MainGui {
                     public void actionPerformed(ActionEvent e) {
                         if (!showAll) {
                             setShowAll(true);
-                            tableModel.update(0);
+                            //TODO
                         }
                     }
                 }
@@ -180,11 +175,6 @@ public class MainGui {
 
         PCcheckBox1.addActionListener(e -> {
             if (PCcheckBox1.isSelected()) {
-                flags = 1;
-                updateShowAllTableModel(1);
-            } else {
-                flags = 0;
-                updateShowAllTableModel(0);
             }
         });
     }
@@ -210,9 +200,9 @@ public class MainGui {
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    public void updateShowAllTableModel(int i) {
+    public void updateShowAllTableModel() {
         statusList.add("updating table ...", 0.2);
-        tableModel.update(i);
+        //TODO
     }
 
     private void openLeftClickPopUpForTable(MouseEvent e) {

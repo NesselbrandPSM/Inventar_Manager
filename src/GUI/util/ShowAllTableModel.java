@@ -20,57 +20,6 @@ public class ShowAllTableModel extends AbstractTableModel {
         columnNames = TableAttributes.toStringArray();
     }
 
-//    public void update(int flag){
-//        switch (flag){
-//            case 0 -> {
-//                ResultSet res;
-//                ResultSet res2;
-//                ResultSet res3;
-//                synchronized (connector) {
-//                    res = connector.query(new SQLSelect_inventory_pcStatement());
-//                }
-//                Object[][] d1 = Utils.convertResultSetTo2DArray(res);
-//                synchronized (connector){
-//                    res2 = connector.query(new SQLSelect_inventory_prStatement());
-//                }
-//                Object[][] d2 = Utils.convertResultSetTo2DArray(res2);
-//                synchronized (connector){
-//                    res3 = connector.query(new SQLSelect_inventory_scStatement());
-//                }
-//                Object[][] d3 = Utils.convertResultSetTo2DArray(res3);
-//
-//
-//                Object[][] temp = new Object[d1.length + d2.length + d3.length][];
-//
-//                int i;
-//                for (i = 0; i < d1.length; i++) {
-//                    temp[i] = d1[i];
-//                }
-//
-//                for (Object[] objects : d2) {
-//                    temp[i] = objects;
-//                    i++;
-//                }
-//
-//                for (Object[] objects : d3) {
-//                    temp[i] = objects;
-//                    i++;
-//                }
-//                data = temp;
-//            }
-//            case 1 -> {
-//                synchronized (ShowAllTableModel.class) {
-//                    ResultSet res;
-//                    synchronized (connector) {
-//                        res = connector.query(new SQLSelect_inventory_pcStatement());
-//                    }
-//                    Object[][] d1 = Utils.convertResultSetTo2DArray(res);
-//                    data = d1;
-//                    fireTableDataChanged();
-//                }
-//            }
-//        }
-//    }
 
     public void update(String[][] data){
         this.data = data;
