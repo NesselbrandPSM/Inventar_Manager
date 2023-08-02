@@ -1,14 +1,17 @@
 package GUI;
 
+import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSequenzStatements;
+import SQL.Statements.SQLStatements;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainGui {
@@ -29,19 +32,20 @@ public class MainGui {
 
     private SQLConnector connector;
     private SQLSequenzStatements sqlSequenzStatements;
+    private SQLStatements sqlStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
     private static boolean showAll = true;
 
-    public MainGui(SQLConnector connector, SQLSequenzStatements sqlSequenzStatements) {
+    public MainGui(SQLConnector connector, SQLSequenzStatements sqlSequenzStatements, SQLStatements sqlStatements) {
         this.connector = connector;
         this.sqlSequenzStatements = sqlSequenzStatements;
         this.statusList = new StatusList(statusLabel);
+        this.sqlStatements = sqlStatements;
         statusList.start();
 
         textArea1.setText("");
-        //TODO set attributes to textArea1
 
         JTableHeader tableHeader = table1.getTableHeader();
         tableHeader.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -102,18 +106,27 @@ public class MainGui {
         suchenButton.addActionListener(new searchAction());
         searchTextField.addActionListener(new searchAction());
 
-        AtomicInteger temp = new AtomicInteger(); //so no doubleclicking
         //region tableListener
         ListSelectionModel selectionModel = table1.getSelectionModel();
         selectionModel.addListSelectionListener(x -> {
-            if (temp.get() == 0) {
-                temp.set(1);
-                int selectedRow = table1.getSelectedRow();
-                if (selectedRow >= 0) {
-                    //TODO get infos from select + show on the right
+
+            int selectedRow = table1.getSelectedRow();
+            if (selectedRow >= 0) {
+                String[] selRow = (String[]) tableModel.getRow(selectedRow);
+                switch (selRow[0].substring(0, 2).toLowerCase()) {
+                    case "pc" -> {
+                        setTextField1(ColumNames.allAttributesPC);
+                        setTextField2(sqlStatements.getAllFromPCView(Integer.parseInt(selRow[2]))[0]);
+                    }
+                    case "pr" -> {
+                        setTextField1(ColumNames.allAttributesPR);
+                        setTextField2(sqlStatements.getAllFromPRView(Integer.parseInt(selRow[2]))[0]);
+                    }
+                    case "sc" -> {
+                        setTextField1(ColumNames.allAttributesSC);
+                        setTextField2(sqlStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
+                    }
                 }
-            } else {
-                temp.set(0);
             }
         });
 
@@ -153,6 +166,22 @@ public class MainGui {
         });
     }
 
+    private void setTextField2(String[] attr) {
+        textArea2.setText("");
+        for (String s : attr) {
+            textArea2.append(s);
+            textArea2.append("\n");
+        }
+    }
+
+    private void setTextField1(String[] attributes) {
+        textArea1.setText("");
+        for (String s : attributes) {
+            textArea1.append(s);
+            textArea1.append("\n");
+        }
+    }
+
     public void init() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -161,7 +190,7 @@ public class MainGui {
             throw new RuntimeException(e);
         }
         JFrame frame = new JFrame("Inventar Manager");
-        frame.setContentPane(new MainGui(connector, sqlSequenzStatements).panel1);
+        frame.setContentPane(new MainGui(connector, sqlSequenzStatements, sqlStatements).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

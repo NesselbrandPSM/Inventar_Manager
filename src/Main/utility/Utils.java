@@ -15,4 +15,36 @@ public class Utils {
 
         return ret;
     }
+
+    public static String toDataBaseAttributeName(String s, String pcType){
+        String ret = null;
+        switch (s){
+            case "Primärschlüssel" -> ret = pcType + "_key";
+        }
+        return ret;
+    }
+
+    public static String toDataBaseAttributeName(String s){
+        String ret = null;
+        switch (s){
+            case "Inventar Nummer" -> ret = "iv_number";
+            case "Firma" -> ret = "company";
+            case "Kaufdatum" -> ret = "purchase_date";
+            case "KaufPreis" -> ret = "purchase_price";
+            case "Arbeitsspeicher" -> ret = "memory_ram_size_gb";
+            case "Festplattenspeicher" -> ret = "memory_rom_size_gb";
+            case "cpu" -> ret = "cpu";
+            case "Betriebssystem" -> ret = "os";
+            case "IP-Addresse" -> ret = "ip";
+            case "Letztes Update" -> ret = "last_update";
+            case "Nutzer" -> ret = "name";
+            case "Serien Nummer" -> ret = "s_number";
+            case "Status" -> ret = "current_status";
+            case "DGUV" -> ret = "dguv";
+            case "Notiz" -> ret = "note";
+            case "Kategorie" -> ret = "category";
+            case "Equipment Nummer" -> ret = "eq_number";
+        }
+        return ret;
+    }
 }

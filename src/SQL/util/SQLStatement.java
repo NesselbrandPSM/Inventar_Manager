@@ -1,4 +1,4 @@
-package SQL.Statements;
+package SQL.util;
 
 public class SQLStatement {
 

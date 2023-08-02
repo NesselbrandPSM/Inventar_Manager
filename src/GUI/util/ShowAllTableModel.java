@@ -18,10 +18,6 @@ public class ShowAllTableModel extends AbstractTableModel {
         this.connector = connector;
         this.sqlSequenzStatements = sqlSequenzStatements;
         columnNames = ColumNames.columnNamesStandardView;
-        initData();
-    }
-
-    private void initData() {
         data = sqlSequenzStatements.getDefaultView();
     }
 

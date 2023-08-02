@@ -1,9 +1,8 @@
 package SQL;
 
-import SQL.Statements.SQLStatement;
+import SQL.util.SQLStatement;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class SQLConnector {
 
