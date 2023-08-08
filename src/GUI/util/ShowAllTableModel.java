@@ -7,7 +7,6 @@ import javax.swing.table.AbstractTableModel;
 
 public class ShowAllTableModel extends AbstractTableModel {
 
-    //TODO array in dem die primary keys mit passendem index zu data + welche tabelle für den zugriff falls man ein element auswählen will
     String[] columnNames;
     Object[][] data;
 
