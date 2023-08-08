@@ -89,7 +89,7 @@ public class SQLStatements {
         try {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
-                for (String s : ColumNames.allAttributesPR) {
+                for (String s : ColumNames.allAttributesSC) {
                     if (s.equals("Primärschlüssel")){
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "sc"))));
                     } else {
