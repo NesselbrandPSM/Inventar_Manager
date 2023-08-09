@@ -90,11 +90,11 @@ public class MainGui {
             public void actionPerformed(ActionEvent e) {
                 if (searchTextField.getText().equals("")) {
                     setShowAll(true);
-                    //TODO updateTableModel to show all
+                    updateShowAllTableModel(0);
                 } else {
                     setShowAll(false);
                     try {
-                        //TODO updateTableModel with search parameters
+                        //TODO
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -125,6 +125,10 @@ public class MainGui {
                     case "sc" -> {
                         setTextField1(ColumNames.allAttributesSC);
                         setTextField2(sqlStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
+                    }
+                    case "mo" -> {
+                        setTextField1(ColumNames.allAttributesMO);
+                        setTextField2(sqlStatements.getAllFromMOView(Integer.parseInt(selRow[2]))[0]);
                     }
                 }
             }
@@ -233,7 +237,7 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    System.out.println("Bearbeiten");
+                    //TODO edit
                 }
             }
         });
