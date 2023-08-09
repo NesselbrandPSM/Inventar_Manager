@@ -122,7 +122,6 @@ public class SQLStatements {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "mo"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
-                        System.out.println(Arrays.toString(resultList.get(0).toArray()));
                     }
                 }
             }
