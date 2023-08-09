@@ -4,15 +4,12 @@ import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import SQL.SQLConnector;
-import SQL.Statements.SQLSequenzStatements;
 import SQL.Statements.SQLStatements;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainGui {
     private JPanel panel1;
@@ -31,16 +28,14 @@ public class MainGui {
     private JCheckBox PCCheckBox;
 
     private SQLConnector connector;
-    private SQLSequenzStatements sqlSequenzStatements;
     private SQLStatements sqlStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
     private static boolean showAll = true;
 
-    public MainGui(SQLConnector connector, SQLSequenzStatements sqlSequenzStatements, SQLStatements sqlStatements) {
+    public MainGui(SQLConnector connector, SQLStatements sqlStatements) {
         this.connector = connector;
-        this.sqlSequenzStatements = sqlSequenzStatements;
         this.statusList = new StatusList(statusLabel);
         this.sqlStatements = sqlStatements;
         statusList.start();
@@ -94,7 +89,7 @@ public class MainGui {
                 } else {
                     setShowAll(false);
                     try {
-                        //TODO
+                        //TODO search action
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -206,7 +201,7 @@ public class MainGui {
             throw new RuntimeException(e);
         }
         JFrame frame = new JFrame("Inventar Manager");
-        frame.setContentPane(new MainGui(connector, sqlSequenzStatements, sqlStatements).panel1);
+        frame.setContentPane(new MainGui(connector, sqlStatements).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -214,7 +209,7 @@ public class MainGui {
     }
 
     private void createUIComponents() {
-        tableModel = new ShowAllTableModel(connector, sqlSequenzStatements);
+        tableModel = new ShowAllTableModel(connector, sqlStatements);
         table1 = new JTable(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -223,7 +218,7 @@ public class MainGui {
         switch (flags) {
             case 0 -> { // show Default View
                 statusList.add("updating table ...", 0.2);
-                tableModel.update(sqlSequenzStatements.getDefaultView());
+                tableModel.update(sqlStatements.getDefaultView());
             }
         }
     }
