@@ -24,7 +24,6 @@ public class SQLStatements {
                 "select * from pc " +
                         "join company on pc.inventory_company_key=company.company_key " +
                         "join purchases on pc.inventory_purchase_key=purchases.purchase_key " +
-                        "join pc_specs on pc.inventory_pc_specs_key=pc_specs.pc_specs_key " +
                         "join user on pc.inventory_user_key=user.user_key " +
                         "where pc.pc_key = " + key
         ));

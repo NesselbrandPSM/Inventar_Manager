@@ -11,6 +11,8 @@ public class Main {
     private SQLStatements sqlStatements;
     public MainGui mainGui;
 
+    private static final String permission_level = "admin";
+
     public static Main m;
 
     public static void main(String[] args) {
@@ -22,7 +24,14 @@ public class Main {
         connector = new SQLConnector();
         sqlSequenzStatements = new SQLSequenzStatements(connector);
         sqlStatements = new SQLStatements(connector);
-        mainGui= new MainGui(connector, sqlSequenzStatements, sqlStatements);
-        mainGui.init();
+        switch (permission_level){
+            case "admin": {
+                mainGui= new MainGui(connector, sqlSequenzStatements, sqlStatements);
+                mainGui.init();
+            }
+            case "user":{
+                //TODO
+            }
+        }
     }
 }
