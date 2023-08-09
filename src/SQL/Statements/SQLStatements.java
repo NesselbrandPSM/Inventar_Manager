@@ -112,7 +112,7 @@ public class SQLStatements {
                 "select * from monitor " +
                         "join company on monitor.inventory_company_key=company.company_key " +
                         "join purchases on monitor.inventory_purchase_key=purchases.purchase_key " +
-                        "where monitor.sc_key = " + key
+                        "where monitor.mo_key = " + key
         ));
         try {
             while (resultSet.next()) {
