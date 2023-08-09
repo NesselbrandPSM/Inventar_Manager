@@ -132,7 +132,7 @@ public class MainGui {
                     }
                     case "te" -> {
                         setTextField1(ColumNames.allAttributesTE);
-                        setTextField2(sqlStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlStatements.getAllFromTEView(Integer.parseInt(selRow[2]))[0]);
                     }
                 }
             }
