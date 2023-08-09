@@ -106,7 +106,7 @@ public class SQLSequenzStatements {
             }
             //endregion
             //region Dockingstation
-            resultSet = connector.query(new SQLStatement("select dockingstation.iv_number, dockingstation.company, dockingstation.ds_key " +
+            resultSet = connector.query(new SQLStatement("select dockingstation.iv_number, company.company, dockingstation.ds_key " +
                     "from company " +
                     "join dockingstation " +
                     "on dockingstation.inventory_company_key = company.company_key " +
