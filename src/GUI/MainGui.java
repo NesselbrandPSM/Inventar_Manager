@@ -109,10 +109,10 @@ public class MainGui {
         //region tableListener
         ListSelectionModel selectionModel = table1.getSelectionModel();
         selectionModel.addListSelectionListener(x -> {
-
             int selectedRow = table1.getSelectedRow();
             if (selectedRow >= 0) {
                 String[] selRow = (String[]) tableModel.getRow(selectedRow);
+                selectedItemTextPane.setText(selRow[0]);
                 switch (selRow[0].substring(0, 2).toLowerCase()) {
                     case "pc" -> {
                         setTextField1(ColumNames.allAttributesPC);
