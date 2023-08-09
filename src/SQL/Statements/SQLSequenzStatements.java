@@ -63,6 +63,20 @@ public class SQLSequenzStatements {
                 i++;
             }
             //endregion
+            //region Monitor
+            resultSet = connector.query(new SQLStatement("select monitor.iv_number, company.company, monitor.mo_key " +
+                    "from company " +
+                    "join monitor " +
+                    "on monitor.inventory_company_key = company.company_key " +
+                    "where monitor.active = 1"));
+            while (resultSet.next()){
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

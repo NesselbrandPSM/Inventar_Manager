@@ -44,6 +44,7 @@ public class Utils {
             case "Notiz" -> ret = "note";
             case "Kategorie" -> ret = "category";
             case "Equipment Nummer" -> ret = "eq_number";
+            case "Hersteller" -> ret = "manufacturer";
         }
         return ret;
     }

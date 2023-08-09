@@ -65,7 +65,6 @@ public class SQLStatements {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "pr"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
-
                     }
                 }
             }
@@ -92,6 +91,35 @@ public class SQLStatements {
                 for (String s : ColumNames.allAttributesSC) {
                     if (s.equals("Primärschlüssel")){
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "sc"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getAllFromMOView(int key) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select * from monitor " +
+                        "join company on monitor.inventory_company_key=company.company_key " +
+                        "join purchases on monitor.inventory_purchase_key=purchases.purchase_key " +
+                        "where monitor.sc_key = " + key
+        ));
+        try {
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : ColumNames.allAttributesSC) {
+                    if (s.equals("Primärschlüssel")){
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "mo"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
 
