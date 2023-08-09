@@ -6,7 +6,7 @@ import SQL.Statements.SQLStatements;
 
 public class Main {
     private SQLConnector connector;
-    private SQLStatements sqlStatements;
+    public SQLStatements sqlStatements;
     public MainGui mainGui;
 
     private static final String permission_level = "admin";

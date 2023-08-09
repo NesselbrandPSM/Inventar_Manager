@@ -3,6 +3,7 @@ package GUI;
 import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
+import Main.Main;
 import SQL.SQLConnector;
 import SQL.Statements.SQLStatements;
 
@@ -209,7 +210,7 @@ public class MainGui {
     }
 
     private void createUIComponents() {
-        tableModel = new ShowAllTableModel(connector, sqlStatements);
+        tableModel = new ShowAllTableModel(connector, Main.m.sqlStatements);
         table1 = new JTable(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
