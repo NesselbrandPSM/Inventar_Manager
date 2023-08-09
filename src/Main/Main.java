@@ -19,6 +19,7 @@ public class Main {
     }
 
     private void init(){
+        //Test
         connector = new SQLConnector();
         sqlSequenzStatements = new SQLSequenzStatements(connector);
         sqlStatements = new SQLStatements(connector);
