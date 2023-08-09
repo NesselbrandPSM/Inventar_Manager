@@ -134,6 +134,10 @@ public class MainGui {
                         setTextField1(ColumNames.allAttributesTE);
                         setTextField2(sqlStatements.getAllFromTEView(Integer.parseInt(selRow[2]))[0]);
                     }
+                    case "hd" -> {
+                        setTextField1(ColumNames.allAttributesHD);
+                        setTextField2(sqlStatements.getAllFromHDView(Integer.parseInt(selRow[2]))[0]);
+                    }
                 }
             }
         });
