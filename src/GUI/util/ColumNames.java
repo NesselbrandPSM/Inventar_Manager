@@ -26,6 +26,6 @@ public class ColumNames {
     };
 
     public static final String[] allAttributesTE = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Kaufdatum", "Kaufpreis", "Status", "DGUV", "Serien Nummer", "IP-Addresse"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma","Modell", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer", "IP-Addresse"
     };
 }
