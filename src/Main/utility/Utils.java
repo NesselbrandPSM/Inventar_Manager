@@ -45,6 +45,7 @@ public class Utils {
             case "Kategorie" -> ret = "category";
             case "Equipment Nummer" -> ret = "eq_number";
             case "Hersteller" -> ret = "manufacturer";
+            case "Modell" -> ret = "modell";
         }
         return ret;
     }
