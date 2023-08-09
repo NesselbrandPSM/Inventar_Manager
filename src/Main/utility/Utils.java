@@ -46,6 +46,7 @@ public class Utils {
             case "Equipment Nummer" -> ret = "eq_number";
             case "Hersteller" -> ret = "manufacturer";
             case "Modell" -> ret = "modell";
+            case "Auflösung" -> ret = "resolution";
         }
         return ret;
     }

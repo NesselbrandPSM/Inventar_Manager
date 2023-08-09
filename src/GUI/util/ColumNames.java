@@ -14,14 +14,18 @@ public class ColumNames {
 
     public static final String[] allAttributesPR = new String[]{
             "Primärschlüssel", "Inventar Nummer", "Hersteller", "Modell", "Firma", "Kaufdatum", "KaufPreis",
-            "Equipment Nummer", "Serien Nummer", "Status", "DGUV"
+            "Equipment Nummer", "Serien Nummer", "Status", "DGUV", "IP-Addresse"
     };
 
     public static final String[] allAttributesSC = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma","Modell", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma","Modell", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer", "IP-Addresse"
     };
 
     public static final String[] allAttributesMO = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Auflösung", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer"
+    };
+
+    public static final String[] allAttributesTE = new String[]{
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Kaufdatum", "Kaufpreis", "Status", "DGUV", "Serien Nummer", "IP-Addresse"
     };
 }
