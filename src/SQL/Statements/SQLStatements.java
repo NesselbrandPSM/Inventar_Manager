@@ -186,4 +186,31 @@ public class SQLStatements {
 
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
+
+    public String[][] getAllFromDSView(int key) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select * from dockingstation " +
+                        "join company on dockingstation.inventory_company_key=company.company_key " +
+                        "join purchases on dockingstation.inventory_purchase_key=purchases.purchase_key " +
+                        "where dockingstation.ds_key = " + key
+        ));
+        try {
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : ColumNames.allAttributesDS) {
+                    if (s.equals("Primärschlüssel")){
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "ds"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
 }
