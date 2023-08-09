@@ -218,7 +218,7 @@ public class MainGui {
     public void updateShowAllTableModel(int flags) {
         switch (flags) {
             case 0 -> { // show Default View
-                statusList.add("updating table ...", 0.2);
+                statusList.add("updating table ...", 0.3);
                 tableModel.update(sqlStatements.getDefaultView());
             }
         }
