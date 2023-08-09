@@ -117,7 +117,7 @@ public class SQLStatements {
         try {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
-                for (String s : ColumNames.allAttributesSC) {
+                for (String s : ColumNames.allAttributesMO) {
                     if (s.equals("Primärschlüssel")){
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "mo"))));
                     } else {
@@ -146,7 +146,7 @@ public class SQLStatements {
         try {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
-                for (String s : ColumNames.allAttributesSC) {
+                for (String s : ColumNames.allAttributesTE) {
                     if (s.equals("Primärschlüssel")){
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "te"))));
                     } else {
