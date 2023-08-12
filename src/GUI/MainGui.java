@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainGui {
+    //region attributes
     private JPanel panel1;
     private JButton suchenButton;
     private JTextField searchTextField;
@@ -26,14 +27,13 @@ public class MainGui {
     private JTextPane selectedItemTextPane;
     private JLabel statusLabel;
     private JScrollPane tableScrollPane;
-    private JCheckBox PCCheckBox;
-
     private SQLConnector connector;
     private SQLStatements sqlStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
     private static boolean showAll = true;
+    //endregion
 
     public MainGui(SQLConnector connector, SQLStatements sqlStatements) {
         this.connector = connector;
@@ -89,10 +89,9 @@ public class MainGui {
                     updateShowAllTableModel(0);
                 } else {
                     setShowAll(false);
-                    try {
-                        //TODO search action
-                    } catch (Exception ex) {
-                        throw new RuntimeException(ex);
+                    switch (searchSelectorComboBox.getSelectedItem().toString()){
+                        case "Inventar Nummer" -> updateShowAllTableModel(1);
+                        case "Firma" ->
                     }
                     searchTextField.setText("");
                 }
@@ -170,49 +169,6 @@ public class MainGui {
                 }
         );
         //endregion
-
-        PCCheckBox.addActionListener(e -> {
-            if (PCCheckBox.isSelected()) {
-                //TODO show only checkbox specific entrys => update Table Model
-            }
-        });
-    }
-
-    private void setTextField2(String[] attr) {
-        textArea2.setText("");
-        for (String s : attr) {
-            textArea2.append(s);
-            textArea2.append("\n");
-        }
-    }
-
-    private void setTextField1(String[] attributes) {
-        textArea1.setText("");
-        for (String s : attributes) {
-            textArea1.append(s);
-            textArea1.append("\n");
-        }
-    }
-
-    public void init() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException e) {
-            throw new RuntimeException(e);
-        }
-        JFrame frame = new JFrame("Inventar Manager");
-        frame.setContentPane(new MainGui(connector, sqlStatements).panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(new Dimension(1000, 700));
-    }
-
-    private void createUIComponents() {
-        tableModel = new ShowAllTableModel(connector, Main.m.sqlStatements);
-        table1 = new JTable(tableModel);
-        table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     public void updateShowAllTableModel(int flags) {
@@ -220,6 +176,18 @@ public class MainGui {
             case 0 -> { // show Default View
                 statusList.add("updating table ...", 0.3);
                 tableModel.update(sqlStatements.getDefaultView());
+            }
+            case 1 -> { // show Search View for iv_number
+                statusList.add("searching ...", 0.2);
+                String[][] result = sqlStatements.getSelectView(searchTextField.getText());
+                if (result == null){
+                    JOptionPane.showConfirmDialog(null, "Die Eingegebene Inventar Nummer war fehlerhaft!");
+                    searchTextField.setText("");
+                    tableModel.update(sqlStatements.getDefaultView());
+                } else {
+                    searchTextField.setText("");
+                    tableModel.update(result);
+                }
             }
         }
     }
@@ -236,6 +204,8 @@ public class MainGui {
         }
     }
 
+
+    //region util
     private JPopupMenu createLeftClickPopUpForTable() {
         JPopupMenu popupMenu = new JPopupMenu();
 
@@ -266,13 +236,49 @@ public class MainGui {
         return popupMenu;
     }
 
-    //region getter | setter
     public static synchronized boolean isShowAll() {
         return showAll;
     }
 
     public static synchronized void setShowAll(boolean b) {
         showAll = b;
+    }
+
+    private void setTextField2(String[] attr) {
+        textArea2.setText("");
+        for (String s : attr) {
+            textArea2.append(s);
+            textArea2.append("\n");
+        }
+    }
+
+    private void setTextField1(String[] attributes) {
+        textArea1.setText("");
+        for (String s : attributes) {
+            textArea1.append(s);
+            textArea1.append("\n");
+        }
+    }
+
+    private void createUIComponents() {
+        tableModel = new ShowAllTableModel(connector, Main.m.sqlStatements);
+        table1 = new JTable(tableModel);
+        table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    public void init() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
+        JFrame frame = new JFrame("Inventar Manager");
+        frame.setContentPane(new MainGui(connector, sqlStatements).panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setSize(new Dimension(1000, 700));
     }
     //endregion
 }

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SQLStatements {
     public SQLStatements(SQLConnector connector) {
@@ -120,6 +121,74 @@ public class SQLStatements {
                 i++;
             }
             //endregion
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getSelectView(String iv_number) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+        String[] columnList = ColumNames.getColumnNamesList(iv_number);
+        if (columnList == null){
+            return null;
+        }
+        ResultSet resultSet = null;
+        try {
+            switch (iv_number.substring(0, 2).toLowerCase()){
+                case "pc" -> resultSet = connector.query(new SQLStatement(
+                        "select * from pc " +
+                                "join company on pc.inventory_company_key=company.company_key " +
+                                "join purchases on pc.inventory_purchase_key=purchases.purchase_key " +
+                                "join user on pc.inventory_user_key=user.user_key " +
+                                "where pc.iv_number = " + iv_number));
+                case "pr" -> resultSet = connector.query(new SQLStatement(
+                        "select * from printer " +
+                                "join company on printer.inventory_company_key=company.company_key " +
+                                "join purchases on printer.inventory_purchase_key=purchases.purchase_key " +
+                                "where printer.iv_number = " + iv_number));
+                case "sc" -> resultSet = connector.query(new SQLStatement(
+                        "select * from scanner " +
+                                "join company on scanner.inventory_company_key=company.company_key " +
+                                "join purchases on scanner.inventory_purchase_key=purchases.purchase_key " +
+                                "where scanner.iv_number = " + iv_number));
+                case "mo" -> resultSet = connector.query(new SQLStatement(
+                        "select * from monitor " +
+                                "join company on monitor.inventory_company_key=company.company_key " +
+                                "join purchases on monitor.inventory_purchase_key=purchases.purchase_key " +
+                                "where monitor.iv_number = " + iv_number));
+                case "te" -> resultSet = connector.query(new SQLStatement(
+                        "select * from telephone " +
+                                "join company on telephone.inventory_company_key=company.company_key " +
+                                "join purchases on telephone.inventory_purchase_key=purchases.purchase_key " +
+                                "where telephone.iv_number = " + iv_number));
+                case "hd" -> resultSet = connector.query(new SQLStatement(
+                        "select * from headset " +
+                                "join company on headset.inventory_company_key=company.company_key " +
+                                "join purchases on headset.inventory_purchase_key=purchases.purchase_key " +
+                                "where headset.iv_number = " + iv_number));
+                case "ds" -> resultSet = connector.query(new SQLStatement(
+                        "select * from dockingstation " +
+                                "join company on dockingstation.inventory_company_key=company.company_key " +
+                                "join purchases on dockingstation.inventory_purchase_key=purchases.purchase_key " +
+                                "where dockingstation.iv_number = " + iv_number));
+            }
+
+            if (resultSet == null){
+                return null;
+            }
+
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : columnList) {
+                    if (s.equals("Primärschlüssel")){
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "ds"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
