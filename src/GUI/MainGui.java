@@ -91,7 +91,7 @@ public class MainGui {
                     setShowAll(false);
                     switch (searchSelectorComboBox.getSelectedItem().toString()){
                         case "Inventar Nummer" -> updateShowAllTableModel(1);
-                        //case "Firma" -> ;
+                        case "Firma" -> updateShowAllTableModel(2);
                     }
                     searchTextField.setText("");
                 }
@@ -179,9 +179,20 @@ public class MainGui {
             }
             case 1 -> { // show Search View for iv_number
                 statusList.add("searching ...", 0.2);
-                String[][] result = sqlStatements.getSelectView(searchTextField.getText());
+                String[][] result = sqlStatements.getSelectViewIV_Number(searchTextField.getText());
                 if (result == null){
                     JOptionPane.showConfirmDialog(null, "Die Eingegebene Inventar Nummer war fehlerhaft!");
+                    searchTextField.setText("");
+                    tableModel.update(sqlStatements.getDefaultView());
+                } else {
+                    searchTextField.setText("");
+                    tableModel.update(result);
+                }
+            }
+            case 2 -> { // show search View for company
+                String[][] result = sqlStatements.getSelectViewCompany(searchTextField.getText());
+                if (result == null){
+                    JOptionPane.showConfirmDialog(null, "Die Eingegebene Firma war fehlerhaft!");
                     searchTextField.setText("");
                     tableModel.update(sqlStatements.getDefaultView());
                 } else {
