@@ -130,7 +130,10 @@ public class SQLStatements {
 
     public String[][] getSelectView(String iv_number) {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+        String[] columnList = new String[]{"Inventar Nummer", "Firma", "Primärschlüssel"};
+
         ResultSet resultSet = null;
+        System.out.println(iv_number);
         try {
             switch (iv_number.substring(0, 2).toLowerCase()){
                 case "pc" -> resultSet = connector.query(new SQLStatement(
@@ -175,13 +178,15 @@ public class SQLStatements {
                 return null;
             }
 
-            int i = 0;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
-                for (int attr_number = 1; attr_number <= 3; attr_number++) {
-                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                for (String s : columnList) {
+                    if (s.equals("Primärschlüssel")){
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, iv_number.substring(0, 2).toLowerCase()))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
                 }
-                i++;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
