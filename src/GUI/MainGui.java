@@ -211,10 +211,8 @@ public class MainGui {
             popupMenu.show(e.getComponent(), e.getX(), e.getY());
         } else {
             table1.clearSelection();
-
         }
     }
-
 
     //region util
     private JPopupMenu createLeftClickPopUpForTable() {

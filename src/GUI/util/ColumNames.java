@@ -2,20 +2,6 @@ package GUI.util;
 
 public class ColumNames {
 
-    public static String[] getColumnNamesList(String iv_number) {
-        String[] ret = null;
-        switch (iv_number.substring(0, 2).toLowerCase()) {
-            case "pc" -> ret = allAttributesPC;
-            case "pr" -> ret = allAttributesPR;
-            case "sc" -> ret = allAttributesSC;
-            case "mo" -> ret = allAttributesMO;
-            case "te" -> ret = allAttributesTE;
-            case "hd" -> ret = allAttributesHD;
-            case "ds" -> ret = allAttributesDS;
-        }
-        return ret;
-    }
-
     public static final String[] columnNamesStandardView = new String[]{
             "Inventar Nummer", "Firma", "p_key"
     };
