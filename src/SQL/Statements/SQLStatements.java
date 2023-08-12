@@ -184,7 +184,7 @@ public class SQLStatements {
                 resultList.add(new ArrayList<>());
                 for (String s : columnList) {
                     if (s.equals("Primärschlüssel")){
-                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "ds"))));
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, iv_number.substring(0, 2).toLowerCase()))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
                     }
