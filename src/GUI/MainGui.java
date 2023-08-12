@@ -172,7 +172,9 @@ public class MainGui {
 
         //region einfügenListener
         elementEinfügenButton.addActionListener(e -> {
-            System.out.println("test");
+
+
+
         });
         //endregion
     }
