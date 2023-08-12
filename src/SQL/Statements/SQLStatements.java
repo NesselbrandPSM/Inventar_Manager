@@ -131,7 +131,6 @@ public class SQLStatements {
         String[] columnList = new String[]{"Inventar Nummer", "Firma", "Primärschlüssel"};
 
         ResultSet resultSet = null;
-        System.out.println(iv_number);
         try {
             switch (iv_number.substring(0, 2).toLowerCase()){
                 case "pc" -> resultSet = connector.query(new SQLStatement(
