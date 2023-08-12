@@ -91,7 +91,7 @@ public class MainGui {
                     setShowAll(false);
                     switch (searchSelectorComboBox.getSelectedItem().toString()){
                         case "Inventar Nummer" -> updateShowAllTableModel(1);
-                        case "Firma" ->
+                        //case "Firma" -> ;
                     }
                     searchTextField.setText("");
                 }
