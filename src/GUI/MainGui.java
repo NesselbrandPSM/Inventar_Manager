@@ -169,6 +169,12 @@ public class MainGui {
                 }
         );
         //endregion
+
+        //region einfügenListener
+        elementEinfügenButton.addActionListener(e -> {
+            System.out.println("test");
+        });
+        //endregion
     }
 
     public void updateShowAllTableModel(int flags) {
