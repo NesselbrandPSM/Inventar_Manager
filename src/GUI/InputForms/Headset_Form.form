@@ -32,7 +32,7 @@
       <component id="71b57" class="javax.swing.JLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Aktueller Status:"/>
@@ -41,7 +41,7 @@
       <component id="78563" class="javax.swing.JLabel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Firma:"/>
@@ -50,7 +50,7 @@
       <component id="ed9e5" class="javax.swing.JLabel">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Hersteller:"/>
@@ -59,7 +59,7 @@
       <component id="5eedc" class="javax.swing.JLabel">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Modell:"/>
@@ -68,7 +68,7 @@
       <component id="11634" class="javax.swing.JLabel">
         <constraints>
           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Seriennummer:"/>
@@ -77,7 +77,7 @@
       <component id="7ba91" class="javax.swing.JLabel">
         <constraints>
           <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Kaufdatum:"/>
@@ -86,7 +86,7 @@
       <component id="3d311" class="javax.swing.JLabel">
         <constraints>
           <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Kaufnummer:"/>
@@ -95,7 +95,7 @@
       <component id="5df68" class="javax.swing.JLabel">
         <constraints>
           <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Kaufpreis:"/>
@@ -104,7 +104,7 @@
       <component id="a4e0a" class="javax.swing.JLabel">
         <constraints>
           <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="Garantie in Jahren:"/>
@@ -113,7 +113,7 @@
       <component id="18b75" class="javax.swing.JLabel">
         <constraints>
           <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
           <text value="DGUV:"/>
