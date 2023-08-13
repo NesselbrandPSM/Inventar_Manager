@@ -74,6 +74,7 @@ public class PC_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 users.removeAllItems();
+                users.addItem(new ComboBoxItem(""));
                 String[] usersArr = sqlSelectStatements.getAllUsers()[0];
                 for (String s : usersArr) {
                     users.addItem(new ComboBoxItem(s));
