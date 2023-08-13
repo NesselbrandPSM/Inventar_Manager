@@ -620,6 +620,15 @@ public class SQLSelectStatements {
         while (ret.length() < 4){
             ret.insert(0, "0");
         }
+        switch (table){
+            case "pc" -> ret.insert(0, "PC-");
+            case "scanner" -> ret.insert(0, "SC-");
+            case "printer" -> ret.insert(0, "PR-");
+            case "dockingstation" -> ret.insert(0, "DS-");
+            case "headset" -> ret.insert(0, "HD-");
+            case "monitor" -> ret.insert(0, "MO-");
+            case "telephone" -> ret.insert(0, "TE-");
+        }
         return ret.toString();
     }
 
