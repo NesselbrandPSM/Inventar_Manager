@@ -16,10 +16,10 @@ public class Utils {
         return ret;
     }
 
-    public static String toDataBaseAttributeName(String s, String pcType){
+    public static String toDataBaseAttributeName(String s, String type){
         String ret = null;
         switch (s){
-            case "Primärschlüssel" -> ret = pcType + "_key";
+            case "Primärschlüssel" -> ret = type + "_key";
         }
         return ret;
     }
@@ -47,6 +47,9 @@ public class Utils {
             case "Hersteller" -> ret = "manufacturer";
             case "Modell" -> ret = "modell";
             case "Auflösung" -> ret = "resolution";
+            case "Raum Nummer" -> ret = "room_nb";
+            case "Etage" -> ret = "floor";
+            case "Desk Sharing" -> ret = "desk_share";
         }
         return ret;
     }

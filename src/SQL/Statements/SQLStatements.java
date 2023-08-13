@@ -119,6 +119,20 @@ public class SQLStatements {
                 i++;
             }
             //endregion
+            // region Desk
+            resultSet = connector.query(new SQLStatement("select desk.iv_number, company.company, desk.dk_key " +
+                    "from company " +
+                    "join desk " +
+                    "on desk.inventory_company_key = company.company_key " +
+                    "where desk.active = 1"));
+            while (resultSet.next()){
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -169,6 +183,11 @@ public class SQLStatements {
                                 "join company on dockingstation.inventory_company_key=company.company_key " +
                                 "join purchases on dockingstation.inventory_purchase_key=purchases.purchase_key " +
                                 "where dockingstation.iv_number = \"" + iv_number + "\""));
+                case "dk" -> resultSet = connector.query(new SQLStatement(
+                        "select * from desk " +
+                                "join company on desk.inventory_company_key=company.company_key " +
+                                "join purchases on desk.inventory_purchase_key=purchases.purchase_key " +
+                                "where desk.iv_number = \"" + iv_number + "\""));
             }
 
             if (resultSet == null){
@@ -289,6 +308,20 @@ public class SQLStatements {
                     "join dockingstation " +
                     "on dockingstation.inventory_company_key = company.company_key " +
                     "where dockingstation.active = 1 and company.company = \"" + company + "\""));
+            while (resultSet.next()){
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
+            // region Desk
+            resultSet = connector.query(new SQLStatement("select desk.iv_number, company.company, desk.dk_key " +
+                    "from company " +
+                    "join desk " +
+                    "on desk.inventory_company_key = company.company_key " +
+                    "where desk.active = 1 and company.company = \"" + company + "\""));
             while (resultSet.next()){
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
@@ -489,6 +522,33 @@ public class SQLStatements {
                 for (String s : ColumNames.allAttributesDS) {
                     if (s.equals("Primärschlüssel")){
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "ds"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getAllFromDKView(int key) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select * from desk " +
+                        "join company on desk.inventory_company_key=company.company_key " +
+                        "join purchases on desk.inventory_purchase_key=purchases.purchase_key " +
+                        "where desk.dk_key = " + key
+        ));
+        try {
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : ColumNames.allAttributesDK) {
+                    if (s.equals("Primärschlüssel")){
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "dk"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
                     }
