@@ -34,6 +34,7 @@ public class Main {
             }
             case "testing" -> {
                 mainForm = new Main_Form();
+                mainForm.init();
             }
         }
     }
