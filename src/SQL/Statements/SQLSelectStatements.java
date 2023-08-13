@@ -604,7 +604,7 @@ public class SQLSelectStatements {
         int current = 0;
         System.out.println(Arrays.toString(allIV_numbers));
         for (String s : allIV_numbers) {
-            s = s.substring(s.indexOf("-"));
+            s = s.substring(s.indexOf("-") + 1);
             System.out.println(s);
             if (Integer.parseInt(s) > current){
                 current = Integer.parseInt(s);
