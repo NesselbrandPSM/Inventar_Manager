@@ -610,6 +610,7 @@ public class SQLSelectStatements {
                 current = Integer.parseInt(s);
             }
         }
+        current++;
         StringBuilder ret = new StringBuilder(String.valueOf(current));
         if (ret.length() > 4){
             throw new RuntimeException("iv_number greater than 4");
