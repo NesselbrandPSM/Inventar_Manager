@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class Scanner_Form {
     private JPanel scannerPanel;
+    private JTextField currentStatus;
 
     public Scanner_Form() {
     }

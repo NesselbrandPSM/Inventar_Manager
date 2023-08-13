@@ -66,8 +66,9 @@ public class MainInputGui {
     }
 
     private void inputEntry() {
-        String currentIVNumber = sqlSelectStatements.getCurrentIV_number(inputPanel.getComponent(0).getName());
-        if (currentIVNumber == null){
+        String currentTable = inputPanel.getComponent(0).getName();
+        String currentIVNumber = sqlSelectStatements.getCurrentIV_number(currentTable);
+        if (currentIVNumber == null) {
             return;
         }
         String[] options = {"JA", "NEIN"};
@@ -78,7 +79,27 @@ public class MainInputGui {
                 null,
                 options,
                 0);
-        System.out.println(i);
+        if (i == 0) {
+            //TODO check dass alle felder ausgefüllt sind
+            //TODO einfügen
+            switch (currentTable) {
+                case "pc" -> {
+
+                }
+                case "scanner" -> {
+                }
+                case "printer" -> {
+                }
+                case "dockingstation" -> {
+                }
+                case "headset" -> {
+                }
+                case "monitor" -> {
+                }
+                case "telephone" -> {
+                }
+            }
+        }
     }
 
     private void show(JPanel panel) {
