@@ -31,6 +31,7 @@ public class MainInputGui {
             checkBox.setSelected(true);
             inputPanel.removeAll();
             inputPanel.add(forms.get(checkBox.getText()));
+            inputPanel.repaint();
         };
 
         PCCheckBox.addActionListener(listener);
