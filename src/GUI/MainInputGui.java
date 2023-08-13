@@ -4,6 +4,7 @@ import GUI.InputForms.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainInputGui {
@@ -53,6 +54,9 @@ public class MainInputGui {
         HeadsetCheckBox.addActionListener(listener);
         MonitorCheckBox.addActionListener(listener);
         TelephoneCheckBox.addActionListener(listener);
+
+
+        einfuegenButton.addActionListener(e -> inputEntry());
     }
 
     private void inputEntry(){
