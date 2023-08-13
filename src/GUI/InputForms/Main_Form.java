@@ -37,6 +37,7 @@ public class Main_Form {
     }
 
     public void init(){
+
         JFrame frame = new JFrame("Einfügen");
         frame.setContentPane(new Main_Form().panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
