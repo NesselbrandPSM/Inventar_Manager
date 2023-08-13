@@ -68,6 +68,7 @@ public class MainGui {
         new UpdateTableThread().start();
         //endregion
 
+        //region aktualisierenListener
         aktuallisierenButton.addActionListener(e -> {
             int i = table1.getSelectedRow();
             if (i < 0) {
@@ -79,6 +80,7 @@ public class MainGui {
             updateShowAllTableModel(0);
             table1.getSelectionModel().setSelectionInterval(0, i);
         });
+        //endregion
 
         //region searchactionListener
         class searchAction extends AbstractAction {
@@ -179,6 +181,7 @@ public class MainGui {
 
         });
         //endregion
+        panel1.setEnabled(false);
     }
 
     public void updateShowAllTableModel(int flags) {
