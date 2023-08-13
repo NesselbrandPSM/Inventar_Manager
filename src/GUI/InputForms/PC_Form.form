@@ -36,6 +36,8 @@
     <rowspec value="center:20px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:20px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:20px:noGrow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:50px:noGrow"/>
@@ -46,7 +48,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:100px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="500"/>
+      <xy x="20" y="20" width="432" height="526"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -161,7 +163,7 @@
       </component>
       <component id="4645a" class="javax.swing.JLabel">
         <constraints>
-          <grid row="34" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="36" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="0"/>
         </constraints>
         <properties>
@@ -350,7 +352,7 @@
       </component>
       <component id="79c46" class="javax.swing.JTextField" binding="note">
         <constraints>
-          <grid row="34" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="36" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <forms defaultalign-horz="false"/>
@@ -395,6 +397,26 @@
         </constraints>
         <properties>
           <model/>
+        </properties>
+      </component>
+      <component id="333b2" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="34" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="0" right="0"/>
+        </constraints>
+        <properties>
+          <text value="DGUV:"/>
+        </properties>
+      </component>
+      <component id="495c1" class="javax.swing.JTextField">
+        <constraints>
+          <grid row="34" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <toolTipText value="Format: YYYY/MM/DD"/>
         </properties>
       </component>
     </children>
