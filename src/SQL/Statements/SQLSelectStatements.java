@@ -599,11 +599,22 @@ public class SQLSelectStatements {
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 
-    public String getCurrentIV_number(String s) {
-        String ret = "";
-        String[] allIV_numbers = getAllIV_Numbers(s);
-        System.out.println(Arrays.toString(allIV_numbers));
-        return ret;
+    public String getCurrentIV_number(String table) {
+        String[] allIV_numbers = getAllIV_Numbers(table);
+        int current = 0;
+        for (String s : allIV_numbers) {
+            if (Integer.parseInt(s) > current){
+                current = Integer.parseInt(s);
+            }
+        }
+        StringBuilder ret = new StringBuilder(String.valueOf(current));
+        if (ret.length() > 4){
+            throw new RuntimeException("iv_number greater than 4");
+        }
+        while (ret.length() < 4){
+            ret.insert(0, "0");
+        }
+        return ret.toString();
     }
 
     private String[] getAllIV_Numbers(String table) {

@@ -67,6 +67,7 @@ public class MainInputGui {
 
     private void inputEntry() {
         String s = sqlSelectStatements.getCurrentIV_number(inputPanel.getComponent(0).getName());
+        System.out.println(s);
     }
 
     private void show(JPanel panel) {
