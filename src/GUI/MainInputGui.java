@@ -66,11 +66,19 @@ public class MainInputGui {
     }
 
     private void inputEntry() {
-        String s = sqlSelectStatements.getCurrentIV_number(inputPanel.getComponent(0).getName());
-        if (s == null){
+        String currentIVNumber = sqlSelectStatements.getCurrentIV_number(inputPanel.getComponent(0).getName());
+        if (currentIVNumber == null){
             return;
         }
-        System.out.println(s);
+        String[] options = {"JA", "NEIN"};
+        int i = JOptionPane.showOptionDialog(null, "Einfügen des Datensatztes mit Inventar Nummer: " + currentIVNumber,
+                "Einfügen",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                0);
+        System.out.println(i);
     }
 
     private void show(JPanel panel) {
