@@ -602,8 +602,10 @@ public class SQLSelectStatements {
     public String getCurrentIV_number(String table) {
         String[] allIV_numbers = getAllIV_Numbers(table);
         int current = 0;
+        System.out.println(Arrays.toString(allIV_numbers));
         for (String s : allIV_numbers) {
             s = s.substring(s.indexOf("-"));
+            System.out.println(s);
             if (Integer.parseInt(s) > current){
                 current = Integer.parseInt(s);
             }
