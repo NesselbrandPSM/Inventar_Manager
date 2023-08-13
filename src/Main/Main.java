@@ -11,7 +11,7 @@ public class Main {
     public MainGui mainGui;
     public Main_Form mainForm;
 
-    private static final String permission_level = "admin";
+    private static final String permission_level = "testing";
 
     public static Main m;
 
