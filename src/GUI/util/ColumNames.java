@@ -38,6 +38,6 @@ public class ColumNames {
     };
 
     public static final String[] allAttributesDK = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Modell", "Seriennummer", "Firma", "Kaufdatum", "KaufPreis", "Status", "Raum Nummer", "Etage", "Desk Sharing"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Modell", "Serien Nummer", "Firma", "Kaufdatum", "KaufPreis", "Status", "Raum Nummer", "Etage", "Desk Sharing"
     };
 }
