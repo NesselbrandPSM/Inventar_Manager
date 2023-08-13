@@ -364,7 +364,9 @@
           </grid>
           <forms defaultalign-horz="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value="Format: YYYY/MM/DD"/>
+        </properties>
       </component>
       <component id="780da" class="javax.swing.JTextField" binding="lastUpdate">
         <constraints>
@@ -373,7 +375,9 @@
           </grid>
           <forms defaultalign-horz="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value="Format: YYYY/MM/DD"/>
+        </properties>
       </component>
       <component id="1b8d9" class="javax.swing.JComboBox" binding="users">
         <constraints>

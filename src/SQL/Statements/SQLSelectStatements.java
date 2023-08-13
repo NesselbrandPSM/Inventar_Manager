@@ -560,4 +560,40 @@ public class SQLSelectStatements {
 
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
+
+    public String[][] getAllCompanys() {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select company from company"
+        ));
+        try {
+            resultList.add(new ArrayList<>());
+            while (resultSet.next()){
+                resultList.get(0).add(String.valueOf(resultSet.getObject("company")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getAllUsers() {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select name from user"
+        ));
+        try {
+            resultList.add(new ArrayList<>());
+            while (resultSet.next()){
+                resultList.get(0).add(String.valueOf(resultSet.getObject("name")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
 }
