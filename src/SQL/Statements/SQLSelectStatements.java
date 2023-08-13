@@ -8,6 +8,7 @@ import SQL.util.SQLStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SQLSelectStatements {
     public SQLSelectStatements(SQLConnector connector) {
@@ -27,7 +28,7 @@ public class SQLSelectStatements {
                     "pc.inventory_company_key = company.company_key " +
                     "where pc.active = 1"));
             int i = 0;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -41,7 +42,7 @@ public class SQLSelectStatements {
                     "join printer " +
                     "on printer.inventory_company_key = company.company_key " +
                     "where printer.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -55,7 +56,7 @@ public class SQLSelectStatements {
                     "join scanner " +
                     "on scanner.inventory_company_key = company.company_key " +
                     "where scanner.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -69,7 +70,7 @@ public class SQLSelectStatements {
                     "join monitor " +
                     "on monitor.inventory_company_key = company.company_key " +
                     "where monitor.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -83,7 +84,7 @@ public class SQLSelectStatements {
                     "join telephone " +
                     "on telephone.inventory_company_key = company.company_key " +
                     "where telephone.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -97,7 +98,7 @@ public class SQLSelectStatements {
                     "join headset " +
                     "on headset.inventory_company_key = company.company_key " +
                     "where headset.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -111,7 +112,7 @@ public class SQLSelectStatements {
                     "join dockingstation " +
                     "on dockingstation.inventory_company_key = company.company_key " +
                     "where dockingstation.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -125,7 +126,7 @@ public class SQLSelectStatements {
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
                     "where desk.active = 1"));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -146,7 +147,7 @@ public class SQLSelectStatements {
 
         ResultSet resultSet = null;
         try {
-            switch (iv_number.substring(0, 2).toLowerCase()){
+            switch (iv_number.substring(0, 2).toLowerCase()) {
                 case "pc" -> resultSet = connector.query(new SQLStatement(
                         "select * from pc " +
                                 "join company on pc.inventory_company_key=company.company_key " +
@@ -190,14 +191,14 @@ public class SQLSelectStatements {
                                 "where desk.iv_number = \"" + iv_number + "\""));
             }
 
-            if (resultSet == null){
+            if (resultSet == null) {
                 return null;
             }
 
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : columnList) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, iv_number.substring(0, 2).toLowerCase()))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -210,6 +211,7 @@ public class SQLSelectStatements {
 
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
+
     public String[][] getSelectViewCompany(String company) {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
@@ -224,7 +226,7 @@ public class SQLSelectStatements {
                     "pc.inventory_company_key = company.company_key " +
                     "where pc.active = 1 and company.company = \"" + company + "\""));
             int i = 0;
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -238,7 +240,7 @@ public class SQLSelectStatements {
                     "join printer " +
                     "on printer.inventory_company_key = company.company_key " +
                     "where printer.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -252,7 +254,7 @@ public class SQLSelectStatements {
                     "join scanner " +
                     "on scanner.inventory_company_key = company.company_key " +
                     "where scanner.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -266,7 +268,7 @@ public class SQLSelectStatements {
                     "join monitor " +
                     "on monitor.inventory_company_key = company.company_key " +
                     "where monitor.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -280,7 +282,7 @@ public class SQLSelectStatements {
                     "join telephone " +
                     "on telephone.inventory_company_key = company.company_key " +
                     "where telephone.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -294,7 +296,7 @@ public class SQLSelectStatements {
                     "join headset " +
                     "on headset.inventory_company_key = company.company_key " +
                     "where headset.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -308,7 +310,7 @@ public class SQLSelectStatements {
                     "join dockingstation " +
                     "on dockingstation.inventory_company_key = company.company_key " +
                     "where dockingstation.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -322,7 +324,7 @@ public class SQLSelectStatements {
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
                     "where desk.active = 1 and company.company = \"" + company + "\""));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
                     resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
@@ -351,7 +353,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesPC) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "pc"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -380,7 +382,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesPR) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "pr"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -408,7 +410,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesSC) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "sc"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -437,7 +439,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesMO) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "mo"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -464,7 +466,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesTE) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "te"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -492,7 +494,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesHD) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "hd"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -520,7 +522,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesDS) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "ds"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -547,7 +549,7 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (String s : ColumNames.allAttributesDK) {
-                    if (s.equals("Primärschlüssel")){
+                    if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "dk"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
@@ -565,11 +567,11 @@ public class SQLSelectStatements {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
         ResultSet resultSet = connector.query(new SQLStatement(
-                "select company from company"
+                "select company from company where active = 1"
         ));
         try {
             resultList.add(new ArrayList<>());
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.get(0).add(String.valueOf(resultSet.getObject("company")));
             }
         } catch (SQLException e) {
@@ -583,11 +585,11 @@ public class SQLSelectStatements {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
         ResultSet resultSet = connector.query(new SQLStatement(
-                "select name from user"
+                "select name from user where active = 1"
         ));
         try {
             resultList.add(new ArrayList<>());
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 resultList.get(0).add(String.valueOf(resultSet.getObject("name")));
             }
         } catch (SQLException e) {
@@ -595,5 +597,28 @@ public class SQLSelectStatements {
         }
 
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String getCurrentIV_number(String s) {
+        String ret = "";
+        String[] allIV_numbers = getAllIV_Numbers(s);
+        System.out.println(Arrays.toString(allIV_numbers));
+        return ret;
+    }
+
+    private String[] getAllIV_Numbers(String table) {
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select iv_number from " + table
+        ));
+
+        ArrayList<String> iv_numbers = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                iv_numbers.add(resultSet.getString(0));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return iv_numbers.toArray(new String[]{});
     }
 }

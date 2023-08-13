@@ -1,6 +1,8 @@
 package GUI;
 
 import GUI.InputForms.*;
+import SQL.SQLConnector;
+import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +30,11 @@ public class MainInputGui {
     private Scanner_Form scannerForm;
     private Telephone_Form telephoneForm;
 
-    public MainInputGui(){
+    private SQLSelectStatements sqlSelectStatements;
+
+    public MainInputGui() {
+        sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+
         initForms();
 
         ActionListener listener = e -> {
@@ -59,11 +65,11 @@ public class MainInputGui {
         einfuegenButton.addActionListener(e -> inputEntry());
     }
 
-    private void inputEntry(){
-        System.out.println(inputPanel.getComponent(0).getName());
+    private void inputEntry() {
+        String s = sqlSelectStatements.getCurrentIV_number(inputPanel.getComponent(0).getName());
     }
 
-    private void show(JPanel panel){
+    private void show(JPanel panel) {
         inputPanel.removeAll();
         inputPanel.add(panel);
         inputPanel.revalidate();
@@ -87,7 +93,7 @@ public class MainInputGui {
         telephoneForm.getTelephonePanel().setName("telephone");
     }
 
-    public void init(){
+    public void init() {
         JFrame frame = new JFrame("Einfügen");
         frame.setContentPane(new MainInputGui().panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -96,7 +102,7 @@ public class MainInputGui {
         frame.setSize(new Dimension(1000, 750));
     }
 
-    private void uncheckBoxes(){
+    private void uncheckBoxes() {
         PCCheckBox.setSelected(false);
         PrinterCheckBox.setSelected(false);
         ScannerCheckBox.setSelected(false);
