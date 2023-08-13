@@ -137,6 +137,10 @@ public class MainGui {
                         setTextField1(ColumNames.allAttributesDS);
                         setTextField2(sqlStatements.getAllFromDSView(Integer.parseInt(selRow[2]))[0]);
                     }
+                    case "dk" -> {
+                        setTextField1(ColumNames.allAttributesDK);
+                        setTextField2(sqlStatements.getAllFromDKView(Integer.parseInt(selRow[2]))[0]);
+                    }
                 }
             }
         });
