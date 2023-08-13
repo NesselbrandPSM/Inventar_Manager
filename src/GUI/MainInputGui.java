@@ -24,6 +24,7 @@ public class MainInputGui {
 
     public MainInputGui(){
         initForms();
+        inputPanel.add(forms.get("PC"));
 
         ActionListener listener = e -> {
             JCheckBox checkBox = (JCheckBox) e.getSource();
