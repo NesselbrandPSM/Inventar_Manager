@@ -173,8 +173,6 @@ public class MainGui {
         //region einfügenListener
         elementEinfügenButton.addActionListener(e -> {
 
-
-
         });
         //endregion
     }
