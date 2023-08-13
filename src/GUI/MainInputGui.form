@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.InputForms.Main_Form">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.MainInputGui">
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FormLayout">
     <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
@@ -101,7 +101,7 @@
           <text value="Neu Einfuegen:"/>
         </properties>
       </component>
-      <grid id="85774" layout-manager="FormLayout">
+      <grid id="85774" binding="inputPanel" custom-create="true" layout-manager="FormLayout">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="13" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>

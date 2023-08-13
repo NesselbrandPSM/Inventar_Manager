@@ -1,6 +1,6 @@
 package Main;
 
-import GUI.InputForms.Main_Form;
+import GUI.MainInputGui;
 import GUI.MainGui;
 import SQL.SQLConnector;
 import SQL.Statements.SQLStatements;
@@ -9,7 +9,7 @@ public class Main {
     private SQLConnector connector;
     public SQLStatements sqlStatements;
     public MainGui mainGui;
-    public Main_Form mainForm;
+    public MainInputGui mainForm;
 
     private static final String permission_level = "testing";
 
@@ -32,7 +32,7 @@ public class Main {
                 //TODO
             }
             case "testing" -> {
-                mainForm = new Main_Form();
+                mainForm = new MainInputGui();
                 mainForm.init();
             }
         }

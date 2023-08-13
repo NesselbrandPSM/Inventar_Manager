@@ -1,10 +1,13 @@
-package GUI.InputForms;
+package GUI;
+
+import GUI.InputForms.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class Main_Form {
+public class MainInputGui {
     private JCheckBox PCCheckBox;
     private JPanel panel1;
     private JCheckBox PrinterCheckBox;
@@ -15,16 +18,18 @@ public class Main_Form {
     private JCheckBox TelephoneCheckBox;
     private JButton einfeugenButton;
     private JButton abbrechenButton;
+    private JPanel inputPanel;
 
-    public Main_Form(){
+    private HashMap<String, JPanel> forms;
+
+    public MainInputGui(){
+        initForms();
 
         ActionListener listener = e -> {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             uncheckBoxes();
             checkBox.setSelected(true);
-            switch (checkBox.getText()){
-
-            }
+            inputPanel = forms.get(checkBox.getText());
         };
 
         PCCheckBox.addActionListener(listener);
@@ -36,10 +41,21 @@ public class Main_Form {
         TelephoneCheckBox.addActionListener(listener);
     }
 
+    private void initForms() {
+        forms = new HashMap<>();
+        forms.put("Dockingstation", new Dockingstation_Form().getDockingPanel());
+        forms.put("Headset", new Headset_Form().getHeadsetPanel());
+        forms.put("Monitor", new Monitor_Form().getMonitorPanel());
+        forms.put("PC", new PC_Form().getPcPanel());
+        forms.put("Printer", new Printer_Form().getPrinterPanel());
+        forms.put("Scanner", new Scanner_Form().getScannerPanel());
+        forms.put("Telephone", new Telephone_Form().getTelephonePanel());
+    }
+
     public void init(){
 
         JFrame frame = new JFrame("Einfügen");
-        frame.setContentPane(new Main_Form().panel1);
+        frame.setContentPane(new MainInputGui().panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -54,5 +70,9 @@ public class Main_Form {
         HeadsetCheckBox.setSelected(false);
         MonitorCheckBox.setSelected(false);
         TelephoneCheckBox.setSelected(false);
+    }
+
+    private void createUIComponents() {
+        inputPanel = new JPanel();
     }
 }
