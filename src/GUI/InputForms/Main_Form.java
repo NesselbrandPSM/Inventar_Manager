@@ -1,10 +1,7 @@
 package GUI.InputForms;
 
-import GUI.MainGui;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main_Form {
@@ -16,6 +13,8 @@ public class Main_Form {
     private JCheckBox HeadsetCheckBox;
     private JCheckBox MonitorCheckBox;
     private JCheckBox TelephoneCheckBox;
+    private JButton einfeugenButton;
+    private JButton abbrechenButton;
 
     public Main_Form(){
 
@@ -23,7 +22,9 @@ public class Main_Form {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             uncheckBoxes();
             checkBox.setSelected(true);
-            //switch (checkBox.getText())
+            switch (checkBox.getText()){
+
+            }
         };
 
         PCCheckBox.addActionListener(listener);
@@ -38,7 +39,7 @@ public class Main_Form {
     public void init(){
         JFrame frame = new JFrame("Einfügen");
         frame.setContentPane(new Main_Form().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setSize(new Dimension(1000, 700));
