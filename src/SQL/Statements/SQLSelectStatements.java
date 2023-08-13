@@ -615,6 +615,7 @@ public class SQLSelectStatements {
         StringBuilder ret = new StringBuilder(String.valueOf(current));
         if (ret.length() > 4){
             JOptionPane.showConfirmDialog(null, "Es wurde alle 9999 iv_nummern ausgenutzt");
+            return null;
         }
         while (ret.length() < 4){
             ret.insert(0, "0");
