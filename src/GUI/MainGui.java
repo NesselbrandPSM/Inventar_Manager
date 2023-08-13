@@ -181,7 +181,6 @@ public class MainGui {
 
         });
         //endregion
-        panel1.setEnabled(false);
     }
 
     public void updateShowAllTableModel(int flags) {
