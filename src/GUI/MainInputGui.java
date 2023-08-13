@@ -55,6 +55,10 @@ public class MainInputGui {
         TelephoneCheckBox.addActionListener(listener);
     }
 
+    private void inputEntry(){
+        System.out.println(inputPanel.getComponent(0).getName());
+    }
+
     private void show(JPanel panel){
         inputPanel.removeAll();
         inputPanel.add(panel);
