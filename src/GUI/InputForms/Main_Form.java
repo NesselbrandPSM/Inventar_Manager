@@ -21,7 +21,9 @@ public class Main_Form {
 
         ActionListener listener = e -> {
             JCheckBox checkBox = (JCheckBox) e.getSource();
-            System.out.println(checkBox.getText());
+            uncheckBoxes();
+            checkBox.setSelected(true);
+            //switch (checkBox.getText())
         };
 
         PCCheckBox.addActionListener(listener);
