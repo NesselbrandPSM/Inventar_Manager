@@ -5,6 +5,7 @@ import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.SQLStatement;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -613,7 +614,7 @@ public class SQLSelectStatements {
         current++;
         StringBuilder ret = new StringBuilder(String.valueOf(current));
         if (ret.length() > 4){
-            throw new RuntimeException("iv_number greater than 4");
+            JOptionPane.showConfirmDialog(null, "Es wurde alle 9999 iv_nummern ausgenutzt");
         }
         while (ret.length() < 4){
             ret.insert(0, "0");
