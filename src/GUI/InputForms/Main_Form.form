@@ -6,6 +6,8 @@
     <rowspec value="center:30px:noGrow"/>
     <rowspec value="top:6dlu:noGrow"/>
     <rowspec value="fill:d:grow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:100px:noGrow"/>
@@ -108,6 +110,24 @@
         <border type="none"/>
         <children/>
       </grid>
+      <component id="576f6" class="javax.swing.JButton" binding="einfeugenButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Einfeugen"/>
+        </properties>
+      </component>
+      <component id="9a06d" class="javax.swing.JButton" binding="abbrechenButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Abbrechen"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
