@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.ResultSet;
 
 public class PC_Form {
     private JPanel pcPanel;
@@ -40,8 +41,8 @@ public class PC_Form {
     private SQLSelectStatements sqlSelectStatements;
 
     public PC_Form() {
-        //sqlConnector = new SQLConnector();
-        //sqlSelectStatements = new SQLSelectStatements(sqlConnector);
+        sqlConnector = new SQLConnector();
+        sqlSelectStatements = new SQLSelectStatements(sqlConnector);
 
         ActionListener listener = e -> {
             JCheckBox checkBox = (JCheckBox) e.getSource();
@@ -63,26 +64,20 @@ public class PC_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 companys.removeAllItems();
-                //TODO get all companys
+                String[] companysArr = sqlSelectStatements.getAllCompanys()[0];
+                for (String s : companysArr) {
+                    companys.addItem(new ComboBoxItem(s));
+                }
             }
         });
         users.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 users.removeAllItems();
-                //TODO get all users
-            }
-        });
-        purchaseDate.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                
-            }
-        });
-        lastUpdate.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                //TODO select lastUpdate Date
+                String[] usersArr = sqlSelectStatements.getAllUsers()[0];
+                for (String s : usersArr) {
+                    users.addItem(new ComboBoxItem(s));
+                }
             }
         });
     }
