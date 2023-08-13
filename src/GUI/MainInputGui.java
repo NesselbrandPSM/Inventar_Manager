@@ -29,9 +29,8 @@ public class MainInputGui {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             uncheckBoxes();
             checkBox.setSelected(true);
-            inputPanel = forms.get(checkBox.getText());
-            panel1.revalidate();
-            panel1.repaint();
+            inputPanel.removeAll();
+            inputPanel.add(forms.get(checkBox.getText()));
         };
 
         PCCheckBox.addActionListener(listener);
