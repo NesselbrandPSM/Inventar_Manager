@@ -101,7 +101,8 @@
           <text value="Neu Einfuegen:"/>
         </properties>
       </component>
-      <grid id="85774" binding="inputPanel" custom-create="true" layout-manager="FormLayout">
+      <grid id="85774" binding="inputPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="13" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
@@ -110,13 +111,13 @@
         <border type="none"/>
         <children/>
       </grid>
-      <component id="576f6" class="javax.swing.JButton" binding="einfeugenButton" default-binding="true">
+      <component id="576f6" class="javax.swing.JButton" binding="einfuegenButton" default-binding="true">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms top="10" left="10" bottom="10" right="0" defaultalign-horz="false"/>
         </constraints>
         <properties>
-          <text value="Einfeugen"/>
+          <text value="Einfuegen"/>
         </properties>
       </component>
       <component id="9a06d" class="javax.swing.JButton" binding="abbrechenButton" default-binding="true">
