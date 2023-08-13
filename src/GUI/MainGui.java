@@ -5,7 +5,7 @@ import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
 import SQL.SQLConnector;
-import SQL.Statements.SQLStatements;
+import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
@@ -28,17 +28,17 @@ public class MainGui {
     private JLabel statusLabel;
     private JScrollPane tableScrollPane;
     private SQLConnector connector;
-    private SQLStatements sqlStatements;
+    private SQLSelectStatements sqlSelectStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
     private static boolean showAll = true;
     //endregion
 
-    public MainGui(SQLConnector connector, SQLStatements sqlStatements) {
+    public MainGui(SQLConnector connector, SQLSelectStatements sqlSelectStatements) {
         this.connector = connector;
         this.statusList = new StatusList(statusLabel);
-        this.sqlStatements = sqlStatements;
+        this.sqlSelectStatements = sqlSelectStatements;
         statusList.start();
 
         textArea1.setText("");
@@ -113,35 +113,35 @@ public class MainGui {
                 switch (selRow[0].substring(0, 2).toLowerCase()) {
                     case "pc" -> {
                         setTextField1(ColumNames.allAttributesPC);
-                        setTextField2(sqlStatements.getAllFromPCView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "pr" -> {
                         setTextField1(ColumNames.allAttributesPR);
-                        setTextField2(sqlStatements.getAllFromPRView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "sc" -> {
                         setTextField1(ColumNames.allAttributesSC);
-                        setTextField2(sqlStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "mo" -> {
                         setTextField1(ColumNames.allAttributesMO);
-                        setTextField2(sqlStatements.getAllFromMOView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "te" -> {
                         setTextField1(ColumNames.allAttributesTE);
-                        setTextField2(sqlStatements.getAllFromTEView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "hd" -> {
                         setTextField1(ColumNames.allAttributesHD);
-                        setTextField2(sqlStatements.getAllFromHDView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "ds" -> {
                         setTextField1(ColumNames.allAttributesDS);
-                        setTextField2(sqlStatements.getAllFromDSView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "dk" -> {
                         setTextField1(ColumNames.allAttributesDK);
-                        setTextField2(sqlStatements.getAllFromDKView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[2]))[0]);
                     }
                 }
             }
@@ -187,26 +187,26 @@ public class MainGui {
         switch (flags) {
             case 0 -> { // show Default View
                 statusList.add("updating table ...", 0.3);
-                tableModel.update(sqlStatements.getDefaultView());
+                tableModel.update(sqlSelectStatements.getDefaultView());
             }
             case 1 -> { // show Search View for iv_number
                 statusList.add("searching ...", 0.2);
-                String[][] result = sqlStatements.getSelectViewIV_Number(searchTextField.getText());
+                String[][] result = sqlSelectStatements.getSelectViewIV_Number(searchTextField.getText());
                 if (result == null){
                     JOptionPane.showConfirmDialog(null, "Die Eingegebene Inventar Nummer war fehlerhaft!");
                     searchTextField.setText("");
-                    tableModel.update(sqlStatements.getDefaultView());
+                    tableModel.update(sqlSelectStatements.getDefaultView());
                 } else {
                     searchTextField.setText("");
                     tableModel.update(result);
                 }
             }
             case 2 -> { // show search View for company
-                String[][] result = sqlStatements.getSelectViewCompany(searchTextField.getText());
+                String[][] result = sqlSelectStatements.getSelectViewCompany(searchTextField.getText());
                 if (result == null){
                     JOptionPane.showConfirmDialog(null, "Die Eingegebene Firma war fehlerhaft!");
                     searchTextField.setText("");
-                    tableModel.update(sqlStatements.getDefaultView());
+                    tableModel.update(sqlSelectStatements.getDefaultView());
                 } else {
                     searchTextField.setText("");
                     tableModel.update(result);
@@ -282,7 +282,7 @@ public class MainGui {
     }
 
     private void createUIComponents() {
-        tableModel = new ShowAllTableModel(connector, Main.m.sqlStatements);
+        tableModel = new ShowAllTableModel(connector, Main.m.sqlSelectStatements);
         table1 = new JTable(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -295,7 +295,7 @@ public class MainGui {
             throw new RuntimeException(e);
         }
         JFrame frame = new JFrame("Inventar Manager");
-        frame.setContentPane(new MainGui(connector, sqlStatements).panel1);
+        frame.setContentPane(new MainGui(connector, sqlSelectStatements).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

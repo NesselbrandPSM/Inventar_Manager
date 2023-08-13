@@ -73,13 +73,12 @@ public class MainInputGui {
     }
 
     public void init(){
-
         JFrame frame = new JFrame("Einfügen");
         frame.setContentPane(new MainInputGui().panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(new Dimension(1000, 700));
+        frame.setSize(new Dimension(1000, 750));
     }
 
     private void uncheckBoxes(){

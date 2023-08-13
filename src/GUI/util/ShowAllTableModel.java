@@ -1,7 +1,7 @@
 package GUI.util;
 
 import SQL.SQLConnector;
-import SQL.Statements.SQLStatements;
+import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -11,13 +11,13 @@ public class ShowAllTableModel extends AbstractTableModel {
     Object[][] data;
 
     final SQLConnector connector;
-    final SQLStatements sqlStatements;
+    final SQLSelectStatements sqlSelectStatements;
 
-    public ShowAllTableModel(SQLConnector connector, SQLStatements sqlStatements) {
+    public ShowAllTableModel(SQLConnector connector, SQLSelectStatements sqlSelectStatements) {
         this.connector = connector;
-        this.sqlStatements = sqlStatements;
+        this.sqlSelectStatements = sqlSelectStatements;
         columnNames = ColumNames.columnNamesStandardView;
-        data = sqlStatements.getDefaultView();
+        data = sqlSelectStatements.getDefaultView();
     }
 
     public void update(String[][] data){

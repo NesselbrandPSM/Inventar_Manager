@@ -3,11 +3,11 @@ package Main;
 import GUI.MainInputGui;
 import GUI.MainGui;
 import SQL.SQLConnector;
-import SQL.Statements.SQLStatements;
+import SQL.Statements.SQLSelectStatements;
 
 public class Main {
     private SQLConnector connector;
-    public SQLStatements sqlStatements;
+    public SQLSelectStatements sqlSelectStatements;
     public MainGui mainGui;
     public MainInputGui mainForm;
 
@@ -24,8 +24,8 @@ public class Main {
         switch (permission_level){
             case "admin" -> {
                 connector = new SQLConnector();
-                sqlStatements = new SQLStatements(connector);
-                mainGui= new MainGui(connector, sqlStatements);
+                sqlSelectStatements = new SQLSelectStatements(connector);
+                mainGui= new MainGui(connector, sqlSelectStatements);
                 mainGui.init();
             }
             case "user" -> {
