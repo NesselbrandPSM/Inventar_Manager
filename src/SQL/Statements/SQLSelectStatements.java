@@ -603,6 +603,7 @@ public class SQLSelectStatements {
         String[] allIV_numbers = getAllIV_Numbers(table);
         int current = 0;
         for (String s : allIV_numbers) {
+            s = s.substring(s.indexOf("-"));
             if (Integer.parseInt(s) > current){
                 current = Integer.parseInt(s);
             }
