@@ -84,7 +84,6 @@ public class MainInputGui {
             //TODO einfügen
             switch (currentTable) {
                 case "pc" -> {
-
                 }
                 case "scanner" -> {
                 }
