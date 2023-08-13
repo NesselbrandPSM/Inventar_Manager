@@ -614,7 +614,7 @@ public class SQLSelectStatements {
         ArrayList<String> iv_numbers = new ArrayList<>();
         try {
             while (resultSet.next()) {
-                iv_numbers.add(resultSet.getString(0));
+                iv_numbers.add(resultSet.getString(1));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
