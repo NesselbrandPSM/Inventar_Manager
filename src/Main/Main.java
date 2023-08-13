@@ -21,10 +21,10 @@ public class Main {
     }
 
     private void init(){
-        connector = new SQLConnector();
-        sqlStatements = new SQLStatements(connector);
         switch (permission_level){
             case "admin" -> {
+                connector = new SQLConnector();
+                sqlStatements = new SQLStatements(connector);
                 mainGui= new MainGui(connector, sqlStatements);
                 mainGui.init();
             }
