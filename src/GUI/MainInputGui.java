@@ -60,7 +60,7 @@ public class MainInputGui {
     }
 
     private void inputEntry(){
-        System.out.println(inputPanel.getComponent(0));
+        System.out.println(inputPanel.getComponent(0).getName());
     }
 
     private void show(JPanel panel){
