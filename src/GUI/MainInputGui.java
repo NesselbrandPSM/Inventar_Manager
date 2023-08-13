@@ -60,7 +60,7 @@ public class MainInputGui {
     }
 
     private void inputEntry(){
-        System.out.println(inputPanel.getComponent(0).getName());
+        System.out.println(inputPanel.getComponent(0));
     }
 
     private void show(JPanel panel){
@@ -72,12 +72,19 @@ public class MainInputGui {
 
     private void initForms() {
         dockingstationForm = new Dockingstation_Form();
+        dockingstationForm.getDockingPanel().setName("dockingstation");
         headsetForm = new Headset_Form();
+        headsetForm.getHeadsetPanel().setName("headset");
         monitorForm = new Monitor_Form();
+        monitorForm.getMonitorPanel().setName("monitor");
         pcForm = new PC_Form();
+        pcForm.getPcPanel().setName("pc");
         printerForm = new Printer_Form();
+        printerForm.getPrinterPanel().setName("printer");
         scannerForm = new Scanner_Form();
+        scannerForm.getScannerPanel().setName("scanner");
         telephoneForm = new Telephone_Form();
+        telephoneForm.getTelephonePanel().setName("telephone");
     }
 
     public void init(){
