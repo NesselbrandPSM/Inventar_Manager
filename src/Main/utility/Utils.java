@@ -50,6 +50,7 @@ public class Utils {
             case "Raum Nummer" -> ret = "room_nb";
             case "Etage" -> ret = "floor";
             case "Desk Sharing" -> ret = "desk_share";
+            case "Nutzer Email" -> ret = "email";
         }
         return ret;
     }

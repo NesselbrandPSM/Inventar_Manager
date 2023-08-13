@@ -9,7 +9,7 @@ public class ColumNames {
     public static final String[] allAttributesPC = new String[]{
             "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Kaufdatum", "KaufPreis", "Arbeitsspeicher",
             "Festplattenspeicher", "cpu", "Betriebssystem", "IP-Addresse", "Letztes Update",
-            "Nutzer", "Serien Nummer", "Status", "DGUV", "Notiz", "Kategorie"
+            "Nutzer", "Nutzer Email", "Serien Nummer", "Status", "DGUV", "Notiz", "Kategorie"
     };
 
     public static final String[] allAttributesPR = new String[]{

@@ -1,1 +1,2 @@
  - change s_number from int to text (probably best)
+ - change every Date to text
