@@ -67,7 +67,6 @@ public class MainInputGui {
         MonitorCheckBox.addActionListener(listener);
         TelephoneCheckBox.addActionListener(listener);
 
-
         einfuegenButton.addActionListener(e -> inputEntry());
     }
 
