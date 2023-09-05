@@ -2,12 +2,14 @@ package GUI;
 
 import GUI.InputForms.*;
 import SQL.SQLConnector;
+import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainInputGui {
     private JCheckBox PCCheckBox;
@@ -31,9 +33,13 @@ public class MainInputGui {
     private Telephone_Form telephoneForm;
 
     private SQLSelectStatements sqlSelectStatements;
+    private SQLInsertStatements sqlInsertStatements;
+
+    private JFrame frame;
 
     public MainInputGui() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+        sqlInsertStatements = new SQLInsertStatements(new SQLConnector());
 
         initForms();
 
@@ -80,10 +86,34 @@ public class MainInputGui {
                 options,
                 0);
         if (i == 0) {
-            //TODO check dass alle felder ausgefüllt sind
-            //TODO einfügen
+            ArrayList<String> args = new ArrayList<>();
             switch (currentTable) {
                 case "pc" -> {
+                    args.add(currentIVNumber);
+                    args.add(pcForm.getPcType());
+                    args.add(pcForm.currentStatus.getText());
+                    args.add("");
+                    args.add("");
+                    args.add(pcForm.manufacturer.getText());
+                    args.add(pcForm.modell.getText());
+                    args.add(pcForm.s_number.getText());
+                    args.add(pcForm.cpu.getText());
+                    args.add(pcForm.ram.getText());
+                    args.add(pcForm.rom.getText());
+                    args.add(pcForm.os.getText());
+                    args.add(pcForm.ip.getText());
+                    args.add(pcForm.lastUpdate.getText());
+                    args.add("");
+                    args.add("");
+                    args.add("");
+                    args.add("");
+                    args.add(pcForm.dguv.getText());
+                    args.add(pcForm.note.getText());
+                    String[] arguments = new String[args.size()];
+                    for (int j = 0; j < arguments.length; j++) {
+                        arguments[j] = args.get(j);
+                    }
+                    sqlInsertStatements.inputPCEntry(arguments);
                 }
                 case "scanner" -> {
                 }
@@ -126,9 +156,9 @@ public class MainInputGui {
     }
 
     public void init() {
-        JFrame frame = new JFrame("Einfügen");
+        frame = new JFrame("Einfügen");
         frame.setContentPane(new MainInputGui().panel1);
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setSize(new Dimension(1000, 750));

@@ -17,23 +17,24 @@ public class PC_Form {
     private JCheckBox laptopCheckBox;
     private JCheckBox tabletCheckBox;
     private JCheckBox thinclientCheckBox;
-    private JTextField currentStatus;
-    private JTextField manufacturer;
-    private JTextField modell;
-    private JTextField s_number;
-    private JTextField cpu;
-    private JTextField ram;
-    private JTextField rom;
-    private JTextField os;
-    private JTextField ip;
-    private JTextField lastUpdate;
+    public JTextField currentStatus;
+    public JTextField manufacturer;
+    public JTextField modell;
+    public JTextField s_number;
+    public JTextField cpu;
+    public JTextField ram;
+    public JTextField rom;
+    public JTextField os;
+    public JTextField ip;
+    public JTextField lastUpdate;
     private JTextField purchaseDate;
     private JTextField purchaseNumber;
     private JTextField purchasePrice;
     private JTextField warranty;
-    private JTextField note;
+    public JTextField note;
     private JComboBox users;
     private JComboBox companys;
+    public JTextField dguv;
 
     private String pcType = "";
 

@@ -408,7 +408,7 @@
           <text value="DGUV:"/>
         </properties>
       </component>
-      <component id="495c1" class="javax.swing.JTextField">
+      <component id="495c1" class="javax.swing.JTextField" binding="dguv">
         <constraints>
           <grid row="34" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

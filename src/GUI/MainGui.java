@@ -5,6 +5,7 @@ import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
 import SQL.SQLConnector;
+import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
@@ -178,7 +179,8 @@ public class MainGui {
 
         //region einfügenListener
         elementEinfügenButton.addActionListener(e -> {
-
+            MainInputGui gui = new MainInputGui();
+            gui.init();
         });
         //endregion
     }

@@ -3,6 +3,7 @@ package Main;
 import GUI.MainInputGui;
 import GUI.MainGui;
 import SQL.SQLConnector;
+import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
     public MainGui mainGui;
     public MainInputGui mainForm;
 
-    private static final String permission_level = "testing";
+    private static final String permission_level = "admin";
 
     public static Main m;
 
@@ -29,7 +30,6 @@ public class Main {
                 mainGui.init();
             }
             case "user" -> {
-                //TODO
             }
             case "testing" -> {
                 mainForm = new MainInputGui();
