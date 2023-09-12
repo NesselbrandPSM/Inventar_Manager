@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PC_Form {
     private JPanel pcPanel;
@@ -41,6 +43,9 @@ public class PC_Form {
     private SQLConnector sqlConnector;
     private SQLSelectStatements sqlSelectStatements;
 
+    private String[][] companySet;
+    private String[][] userSet;
+
     public PC_Form() {
         sqlConnector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(sqlConnector);
@@ -65,7 +70,8 @@ public class PC_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 companys.removeAllItems();
-                String[] companysArr = sqlSelectStatements.getAllCompanys()[0];
+                companySet = sqlSelectStatements.getAllCompanys();
+                String[] companysArr = companySet[0];
                 for (String s : companysArr) {
                     companys.addItem(new ComboBoxItem(s));
                 }
@@ -75,8 +81,9 @@ public class PC_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 users.removeAllItems();
+                userSet = sqlSelectStatements.getAllUsers();
+                String[] usersArr = userSet[0];
                 users.addItem(new ComboBoxItem(""));
-                String[] usersArr = sqlSelectStatements.getAllUsers()[0];
                 for (String s : usersArr) {
                     users.addItem(new ComboBoxItem(s));
                 }
@@ -97,5 +104,81 @@ public class PC_Form {
 
     public String getPcType() {
         return pcType;
+    }
+
+    public String[] getArgs(String currentIVNumber) {
+        ArrayList<String> args = new ArrayList<>();
+        args.add(currentIVNumber);
+        args.add(getPcType());
+        args.add(currentStatus.getText());
+        args.add("");
+        args.add("");
+        args.add(manufacturer.getText());
+        args.add(modell.getText());
+        args.add(s_number.getText());
+        args.add(cpu.getText());
+        args.add(ram.getText());
+        args.add(rom.getText());
+        args.add(os.getText());
+        args.add(ip.getText());
+        args.add(lastUpdate.getText());
+        args.add("");
+        args.add("");
+        args.add("");
+        args.add("");
+        args.add(dguv.getText());
+        args.add(note.getText());
+        String currentComp = companys.getSelectedItem().toString();
+        for (int i = 0; i < companySet[0].length; i++) {
+            if (currentComp.equals(companySet[0][i])){
+                args.add(companySet[1][i]);
+            }
+        }
+
+        boolean hasUser = false;
+        String currentUser = users.getSelectedItem().toString();
+        for (int x = 0; x < userSet[0].length; x++) {
+            if (currentUser.equals(userSet[0][x])){
+                System.out.println(userSet[1][x]);
+                args.add(userSet[1][x]);
+                hasUser = true;
+            }
+        }
+        if (!hasUser){
+            args.add("-1");
+        }
+
+        args.add(purchaseDate.getText());
+        args.add(purchasePrice.getText());
+        args.add(warranty.getText());
+
+        String[] arguments = new String[args.size()];
+        for (int j = 0; j < arguments.length; j++) {
+            arguments[j] = args.get(j);
+        }
+
+        resetInputFields();
+
+        return arguments;
+    }
+
+    private void resetInputFields(){
+        uncheckBoxes();
+        currentStatus.setText("");
+        manufacturer.setText("");
+        modell.setText("");
+        s_number.setText("");
+        cpu.setText("");
+        ram.setText("");
+        rom.setText("");
+        os.setText("");
+        ip.setText("");
+        lastUpdate.setText("");
+        purchaseDate.setText("");
+        purchaseNumber.setText("");
+        purchasePrice.setText("");
+        warranty.setText("");
+        note.setText("");
+        dguv.setText("");
     }
 }

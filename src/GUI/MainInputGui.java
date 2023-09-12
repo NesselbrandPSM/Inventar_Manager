@@ -7,9 +7,7 @@ import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class MainInputGui {
     private JCheckBox PCCheckBox;
@@ -23,6 +21,7 @@ public class MainInputGui {
     private JButton einfuegenButton;
     private JButton abbrechenButton;
     private JPanel inputPanel;
+    private JCheckBox DeskCheckBox;
 
     private Dockingstation_Form dockingstationForm;
     private Headset_Form headsetForm;
@@ -31,6 +30,7 @@ public class MainInputGui {
     private Printer_Form printerForm;
     private Scanner_Form scannerForm;
     private Telephone_Form telephoneForm;
+    private Desk_Form deskForm;
 
     private SQLSelectStatements sqlSelectStatements;
     private SQLInsertStatements sqlInsertStatements;
@@ -56,6 +56,7 @@ public class MainInputGui {
                 case "Headset" -> show(headsetForm.getHeadsetPanel());
                 case "Monitor" -> show(monitorForm.getMonitorPanel());
                 case "Telephone" -> show(telephoneForm.getTelephonePanel());
+                case "Desk" -> show(deskForm.getDeskPanel());
             }
         };
 
@@ -66,6 +67,7 @@ public class MainInputGui {
         HeadsetCheckBox.addActionListener(listener);
         MonitorCheckBox.addActionListener(listener);
         TelephoneCheckBox.addActionListener(listener);
+        DeskCheckBox.addActionListener(listener);
 
         einfuegenButton.addActionListener(e -> inputEntry());
     }
@@ -85,35 +87,8 @@ public class MainInputGui {
                 options,
                 0);
         if (i == 0) {
-            ArrayList<String> args = new ArrayList<>();
             switch (currentTable) {
-                case "pc" -> {
-                    args.add(currentIVNumber);
-                    args.add(pcForm.getPcType());
-                    args.add(pcForm.currentStatus.getText());
-                    args.add("");
-                    args.add("");
-                    args.add(pcForm.manufacturer.getText());
-                    args.add(pcForm.modell.getText());
-                    args.add(pcForm.s_number.getText());
-                    args.add(pcForm.cpu.getText());
-                    args.add(pcForm.ram.getText());
-                    args.add(pcForm.rom.getText());
-                    args.add(pcForm.os.getText());
-                    args.add(pcForm.ip.getText());
-                    args.add(pcForm.lastUpdate.getText());
-                    args.add("");
-                    args.add("");
-                    args.add("");
-                    args.add("");
-                    args.add(pcForm.dguv.getText());
-                    args.add(pcForm.note.getText());
-                    String[] arguments = new String[args.size()];
-                    for (int j = 0; j < arguments.length; j++) {
-                        arguments[j] = args.get(j);
-                    }
-                    sqlInsertStatements.inputPCEntry(arguments);
-                }
+                case "pc" -> sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
                 case "scanner" -> {
                 }
                 case "printer" -> {
@@ -152,6 +127,8 @@ public class MainInputGui {
         scannerForm.getScannerPanel().setName("scanner");
         telephoneForm = new Telephone_Form();
         telephoneForm.getTelephonePanel().setName("telephone");
+        deskForm = new Desk_Form();
+        deskForm.getDeskPanel().setName("desk");
     }
 
     public void init() {
@@ -171,6 +148,7 @@ public class MainInputGui {
         HeadsetCheckBox.setSelected(false);
         MonitorCheckBox.setSelected(false);
         TelephoneCheckBox.setSelected(false);
+        DeskCheckBox.setSelected(false);
     }
 
     private void createUIComponents() {

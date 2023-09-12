@@ -20,11 +20,13 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:100px:noGrow"/>
+    <colspec value="fill:103px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:100px:noGrow"/>
+    <colspec value="fill:105px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:105px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="829" height="660"/>
+      <xy x="20" y="20" width="899" height="660"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -106,7 +108,7 @@
       <grid id="85774" binding="inputPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="13" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="15" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -133,10 +135,19 @@
       </component>
       <component id="6fa54" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="13" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="15" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
+      </component>
+      <component id="92509" class="javax.swing.JCheckBox" binding="DeskCheckBox">
+        <constraints>
+          <grid row="2" column="14" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Desk"/>
+        </properties>
       </component>
     </children>
   </grid>
