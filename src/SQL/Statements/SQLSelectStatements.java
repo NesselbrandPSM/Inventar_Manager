@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SQLSelectStatements {
     public SQLSelectStatements(SQLConnector connector) {
@@ -337,7 +338,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from pc " +
                         "join company on pc.inventory_company_key=company.company_key " +
-                        "join user on pc.inventory_user_key=user.user_key " +
+                        "join user on pc.inventory_user_key=user.name " +
                         "where pc.pc_key = " + key
         ));
         try {
@@ -348,12 +349,11 @@ public class SQLSelectStatements {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "pc"))));
                     } else {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
-
                     }
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);

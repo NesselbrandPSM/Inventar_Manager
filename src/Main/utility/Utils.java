@@ -37,7 +37,7 @@ public class Utils {
             case "Betriebssystem" -> ret = "os";
             case "IP-Addresse" -> ret = "ip";
             case "Letztes Update" -> ret = "last_update";
-            case "Nutzer" -> ret = "name";
+            case "Nutzer" -> ret = "inventory_user_key";
             case "Serien Nummer" -> ret = "s_number";
             case "Status" -> ret = "current_status";
             case "DGUV" -> ret = "dguv";
