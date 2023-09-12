@@ -7,7 +7,9 @@ import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class MainInputGui {
     private JCheckBox PCCheckBox;
@@ -35,7 +37,7 @@ public class MainInputGui {
     private SQLSelectStatements sqlSelectStatements;
     private SQLInsertStatements sqlInsertStatements;
 
-    private JFrame frame;
+    private static JFrame frame;
 
     public MainInputGui() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
@@ -70,6 +72,7 @@ public class MainInputGui {
         DeskCheckBox.addActionListener(listener);
 
         einfuegenButton.addActionListener(e -> inputEntry());
+        abbrechenButton.addActionListener(e -> close());
     }
 
     private void inputEntry() {
@@ -132,12 +135,16 @@ public class MainInputGui {
     }
 
     public void init() {
-        frame = new JFrame("Einfügen");
-        frame.setContentPane(new MainInputGui().panel1);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(new Dimension(1000, 750));
+        try {
+            frame = new JFrame("Einfügen");
+            frame.setContentPane(new MainInputGui().panel1);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
+            frame.setSize(new Dimension(1000, 750));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void uncheckBoxes() {
@@ -153,5 +160,13 @@ public class MainInputGui {
 
     private void createUIComponents() {
         inputPanel = new JPanel();
+    }
+
+    private void close() {
+        try {
+            frame.dispose();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
