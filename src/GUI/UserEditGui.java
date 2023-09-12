@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.util.UserTableModell;
+import Main.utility.ADWrapper;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -22,6 +23,7 @@ public class UserEditGui {
     private JTable userTable;
     private JScrollPane userTableScrollPane;
     private JButton aktualisierenButton;
+    private JButton databaseSyncenButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
@@ -59,6 +61,12 @@ public class UserEditGui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 update();
+            }
+        });
+        databaseSyncenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ADWrapper.syncDatabase();
             }
         });
     }
@@ -106,7 +114,6 @@ public class UserEditGui {
     private void createUIComponents() {
         userTableModell = new UserTableModell(new SQLSelectStatements(new SQLConnector()));
         String[][] data = new SQLSelectStatements(new SQLConnector()).getAllUsersTableModel(2);
-        System.out.println(Arrays.deepToString(data));
         userTableModell.update(data);
         userTable = new JTable(userTableModell);
         userTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

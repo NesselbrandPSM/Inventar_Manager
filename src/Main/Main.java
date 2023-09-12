@@ -13,7 +13,7 @@ public class Main {
     public MainGui mainGui;
     public MainInputGui mainForm;
 
-    private static final String permission_level = "testing";
+    private static final String permission_level = "admin";
 
     public static Main m;
 

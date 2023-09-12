@@ -4,6 +4,7 @@ import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
+import Main.utility.ADWrapper;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 

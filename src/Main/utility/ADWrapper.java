@@ -89,6 +89,20 @@ public class ADWrapper {
         ArrayList<ArrayList<String>> newUsers = new ArrayList<>();
         String[][] oldUsers = sqlSelectStatements.getAllUsersActive0();
 
+        //alte user mergen
+        for (int i = 0; i < oldUsers[0].length; i++) {
+            for (String[] adUser : users){
+                if (oldUsers[0][i].equals(adUser[0])){
+                    ArrayList<String> temp = new ArrayList<>();
+                    temp.add(oldUsers[0][i]);
+                    temp.add(oldUsers[3][i]);
+                    temp.add(oldUsers[2][i]);
+                    temp.add(oldUsers[4][i]);
+                    newUsers.add(temp);
+                }
+            }
+        }
+
         //neue user mergen
         for (int i = 0; i < users.length; i++) {
             boolean is = false;
@@ -117,5 +131,7 @@ public class ADWrapper {
                     "'" + list.get(3) + "'" +
                     ")");
         }
+
+        System.out.println("user merged!");
     }
 }
