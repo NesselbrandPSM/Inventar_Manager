@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SQLSelectStatements {
     public SQLSelectStatements(SQLConnector connector) {
@@ -578,6 +577,41 @@ public class SQLSelectStatements {
             while (resultSet.next()) {
                 resultList.get(0).add(String.valueOf(resultSet.getObject("name")));
                 resultList.get(1).add(String.valueOf(resultSet.getObject("user_key")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getAllUsersTableModel(int status) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        SQLStatement statement = new SQLStatement("");
+
+        switch (status){
+            case -1: // inaktiv
+                statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = -1");
+                break;
+            case 0: // neu
+                statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = 0");
+                break;
+            case 1: // aktiv
+                statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = 1");
+                break;
+            case 2: // all
+                statement.setStatement("select name, mail, current_status from user where active = 1");
+                break;
+        }
+
+        ResultSet resultSet = connector.query(statement);
+        try {
+            while (resultSet.next()) {
+                ArrayList<String> temp = new ArrayList<>();
+                temp.add(String.valueOf(resultSet.getObject("name")));
+                temp.add(String.valueOf(resultSet.getObject("mail")));
+                temp.add(String.valueOf(resultSet.getObject("current_status")));
+                resultList.add(temp);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

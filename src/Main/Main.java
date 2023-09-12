@@ -2,6 +2,7 @@ package Main;
 
 import GUI.MainInputGui;
 import GUI.MainGui;
+import GUI.UserEditGui;
 import Main.utility.ADWrapper;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
@@ -12,7 +13,7 @@ public class Main {
     public MainGui mainGui;
     public MainInputGui mainForm;
 
-    private static final String permission_level = "admin";
+    private static final String permission_level = "testing";
 
     public static Main m;
 
@@ -34,8 +35,7 @@ public class Main {
             }
             case "testing" -> {
                 ADWrapper.init();
-                ADWrapper.syncDatabase();
-                ADWrapper.close();
+                new UserEditGui().init();
             }
         }
     }

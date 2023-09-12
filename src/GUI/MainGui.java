@@ -293,7 +293,7 @@ public class MainGui {
     }
 
     private void createUIComponents() {
-        tableModel = new ShowAllTableModel(connector, Main.m.sqlSelectStatements);
+        tableModel = new ShowAllTableModel(Main.m.sqlSelectStatements);
         table1 = new JTable(tableModel);
         table1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }

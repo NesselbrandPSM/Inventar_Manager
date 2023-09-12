@@ -12,7 +12,7 @@ public class SQLStatement {
         return statement;
     }
 
-    protected void setStatement(String statement){
+    public void setStatement(String statement){
         this.statement = statement;
     }
 }

@@ -5,17 +5,15 @@ import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.table.AbstractTableModel;
 
-public class ShowAllTableModel extends AbstractTableModel {
-
+public class UserTableModell extends AbstractTableModel {
     String[] columnNames;
     Object[][] data;
 
     final SQLSelectStatements sqlSelectStatements;
 
-    public ShowAllTableModel(SQLSelectStatements sqlSelectStatements) {
+    public UserTableModell(SQLSelectStatements sqlSelectStatements) {
+        columnNames = new String[]{"Name", "Email", "Status"};
         this.sqlSelectStatements = sqlSelectStatements;
-        columnNames = ColumNames.columnNamesStandardView;
-        data = sqlSelectStatements.getDefaultView();
     }
 
     public void update(String[][] data){
@@ -46,6 +44,4 @@ public class ShowAllTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         return columnNames[column];
     }
-
-
 }
