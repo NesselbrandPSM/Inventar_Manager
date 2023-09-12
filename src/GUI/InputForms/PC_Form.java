@@ -157,6 +157,12 @@ public class PC_Form {
             arguments[j] = args.get(j);
         }
 
+        for (int i = 0; i < arguments.length; i++) {
+            if (arguments[i].equals("")){
+                arguments[i] = " - ";
+            }
+        }
+
         resetInputFields();
 
         return arguments;

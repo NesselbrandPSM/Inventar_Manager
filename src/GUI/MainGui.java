@@ -5,7 +5,6 @@ import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
 import SQL.SQLConnector;
-import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
@@ -28,6 +27,7 @@ public class MainGui {
     private JTextPane selectedItemTextPane;
     private JLabel statusLabel;
     private JScrollPane tableScrollPane;
+    private JButton editUserButton;
     private SQLConnector connector;
     private SQLSelectStatements sqlSelectStatements;
     private ShowAllTableModel tableModel;
@@ -183,6 +183,15 @@ public class MainGui {
             gui.init();
         });
         //endregion
+
+
+        editUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserEditGui userEditGui = new UserEditGui();
+                userEditGui.init();
+            }
+        });
     }
 
     public void updateShowAllTableModel(int flags) {
@@ -301,7 +310,7 @@ public class MainGui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(new Dimension(1000, 700));
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
     //endregion
 }

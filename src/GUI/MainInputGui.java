@@ -141,7 +141,7 @@ public class MainInputGui {
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.pack();
             frame.setVisible(true);
-            frame.setSize(new Dimension(1000, 750));
+            frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         } catch (Exception e){
             e.printStackTrace();
         }
