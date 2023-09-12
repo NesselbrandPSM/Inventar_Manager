@@ -2,8 +2,8 @@ package Main;
 
 import GUI.MainInputGui;
 import GUI.MainGui;
+import Main.utility.ADWrapper;
 import SQL.SQLConnector;
-import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 
 public class Main {
@@ -24,6 +24,7 @@ public class Main {
     private void init(){
         switch (permission_level){
             case "admin" -> {
+                ADWrapper.init();
                 connector = new SQLConnector();
                 sqlSelectStatements = new SQLSelectStatements(connector);
                 mainGui= new MainGui(connector, sqlSelectStatements);
@@ -32,8 +33,9 @@ public class Main {
             case "user" -> {
             }
             case "testing" -> {
-                mainForm = new MainInputGui();
-                mainForm.init();
+                ADWrapper.init();
+                ADWrapper.syncDatabase();
+                ADWrapper.close();
             }
         }
     }

@@ -10,6 +10,10 @@ public class SQLInsertStatements {
 
     private SQLConnector connector;
 
+    public void insert(String statement){
+        connector.query(new SQLStatement(statement));
+    }
+
     public void inputPCEntry(String[] args){
         SQLStatement s = new SQLStatement(
                 "insert into pc (" +

@@ -585,6 +585,31 @@ public class SQLSelectStatements {
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 
+    public String[][] getAllUsersActive0() {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select name, user_key, current_status, mail, active from user"
+        ));
+        try {
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            while (resultSet.next()) {
+                resultList.get(0).add(String.valueOf(resultSet.getObject("name")));
+                resultList.get(1).add(String.valueOf(resultSet.getObject("user_key")));
+                resultList.get(2).add(String.valueOf(resultSet.getObject("current_status")));
+                resultList.get(3).add(String.valueOf(resultSet.getObject("mail")));
+                resultList.get(4).add(String.valueOf(resultSet.getObject("active")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
     public String getCurrentIV_number(String table) {
         String[] allIV_numbers = getAllIV_Numbers(table);
         int current = 0;
