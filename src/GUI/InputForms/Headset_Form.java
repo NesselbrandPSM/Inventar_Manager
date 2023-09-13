@@ -21,6 +21,7 @@ public class Headset_Form {
     private JTextField warranty;
     private JComboBox users;
     private JTextField dguv;
+    private JTextField note;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -92,6 +93,8 @@ public class Headset_Form {
             args.add("-1");
         }
 
+        args.add(note.getText());
+
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
@@ -113,5 +116,6 @@ public class Headset_Form {
         warranty.setText("");
         currentStatus.setText("");
         dguv.setText("");
+        note.setText("");
     }
 }

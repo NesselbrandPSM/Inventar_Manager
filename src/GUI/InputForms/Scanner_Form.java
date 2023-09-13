@@ -22,6 +22,7 @@ public class Scanner_Form {
     private JTextField warranty;
     private JComboBox users;
     private JTextField dguv;
+    private JTextField note;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -92,6 +93,7 @@ public class Scanner_Form {
         args.add(purchaseDate.getText());
         args.add(purchasePrice.getText());
         args.add(warranty.getText());
+        args.add(note.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
@@ -115,5 +117,6 @@ public class Scanner_Form {
         purchasePrice.setText("");
         warranty.setText("");
         dguv.setText("");
+        note.setText("");
     }
 }

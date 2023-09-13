@@ -421,6 +421,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from monitor " +
                         "join company on monitor.inventory_company_key=company.company_key " +
+                        "join user on monitor.inventory_user_key=user.name " +
                         "where monitor.mo_key = " + key
         ));
         try {
@@ -447,6 +448,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from telephone " +
                         "join company on telephone.inventory_company_key=company.company_key " +
+                        "join user on telephone.inventory_user_key=user.name " +
                         "where telephone.te_key = " + key
         ));
         try {

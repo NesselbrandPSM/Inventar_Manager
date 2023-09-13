@@ -22,6 +22,7 @@ public class Printer_Form {
     private JTextField purchasePrice;
     private JTextField warranty;
     private JTextField dguv;
+    private JTextField note;
 
     private String[][] companySet;
 
@@ -69,6 +70,7 @@ public class Printer_Form {
         args.add(warranty.getText());
         args.add(dguv.getText());
         args.add(currentIVNumber);
+        args.add(note.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
@@ -93,5 +95,6 @@ public class Printer_Form {
         purchasePrice.setText("");
         warranty.setText("");
         dguv.setText("");
+        note.setText("");
     }
 }

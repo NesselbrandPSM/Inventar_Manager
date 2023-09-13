@@ -42,6 +42,7 @@ public class Utils {
             case "Status" -> ret = "current_status";
             case "DGUV" -> ret = "dguv";
             case "Notiz" -> ret = "note";
+            case "Bemerkung" -> ret = "note";
             case "Kategorie" -> ret = "category";
             case "Equipment Nummer" -> ret = "eq_number";
             case "Hersteller" -> ret = "manufacturer";
@@ -51,6 +52,10 @@ public class Utils {
             case "Etage" -> ret = "floor";
             case "Desk Sharing" -> ret = "desk_share";
             case "Nutzer Email" -> ret = "mail";
+            case "HDMI" -> ret = "hdmi";
+            case "DisplayPort" -> ret = "dp";
+            case "VGA" -> ret = "vga";
+            case "DVI" -> ret = "dvi";
         }
         return ret;
     }

@@ -21,6 +21,7 @@ public class Dockingstation_Form {
     private JTextField warranty;
     private JTextField dguv;
     private JComboBox users;
+    private JTextField note;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -85,6 +86,7 @@ public class Dockingstation_Form {
         args.add(purchaseDate.getText());
         args.add(purchasePrice.getText());
         args.add(warranty.getText());
+        args.add(note.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
@@ -107,6 +109,7 @@ public class Dockingstation_Form {
         purchasePrice.setText("");
         warranty.setText("");
         dguv.setText("");
+        note.setText("");
     }
 
     public JPanel getDockingPanel() {
