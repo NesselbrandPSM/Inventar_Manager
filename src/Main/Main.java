@@ -2,6 +2,7 @@ package Main;
 
 import GUI.MainInputGui;
 import GUI.MainGui;
+import GUI.UserEditGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.Printer;
@@ -12,9 +13,8 @@ public class Main {
     private SQLConnector connector;
     public SQLSelectStatements sqlSelectStatements;
     public MainGui mainGui;
-    public MainInputGui mainForm;
 
-    private static final String permission_level = "admin";
+    private static final String permission_level = "testing2";
 
     public static Main m;
 
@@ -35,8 +35,13 @@ public class Main {
             }
             case "user" -> {
             }
-            case "testing" -> {
+            case "testing1" -> {
                 Printer.print();
+            }
+            case "testing2" -> {
+                ADWrapper.init();
+                UserEditGui gui = new UserEditGui();
+                gui.init();
             }
         }
     }

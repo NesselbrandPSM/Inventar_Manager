@@ -55,6 +55,16 @@ public class Utils {
             case "DisplayPort" -> ret = "dp";
             case "VGA" -> ret = "vga";
             case "DVI" -> ret = "dvi";
+            case "Garantie" -> ret = "warranty";
+            case "PC-IV-Nummer" -> ret = "pc_iv_number";
+            case "HD-IV-Nummer" -> ret = "hd_iv_number";
+            case "TE-IV-Nummer" -> ret = "te_iv_number";
+            case "DS-IV-Nummer" -> ret = "ds_iv_number";
+            case "SC-IV-Nummer" -> ret = "sc_iv_number";
+            case "MO1-IV-Nummer" -> ret = "mo_iv_number_1";
+            case "MO2-IV-Nummer" -> ret = "mo_iv_number_2";
+            case "Maus" -> ret = "has_mouse";
+            case "Tastatur" -> ret = "has_keyboard";
         }
         return ret;
     }

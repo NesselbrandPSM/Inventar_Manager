@@ -531,6 +531,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from desk " +
                         "join company on desk.inventory_company_key=company.company_key " +
+                        "join user on desk.inventory_user_key=user.name " +
                         "where desk.dk_key = " + key
         ));
         try {
