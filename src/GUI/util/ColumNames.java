@@ -34,7 +34,7 @@ public class ColumNames {
     };
 
     public static final String[] allAttributesDS = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis", "Status", "DGUV", "Serien Nummer"
     };
 
     public static final String[] allAttributesDK = new String[]{

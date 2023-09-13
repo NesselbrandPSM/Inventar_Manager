@@ -502,6 +502,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from dockingstation " +
                         "join company on dockingstation.inventory_company_key=company.company_key " +
+                        "join user on dockingstation.inventory_user_key=user.name " +
                         "where dockingstation.ds_key = " + key
         ));
         try {

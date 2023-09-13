@@ -94,8 +94,7 @@ public class MainInputGui {
                 case "pc" -> sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
                 case "scanner" -> sqlInsertStatements.inputSCEntry(scannerForm.getArgs(currentIVNumber));
                 case "printer" -> sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
-                case "dockingstation" -> {
-                }
+                case "dockingstation" -> sqlInsertStatements.inputDSEntry(dockingstationForm.getArgs(currentIVNumber));
                 case "headset" -> sqlInsertStatements.inputHDEntry(headsetForm.getArgs(currentIVNumber));
                 case "monitor" -> {
                 }
