@@ -1,6 +1,7 @@
 package GUI.InputForms;
 
 import GUI.util.ComboBoxItem;
+import Main.utility.Constants;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -46,7 +47,7 @@ public class PC_Form {
         sqlConnector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(sqlConnector);
 
-        for (String s : sqlSelectStatements.getStatusList()) {
+        for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
@@ -121,7 +122,7 @@ public class PC_Form {
         ArrayList<String> args = new ArrayList<>();
         args.add(currentIVNumber);
         args.add(getPcType());
-        args.add((String) status.getSelectedItem());
+        args.add(status.getSelectedItem().toString());
         args.add("");
         args.add("");
         args.add(manufacturer.getText());

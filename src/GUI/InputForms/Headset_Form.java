@@ -1,6 +1,7 @@
 package GUI.InputForms;
 
 import GUI.util.ComboBoxItem;
+import Main.utility.Constants;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 public class Headset_Form {
     private JPanel headsetPanel;
-    private JTextField currentStatus;
     private JComboBox companys;
     private JTextField manufacturer;
     private JTextField modell;
@@ -32,7 +32,7 @@ public class Headset_Form {
     public Headset_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
-        for (String s : sqlSelectStatements.getStatusList()) {
+        for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
@@ -82,7 +82,7 @@ public class Headset_Form {
         args.add(currentIVNumber);
         args.add(manufacturer.getText());
         args.add(s_number.getText());
-        args.add(currentStatus.getText());
+        args.add(status.getSelectedItem().toString());
         args.add(modell.getText());
         args.add(dguv.getText());
 
@@ -130,7 +130,6 @@ public class Headset_Form {
         purchaseDate.setText("");
         purchasePrice.setText("");
         warranty.setText("");
-        currentStatus.setText("");
         dguv.setText("");
         note.setText("");
     }

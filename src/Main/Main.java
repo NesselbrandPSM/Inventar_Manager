@@ -3,6 +3,7 @@ package Main;
 import GUI.MainInputGui;
 import GUI.MainGui;
 import Main.utility.ADWrapper;
+import Main.utility.Constants;
 import Main.utility.Printer;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
@@ -26,6 +27,7 @@ public class Main {
         switch (permission_level){
             case "admin" -> {
                 ADWrapper.init();
+                Constants.init();
                 connector = new SQLConnector();
                 sqlSelectStatements = new SQLSelectStatements(connector);
                 mainGui= new MainGui(connector, sqlSelectStatements);

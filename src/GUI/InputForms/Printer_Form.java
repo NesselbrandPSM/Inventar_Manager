@@ -1,6 +1,7 @@
 package GUI.InputForms;
 
 import GUI.util.ComboBoxItem;
+import Main.utility.Constants;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 public class Printer_Form {
     private JPanel printerPanel;
-    private JTextField currentStatus;
     private JComboBox companys;
     private JTextField manufacturer;
     private JTextField modell;
@@ -32,7 +32,7 @@ public class Printer_Form {
     public Printer_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
-        for (String s : sqlSelectStatements.getStatusList()) {
+        for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
@@ -61,7 +61,7 @@ public class Printer_Form {
     public String[] getArgs(String currentIVNumber){
         ArrayList<String> args = new ArrayList<>();
 
-        args.add(currentStatus.getText());
+        args.add(status.getSelectedItem().toString());
 
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
@@ -95,7 +95,6 @@ public class Printer_Form {
     }
 
     private void resetInputFields(){
-        currentStatus.setText("");
         manufacturer.setText("");
         modell.setText("");
         s_number.setText("");

@@ -1,6 +1,7 @@
 package GUI.InputForms;
 
 import GUI.util.ComboBoxItem;
+import Main.utility.Constants;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 public class Scanner_Form {
     private JPanel scannerPanel;
-    private JTextField currentStatus;
     private JComboBox companys;
     private JTextField manufacturer;
     private JTextField modell;
@@ -33,7 +33,7 @@ public class Scanner_Form {
     public Scanner_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
-        for (String s : sqlSelectStatements.getStatusList()) {
+        for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
@@ -100,7 +100,7 @@ public class Scanner_Form {
             args.add("-1");
         }
 
-        args.add(currentStatus.getText());
+        args.add(status.getSelectedItem().toString());
         args.add(dguv.getText());
         args.add(s_number.getText());
         args.add(manufacturer.getText());
@@ -124,7 +124,6 @@ public class Scanner_Form {
     }
 
     private void resetInputFields(){
-        currentStatus.setText("");
         manufacturer.setText("");
         modell.setText("");
         s_number.setText("");
