@@ -22,6 +22,7 @@ public class Dockingstation_Form {
     private JTextField dguv;
     private JComboBox users;
     private JTextField note;
+    private JComboBox status;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -31,11 +32,27 @@ public class Dockingstation_Form {
     public Dockingstation_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
+        for (String s : sqlSelectStatements.getStatusList()) {
+            status.addItem(new ComboBoxItem(s));
+        }
+        companys.removeAllItems();
+        companySet = sqlSelectStatements.getAllCompanys();
+        String[] companysArr = companySet[0];
+        for (String s : companysArr) {
+            companys.addItem(new ComboBoxItem(s));
+        }
+        users.removeAllItems();
+        userSet = sqlSelectStatements.getAllUsers();
+        String[] usersArr = userSet[0];
+        users.addItem(new ComboBoxItem(""));
+        for (String s : usersArr) {
+            users.addItem(new ComboBoxItem(s));
+        }
+
         companys.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 companys.removeAllItems();
-                companySet = sqlSelectStatements.getAllCompanys();
                 String[] companysArr = companySet[0];
                 for (String s : companysArr) {
                     companys.addItem(new ComboBoxItem(s));
@@ -46,7 +63,6 @@ public class Dockingstation_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 users.removeAllItems();
-                userSet = sqlSelectStatements.getAllUsers();
                 String[] usersArr = userSet[0];
                 users.addItem(new ComboBoxItem(""));
                 for (String s : usersArr) {

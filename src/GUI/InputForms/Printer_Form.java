@@ -23,6 +23,7 @@ public class Printer_Form {
     private JTextField warranty;
     private JTextField dguv;
     private JTextField note;
+    private JComboBox status;
 
     private String[][] companySet;
 
@@ -31,12 +32,21 @@ public class Printer_Form {
     public Printer_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
+        for (String s : sqlSelectStatements.getStatusList()) {
+            status.addItem(new ComboBoxItem(s));
+        }
+        companys.removeAllItems();
+        companySet = sqlSelectStatements.getAllCompanys();
+        String[] companysArr = companySet[0];
+        for (String s : companysArr) {
+            companys.addItem(new ComboBoxItem(s));
+        }
+
         companys.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 companys.removeAllItems();
                 String[] companysArr = sqlSelectStatements.getAllCompanys()[0];
-                companySet = sqlSelectStatements.getAllCompanys();
                 for (String s : companysArr) {
                     companys.addItem(new ComboBoxItem(s));
                 }

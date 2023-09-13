@@ -594,7 +594,7 @@ public class SQLSelectStatements {
 
         SQLStatement statement = new SQLStatement("");
 
-        switch (status){
+        switch (status) {
             case -1: // inaktiv
                 statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = -1");
                 break;
@@ -654,20 +654,20 @@ public class SQLSelectStatements {
         int current = 0;
         for (String s : allIV_numbers) {
             s = s.substring(s.indexOf("-") + 1);
-            if (Integer.parseInt(s) > current){
+            if (Integer.parseInt(s) > current) {
                 current = Integer.parseInt(s);
             }
         }
         current++;
         StringBuilder ret = new StringBuilder(String.valueOf(current));
-        if (ret.length() > 4){
+        if (ret.length() > 4) {
             JOptionPane.showConfirmDialog(null, "Es wurde alle 9999 iv_nummern ausgenutzt");
             return null;
         }
-        while (ret.length() < 4){
+        while (ret.length() < 4) {
             ret.insert(0, "0");
         }
-        switch (table){
+        switch (table) {
             case "pc" -> ret.insert(0, "PC-");
             case "scanner" -> ret.insert(0, "SC-");
             case "printer" -> ret.insert(0, "PR-");
@@ -693,5 +693,20 @@ public class SQLSelectStatements {
             throw new RuntimeException(e);
         }
         return iv_numbers.toArray(new String[]{});
+    }
+
+    public String[] getStatusList() {
+        ResultSet res = connector.query(new SQLStatement(
+                "select statustext, p_key from statuslist"
+        ));
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            while (res.next()){
+                result.add(res.getString("statustext"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toArray(new String[0]);
     }
 }

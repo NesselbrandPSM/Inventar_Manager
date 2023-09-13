@@ -5,13 +5,10 @@ import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PC_Form {
     private JPanel pcPanel;
@@ -19,7 +16,6 @@ public class PC_Form {
     private JCheckBox laptopCheckBox;
     private JCheckBox tabletCheckBox;
     private JCheckBox thinclientCheckBox;
-    public JTextField currentStatus;
     public JTextField manufacturer;
     public JTextField modell;
     public JTextField s_number;
@@ -36,6 +32,7 @@ public class PC_Form {
     private JComboBox users;
     private JComboBox companys;
     public JTextField dguv;
+    private JComboBox status;
 
     private String pcType = "";
 
@@ -48,6 +45,23 @@ public class PC_Form {
     public PC_Form() {
         sqlConnector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(sqlConnector);
+
+        for (String s : sqlSelectStatements.getStatusList()) {
+            status.addItem(new ComboBoxItem(s));
+        }
+        companys.removeAllItems();
+        companySet = sqlSelectStatements.getAllCompanys();
+        String[] companysArr = companySet[0];
+        for (String s : companysArr) {
+            companys.addItem(new ComboBoxItem(s));
+        }
+        users.removeAllItems();
+        userSet = sqlSelectStatements.getAllUsers();
+        String[] usersArr = userSet[0];
+        users.addItem(new ComboBoxItem(""));
+        for (String s : usersArr) {
+            users.addItem(new ComboBoxItem(s));
+        }
 
         ActionListener listener = e -> {
             JCheckBox checkBox = (JCheckBox) e.getSource();
@@ -69,7 +83,6 @@ public class PC_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 companys.removeAllItems();
-                companySet = sqlSelectStatements.getAllCompanys();
                 String[] companysArr = companySet[0];
                 for (String s : companysArr) {
                     companys.addItem(new ComboBoxItem(s));
@@ -80,7 +93,6 @@ public class PC_Form {
             @Override
             public void focusGained(FocusEvent e) {
                 users.removeAllItems();
-                userSet = sqlSelectStatements.getAllUsers();
                 String[] usersArr = userSet[0];
                 users.addItem(new ComboBoxItem(""));
                 for (String s : usersArr) {
@@ -109,7 +121,7 @@ public class PC_Form {
         ArrayList<String> args = new ArrayList<>();
         args.add(currentIVNumber);
         args.add(getPcType());
-        args.add(currentStatus.getText());
+        args.add((String) status.getSelectedItem());
         args.add("");
         args.add("");
         args.add(manufacturer.getText());
@@ -164,7 +176,6 @@ public class PC_Form {
 
     private void resetInputFields(){
         uncheckBoxes();
-        currentStatus.setText("");
         manufacturer.setText("");
         modell.setText("");
         s_number.setText("");

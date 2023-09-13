@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.InputForms.Telephone_Form">
   <grid id="27dc6" binding="telephonePanel" layout-manager="FormLayout">
-    <rowspec value="center:20px:noGrow"/>
+    <rowspec value="center:25px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:25px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
@@ -134,15 +134,6 @@
           <text value="DGUV:"/>
         </properties>
       </component>
-      <component id="f7f" class="javax.swing.JTextField" binding="currentStatus">
-        <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties/>
-      </component>
       <component id="28e22" class="javax.swing.JComboBox" binding="companys">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
@@ -272,6 +263,13 @@
         <properties>
           <model/>
         </properties>
+      </component>
+      <component id="ce20d" class="javax.swing.JComboBox" binding="status">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties/>
       </component>
     </children>
   </grid>
