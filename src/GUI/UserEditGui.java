@@ -36,7 +36,6 @@ public class UserEditGui {
     private SQLUpdateStatements sqlUpdateStatements;
 
     public UserEditGui() {
-        sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
 
         JTableHeader tableHeader = userTable.getTableHeader();
@@ -115,14 +114,26 @@ public class UserEditGui {
         return -100;
     }
 
+    public void update(int x){
+        String[][] data = sqlSelectStatements.getAllUsersTableModel(x);
+        for (int i = 0; i < data.length; i++) {
+            switch (data[i][2]) {
+                case "0" -> data[i][2] = "neu";
+                case "-1" -> data[i][2] = "inaktiv";
+                case "1" -> data[i][2] = "aktiv";
+            }
+        }
+        userTableModell.update(data);
+    }
+
     private void update() {
-        userTableModell.update(sqlSelectStatements.getAllUsersTableModel(getCheckedBox()));
+        update(getCheckedBox());
     }
 
     private void createUIComponents() {
+        sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         userTableModell = new UserTableModell(new SQLSelectStatements(new SQLConnector()));
-        String[][] data = new SQLSelectStatements(new SQLConnector()).getAllUsersTableModel(2);
-        userTableModell.update(data);
+        update(2);
         userTable = new JTable(userTableModell);
         userTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }

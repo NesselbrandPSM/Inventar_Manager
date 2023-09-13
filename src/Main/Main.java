@@ -14,7 +14,7 @@ public class Main {
     public SQLSelectStatements sqlSelectStatements;
     public MainGui mainGui;
 
-    private static final String permission_level = "testing2";
+    private static final String permission_level = "admin";
 
     public static Main m;
 
