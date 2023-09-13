@@ -57,44 +57,13 @@ public class UserEditGui {
 
         allCheckBox.setSelected(true);
         abbrechenButton.addActionListener(e -> close());
-        fertigButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO write userdata to sql database
-            }
-        });
-        aktualisierenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                update();
-            }
-        });
-        databaseSyncenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ADWrapper.syncDatabase();
-            }
-        });
+        fertigButton.addActionListener(e -> close());
+        aktualisierenButton.addActionListener(e -> update());
+        databaseSyncenButton.addActionListener(e -> ADWrapper.syncDatabase());
 
-
-        aktivButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeStatus(1);
-            }
-        });
-        inaktivButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeStatus(-1);
-            }
-        });
-        neuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeStatus(0);
-            }
-        });
+        aktivButton.addActionListener(e -> changeStatus(1));
+        inaktivButton.addActionListener(e -> changeStatus(-1));
+        neuButton.addActionListener(e -> changeStatus(0));
     }
 
     private void changeStatus(int status){
@@ -108,12 +77,6 @@ public class UserEditGui {
     }
 
     public void init() {
-        try { //TODO remove
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException e) {
-            throw new RuntimeException(e);
-        } //TODO remove end
         frame = new JFrame("UserEditGui");
         frame.setContentPane(new UserEditGui().userEditPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
