@@ -569,7 +569,7 @@ public class SQLSelectStatements {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
         ResultSet resultSet = connector.query(new SQLStatement(
-                "select name, user_key from user where active = 1"
+                "select name, user_key from user where active = 1 and current_status = 1"
         ));
         try {
             resultList.add(new ArrayList<>());

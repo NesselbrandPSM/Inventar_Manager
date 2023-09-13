@@ -32,7 +32,7 @@ public class SQLConnector {
         try {
             switch (query.getStatement().substring(0, query.getStatement().indexOf(" "))) {
                 case "select" -> result = statement.executeQuery(query.getStatement());
-                case "insert", "delete" -> statement.executeUpdate(query.getStatement());
+                case "insert", "delete", "update" -> statement.executeUpdate(query.getStatement());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -4,12 +4,14 @@ import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
+import SQL.Statements.SQLUpdateStatements;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class UserEditGui {
     private JPanel userEditPanel;
@@ -23,14 +25,19 @@ public class UserEditGui {
     private JScrollPane userTableScrollPane;
     private JButton aktualisierenButton;
     private JButton databaseSyncenButton;
+    private JButton aktivButton;
+    private JButton inaktivButton;
+    private JButton neuButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
 
     private SQLSelectStatements sqlSelectStatements;
+    private SQLUpdateStatements sqlUpdateStatements;
 
     public UserEditGui() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+        sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
 
         JTableHeader tableHeader = userTable.getTableHeader();
         tableHeader.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -68,9 +75,45 @@ public class UserEditGui {
                 ADWrapper.syncDatabase();
             }
         });
+
+
+        aktivButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeStatus(1);
+            }
+        });
+        inaktivButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeStatus(-1);
+            }
+        });
+        neuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeStatus(0);
+            }
+        });
+    }
+
+    private void changeStatus(int status){
+        String[] row = (String[]) userTableModell.getRow(userTable.getSelectedRow());
+        changeStatus(row[0], status);
+    }
+
+    private void changeStatus(String name, int status){
+        sqlUpdateStatements.updateUserStatus(name, status);
+        update();
     }
 
     public void init() {
+        try { //TODO remove
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        } //TODO remove end
         frame = new JFrame("UserEditGui");
         frame.setContentPane(new UserEditGui().userEditPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
