@@ -30,7 +30,6 @@ public class PC_Form {
     public JTextField ip;
     public JTextField lastUpdate;
     private JTextField purchaseDate;
-    private JTextField purchaseNumber;
     private JTextField purchasePrice;
     private JTextField warranty;
     public JTextField note;
@@ -155,11 +154,8 @@ public class PC_Form {
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
-        }
-
-        for (int i = 0; i < arguments.length; i++) {
-            if (arguments[i].equals("")){
-                arguments[i] = " - ";
+            if (arguments[j].equals("")){
+                arguments[j] = " - ";
             }
         }
 
@@ -180,7 +176,6 @@ public class PC_Form {
         ip.setText("");
         lastUpdate.setText("");
         purchaseDate.setText("");
-        purchaseNumber.setText("");
         purchasePrice.setText("");
         warranty.setText("");
         note.setText("");

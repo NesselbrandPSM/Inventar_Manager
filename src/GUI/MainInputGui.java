@@ -95,6 +95,7 @@ public class MainInputGui {
                 case "scanner" -> {
                 }
                 case "printer" -> {
+                    sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
                 }
                 case "dockingstation" -> {
                 }
