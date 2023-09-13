@@ -182,6 +182,8 @@ public class MainGui {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         setShowAll(true);
+                        lastactivefilterbox = "";
+                        uncheckFilterBoxes();
                         updateShowAllTableModel(0);
                     }
                 }
@@ -211,6 +213,7 @@ public class MainGui {
                 uncheckFilterBoxes();
                 if (lastactivefilterbox.equals(c.getText())) {
                     updateShowAllTableModel(0);
+                    lastactivefilterbox = "";
                     return;
                 }
                 c.setSelected(true);
@@ -231,9 +234,13 @@ public class MainGui {
     public void updateShowAllTableModel(int flags) {
         switch (flags) {
             case 0 -> { // show Default View
-                statusList.add("updating table ...", 0.3);
-                tableModel.update(sqlSelectStatements.getDefaultView());
-                showAllTableModelFlag = 0;
+                if (lastactivefilterbox.equals("")) {
+                    statusList.add("updating table ...", 0.3);
+                    tableModel.update(sqlSelectStatements.getDefaultView());
+                    showAllTableModelFlag = 0;
+                } else {
+                    updateShowAllTableModel(3);
+                }
             }
             case 1 -> { // show Search View for iv_number
                 statusList.add("searching ...", 0.2);
@@ -250,7 +257,12 @@ public class MainGui {
             }
             case 2 -> { // show search View for company
                 statusList.add("searching ...", 0.2);
-                String[][] result = sqlSelectStatements.getSelectViewCompany(searchTextField.getText());
+                String[][] result;
+                if (lastactivefilterbox.equals("")) {
+                    result = sqlSelectStatements.getSelectViewCompany(searchTextField.getText());
+                } else {
+                    result = sqlSelectStatements.getSelectViewCompany(searchTextField.getText(), Utils.filterBoxTextToAccordingDataTable(lastactivefilterbox));
+                }
                 if (result == null) {
                     JOptionPane.showConfirmDialog(null, "Die Eingegebene Firma war fehlerhaft!");
                     searchTextField.setText("");

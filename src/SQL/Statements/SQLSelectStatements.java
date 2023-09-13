@@ -167,7 +167,7 @@ public class SQLSelectStatements {
                                 "join company on monitor.inventory_company_key=company.company_key " +
                                 "where monitor.iv_number = \"" + iv_number + "\""));
                 case "te" -> resultSet = connector.query(new SQLStatement(
-                        "select * from telephone \"" +
+                        "select * from telephone " +
                                 "join company on telephone.inventory_company_key=company.company_key " +
                                 "where telephone.iv_number = \"" + iv_number + "\""));
                 case "hd" -> resultSet = connector.query(new SQLStatement(
@@ -317,6 +317,32 @@ public class SQLSelectStatements {
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
                     "where desk.active = 1 and company.company = \"" + company + "\""));
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getSelectViewCompany(String company, String table) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = null;
+        try {
+            resultSet = connector.query(new SQLStatement("select " + table + ".iv_number, company.company, " + table + "." + Utils.getShortCutFromTable(table) + "_key " +
+                    "from company " +
+                    "join " + table + " on " +
+                    table + ".inventory_company_key = company.company_key " +
+                    "where " + table + ".active = 1 and company.company = \"" + company + "\""));
+            int i = 0;
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
