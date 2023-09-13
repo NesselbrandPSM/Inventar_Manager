@@ -1,3 +1,3 @@
- - change s_number from int to text (probably best)
- - change every Date to text
- - Datum Check
+ - //TODO Datumformat check
+ - //TODO Löschen Button bei UserEditGui
+ - //TODO Fehlerausgabe bei Einfuegen von neuen Entrys

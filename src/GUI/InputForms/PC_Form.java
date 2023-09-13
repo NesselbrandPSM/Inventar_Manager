@@ -127,13 +127,13 @@ public class PC_Form {
         args.add("");
         args.add(dguv.getText());
         args.add(note.getText());
+
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
             if (currentComp.equals(companySet[0][i])){
                 args.add(companySet[1][i]);
             }
         }
-
         boolean hasUser = false;
         String currentUser = users.getSelectedItem().toString();
         for (int x = 0; x < userSet[0].length; x++) {

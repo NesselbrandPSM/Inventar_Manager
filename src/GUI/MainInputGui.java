@@ -92,8 +92,7 @@ public class MainInputGui {
         if (i == 0) {
             switch (currentTable) {
                 case "pc" -> sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
-                case "scanner" -> {
-                }
+                case "scanner" -> sqlInsertStatements.inputSCEntry(scannerForm.getArgs(currentIVNumber));
                 case "printer" -> sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
                 case "dockingstation" -> {
                 }

@@ -392,6 +392,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from scanner " +
                         "join company on scanner.inventory_company_key=company.company_key " +
+                        "join user on scanner.inventory_user_key=user.name " +
                         "where scanner.sc_key = " + key
         ));
         try {
