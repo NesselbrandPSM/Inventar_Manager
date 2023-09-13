@@ -4,6 +4,7 @@ import GUI.MainInputGui;
 import GUI.MainGui;
 import GUI.UserEditGui;
 import Main.utility.ADWrapper;
+import Main.utility.Printer;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -13,7 +14,7 @@ public class Main {
     public MainGui mainGui;
     public MainInputGui mainForm;
 
-    private static final String permission_level = "admin";
+    private static final String permission_level = "testing";
 
     public static Main m;
 
@@ -34,8 +35,7 @@ public class Main {
             case "user" -> {
             }
             case "testing" -> {
-                ADWrapper.init();
-                new UserEditGui().init();
+                Printer.print();
             }
         }
     }
