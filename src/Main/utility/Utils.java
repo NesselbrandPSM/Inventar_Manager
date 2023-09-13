@@ -68,4 +68,34 @@ public class Utils {
         }
         return ret;
     }
+
+    public static String filterBoxTextToAccordingDataTable(String s){
+        String ret = "";
+        switch (s){
+            case "PCs" -> ret = "pc";
+            case "Drucker" -> ret = "printer";
+            case "Scanner" -> ret = "scanner";
+            case "Desks" -> ret = "desk";
+            case "Telefone" -> ret = "telephone";
+            case "Monitore" -> ret = "monitor";
+            case "Headsets" -> ret = "headset";
+            case "Dockingstationen" -> ret = "dockingstation";
+        }
+        return ret;
+    }
+
+    public static String getShortCutFromTable(String table){
+        String ret = "";
+        switch (table){
+            case "pc" -> ret = "pc";
+            case "monitor" -> ret = "mo";
+            case "headset" -> ret = "hd";
+            case "dockingstation" -> ret = "ds";
+            case "telephone" -> ret = "te";
+            case "scanner" -> ret = "sc";
+            case "printer" -> ret = "pr";
+            case "desk" -> ret = "dk";
+        }
+        return ret;
+    }
 }

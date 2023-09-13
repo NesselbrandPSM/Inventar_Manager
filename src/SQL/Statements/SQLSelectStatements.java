@@ -4,6 +4,7 @@ import GUI.util.ColumNames;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.SQLStatement;
+import jdk.jshell.execution.Util;
 
 import javax.swing.*;
 import java.sql.ResultSet;
@@ -17,11 +18,11 @@ public class SQLSelectStatements {
     }
 
     private SQLConnector connector;
+    private final int attributeNumber = 3; //Number of attributes to get
 
     public String[][] getDefaultView() {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
         try {
-            final int attributeNumber = 3; //Number of attributes to get
             //region PC
             ResultSet resultSet = connector.query(new SQLStatement("select pc.iv_number, company.company, pc.pc_key " +
                     "from company " +
@@ -152,7 +153,6 @@ public class SQLSelectStatements {
                 case "pc" -> resultSet = connector.query(new SQLStatement(
                         "select * from pc " +
                                 "join company on pc.inventory_company_key=company.company_key " +
-                                "join user on pc.inventory_user_key=user.user_key " +
                                 "where pc.iv_number = \"" + iv_number + "\""));
                 case "pr" -> resultSet = connector.query(new SQLStatement(
                         "select * from printer " +
@@ -329,6 +329,28 @@ public class SQLSelectStatements {
             throw new RuntimeException(e);
         }
 
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getSelectViewType(String table) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+        try {
+            ResultSet resultSet = connector.query(new SQLStatement("select " + table + ".iv_number, company.company, " + table + "." + Utils.getShortCutFromTable(table) + "_key " +
+                    "from " + table + " " +
+                    "join company on " + table +
+                    ".inventory_company_key = company.company_key " +
+                    "where " + table + ".active = 1"));
+            int i = 0;
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 
@@ -702,7 +724,7 @@ public class SQLSelectStatements {
         ));
         ArrayList<String> result = new ArrayList<>();
         try {
-            while (res.next()){
+            while (res.next()) {
                 result.add(res.getString("statustext"));
             }
         } catch (SQLException e) {

@@ -4,7 +4,7 @@ import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
-import Main.utility.ADWrapper;
+import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -29,11 +29,23 @@ public class MainGui {
     private JLabel statusLabel;
     private JScrollPane tableScrollPane;
     private JButton editUserButton;
+    private JPanel checkBoxPanel;
+    private JCheckBox deskBox;
+    private JCheckBox druckerBox;
+    private JCheckBox pcBox;
+    private JCheckBox scannerBox;
+    private JCheckBox headsetBox;
+    private JCheckBox monitorBox;
+    private JCheckBox dockingstationBox;
+    private JCheckBox telephoneBox;
     private SQLConnector connector;
     private SQLSelectStatements sqlSelectStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
+    private String lastactivefilterbox = "";
+
+    private static int showAllTableModelFlag = 0;
     private static boolean showAll = true;
     //endregion
 
@@ -57,7 +69,7 @@ public class MainGui {
                     if (isShowAll()) {
                         try {
                             int i = table1.getSelectedRow();
-                            updateShowAllTableModel(0);
+                            updateShowAllTableModel(showAllTableModelFlag);
                             table1.getSelectionModel().setSelectionInterval(0, i);
                             Thread.sleep(60 * 1000);
                         } catch (InterruptedException e) {
@@ -79,7 +91,7 @@ public class MainGui {
                 textArea2.setText("");
                 textArea2.setDisabledTextColor(new Color(2, 126, 254));
             }
-            updateShowAllTableModel(0);
+            updateShowAllTableModel(showAllTableModelFlag);
             table1.getSelectionModel().setSelectionInterval(0, i);
         });
         //endregion
@@ -93,7 +105,7 @@ public class MainGui {
                     updateShowAllTableModel(0);
                 } else {
                     setShowAll(false);
-                    switch (searchSelectorComboBox.getSelectedItem().toString()){
+                    switch (searchSelectorComboBox.getSelectedItem().toString()) {
                         case "Inventar Nummer" -> updateShowAllTableModel(1);
                         case "Firma" -> updateShowAllTableModel(2);
                     }
@@ -169,10 +181,8 @@ public class MainGui {
         table1.getActionMap().put("escape", new AbstractAction() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (!showAll) {
-                            setShowAll(true);
-                            updateShowAllTableModel(0);
-                        }
+                        setShowAll(true);
+                        updateShowAllTableModel(0);
                     }
                 }
         );
@@ -193,6 +203,29 @@ public class MainGui {
                 userEditGui.init();
             }
         });
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JCheckBox c = (JCheckBox) e.getSource();
+                uncheckFilterBoxes();
+                if (lastactivefilterbox.equals(c.getText())) {
+                    updateShowAllTableModel(0);
+                    return;
+                }
+                c.setSelected(true);
+                lastactivefilterbox = c.getText();
+                updateShowAllTableModel(3);
+            }
+        };
+        druckerBox.addActionListener(listener);
+        pcBox.addActionListener(listener);
+        scannerBox.addActionListener(listener);
+        deskBox.addActionListener(listener);
+        headsetBox.addActionListener(listener);
+        monitorBox.addActionListener(listener);
+        dockingstationBox.addActionListener(listener);
+        telephoneBox.addActionListener(listener);
     }
 
     public void updateShowAllTableModel(int flags) {
@@ -200,11 +233,12 @@ public class MainGui {
             case 0 -> { // show Default View
                 statusList.add("updating table ...", 0.3);
                 tableModel.update(sqlSelectStatements.getDefaultView());
+                showAllTableModelFlag = 0;
             }
             case 1 -> { // show Search View for iv_number
                 statusList.add("searching ...", 0.2);
                 String[][] result = sqlSelectStatements.getSelectViewIV_Number(searchTextField.getText());
-                if (result == null){
+                if (result == null) {
                     JOptionPane.showConfirmDialog(null, "Die Eingegebene Inventar Nummer war fehlerhaft!");
                     searchTextField.setText("");
                     tableModel.update(sqlSelectStatements.getDefaultView());
@@ -212,10 +246,12 @@ public class MainGui {
                     searchTextField.setText("");
                     tableModel.update(result);
                 }
+                showAllTableModelFlag = 1;
             }
             case 2 -> { // show search View for company
+                statusList.add("searching ...", 0.2);
                 String[][] result = sqlSelectStatements.getSelectViewCompany(searchTextField.getText());
-                if (result == null){
+                if (result == null) {
                     JOptionPane.showConfirmDialog(null, "Die Eingegebene Firma war fehlerhaft!");
                     searchTextField.setText("");
                     tableModel.update(sqlSelectStatements.getDefaultView());
@@ -223,6 +259,20 @@ public class MainGui {
                     searchTextField.setText("");
                     tableModel.update(result);
                 }
+                showAllTableModelFlag = 2;
+            }
+            case 3 -> { // show search View for type
+                statusList.add("searching ...", 0.2);
+                String[][] result = sqlSelectStatements.getSelectViewType(Utils.filterBoxTextToAccordingDataTable(lastactivefilterbox));
+                if (result == null) {
+                    JOptionPane.showConfirmDialog(null, "Es ist ein Fehler aufgetreten!");
+                    searchTextField.setText("");
+                    tableModel.update(sqlSelectStatements.getDefaultView());
+                } else {
+                    searchTextField.setText("");
+                    tableModel.update(result);
+                }
+                showAllTableModelFlag = 3;
             }
         }
     }
@@ -239,6 +289,17 @@ public class MainGui {
     }
 
     //region util
+    private void uncheckFilterBoxes() {
+        druckerBox.setSelected(false);
+        pcBox.setSelected(false);
+        scannerBox.setSelected(false);
+        deskBox.setSelected(false);
+        headsetBox.setSelected(false);
+        monitorBox.setSelected(false);
+        dockingstationBox.setSelected(false);
+        telephoneBox.setSelected(false);
+    }
+
     private JPopupMenu createLeftClickPopUpForTable() {
         JPopupMenu popupMenu = new JPopupMenu();
 

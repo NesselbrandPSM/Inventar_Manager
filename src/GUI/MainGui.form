@@ -5,6 +5,8 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:grow(0.19999999999999998)"/>
     <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:m:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:13px:grow(0.2)"/>
     <rowspec value="top:320px:noGrow"/>
     <rowspec value="center:d:grow(7.199999999999999)"/>
@@ -24,7 +26,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:200px:grow(0.2)"/>
     <constraints>
-      <xy x="20" y="20" width="1022" height="674"/>
+      <xy x="20" y="20" width="2043" height="674"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -50,7 +52,7 @@
       </component>
       <scrollpane id="ea2f5" binding="tableScrollPane">
         <constraints>
-          <grid row="4" column="0" row-span="3" col-span="10" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="3" col-span="10" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -80,7 +82,7 @@
       </component>
       <component id="bc67d" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
         <constraints>
-          <grid row="5" column="10" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="10" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms top="10" left="0" bottom="10" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
@@ -147,7 +149,7 @@
       </component>
       <component id="164bd" class="javax.swing.JTextArea" binding="textArea2" default-binding="true">
         <constraints>
-          <grid row="5" column="12" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="12" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms top="10" left="0" bottom="10" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
@@ -162,7 +164,7 @@
       </component>
       <component id="ff0c7" class="javax.swing.JTextPane" binding="selectedItemTextPane">
         <constraints>
-          <grid row="4" column="10" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="6" column="10" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms top="0" left="0" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
@@ -177,7 +179,7 @@
       </component>
       <component id="78e6b" class="javax.swing.JLabel" binding="statusLabel">
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms top="0" left="10" bottom="10" right="0"/>
         </constraints>
         <properties>
@@ -193,6 +195,98 @@
           <text value="Nutzer Bearbeiten"/>
         </properties>
       </component>
+      <grid id="62b53" binding="checkBoxPanel" layout-manager="FormLayout">
+        <rowspec value="center:25px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:25px:noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:115px:noGrow"/>
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="20" bottom="10" right="0"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="86a8e" class="javax.swing.JCheckBox" binding="druckerBox">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Drucker"/>
+            </properties>
+          </component>
+          <component id="6dc92" class="javax.swing.JCheckBox" binding="pcBox">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="PCs"/>
+            </properties>
+          </component>
+          <component id="461ee" class="javax.swing.JCheckBox" binding="scannerBox">
+            <constraints>
+              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Scanner"/>
+            </properties>
+          </component>
+          <component id="ebddb" class="javax.swing.JCheckBox" binding="deskBox">
+            <constraints>
+              <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Desks"/>
+            </properties>
+          </component>
+          <component id="f0098" class="javax.swing.JCheckBox" binding="headsetBox">
+            <constraints>
+              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Headsets"/>
+            </properties>
+          </component>
+          <component id="baffe" class="javax.swing.JCheckBox" binding="monitorBox">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Monitore"/>
+            </properties>
+          </component>
+          <component id="5453c" class="javax.swing.JCheckBox" binding="dockingstationBox">
+            <constraints>
+              <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Dockingstationen"/>
+            </properties>
+          </component>
+          <component id="defa8" class="javax.swing.JCheckBox" binding="telephoneBox">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Telefone"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
