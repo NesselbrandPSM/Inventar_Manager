@@ -75,7 +75,6 @@ public class Scanner_Form {
         String currentUser = users.getSelectedItem().toString();
         for (int x = 0; x < userSet[0].length; x++) {
             if (currentUser.equals(userSet[0][x])){
-                System.out.println(userSet[1][x]);
                 args.add(userSet[0][x]);
                 hasUser = true;
             }
