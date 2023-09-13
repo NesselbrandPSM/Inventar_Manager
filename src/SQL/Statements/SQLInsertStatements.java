@@ -66,4 +66,27 @@ public class SQLInsertStatements {
         System.out.println(s.getStatement());
         connector.query(s);
     }
+
+    public void inputHDEntry(String[] args){
+        SQLStatement s = new SQLStatement(
+                "insert into headset (" +
+                        "iv_number, manufacturer, s_number, current_status, modell, dguv, inventory_company_key, purchase_date, purchase_price, warranty, inventory_user_key" +
+                        ") values (" +
+                        "'" + args[0] + "', " +
+                        "'" + args[1] + "', " +
+                        "'" + args[2] + "', " +
+                        "'" + args[3] + "', " +
+                        "'" + args[4] + "', " +
+                        "'" + args[5] + "', " +
+                        "'" + args[6] + "', " +
+                        "'" + args[7] + "', " +
+                        "'" + args[8] + "', " +
+                        "'" + args[9] + "', " +
+                        "'" + args[10] + "'" +
+                        ")"
+        );
+
+        System.out.println(s.getStatement());
+        connector.query(s);
+    }
 }

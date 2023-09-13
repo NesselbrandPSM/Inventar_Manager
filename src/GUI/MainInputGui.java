@@ -94,13 +94,10 @@ public class MainInputGui {
                 case "pc" -> sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
                 case "scanner" -> {
                 }
-                case "printer" -> {
-                    sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
-                }
+                case "printer" -> sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
                 case "dockingstation" -> {
                 }
-                case "headset" -> {
-                }
+                case "headset" -> sqlInsertStatements.inputHDEntry(headsetForm.getArgs(currentIVNumber));
                 case "monitor" -> {
                 }
                 case "telephone" -> {
@@ -143,7 +140,7 @@ public class MainInputGui {
             frame.pack();
             frame.setVisible(true);
             frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -166,7 +163,7 @@ public class MainInputGui {
     private void close() {
         try {
             frame.dispose();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

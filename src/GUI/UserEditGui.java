@@ -59,19 +59,22 @@ public class UserEditGui {
         abbrechenButton.addActionListener(e -> close());
         fertigButton.addActionListener(e -> close());
         aktualisierenButton.addActionListener(e -> update());
-        databaseSyncenButton.addActionListener(e -> ADWrapper.syncDatabase());
+        databaseSyncenButton.addActionListener(e -> {
+            ADWrapper.syncDatabase();
+            update();
+        });
 
         aktivButton.addActionListener(e -> changeStatus(1));
         inaktivButton.addActionListener(e -> changeStatus(-1));
         neuButton.addActionListener(e -> changeStatus(0));
     }
 
-    private void changeStatus(int status){
+    private void changeStatus(int status) {
         String[] row = (String[]) userTableModell.getRow(userTable.getSelectedRow());
         changeStatus(row[0], status);
     }
 
-    private void changeStatus(String name, int status){
+    private void changeStatus(String name, int status) {
         sqlUpdateStatements.updateUserStatus(name, status);
         update();
     }

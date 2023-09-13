@@ -473,6 +473,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from headset " +
                         "join company on headset.inventory_company_key=company.company_key " +
+                        "join user on headset.inventory_user_key=user.name " +
                         "where headset.hd_key = " + key
         ));
         try {

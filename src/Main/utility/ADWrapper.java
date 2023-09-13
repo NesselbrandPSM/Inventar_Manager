@@ -121,6 +121,23 @@ public class ADWrapper {
             }
         }
 
+        //nicht vorhandener user eintrag
+        boolean dummyPresent = false;
+        for (int i = 0; i < oldUsers[0].length; i++) {
+            if (oldUsers[0][i].equals("-1")){
+                dummyPresent = true;
+                break;
+            }
+        }
+        if (!dummyPresent){
+            ArrayList<String> temp = new ArrayList<>();
+            temp.add("-1");
+            temp.add(" - ");
+            temp.add("1");
+            temp.add("1");
+            newUsers.add(temp);
+        }
+
         sqlDeleteStatements.delete("user");
 
         for (ArrayList<String> list : newUsers) {
