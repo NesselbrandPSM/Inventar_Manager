@@ -774,4 +774,19 @@ public class SQLSelectStatements {
         }
         return result.toArray(new String[0]);
     }
+
+    public String[] getParagraphsList() {
+        ResultSet res = connector.query(new SQLStatement(
+                "select paragraph from paragraphen"
+        ));
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            while (res.next()) {
+                result.add(res.getString("paragraph"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toArray(new String[0]);
+    }
 }
