@@ -32,6 +32,7 @@ public class Desk_Form {
     private JComboBox teIVNumberBox;
     private JComboBox mo1IVNumberBox;
     private JComboBox mo2IVNumberBox;
+    private JComboBox condition;
 
     private SQLConnector sqlConnector;
     private SQLSelectStatements sqlSelectStatements;
@@ -95,6 +96,10 @@ public class Desk_Form {
         dsIVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             dsIVNumberBox.addItem(new ComboBoxItem(s));
+        }
+
+        for (String s : Constants.conditionList){
+            condition.addItem(new ComboBoxItem(s));
         }
     }
 

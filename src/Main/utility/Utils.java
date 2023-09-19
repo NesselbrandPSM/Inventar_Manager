@@ -65,6 +65,8 @@ public class Utils {
             case "MO2-IV-Nummer" -> ret = "mo_iv_number_2";
             case "Maus" -> ret = "has_mouse";
             case "Tastatur" -> ret = "has_keyboard";
+            case "Zustand" -> ret = "c_status";
+            case "Zustandsbemerkung" -> ret = "c_note";
         }
         return ret;
     }

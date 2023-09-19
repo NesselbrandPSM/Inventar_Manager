@@ -34,6 +34,7 @@ public class PC_Form {
     private JComboBox companys;
     public JTextField dguv;
     private JComboBox status;
+    private JComboBox condition;
 
     private String pcType = "";
 
@@ -62,6 +63,10 @@ public class PC_Form {
         users.addItem(new ComboBoxItem(" - "));
         for (String s : usersArr) {
             users.addItem(new ComboBoxItem(s));
+        }
+
+        for (String s : Constants.conditionList){
+            condition.addItem(new ComboBoxItem(s));
         }
 
         ActionListener listener = e -> {

@@ -28,6 +28,7 @@ public class Monitor_Form {
     private JTextField dguv;
     private JTextField note;
     private JComboBox status;
+    private JComboBox condition;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -36,6 +37,10 @@ public class Monitor_Form {
 
     public Monitor_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+
+        for (String s : Constants.conditionList){
+            condition.addItem(new ComboBoxItem(s));
+        }
 
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));

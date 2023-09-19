@@ -23,6 +23,7 @@ public class Dockingstation_Form {
     private JComboBox users;
     private JTextField note;
     private JComboBox status;
+    private JComboBox condition;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -47,6 +48,10 @@ public class Dockingstation_Form {
         users.addItem(new ComboBoxItem(" - "));
         for (String s : usersArr) {
             users.addItem(new ComboBoxItem(s));
+        }
+
+        for (String s : Constants.conditionList){
+            condition.addItem(new ComboBoxItem(s));
         }
 
         companys.addFocusListener(new FocusAdapter() {

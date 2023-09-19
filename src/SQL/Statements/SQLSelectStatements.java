@@ -759,4 +759,19 @@ public class SQLSelectStatements {
         }
         return result.toArray(new String[0]);
     }
+
+    public String[] getConditionList() {
+        ResultSet res = connector.query(new SQLStatement(
+                "select conditions, p_key from conditionlist"
+        ));
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            while (res.next()) {
+                result.add(res.getString("conditions"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toArray(new String[0]);
+    }
 }

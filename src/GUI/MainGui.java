@@ -337,6 +337,17 @@ public class MainGui {
                 }
             }
         });
+
+        popupMenu.add("Zugehöriges Desk Finden");
+        //region desk finden
+        popupMenu.getComponent(1).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    //TODO desk finden
+                }
+            }
+        });
         //endregion
 
         return popupMenu;
