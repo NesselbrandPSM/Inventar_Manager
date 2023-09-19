@@ -9,12 +9,14 @@ import Main.utility.Printer;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
+import javax.swing.*;
+
 public class Main {
     private SQLConnector connector;
     public SQLSelectStatements sqlSelectStatements;
     public MainGui mainGui;
 
-    private static final String permission_level = "admin";
+    private static final String startup_configuration = "main";
 
     public static Main m;
 
@@ -24,23 +26,31 @@ public class Main {
     }
 
     private void init(){
-        switch (permission_level){
-            case "admin" -> {
-                ADWrapper.init();
-                Constants.init();
+        Constants.init();
+        ADWrapper.init();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 UnsupportedLookAndFeelException e) {
+            throw new RuntimeException(e);
+        }
+
+        switch (startup_configuration){
+            case "main" -> {
                 connector = new SQLConnector();
                 sqlSelectStatements = new SQLSelectStatements(connector);
                 mainGui= new MainGui(connector, sqlSelectStatements);
                 mainGui.init();
             }
-            case "user" -> {
-            }
             case "testing1" -> {
                 Printer.print();
             }
             case "testing2" -> {
-                ADWrapper.init();
                 UserEditGui gui = new UserEditGui();
+                gui.init();
+            }
+            case "testing3" -> {
+                MainInputGui gui = new MainInputGui();
                 gui.init();
             }
         }

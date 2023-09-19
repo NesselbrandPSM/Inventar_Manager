@@ -373,12 +373,6 @@ public class MainGui {
     }
 
     public void init() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                 UnsupportedLookAndFeelException e) {
-            throw new RuntimeException(e);
-        }
         JFrame frame = new JFrame("Inventar Manager");
         frame.setContentPane(new MainGui(connector, sqlSelectStatements).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

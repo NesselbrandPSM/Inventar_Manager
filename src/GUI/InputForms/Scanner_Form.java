@@ -45,7 +45,7 @@ public class Scanner_Form {
         users.removeAllItems();
         userSet = sqlSelectStatements.getAllUsers();
         String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(""));
+        users.addItem(new ComboBoxItem(" - "));
         for (String s : usersArr) {
             users.addItem(new ComboBoxItem(s));
         }

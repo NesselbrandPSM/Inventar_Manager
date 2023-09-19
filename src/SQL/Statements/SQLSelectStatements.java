@@ -724,11 +724,12 @@ public class SQLSelectStatements {
             case "headset" -> ret.insert(0, "HD-");
             case "monitor" -> ret.insert(0, "MO-");
             case "telephone" -> ret.insert(0, "TE-");
+            case "desk" -> ret.insert(0, "DK-");
         }
         return ret.toString();
     }
 
-    private String[] getAllIV_Numbers(String table) {
+    public String[] getAllIV_Numbers(String table) {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select iv_number from " + table
         ));

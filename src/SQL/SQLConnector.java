@@ -35,7 +35,8 @@ public class SQLConnector {
                 case "insert", "delete", "update" -> statement.executeUpdate(query.getStatement());
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw
+                    new RuntimeException(e);
         }
         return result;
     }
