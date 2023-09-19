@@ -33,6 +33,7 @@ public class Desk_Form {
     private JComboBox mo1IVNumberBox;
     private JComboBox mo2IVNumberBox;
     private JComboBox condition;
+    private JTextField conditionNote;
 
     private SQLConnector sqlConnector;
     private SQLSelectStatements sqlSelectStatements;
@@ -145,6 +146,8 @@ public class Desk_Form {
         args.add(purchasePrice.getText());
         args.add(warranty.getText());
         args.add(note.getText());
+        args.add(condition.getSelectedItem().toString());
+        args.add(conditionNote.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {

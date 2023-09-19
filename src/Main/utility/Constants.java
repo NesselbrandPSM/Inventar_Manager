@@ -3,8 +3,6 @@ package Main.utility;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
-import java.util.Arrays;
-
 public class Constants {
 
     public static String[] statusList;
@@ -15,7 +13,5 @@ public class Constants {
 
         statusList = sqlSelectStatements.getStatusList();
         conditionList = sqlSelectStatements.getConditionList();
-
-        System.out.println(Arrays.toString(conditionList));
     }
 }

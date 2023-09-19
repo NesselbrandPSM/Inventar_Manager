@@ -35,6 +35,7 @@ public class PC_Form {
     public JTextField dguv;
     private JComboBox status;
     private JComboBox condition;
+    private JTextField conditionNote;
 
     private String pcType = "";
 
@@ -167,6 +168,8 @@ public class PC_Form {
         args.add(purchaseDate.getText());
         args.add(purchasePrice.getText());
         args.add(warranty.getText());
+        args.add(condition.getSelectedItem().toString());
+        args.add(conditionNote.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {

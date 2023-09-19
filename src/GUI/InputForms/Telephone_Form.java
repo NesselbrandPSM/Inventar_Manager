@@ -26,6 +26,7 @@ public class Telephone_Form {
     private JTextField dguv;
     private JComboBox status;
     private JComboBox condition;
+    private JTextField conditionNote;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -112,6 +113,8 @@ public class Telephone_Form {
         args.add(purchasePrice.getText());
         args.add(warranty.getText());
         args.add(note.getText());
+        args.add(condition.getSelectedItem().toString());
+        args.add(conditionNote.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {

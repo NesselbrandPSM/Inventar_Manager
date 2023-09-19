@@ -29,6 +29,7 @@ public class Monitor_Form {
     private JTextField note;
     private JComboBox status;
     private JComboBox condition;
+    private JTextField conditionNote;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -120,6 +121,8 @@ public class Monitor_Form {
         args.add(vga.getText());
         args.add(dvi.getText());
         args.add(note.getText());
+        args.add(condition.getSelectedItem().toString());
+        args.add(conditionNote.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {

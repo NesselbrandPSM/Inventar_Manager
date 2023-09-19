@@ -17,7 +17,7 @@ public class SQLInsertStatements {
     public void inputPCEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into pc (" +
-                        "iv_number, s_number, current_status, dguv, note, category, manufacturer, modell, memory_ram_size_gb, memory_rom_size_gb, cpu, os, ip, last_update, inventory_company_key, inventory_user_key, purchase_date, purchase_price, warranty) " +
+                        "iv_number, s_number, current_status, dguv, note, category, manufacturer, modell, memory_ram_size_gb, memory_rom_size_gb, cpu, os, ip, last_update, inventory_company_key, inventory_user_key, purchase_date, purchase_price, warranty, c_status, c_note) " +
                         "values (" +
                         "'" + args[0] + "', " +
                         "'" + args[7] + "', " +
@@ -37,7 +37,9 @@ public class SQLInsertStatements {
                         "'" + args[21] + "', " +
                         "'" + args[22] + "', " +
                         "'" + args[23] + "', " +
-                        "'" + args[24] + "'" +
+                        "'" + args[24] + "', " +
+                        "'" + args[25] + "', " +
+                        "'" + args[26] + "'" +
                         ")"
         );
         System.out.println(s.getStatement());
@@ -47,7 +49,7 @@ public class SQLInsertStatements {
     public void inputPREntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into printer (" +
-                        "current_status, inventory_company_key, manufacturer, modell, s_number, eq_number, ip, purchase_date, purchase_price, warranty, dguv, iv_number, note" +
+                        "current_status, inventory_company_key, manufacturer, modell, s_number, eq_number, ip, purchase_date, purchase_price, warranty, dguv, iv_number, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -61,7 +63,9 @@ public class SQLInsertStatements {
                         "'" + args[9] + "', " +
                         "'" + args[10] + "', " +
                         "'" + args[11] + "', " +
-                        "'" + args[12] + "'" +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "', " +
+                        "'" + args[14] + "'" +
                         ")"
         );
 
@@ -72,7 +76,7 @@ public class SQLInsertStatements {
     public void inputHDEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into headset (" +
-                        "iv_number, manufacturer, s_number, current_status, modell, dguv, inventory_company_key, purchase_date, purchase_price, warranty, inventory_user_key, note" +
+                        "iv_number, manufacturer, s_number, current_status, modell, dguv, inventory_company_key, purchase_date, purchase_price, warranty, inventory_user_key, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -85,7 +89,9 @@ public class SQLInsertStatements {
                         "'" + args[8] + "', " +
                         "'" + args[9] + "', " +
                         "'" + args[10] + "', " +
-                        "'" + args[11] + "'" +
+                        "'" + args[11] + "', " +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "'" +
                         ")"
         );
 
@@ -96,7 +102,7 @@ public class SQLInsertStatements {
     public void inputSCEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into scanner (" +
-                        "iv_number, inventory_company_key, inventory_user_key, current_status, dguv, s_number, manufacturer, modell, ip, purchase_date, purchase_price, warranty, note" +
+                        "iv_number, inventory_company_key, inventory_user_key, current_status, dguv, s_number, manufacturer, modell, ip, purchase_date, purchase_price, warranty, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -109,7 +115,9 @@ public class SQLInsertStatements {
                         "'" + args[8] + "', " +
                         "'" + args[9] + "', " +
                         "'" + args[10] + "', " +
-                        "'" + args[11] + "'" +
+                        "'" + args[11] + "', " +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "'" +
                         ")"
         );
 
@@ -120,7 +128,7 @@ public class SQLInsertStatements {
     public void inputDSEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into dockingstation (" +
-                        "inventory_company_key, inventory_user_key, iv_number, manufacturer, current_status, modell, dguv, s_number, purchase_date, purchase_price, warranty, note" +
+                        "inventory_company_key, inventory_user_key, iv_number, manufacturer, current_status, modell, dguv, s_number, purchase_date, purchase_price, warranty, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -133,7 +141,9 @@ public class SQLInsertStatements {
                         "'" + args[8] + "', " +
                         "'" + args[9] + "', " +
                         "'" + args[10] + "', " +
-                        "'" + args[11] + "'" +
+                        "'" + args[11] + "', " +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "'" +
                         ")"
         );
 
@@ -144,7 +154,7 @@ public class SQLInsertStatements {
     public void inputMOEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into monitor (" +
-                        "inventory_company_key, inventory_user_key, manufacturer, s_number, current_status, dguv, resolution, iv_number, modell, purchase_date, purchase_price, warranty, hdmi, dp, vga, dvi, note" +
+                        "inventory_company_key, inventory_user_key, manufacturer, s_number, current_status, dguv, resolution, iv_number, modell, purchase_date, purchase_price, warranty, hdmi, dp, vga, dvi, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -162,7 +172,9 @@ public class SQLInsertStatements {
                         "'" + args[13] + "', " +
                         "'" + args[14] + "', " +
                         "'" + args[15] + "', " +
-                        "'" + args[16] + "'" +
+                        "'" + args[16] + "', " +
+                        "'" + args[17] + "', " +
+                        "'" + args[18] + "'" +
                         ")"
         );
 
@@ -173,7 +185,7 @@ public class SQLInsertStatements {
     public void inputTEEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into telephone (" +
-                        "iv_number, inventory_company_key, inventory_user_key, manufacturer, s_number, current_status, dguv, modell, ip, purchase_date, purchase_price, warranty, note" +
+                        "iv_number, inventory_company_key, inventory_user_key, manufacturer, s_number, current_status, dguv, modell, ip, purchase_date, purchase_price, warranty, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -187,7 +199,9 @@ public class SQLInsertStatements {
                         "'" + args[9] + "', " +
                         "'" + args[10] + "', " +
                         "'" + args[11] + "', " +
-                        "'" + args[12] + "'" +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "', " +
+                        "'" + args[14] + "'" +
                         ")"
         );
 
@@ -198,7 +212,7 @@ public class SQLInsertStatements {
     public void inputDKEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into desk (" +
-                        "inventory_company_key, inventory_user_key, current_status, room_nb, desk_share, floor, iv_number, modell, manufacturer, s_number, te_iv_number, sc_iv_number, hd_iv_number, ds_iv_number, pc_iv_number, has_mouse, has_keyboard, mo_iv_number_1, mo_iv_number_2, purchase_date, purchase_price, warranty, note" +
+                        "inventory_company_key, inventory_user_key, current_status, room_nb, desk_share, floor, iv_number, modell, manufacturer, s_number, te_iv_number, sc_iv_number, hd_iv_number, ds_iv_number, pc_iv_number, has_mouse, has_keyboard, mo_iv_number_1, mo_iv_number_2, purchase_date, purchase_price, warranty, note, c_status, c_note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -222,7 +236,9 @@ public class SQLInsertStatements {
                         "'" + args[19] + "', " +
                         "'" + args[20] + "', " +
                         "'" + args[21] + "', " +
-                        "'" + args[22] + "'" +
+                        "'" + args[22] + "', " +
+                        "'" + args[23] + "', " +
+                        "'" + args[24] + "'" +
                         ")"
         );
 

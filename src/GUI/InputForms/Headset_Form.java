@@ -24,6 +24,7 @@ public class Headset_Form {
     private JTextField note;
     private JComboBox status;
     private JComboBox condition;
+    private JTextField conditionNote;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -115,6 +116,8 @@ public class Headset_Form {
         }
 
         args.add(note.getText());
+        args.add(condition.getSelectedItem().toString());
+        args.add(conditionNote.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
