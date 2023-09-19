@@ -100,9 +100,6 @@ public class Printer {
                 while (paragraphs.size() != 0) {
                     String par = paragraphs.get(0);
                     if ((calcParaLines(g, par, width) + line) > maxLines) {
-                        Constants.printHelper = --currentParagraph;
-                        Constants.printStatus = 1;
-                        Constants.printHelper2 = currentParagraph;
                         break;
                     }
                     paragraphs.remove(0);
@@ -138,73 +135,35 @@ public class Printer {
                 }
                 return PAGE_EXISTS;
             } else {
-                if (Constants.printStatus == 1 || Constants.printStatus == 2){
-                    if (Constants.printStatus == 2){
-                        Constants.printStatus = -1;
-                    } else {
-                        Constants.printStatus = 2;
-                    }
-                    System.out.println(maxLines);
-                    currentParagraph = Constants.printHelper2 + 1;
-                    int y;
-                    yMargin -= 30;
-                    FontMetrics fontMetrics = g.getFontMetrics();
-                    paragraphs = new ArrayList<>();
-                    paragraphs.addAll(Arrays.asList(Constants.paragraphs));
-                    for (int i = 0; i < Constants.printHelper; i++) {
-                        paragraphs.remove(0);
-                    }
-                    while (paragraphs.size() != 0) {
-                        String par = paragraphs.get(0);
-                        System.out.println(line + "    " + calcParaLines(g, par, width));
-                        if ((calcParaLines(g, par, width) + line) > maxLines){
-                            Constants.printHelper = currentParagraph;
-                            Constants.printStatus = 1;
-                            yMargin += 30;
-                            break;
-                        }
-                        paragraphs.remove(0);
-                        line += 2;
-                        y = (int) (line * lineHeight) + yMargin;
-                        g.setFont(paragraph);
-                        g.drawString("§ " + (currentParagraph), xMargin, y);
-                        currentParagraph++;
-                        g.setFont(standard);
-                        while (par.length() > 0){
-                            line += 2;
-                            String s = par;
-                            y = (int) (line * lineHeight) + yMargin;
-                            int cutOff = 0;
-                            if (fontMetrics.stringWidth(s) > (width + 50)) {
-                                while (fontMetrics.stringWidth(s) > (width + 50)) {
-                                    cutOff = s.lastIndexOf(" ");
-                                    s = s.substring(0, cutOff);
-                                }
-                                if (s.indexOf(" ") == 0){
-                                    s = s.substring(1);
-                                }
-                                g.drawString(s, xMargin, y);
-                                par = par.substring(cutOff);
-                            } else {
-                                if (s.indexOf(" ") == 0){
-                                    s = s.substring(1);
-                                }
-                                g.drawString(s, xMargin, y);
-                                par = "";
-                            }
-                        }
-                    }
-                    yMargin += 30;
-                    return PAGE_EXISTS;
-                }
                 return NO_SUCH_PAGE;
             }
         }
 
-        private int calcParaLines(Graphics g, String s, int width) {
+        private int calcParaLines(Graphics g, String par, int width) {
             int lines = 4;
-            int stringWidth = g.getFontMetrics().stringWidth(s);
-            lines += stringWidth / width;
+
+            while (par.length() > 0) {
+                String s = par;
+                int cutOff = 0;
+                if (g.getFontMetrics().stringWidth(s) > (width + 50)) {
+                    while (g.getFontMetrics().stringWidth(s) > (width + 50)) {
+                        cutOff = s.lastIndexOf(" ");
+                        s = s.substring(0, cutOff);
+                    }
+                    if (s.indexOf(" ") == 0) {
+                        s = s.substring(1);
+                    }
+                    lines += 2;
+                    par = par.substring(cutOff);
+                } else {
+                    if (s.indexOf(" ") == 0) {
+                        s = s.substring(1);
+                    }
+                    lines += 2;
+                    par = "";
+                }
+            }
+
             return lines;
         }
     }

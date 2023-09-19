@@ -16,7 +16,7 @@ public class Main {
     public SQLSelectStatements sqlSelectStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "testing1";
+    private static final String startup_configuration = "main";
 
     public static Main m;
 
