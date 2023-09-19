@@ -340,11 +340,22 @@ public class MainGui {
 
         popupMenu.add("Zugehöriges Desk Finden");
         //region desk finden
-        popupMenu.getComponent(1).addMouseListener(new MouseAdapter() {
+        popupMenu.getComponent(2).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     //TODO desk finden
+                }
+            }
+        });
+
+        popupMenu.add("Label Drucken");
+        //region label drucken
+        popupMenu.getComponent(3).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    //TODO label drucken
                 }
             }
         });
