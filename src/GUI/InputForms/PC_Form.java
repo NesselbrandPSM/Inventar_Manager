@@ -29,13 +29,13 @@ public class PC_Form {
     private JTextField purchaseDate;
     private JTextField purchasePrice;
     private JTextField warranty;
-    public JTextField note;
     private JComboBox users;
     private JComboBox companys;
     public JTextField dguv;
     private JComboBox status;
     private JComboBox condition;
-    private JTextField conditionNote;
+    private JTextArea note;
+    private JTextArea conditionNote;
 
     private String pcType = "";
 

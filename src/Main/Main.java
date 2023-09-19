@@ -6,6 +6,7 @@ import GUI.UserEditGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.ArbeitsmittelPrinter;
+import Main.utility.LabelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
@@ -18,7 +19,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
+    private static final String startup_configuration = "testing3";
 
     public static Main m;
 
@@ -55,6 +56,9 @@ public class Main {
             case "testing3" -> {
                 MainInputGui gui = new MainInputGui();
                 gui.init();
+            }
+            case "testing4" -> {
+                LabelPrinter.print();
             }
         }
     }

@@ -37,9 +37,9 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:20px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:20px:noGrow"/>
+    <rowspec value="center:m:grow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:20px:noGrow"/>
+    <rowspec value="center:m:grow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:50px:noGrow"/>
@@ -325,15 +325,6 @@
         </constraints>
         <properties/>
       </component>
-      <component id="79c46" class="javax.swing.JTextField" binding="note">
-        <constraints>
-          <grid row="36" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties/>
-      </component>
       <component id="1e397" class="javax.swing.JTextField" binding="purchaseDate">
         <constraints>
           <grid row="28" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -426,14 +417,27 @@
           <text value="Zustands Bemerkung:"/>
         </properties>
       </component>
-      <component id="297ff" class="javax.swing.JTextField" binding="conditionNote">
+      <component id="a9e96" class="javax.swing.JTextArea" binding="note">
         <constraints>
-          <grid row="38" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
+          <grid row="36" column="4" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
           </grid>
-          <forms defaultalign-horz="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <lineWrap value="true"/>
+        </properties>
+      </component>
+      <component id="87416" class="javax.swing.JTextArea" binding="conditionNote">
+        <constraints>
+          <grid row="38" column="4" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <lineWrap value="true"/>
+        </properties>
       </component>
     </children>
   </grid>

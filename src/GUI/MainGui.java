@@ -10,6 +10,8 @@ import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
@@ -296,8 +298,14 @@ public class MainGui {
         int r = table1.rowAtPoint(e.getPoint());
         if (r >= 0 && r < table1.getRowCount()) {
             table1.setRowSelectionInterval(0, r);
-            JPopupMenu popupMenu = createLeftClickPopUpForTable();
-            popupMenu.show(e.getComponent(), e.getX(), e.getY());
+            if (((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk") ||
+                    ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr")){
+                JPopupMenu popupMenu = createLeftClickPopUpForTable(1);
+                popupMenu.show(e.getComponent(), e.getX(), e.getY());
+            } else {
+                JPopupMenu popupMenu = createLeftClickPopUpForTable(0);
+                popupMenu.show(e.getComponent(), e.getX(), e.getY());
+            }
         } else {
             table1.clearSelection();
         }
@@ -315,7 +323,7 @@ public class MainGui {
         telephoneBox.setSelected(false);
     }
 
-    private JPopupMenu createLeftClickPopUpForTable() {
+    private JPopupMenu createLeftClickPopUpForTable(int flag) {
         JPopupMenu popupMenu = new JPopupMenu();
 
         popupMenu.add("Bearbeiten");
@@ -357,46 +365,59 @@ public class MainGui {
         });
         //endregion
 
-        popupMenu.add("Zugehöriges Desk Finden");
-        //region desk finden
-        popupMenu.getComponent(2).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    if (((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr") ||
-                            ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk")){
-                        JOptionPane.showConfirmDialog(null, "Das angeschaute Objekt hat keine Deskzugehörigkeit!", "Desk",JOptionPane.DEFAULT_OPTION);
-                        return;
-                    }
-                    String[][] result = sqlSelectStatements.getCorospondingDesk(((String[]) tableModel.getRow(table1.getSelectedRow()))[0]);
-                    StringBuilder s = new StringBuilder();
-                    for (String[] st : result) {
-                        s.append(st[0]);
-                        if (result.length > 1){
-                            s.append(", ");
+        if (flag != 1){
+            popupMenu.add("Zugehöriges Desk Finden");
+            //region desk finden
+            popupMenu.getComponent(2).addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    if (e.getButton() == MouseEvent.BUTTON1) {
+                        if (((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr") ||
+                                ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk")){
+                            JOptionPane.showConfirmDialog(null, "Das angeschaute Objekt hat keine Deskzugehörigkeit!", "Desk",JOptionPane.DEFAULT_OPTION);
+                            return;
+                        }
+                        String[][] result = sqlSelectStatements.getCorospondingDesk(((String[]) tableModel.getRow(table1.getSelectedRow()))[0]);
+                        StringBuilder s = new StringBuilder();
+                        for (String[] st : result) {
+                            s.append(st[0]);
+                            if (result.length > 1){
+                                s.append(", ");
+                            }
+                        }
+                        if (s.toString().equals("")){
+                            JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " hat kein zugehöriges Desk!" + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
+                        } else {
+                            JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " gehört zu Desk: " + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
                         }
                     }
-                    if (s.toString().equals("")){
-                        JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " hat kein zugehöriges Desk!" + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
-                    } else {
-                        JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " gehört zu Desk: " + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
+                }
+            });
+            //endregion
+
+            popupMenu.add("Label Drucken");
+            //region label drucken
+            popupMenu.getComponent(3).addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    if (e.getButton() == MouseEvent.BUTTON1) {
+                        //TODO label drucken
                     }
                 }
-            }
-        });
-        //endregion
-
-        popupMenu.add("Label Drucken");
-        //region label drucken
-        popupMenu.getComponent(3).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    //TODO label drucken
+            });
+        } else {
+            popupMenu.add("Label Drucken");
+            //region label drucken
+            popupMenu.getComponent(2).addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    if (e.getButton() == MouseEvent.BUTTON1) {
+                        //TODO label drucken
+                    }
                 }
-            }
-        });
-        //endregion
+            });
+            //endregion
+        }
 
         return popupMenu;
     }
