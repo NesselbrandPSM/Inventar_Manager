@@ -3,6 +3,7 @@ package GUI;
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
 import SQL.SQLConnector;
+import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
 import SQL.Statements.SQLUpdateStatements;
 
@@ -11,7 +12,6 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class UserEditGui {
     private JPanel userEditPanel;
@@ -28,15 +28,18 @@ public class UserEditGui {
     private JButton aktivButton;
     private JButton inaktivButton;
     private JButton neuButton;
+    private JButton löschenButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
 
     private SQLSelectStatements sqlSelectStatements;
     private SQLUpdateStatements sqlUpdateStatements;
+    private SQLDeleteStatements sqlDeleteStatements;
 
     public UserEditGui() {
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
+        sqlDeleteStatements = new SQLDeleteStatements(new SQLConnector());
 
         JTableHeader tableHeader = userTable.getTableHeader();
         tableHeader.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -66,6 +69,24 @@ public class UserEditGui {
         aktivButton.addActionListener(e -> changeStatus(1));
         inaktivButton.addActionListener(e -> changeStatus(-1));
         neuButton.addActionListener(e -> changeStatus(0));
+        löschenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String user = ((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0];
+                String[] options = {"JA", "NEIN"};
+                int i = JOptionPane.showOptionDialog(null, "Wollen sie Nutzer " + user + " wirklich löschen?",
+                        "Einfügen",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        0);
+                if (i == 0) {
+                    sqlDeleteStatements.deleteUser(user);
+                    update();
+                }
+            }
+        });
     }
 
     private void changeStatus(int status) {
@@ -114,7 +135,7 @@ public class UserEditGui {
         return -100;
     }
 
-    public void update(int x){
+    public void update(int x) {
         String[][] data = sqlSelectStatements.getAllUsersTableModel(x);
         for (int i = 0; i < data.length; i++) {
             switch (data[i][2]) {

@@ -1,7 +1,6 @@
  - //TODO Datumformat check
- - //TODO Löschen Button bei UserEditGui
  - //TODO Fehlerausgabe bei Einfuegen von neuen Entrys
- - //TODO Feld für Bemerkungen bei neuen Entrys Dynamisch + größer
+ - //TODO Felder für Bemerkungen bei neuen Entrys Dynamisch + größer
  - //TODO Dokumentenpfad(Von "Überlassung von Arbeitsmitteln") + Speichern + Verzeichnis
  - //TODO Foto von Geräten in Verzeichnis mit iv_number als titel
  - //TODO "Überlassng von Arbeitsmitteln" per email

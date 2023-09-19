@@ -25,6 +25,8 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:50px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:grow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
@@ -55,7 +57,7 @@
     <children>
       <scrollpane id="3b154" binding="userTableScrollPane">
         <constraints>
-          <grid row="2" column="0" row-span="23" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="25" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -189,7 +191,7 @@
       </component>
       <vspacer id="7d400">
         <constraints>
-          <grid row="24" column="16" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="26" column="16" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -199,6 +201,15 @@
           <forms defaultalign-horz="false"/>
         </constraints>
       </hspacer>
+      <component id="cf6e5" class="javax.swing.JButton" binding="löschenButton" default-binding="true">
+        <constraints>
+          <grid row="24" column="16" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="0" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Löschen"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

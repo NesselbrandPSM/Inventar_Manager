@@ -10,7 +10,6 @@ import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 
@@ -138,7 +137,7 @@ public class ADWrapper {
             newUsers.add(temp);
         }
 
-        sqlDeleteStatements.delete("user");
+        sqlDeleteStatements.deleteTable("user");
 
         for (ArrayList<String> list : newUsers) {
             sqlInsertStatements.insert("insert into user (name, mail, current_status, active) values (" +

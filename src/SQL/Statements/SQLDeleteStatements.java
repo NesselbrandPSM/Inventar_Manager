@@ -10,7 +10,11 @@ public class SQLDeleteStatements {
 
     private SQLConnector connector;
 
-    public void delete(String table){
+    public void deleteTable(String table){
         connector.query(new SQLStatement("delete from psm_inventory." + table));
+    }
+
+    public void deleteUser(String name){
+        connector.query(new SQLStatement("update user SET active = 0 where name = '" + name + "'"));
     }
 }
