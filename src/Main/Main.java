@@ -5,8 +5,9 @@ import GUI.MainGui;
 import GUI.UserEditGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
-import Main.utility.Printer;
+import Main.utility.ArbeitsmittelPrinter;
 import SQL.SQLConnector;
+import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import javax.swing.*;
 public class Main {
     private SQLConnector connector;
     public SQLSelectStatements sqlSelectStatements;
+    private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
     private static final String startup_configuration = "main";
@@ -39,11 +41,12 @@ public class Main {
             case "main" -> {
                 connector = new SQLConnector();
                 sqlSelectStatements = new SQLSelectStatements(connector);
-                mainGui= new MainGui(connector, sqlSelectStatements);
+                sqlDeleteStatements = new SQLDeleteStatements(connector);
+                mainGui= new MainGui(connector, sqlSelectStatements, sqlDeleteStatements);
                 mainGui.init();
             }
             case "testing1" -> {
-                Printer.print();
+                ArbeitsmittelPrinter.print();
             }
             case "testing2" -> {
                 UserEditGui gui = new UserEditGui();

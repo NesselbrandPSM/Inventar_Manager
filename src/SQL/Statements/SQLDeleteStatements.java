@@ -17,4 +17,10 @@ public class SQLDeleteStatements {
     public void deleteUser(String name){
         connector.query(new SQLStatement("update user SET active = 0 where name = '" + name + "'"));
     }
+
+    public void deleteEntry(String table, String iv_number){
+        connector.query(new SQLStatement(
+                "update " + table + " set active = 0 where iv_number = '" + iv_number + "'"
+        ));
+    }
 }

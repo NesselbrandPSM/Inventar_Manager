@@ -6,7 +6,7 @@ import java.awt.print.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Printer {
+public class ArbeitsmittelPrinter {
     public static int currentParagraph = 0;
 
     public static void print() {

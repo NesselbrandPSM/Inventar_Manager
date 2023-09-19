@@ -6,12 +6,14 @@ import GUI.util.StatusList;
 import Main.Main;
 import Main.utility.Utils;
 import SQL.SQLConnector;
+import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class MainGui {
     //region attributes
@@ -40,6 +42,7 @@ public class MainGui {
     private JCheckBox telephoneBox;
     private SQLConnector connector;
     private SQLSelectStatements sqlSelectStatements;
+    private SQLDeleteStatements sqlDeleteStatements;
     private ShowAllTableModel tableModel;
     private StatusList statusList;
 
@@ -49,10 +52,11 @@ public class MainGui {
     private static boolean showAll = true;
     //endregion
 
-    public MainGui(SQLConnector connector, SQLSelectStatements sqlSelectStatements) {
+    public MainGui(SQLConnector connector, SQLSelectStatements sqlSelectStatements, SQLDeleteStatements sqlDeleteStatements) {
         this.connector = connector;
         this.statusList = new StatusList(statusLabel);
         this.sqlSelectStatements = sqlSelectStatements;
+        this.sqlDeleteStatements = sqlDeleteStatements;
         statusList.start();
 
         textArea1.setText("");
@@ -197,7 +201,6 @@ public class MainGui {
         });
         //endregion
 
-
         editUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -333,10 +336,26 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    //TODO delete (active => 0)
+                    int selectedRow = table1.getSelectedRow();
+                    String[] selRow = (String[]) tableModel.getRow(selectedRow);
+                    String[] options = {"JA", "NEIN"};
+                    int i = JOptionPane.showOptionDialog(null, "Soll der Datensatz mit\n    " +
+                                    "Inventarnummer: " + selRow[0] + "\n    " +
+                                    "Primärschlüssel: " + selRow[2] + "\nwirklich gelöscht werden?",
+                            "Löschen",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            options,
+                            0);
+                    if (i == 0) {
+                        sqlDeleteStatements.deleteEntry(Utils.getTableFromShortCut(selRow[0].substring(0, 2)), selRow[0]);
+                        updateShowAllTableModel(showAllTableModelFlag);
+                    }
                 }
             }
         });
+        //endregion
 
         popupMenu.add("Zugehöriges Desk Finden");
         //region desk finden
@@ -344,10 +363,28 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    //TODO desk finden
+                    if (((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr") ||
+                            ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk")){
+                        JOptionPane.showConfirmDialog(null, "Das angeschaute Objekt hat keine Deskzugehörigkeit!", "Desk",JOptionPane.DEFAULT_OPTION);
+                        return;
+                    }
+                    String[][] result = sqlSelectStatements.getCorospondingDesk(((String[]) tableModel.getRow(table1.getSelectedRow()))[0]);
+                    StringBuilder s = new StringBuilder();
+                    for (String[] st : result) {
+                        s.append(st[0]);
+                        if (result.length > 1){
+                            s.append(", ");
+                        }
+                    }
+                    if (s.toString().equals("")){
+                        JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " hat kein zugehöriges Desk!" + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " gehört zu Desk: " + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
+                    }
                 }
             }
         });
+        //endregion
 
         popupMenu.add("Label Drucken");
         //region label drucken
@@ -396,7 +433,7 @@ public class MainGui {
 
     public void init() {
         JFrame frame = new JFrame("Inventar Manager");
-        frame.setContentPane(new MainGui(connector, sqlSelectStatements).panel1);
+        frame.setContentPane(new MainGui(connector, sqlSelectStatements, sqlDeleteStatements).panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

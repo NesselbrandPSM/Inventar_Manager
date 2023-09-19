@@ -4,13 +4,11 @@ import GUI.util.ColumNames;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.SQLStatement;
-import jdk.jshell.execution.Util;
 
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SQLSelectStatements {
     public SQLSelectStatements(SQLConnector connector) {
@@ -153,35 +151,35 @@ public class SQLSelectStatements {
                 case "pc" -> resultSet = connector.query(new SQLStatement(
                         "select * from pc " +
                                 "join company on pc.inventory_company_key=company.company_key " +
-                                "where pc.iv_number = \"" + iv_number + "\""));
+                                "where pc.active = 1 and pc.iv_number = \"" + iv_number + "\""));
                 case "pr" -> resultSet = connector.query(new SQLStatement(
                         "select * from printer " +
                                 "join company on printer.inventory_company_key=company.company_key " +
-                                "where printer.iv_number = \"" + iv_number + "\""));
+                                "where printer.active = 1 and printer.iv_number = \"" + iv_number + "\""));
                 case "sc" -> resultSet = connector.query(new SQLStatement(
                         "select * from scanner " +
                                 "join company on scanner.inventory_company_key=company.company_key " +
-                                "where scanner.iv_number = \"" + iv_number + "\""));
+                                "where scanner.active = 1 and scanner.iv_number = \"" + iv_number + "\""));
                 case "mo" -> resultSet = connector.query(new SQLStatement(
                         "select * from monitor " +
                                 "join company on monitor.inventory_company_key=company.company_key " +
-                                "where monitor.iv_number = \"" + iv_number + "\""));
+                                "where monitor.active = 1 and monitor.iv_number = \"" + iv_number + "\""));
                 case "te" -> resultSet = connector.query(new SQLStatement(
                         "select * from telephone " +
                                 "join company on telephone.inventory_company_key=company.company_key " +
-                                "where telephone.iv_number = \"" + iv_number + "\""));
+                                "where telephone.active = 1 and telephone.iv_number = \"" + iv_number + "\""));
                 case "hd" -> resultSet = connector.query(new SQLStatement(
                         "select * from headset " +
                                 "join company on headset.inventory_company_key=company.company_key " +
-                                "where headset.iv_number = \"" + iv_number + "\""));
+                                "where headset.active = 1 and headset.iv_number = \"" + iv_number + "\""));
                 case "ds" -> resultSet = connector.query(new SQLStatement(
                         "select * from dockingstation " +
                                 "join company on dockingstation.inventory_company_key=company.company_key " +
-                                "where dockingstation.iv_number = \"" + iv_number + "\""));
+                                "where dockingstation.active = 1 and dockingstation.iv_number = \"" + iv_number + "\""));
                 case "dk" -> resultSet = connector.query(new SQLStatement(
                         "select * from desk " +
                                 "join company on desk.inventory_company_key=company.company_key " +
-                                "where desk.iv_number = \"" + iv_number + "\""));
+                                "where desk.active = 1 and desk.iv_number = \"" + iv_number + "\""));
             }
 
             if (resultSet == null) {
@@ -788,5 +786,33 @@ public class SQLSelectStatements {
             throw new RuntimeException(e);
         }
         return result.toArray(new String[0]);
+    }
+
+    public String[][] getCorospondingDesk(String iv_number) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        String rest = "";
+        switch (iv_number.substring(0, 2).toLowerCase()) {
+            case "mo" -> {
+                rest = "mo_iv_number_1 = '" + iv_number + "' or mo_iv_number_2 = '" + iv_number + "'";
+            }
+            case "sc", "dk", "hd", "te", "ds", "pc" ->
+                    rest = iv_number.substring(0, 2).toLowerCase() + "_iv_number = " + "'" + iv_number + "'";
+        }
+
+        SQLStatement s = new SQLStatement(
+                "select iv_number from desk where " + rest
+        );
+        ResultSet resultSet = connector.query(s);
+        try {
+            while (resultSet.next()) {
+                ArrayList<String> temp = new ArrayList<>();
+                temp.add(resultSet.getString("iv_number"));
+                resultList.add(temp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 }

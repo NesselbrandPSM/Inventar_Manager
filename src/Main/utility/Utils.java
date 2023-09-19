@@ -100,4 +100,20 @@ public class Utils {
         }
         return ret;
     }
+
+    public static String getTableFromShortCut(String shortCut){
+        String ret = "";
+        System.out.println(shortCut);
+        switch (shortCut.toLowerCase()){
+            case "pc" -> ret = "pc";
+            case "mo" -> ret = "monitor";
+            case "sc" -> ret = "scanner";
+            case "hd" -> ret = "headset";
+            case "te" -> ret = "telephone";
+            case "pr" -> ret = "printer";
+            case "ds" -> ret = "dockingstation";
+            case "dk" -> ret = "desk";
+        }
+        return ret;
+    }
 }
