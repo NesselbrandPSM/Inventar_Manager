@@ -22,10 +22,10 @@ public class Printer_Form {
     private JTextField purchasePrice;
     private JTextField warranty;
     private JTextField dguv;
-    private JTextField note;
     private JComboBox status;
     private JComboBox condition;
-    private JTextField conditionNote;
+    private JTextArea conditionNote;
+    private JTextArea note;
 
     private String[][] companySet;
 

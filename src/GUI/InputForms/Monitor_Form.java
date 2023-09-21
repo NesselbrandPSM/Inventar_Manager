@@ -26,10 +26,10 @@ public class Monitor_Form {
     private JTextField dvi;
     private JTextField vga;
     private JTextField dguv;
-    private JTextField note;
     private JComboBox status;
     private JComboBox condition;
-    private JTextField conditionNote;
+    private JTextArea note;
+    private JTextArea conditionNote;
 
     private SQLSelectStatements sqlSelectStatements;
 

@@ -25,7 +25,6 @@ public class Desk_Form {
     private JCheckBox hasMouseCheckBox;
     private JCheckBox hasKeyboardCheckBox;
     private JCheckBox deskShareCheckBox;
-    private JTextField note;
     private JComboBox dsIVNumberBox;
     private JComboBox hdIVNumberBox;
     private JComboBox scIVNumberBox;
@@ -33,7 +32,8 @@ public class Desk_Form {
     private JComboBox mo1IVNumberBox;
     private JComboBox mo2IVNumberBox;
     private JComboBox condition;
-    private JTextField conditionNote;
+    private JTextArea note;
+    private JTextArea conditionNote;
 
     private SQLConnector sqlConnector;
     private SQLSelectStatements sqlSelectStatements;

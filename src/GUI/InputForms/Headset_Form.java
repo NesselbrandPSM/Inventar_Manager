@@ -21,10 +21,10 @@ public class Headset_Form {
     private JTextField warranty;
     private JComboBox users;
     private JTextField dguv;
-    private JTextField note;
     private JComboBox status;
     private JComboBox condition;
-    private JTextField conditionNote;
+    private JTextArea note;
+    private JTextArea conditionNote;
 
     private SQLSelectStatements sqlSelectStatements;
 

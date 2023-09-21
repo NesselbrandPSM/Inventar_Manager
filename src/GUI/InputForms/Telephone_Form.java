@@ -21,12 +21,12 @@ public class Telephone_Form {
     private JTextField purchaseNumber;
     private JTextField purchasePrice;
     private JTextField warranty;
-    private JTextField note;
     private JComboBox users;
     private JTextField dguv;
     private JComboBox status;
     private JComboBox condition;
-    private JTextField conditionNote;
+    private JTextArea note;
+    private JTextArea conditionNote;
 
     private SQLSelectStatements sqlSelectStatements;
 
