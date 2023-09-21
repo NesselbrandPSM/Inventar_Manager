@@ -1,6 +1,5 @@
  - //TODO Datumformat check
  - //TODO Fehlerausgabe bei Einfuegen von neuen Entrys
- - //TODO Felder für Bemerkungen bei neuen Entrys Dynamisch + größer
  - //TODO Dokumentenpfad(Von "Überlassung von Arbeitsmitteln") + Speichern + Verzeichnis
  - //TODO Foto von Geräten in Verzeichnis mit iv_number als titel
  - //TODO "Überlassung von Arbeitsmitteln" per email
