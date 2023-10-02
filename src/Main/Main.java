@@ -19,7 +19,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
+    private static final String startup_configuration = "testing1";
 
     public static Main m;
 
