@@ -2,14 +2,14 @@ package Main.utility;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.awt.print.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ArbeitsmittelPrinter {
-    public static int currentParagraph = 0;
 
-    public static void print() {
+    public static void print(String name) {
         PrinterJob printJob = PrinterJob.getPrinterJob();
         PageFormat pageFormat = new PageFormat();
         Paper a4 = new Paper();
@@ -21,6 +21,7 @@ public class ArbeitsmittelPrinter {
 
         PrintObject p = new PrintObject();
         p.init();
+        p.calculatePages(pageFormat, name);
         printJob.setPrintable(p, pageFormat);
 
         boolean doPrint = printJob.printDialog();
@@ -36,135 +37,246 @@ public class ArbeitsmittelPrinter {
 
     static class PrintObject implements Printable {
 
-        private Font title;
-        private Font standard;
-        private Font paragraph;
+        private Font titleF;
+        private Font standardF;
+        private Font paragraphF;
+        private Font footF;
         private ArrayList<String> paragraphs;
 
         private int xMargin;
         private int yMargin;
         private int lineHeight;
 
+        private int width;
+        private int height;
+
         private static final String font = "Arial";
 
+        ArrayList<ArrayList<Line>> pageLineList;
+
         public void init() {
-            title = new Font(font, Font.BOLD, 13);
-            standard = new Font(font, Font.PLAIN, 10);
-            paragraph = new Font(font, Font.BOLD, 10);
+            titleF = new Font(font, Font.BOLD, 13);
+            standardF = new Font(font, Font.PLAIN, 10);
+            paragraphF = new Font(font, Font.BOLD, 10);
+            footF = new Font(font, Font.PLAIN, 7);
 
             xMargin = 40;
             yMargin = 60;
             lineHeight = 10;
         }
 
-        @Override
-        public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
-            Graphics2D g = (Graphics2D) graphics;
-            g.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+        public void calculatePages(PageFormat pageFormat, String name){
+            pageLineList = new ArrayList<>();
 
-            double line = 1;
+            width = (int) pageFormat.getImageableWidth() - xMargin;
+            height = (int) pageFormat.getImageableHeight();
 
-            int width = (int) pageFormat.getImageableWidth();
-            int height = (int) pageFormat.getImageableHeight();
+            int maxLines = 76;
+            //page 1 with default
+            pageLineList.add(new ArrayList<>());
+            pageLineList.get(0).add(new Line("Überlassung von Arbeitsmitteln", Double.POSITIVE_INFINITY, 4, titleF, 5, 0));
+            pageLineList.get(0).add(new Line("Zwischen", xMargin, 2, standardF));
+            pageLineList.get(0).add(new Line("Apocare GmbH - Im Gewerbepark 11, 96155 Buttenheim", xMargin + 10, 0, standardF));
+            pageLineList.get(0).add(new Line("[im Folgenden Firma]", Double.NEGATIVE_INFINITY, 2, standardF));
+            pageLineList.get(0).add(new Line("und " + name, xMargin + 10, 0, standardF));
+            pageLineList.get(0).add(new Line("[im Folgenden Arbeitnehmer]", Double.NEGATIVE_INFINITY, 3, standardF));
+            pageLineList.get(0).add(new Line("werden nachfolgende Vereinbarungen getroffen:", xMargin, 3, standardF));
 
-            int maxLines = (height - yMargin - yMargin) / lineHeight;
+            double currentLine = 13;
+            int page = 0;
+            int paraIndex = 1;
+            int internalWidth = width - xMargin;
 
-            String name = "Leonard Schmidt";
+            for (int i = 0; i < Constants.paragraphs.length; i++) {
+                String paragraphC = Constants.paragraphs[i];
+                if ((2 + currentLine + calcParaLines(paragraphC, internalWidth, standardF)) < maxLines){
+                    pageLineList.get(page).add(new Line("§ " + paraIndex, xMargin, 2, paragraphF));
+                    currentLine += 2;
 
-            if (pageIndex == 0) {
-                paragraphs = new ArrayList<>();
-                paragraphs.addAll(Arrays.asList(Constants.paragraphs));
-                g.setFont(title);
-                FontMetrics fontMetrics = g.getFontMetrics();
-                int x = (width - fontMetrics.stringWidth("Überlassung von Arbeitsmitteln")) / 2;
-                int y = (int) (line * lineHeight) + yMargin;
-                g.drawString("Überlassung von Arbeitsmitteln", x, y + 5); // Ueberschrift
-                g.setFont(standard);
-                line += 4;
-                y = (int) (line * lineHeight) + yMargin;
-                g.drawString("Zwischen", xMargin, y);
-                line += 2;
-                y = (int) (line * lineHeight) + yMargin;
-                g.drawString("Apocare GmbH - Im Gewerbepark 11, 96155 Buttenheim", 10 + xMargin, y);
-                g.drawString("[im Folgenden Firma]", width - fontMetrics.stringWidth("[im Folgenden Arbeitnehmer]") + 10, y);
-                line += 2;
-                y = (int) (line * lineHeight) + yMargin;
-                g.drawString("und " + name, 10 + xMargin, y);
-                g.drawString("[im Folgenden Arbeitnehmer]", width - fontMetrics.stringWidth("[im Folgenden Arbeitnehmer]") + 10, y);
-                line += 3;
-                y = (int) (line * lineHeight) + yMargin;
-                g.drawString("werden nachfolgende Vereinbarungen getroffen:", xMargin, y);
-                g.setFont(paragraph);
-
-                currentParagraph = 1;
-                while (paragraphs.size() != 0) {
-                    String par = paragraphs.get(0);
-                    if ((calcParaLines(g, par, width) + line) > maxLines) {
-                        break;
-                    }
-                    paragraphs.remove(0);
-                    line += 2;
-                    y = (int) (line * lineHeight) + yMargin;
-                    g.setFont(paragraph);
-                    g.drawString("§ " + (currentParagraph), xMargin, y);
-                    currentParagraph++;
-                    g.setFont(standard);
-                    while (par.length() > 0) {
-                        line += 2;
-                        String s = par;
-                        y = (int) (line * lineHeight) + yMargin;
-                        int cutOff = 0;
-                        if (fontMetrics.stringWidth(s) > (width + 150)) {
-                            while (fontMetrics.stringWidth(s) > (width + 150)) {
-                                cutOff = s.lastIndexOf(" ");
-                                s = s.substring(0, cutOff);
-                            }
-                            if (s.indexOf(" ") == 0) {
-                                s = s.substring(1);
-                            }
-                            g.drawString(s, xMargin, y);
-                            par = par.substring(cutOff);
-                        } else {
-                            if (s.indexOf(" ") == 0) {
-                                s = s.substring(1);
-                            }
-                            g.drawString(s, xMargin, y);
-                            par = "";
+                    String paragraph = paragraphC;
+                    while (paragraph.length() > 0){
+                        String line = paragraph;
+                        while (getTextWidth(line, standardF) > internalWidth) {
+                            line = line.substring(0, line.lastIndexOf(" "));
                         }
+                        paragraph = paragraph.substring(line.length());
+                        if (line.substring(0, 1).equals(" ")){
+                            line = line.substring(1);
+                        }
+                        pageLineList.get(page).add(new Line(line, xMargin, 1.3 , standardF));
+                        currentLine += 1.3;
                     }
+                    pageLineList.get(page).get(pageLineList.get(page).size() - 1).lineAdd = 2;
+                    currentLine += 0.7;
+                    paraIndex++;
+                } else {
+                    pageLineList.add(new ArrayList<>());
+                    page++;
+                    currentLine = 1;
+                    i--;
                 }
-                return PAGE_EXISTS;
-            } else {
-                return NO_SUCH_PAGE;
             }
+
+            double tempLineAddon = 9.5;
+            if ((currentLine + tempLineAddon) > maxLines){
+                page++;
+                currentLine = 1;
+                pageLineList.add(new ArrayList<>());
+            }
+            pageLineList.get(page).add(new Line("", xMargin, 3, standardF));
+            pageLineList.get(page).add(new Line("Buttenheim, _____________", xMargin, 5, standardF));
+            pageLineList.get(page).add(new Line("________________________________", xMargin, 0, standardF));
+            pageLineList.get(page).add(new Line("________________________________", width - getTextWidth("________________________________", standardF) - 20, 1.5, standardF, 0, -10));
+            pageLineList.get(page).add(new Line("Unterschrift Arbeitnemer", xMargin, 0, standardF));
+            pageLineList.get(page).add(new Line("Unterschrift Arbeitgeber", width - getTextWidth("________________________________", standardF) - 20, 3, standardF, 0, -10));
+            currentLine += tempLineAddon;
+            currentLine += 3;
+
+            tempLineAddon = 24;
+            if ((currentLine + tempLineAddon) > maxLines){
+                page++;
+                currentLine = 1;
+                pageLineList.add(new ArrayList<>());
+            }
+            int underLineOffset = 95;
+            pageLineList.get(page).add(new Line(Math.PI, 3));
+            pageLineList.get(page).add(new Line("Rückgabe der Arbeitsmittel", xMargin, 3, titleF));
+            pageLineList.get(page).add(new Line("Zustand:", xMargin, 0, standardF));
+            pageLineList.get(page).add(new Line("_________________________________________________________________________", xMargin + underLineOffset, 2, standardF));
+            pageLineList.get(page).add(new Line("_________________________________________________________________________", xMargin + underLineOffset, 2, standardF));
+            pageLineList.get(page).add(new Line("_________________________________________________________________________", xMargin + underLineOffset, 4, standardF));
+
+            pageLineList.get(page).add(new Line("Angenommen von:", xMargin, 0, standardF));
+            pageLineList.get(page).add(new Line("_________________________________________________________________________", xMargin + underLineOffset, 4, standardF));
+            pageLineList.get(page).add(new Line("Datum und ", xMargin, 2, standardF));
+            pageLineList.get(page).add(new Line("Unterschrift:", xMargin, 0, standardF));
+            pageLineList.get(page).add(new Line("_________________________________________________________________________", xMargin + underLineOffset, 4, standardF));
+
+            //pageLineList.get(page).add(new Line());
+
+
+
+            currentLine += tempLineAddon;
+
+            //pageLineList.get(page).add(new Line());
         }
 
-        private int calcParaLines(Graphics g, String par, int width) {
-            int lines = 4;
+        @Override
+        public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
+            for (ArrayList<Line> list : pageLineList) {
+                for (Line l : list) {
+                    System.out.println(l.line);
+                }
+                System.out.println("---------");
+            }
 
+            Graphics2D g = (Graphics2D) graphics;
+            g.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+            if (pageIndex == 0) {
+                double line = 0;
+                g.setFont(standardF);
+                for (Line l : pageLineList.get(0)) {
+                    if (l.x == Math.PI){
+                        int y = (int) ((line * lineHeight) + yMargin);
+                        g.drawLine(xMargin, y, width, y);
+                    } else {
+                        g.setFont(l.font);
+                        if (l.x == Double.POSITIVE_INFINITY) {
+                            l.x = getXMiddle(l.line, g.getFontMetrics());
+                        } else if (l.x == Double.NEGATIVE_INFINITY) {
+                            l.x = getXRight(l.line, g.getFontMetrics());
+                        }
+
+                        l.x += l.xAddon;
+                        int y = (int) ((line * lineHeight) + yMargin);
+                        g.drawString(l.line, (int) l.x, (int) (y + l.yAddon));
+                    }
+                    line += l.lineAdd;
+                }
+                //Footer
+                g.setFont(footF);
+                g.drawString("Seite", xMargin, height - 30);
+                int showIndex = pageIndex + 1;
+                g.drawString(showIndex + "/" + pageLineList.size(), (int) getXRight(pageIndex + "/" + pageLineList.size(), g.getFontMetrics()), height - 30);
+                Color temp = g.getColor();
+                g.setColor(new Color(169, 169, 169));
+                g.drawLine(xMargin, height - 40, width, height - 40);
+                g.setColor(temp);
+
+                return PAGE_EXISTS;
+            } else if (pageIndex > 0 && pageIndex < pageLineList.size()){
+                double line = 0;
+                for (Line l : pageLineList.get(pageIndex)) {
+                    if (l.x == Math.PI) {
+                        int y = (int) ((line * lineHeight) + yMargin);
+                        g.drawLine(xMargin, y, width, y);
+                    } else {
+                        g.setFont(l.font);
+                        if (l.x == Double.POSITIVE_INFINITY) {
+                            l.x = getXMiddle(l.line, g.getFontMetrics());
+                        } else if (l.x == Double.NEGATIVE_INFINITY) {
+                            l.x = getXRight(l.line, g.getFontMetrics());
+                        }
+                        l.x += l.xAddon;
+                        int y = (int) ((line * lineHeight) + yMargin);
+                        g.drawString(l.line, (int) l.x, (int) (y + l.yAddon));
+                    }
+                    line += l.lineAdd;
+                }
+                //Footer
+                g.setFont(footF);
+                g.drawString("Seite", xMargin, height - 30);
+                int showIndex = pageIndex + 1;
+                g.drawString(showIndex + "/" + pageLineList.size(), (int) getXRight(pageIndex + "/" + pageLineList.size(), g.getFontMetrics()), height - 30);
+                Color temp = g.getColor();
+                g.setColor(new Color(169, 169, 169));
+                g.drawLine(xMargin, height - 40, width, height - 40);
+                g.setColor(temp);
+
+                return PAGE_EXISTS;
+            }
+            return NO_SUCH_PAGE;
+        }
+
+        private double getXMiddle(String line, FontMetrics metrics){
+            return (double) (width - metrics.stringWidth(line)) / 2;
+        }
+
+        private double getXRight(String line, FontMetrics metrics){
+            return width - metrics.stringWidth(line);
+        }
+
+        private double calcParaLines(String par, int width, Font font) {
+            double lines = 0;
             while (par.length() > 0) {
                 String s = par;
                 int cutOff = 0;
-                if (g.getFontMetrics().stringWidth(s) > (width + 50)) {
-                    while (g.getFontMetrics().stringWidth(s) > (width + 50)) {
+                if (getTextWidth(s, font) > (width + 50)) {
+                    while (getTextWidth(s, font) > (width + 50)) {
                         cutOff = s.lastIndexOf(" ");
                         s = s.substring(0, cutOff);
                     }
                     if (s.indexOf(" ") == 0) {
                         s = s.substring(1);
                     }
-                    lines += 2;
+                    lines += 1.3;
                     par = par.substring(cutOff);
                 } else {
                     if (s.indexOf(" ") == 0) {
                         s = s.substring(1);
                     }
-                    lines += 2;
+                    lines += 1.3;
                     par = "";
                 }
             }
-
+            lines += 0.7;
             return lines;
+        }
+
+        private int getTextWidth(String text, Font font){
+            AffineTransform affinetransform = new AffineTransform();
+            FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+            return (int)(font.getStringBounds(text, frc).getWidth());
         }
     }
 }

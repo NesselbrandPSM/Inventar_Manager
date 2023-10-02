@@ -19,7 +19,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
+    private static final String startup_configuration = "testing1";
 
     public static Main m;
 
@@ -47,7 +47,7 @@ public class Main {
                 mainGui.init();
             }
             case "testing1" -> {
-                ArbeitsmittelPrinter.print();
+                ArbeitsmittelPrinter.print("Leonard Schmidt");
             }
             case "testing2" -> {
                 UserEditGui gui = new UserEditGui();

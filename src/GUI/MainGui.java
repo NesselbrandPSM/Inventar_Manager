@@ -217,8 +217,8 @@ public class MainGui {
                 JCheckBox c = (JCheckBox) e.getSource();
                 uncheckFilterBoxes();
                 if (lastactivefilterbox.equals(c.getText())) {
-                    updateShowAllTableModel(0);
                     lastactivefilterbox = "";
+                    updateShowAllTableModel(0);
                     return;
                 }
                 c.setSelected(true);
