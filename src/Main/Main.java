@@ -19,7 +19,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "testing1";
+    private static final String startup_configuration = "main";
 
     public static Main m;
 
@@ -58,7 +58,7 @@ public class Main {
                 gui.init();
             }
             case "testing4" -> {
-                LabelPrinter.print();
+                LabelPrinter.print("NB-0001");
             }
         }
     }

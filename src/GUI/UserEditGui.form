@@ -26,6 +26,8 @@
     <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
+    <rowspec value="top:10dlu:noGrow"/>
+    <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:grow"/>
     <colspec value="fill:100px:noGrow"/>
@@ -50,14 +52,14 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:5px:noGrow"/>
     <constraints>
-      <xy x="22" y="24" width="1297" height="664"/>
+      <xy x="22" y="24" width="1297" height="682"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <scrollpane id="3b154" binding="userTableScrollPane">
         <constraints>
-          <grid row="2" column="0" row-span="25" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="27" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -191,7 +193,7 @@
       </component>
       <vspacer id="7d400">
         <constraints>
-          <grid row="26" column="16" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="28" column="16" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -208,6 +210,15 @@
         </constraints>
         <properties>
           <text value="Löschen"/>
+        </properties>
+      </component>
+      <component id="f3fe0" class="javax.swing.JButton" binding="arbeitsmittelButton">
+        <constraints>
+          <grid row="26" column="16" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="0" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Arbeitsmittel Drucken"/>
         </properties>
       </component>
     </children>

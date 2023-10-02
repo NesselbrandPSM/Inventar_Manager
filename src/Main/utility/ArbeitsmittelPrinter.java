@@ -151,25 +151,11 @@ public class ArbeitsmittelPrinter {
             pageLineList.get(page).add(new Line("Datum und ", xMargin, 2, standardF));
             pageLineList.get(page).add(new Line("Unterschrift:", xMargin, 0, standardF));
             pageLineList.get(page).add(new Line("_________________________________________________________________________", xMargin + underLineOffset, 4, standardF));
-
-            //pageLineList.get(page).add(new Line());
-
-
-
             currentLine += tempLineAddon;
-
-            //pageLineList.get(page).add(new Line());
         }
 
         @Override
         public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
-            for (ArrayList<Line> list : pageLineList) {
-                for (Line l : list) {
-                    System.out.println(l.line);
-                }
-                System.out.println("---------");
-            }
-
             Graphics2D g = (Graphics2D) graphics;
             g.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
             if (pageIndex == 0) {

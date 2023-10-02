@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
+import Main.utility.ArbeitsmittelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
@@ -29,6 +30,7 @@ public class UserEditGui {
     private JButton inaktivButton;
     private JButton neuButton;
     private JButton löschenButton;
+    private JButton arbeitsmittelButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
@@ -85,6 +87,12 @@ public class UserEditGui {
                     sqlDeleteStatements.deleteUser(user);
                     update();
                 }
+            }
+        });
+        arbeitsmittelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0]);
             }
         });
     }

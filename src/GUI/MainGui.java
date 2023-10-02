@@ -4,6 +4,7 @@ import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
+import Main.utility.LabelPrinter;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
@@ -401,7 +402,7 @@ public class MainGui {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (e.getButton() == MouseEvent.BUTTON1) {
-                        //TODO label drucken
+                        LabelPrinter.print(((String[]) tableModel.getRow(table1.getSelectedRow()))[0]);
                     }
                 }
             });
@@ -412,7 +413,7 @@ public class MainGui {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     if (e.getButton() == MouseEvent.BUTTON1) {
-                        //TODO label drucken
+                        LabelPrinter.print(((String[]) tableModel.getRow(table1.getSelectedRow()))[0]);
                     }
                 }
             });
