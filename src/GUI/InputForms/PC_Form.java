@@ -36,6 +36,8 @@ public class PC_Form {
     private JComboBox condition;
     private JTextArea note;
     private JTextArea conditionNote;
+    private JTextField eSimNumber;
+    private JTextField eSimPin;
 
     private String pcType = "";
 
@@ -170,6 +172,8 @@ public class PC_Form {
         args.add(warranty.getText());
         args.add(condition.getSelectedItem().toString());
         args.add(conditionNote.getText());
+        args.add(eSimNumber.getText());
+        args.add(eSimPin.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
@@ -199,5 +203,7 @@ public class PC_Form {
         warranty.setText("");
         note.setText("");
         dguv.setText("");
+        eSimNumber.setText("");
+        eSimPin.setText("");
     }
 }

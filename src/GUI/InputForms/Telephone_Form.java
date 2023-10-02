@@ -27,6 +27,11 @@ public class Telephone_Form {
     private JComboBox condition;
     private JTextArea note;
     private JTextArea conditionNote;
+    private JTextField rufNummer;
+    private JTextField tarif;
+    private JTextField dpPin;
+    private JTextField simPin;
+    private JTextField simNummer;
 
     private SQLSelectStatements sqlSelectStatements;
 
@@ -115,6 +120,11 @@ public class Telephone_Form {
         args.add(note.getText());
         args.add(condition.getSelectedItem().toString());
         args.add(conditionNote.getText());
+        args.add(rufNummer.getText());
+        args.add(simNummer.getText());
+        args.add(simPin.getText());
+        args.add(dpPin.getText());
+        args.add(tarif.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
@@ -139,6 +149,11 @@ public class Telephone_Form {
         warranty.setText("");
         note.setText("");
         dguv.setText("");
+        rufNummer.setText("");
+        tarif.setText("");
+        dpPin.setText("");
+        simPin.setText("");
+        simNummer.setText("");
     }
 
     public JPanel getTelephonePanel() {

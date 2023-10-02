@@ -17,7 +17,7 @@ public class SQLInsertStatements {
     public void inputPCEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into pc (" +
-                        "iv_number, s_number, current_status, dguv, note, category, manufacturer, modell, memory_ram_size_gb, memory_rom_size_gb, cpu, os, ip, last_update, inventory_company_key, inventory_user_key, purchase_date, purchase_price, warranty, c_status, c_note) " +
+                        "iv_number, s_number, current_status, dguv, note, category, manufacturer, modell, memory_ram_size_gb, memory_rom_size_gb, cpu, os, ip, last_update, inventory_company_key, inventory_user_key, purchase_date, purchase_price, warranty, c_status, c_note, esim_number, esim_pin) " +
                         "values (" +
                         "'" + args[0] + "', " +
                         "'" + args[7] + "', " +
@@ -39,7 +39,9 @@ public class SQLInsertStatements {
                         "'" + args[23] + "', " +
                         "'" + args[24] + "', " +
                         "'" + args[25] + "', " +
-                        "'" + args[26] + "'" +
+                        "'" + args[26] + "', " +
+                        "'" + args[27] + "', " +
+                        "'" + args[28] + "'" +
                         ")"
         );
         System.out.println(s.getStatement());
@@ -185,7 +187,7 @@ public class SQLInsertStatements {
     public void inputTEEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into telephone (" +
-                        "iv_number, inventory_company_key, inventory_user_key, manufacturer, s_number, current_status, dguv, modell, ip, purchase_date, purchase_price, warranty, note, c_status, c_note" +
+                        "iv_number, inventory_company_key, inventory_user_key, manufacturer, s_number, current_status, dguv, modell, ip, purchase_date, purchase_price, warranty, note, c_status, c_note, call_number, sim_number, sim_pin, display_pin, tariff" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -201,7 +203,12 @@ public class SQLInsertStatements {
                         "'" + args[11] + "', " +
                         "'" + args[12] + "', " +
                         "'" + args[13] + "', " +
-                        "'" + args[14] + "'" +
+                        "'" + args[14] + "', " +
+                        "'" + args[15] + "', " +
+                        "'" + args[16] + "', " +
+                        "'" + args[17] + "', " +
+                        "'" + args[18] + "', " +
+                        "'" + args[19] + "'" +
                         ")"
         );
 

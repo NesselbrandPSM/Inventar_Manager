@@ -4,19 +4,16 @@ import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
 import Main.Main;
-import Main.utility.LabelPrinter;
+import Main.utility.Printer.LabelPrinter;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 
 public class MainGui {
     //region attributes

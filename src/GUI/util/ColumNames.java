@@ -9,7 +9,7 @@ public class ColumNames {
     public static final String[] allAttributesPC = new String[]{
             "Primärschlüssel", "Inventar Nummer", "Kategorie", "Firma", "Hersteller", "Modell", "Kaufdatum", "KaufPreis", "Garantie", "Arbeitsspeicher",
             "Festplattenspeicher", "cpu", "Betriebssystem", "IP-Addresse", "Letztes Update",
-            "Nutzer", "Nutzer Email", "Serien Nummer", "Status", "DGUV", "Bemerkung", "Zustand", "Zustandsbemerkung"
+            "Nutzer", "Nutzer Email", "Serien Nummer", "Status", "DGUV", "E-Sim Nummer", "E-Sim Pin", "Bemerkung", "Zustand", "Zustandsbemerkung"
     };
 
     public static final String[] allAttributesPR = new String[]{
@@ -26,7 +26,7 @@ public class ColumNames {
     };
 
     public static final String[] allAttributesTE = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer", "IP-Addresse", "Bemerkung", "Zustand", "Zustandsbemerkung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer", "IP-Addresse", "Rufnummer", "Tarif", "Display Pin", "Sim Nummer", "Sim Pin", "Bemerkung", "Zustand", "Zustandsbemerkung"
     };
 
     public static final String[] allAttributesHD = new String[]{

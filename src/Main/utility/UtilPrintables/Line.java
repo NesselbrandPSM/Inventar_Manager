@@ -1,4 +1,4 @@
-package Main.utility;
+package Main.utility.UtilPrintables;
 
 import java.awt.*;
 
@@ -20,9 +20,9 @@ public class Line {
         this.xAddon = xAddon;
 
         //special x values:
-            // x = INFINITY => Text soll mittig aligned werden
-            // x = -INFINITY => Text soll am rechten Rand aligned werden
-            // x = Math.PI => Schwarzer Strich
+        // x = INFINITY => Text soll mittig aligned werden
+        // x = -INFINITY => Text soll am rechten Rand aligned werden
+        // x = Math.PI => Schwarzer Strich
     }
 
     public Line(String line, double x, double lineAdd, Font font) {
@@ -34,7 +34,7 @@ public class Line {
         this.xAddon = 0;
     }
 
-    public Line(double x, double lineAdd){
+    public Line(double x, double lineAdd) {
         this.x = Math.PI;
         this.lineAdd = lineAdd;
     }

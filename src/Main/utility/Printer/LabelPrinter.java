@@ -1,4 +1,4 @@
-package Main.utility;
+package Main.utility.Printer;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;

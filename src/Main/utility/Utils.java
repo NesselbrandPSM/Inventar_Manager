@@ -67,6 +67,13 @@ public class Utils {
             case "Tastatur" -> ret = "has_keyboard";
             case "Zustand" -> ret = "c_status";
             case "Zustandsbemerkung" -> ret = "c_note";
+            case "E-Sim Nummer" -> ret = "esim_number";
+            case "E-Sim Pin" -> ret = "esim_pin";
+            case "Rufnummer" -> ret = "call_number";
+            case "Display Pin" -> ret = "display_pin";
+            case "Tarif" -> ret = "tariff";
+            case "Sim Nummer" -> ret = "sim_number";
+            case "Sim Pin" -> ret = "sim_pin";
         }
         return ret;
     }

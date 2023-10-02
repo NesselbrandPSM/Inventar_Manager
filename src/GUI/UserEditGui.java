@@ -2,7 +2,7 @@ package GUI;
 
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
-import Main.utility.ArbeitsmittelPrinter;
+import Main.utility.Printer.ArbeitsmittelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;

@@ -1,4 +1,8 @@
-package Main.utility;
+package Main.utility.Printer;
+
+import Main.utility.Constants;
+import Main.utility.UtilPrintables.IVObject;
+import Main.utility.UtilPrintables.Line;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +45,6 @@ public class ArbeitsmittelPrinter {
         private Font standardF;
         private Font paragraphF;
         private Font footF;
-        private ArrayList<String> paragraphs;
 
         private int xMargin;
         private int yMargin;
@@ -53,6 +56,7 @@ public class ArbeitsmittelPrinter {
         private static final String font = "Arial";
 
         ArrayList<ArrayList<Line>> pageLineList;
+        ArrayList<ArrayList<IVObject>> objectList;
 
         public void init() {
             titleF = new Font(font, Font.BOLD, 13);
@@ -220,6 +224,9 @@ public class ArbeitsmittelPrinter {
                 g.setColor(temp);
 
                 return PAGE_EXISTS;
+            } else if (pageIndex >= pageLineList.size() && pageIndex < objectList.size()) {
+
+                return NO_SUCH_PAGE;
             }
             return NO_SUCH_PAGE;
         }
