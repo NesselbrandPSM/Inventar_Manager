@@ -123,4 +123,24 @@ public class Utils {
         }
         return ret;
     }
+
+    public static String ivObjectToDisplayable(String s){
+        String ret = "";
+        switch (s){
+            case "modell" -> ret = "Modell:";
+            case "manufacturer" -> ret = "Hersteller:";
+            case "s_number" -> ret = "Seriennummer:";
+            case "c_status" -> ret = "Zustand:";
+            case "c_note" -> ret = "Zustandsbemerkung:";
+            case "esim_number" -> ret = "E-Sim Nummer:";
+            case "esim_pin" -> ret = "E-Sim Pin:";
+            case "call_number" -> ret = "Rufnummer:";
+            case "tariff" -> ret = "Tarif:";
+            case "sim_pin" -> ret = "Simkarten Pin:";
+            case "display_pin" -> ret = "Display Pin:";
+            case "name" -> ret = "Bezeichner:";
+            case "typ" -> ret = "Typ:";
+        }
+        return ret;
+    }
 }

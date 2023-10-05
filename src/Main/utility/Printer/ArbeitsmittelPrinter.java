@@ -4,6 +4,7 @@ import Main.utility.Constants;
 import Main.utility.UtilPrintables.IVObject;
 import Main.utility.UtilPrintables.IVObjectType;
 import Main.utility.UtilPrintables.Line;
+import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
@@ -284,7 +285,7 @@ public class ArbeitsmittelPrinter {
                             for (int i = 1; i < ob.values.length; i++) {
                                 if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
                                     y = (int) ((line * lineHeight) + yMargin);
-                                    g.drawString(ob.objectType.getAttributes()[i], x, y);
+                                    g.drawString(Utils.ivObjectToDisplayable(ob.objectType.getAttributes()[i]), x, y);
 
                                     if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn){
                                         String paragraph = ob.values[i];
@@ -345,7 +346,7 @@ public class ArbeitsmittelPrinter {
                             for (int i = 1; i < ob.values.length; i++) {
                                 if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
                                     y = (int) ((line * lineHeight) + yMargin);
-                                    g.drawString(ob.objectType.getAttributes()[i], x, y);
+                                    g.drawString(Utils.ivObjectToDisplayable(ob.objectType.getAttributes()[i]), x, y);
 
                                     if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn){
                                         String paragraph = ob.values[i];
