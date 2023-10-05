@@ -1,6 +1,5 @@
 package Main;
 
-import GUI.MainInputGui;
 import GUI.MainGui;
 import GUI.UserEditGui;
 import Main.utility.ADWrapper;
@@ -12,6 +11,10 @@ import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class Main {
     private SQLConnector connector;
@@ -19,7 +22,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "testing1";
+    private static final String startup_configuration = "main";
 
     public static Main m;
 
@@ -28,7 +31,7 @@ public class Main {
         m.init();
     }
 
-    private void init(){
+    private void init()  {
         Constants.init();
         ADWrapper.init();
         try {
@@ -47,15 +50,21 @@ public class Main {
                 mainGui.init();
             }
             case "testing1" -> {
-                ArbeitsmittelPrinter.print("Leonard Schmidt");
+                ArbeitsmittelPrinter.print("l.schmidt", 2);
             }
             case "testing2" -> {
                 UserEditGui gui = new UserEditGui();
                 gui.init();
             }
             case "testing3" -> {
-                MainInputGui gui = new MainInputGui();
-                gui.init();
+                try {
+                    URI uri = new URL("https://example.com").toURI();
+                    java.awt.Desktop.getDesktop().browse(uri);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
             }
             case "testing4" -> {
                 LabelPrinter.print("NB-0001");

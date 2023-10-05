@@ -1,6 +1,8 @@
 package SQL.Statements;
 
 import GUI.util.ColumNames;
+import Main.utility.UtilPrintables.IVObject;
+import Main.utility.UtilPrintables.IVObjectType;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.SQLStatement;
@@ -9,6 +11,8 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.RecursiveTask;
 
 public class SQLSelectStatements {
     public SQLSelectStatements(SQLConnector connector) {
@@ -723,6 +727,7 @@ public class SQLSelectStatements {
             case "monitor" -> ret.insert(0, "MO-");
             case "telephone" -> ret.insert(0, "TE-");
             case "desk" -> ret.insert(0, "DK-");
+            case "miscellaneous" -> ret.insert(0, "MC-");
         }
         return ret.toString();
     }
@@ -741,6 +746,21 @@ public class SQLSelectStatements {
             throw new RuntimeException(e);
         }
         return iv_numbers.toArray(new String[]{});
+    }
+
+    public String[] getTyps(){
+        ResultSet res = connector.query(new SQLStatement(
+                "select typ, p_key from misctype"
+        ));
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            while (res.next()) {
+                result.add(res.getString("typ"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toArray(new String[0]);
     }
 
     public String[] getStatusList() {
@@ -773,9 +793,24 @@ public class SQLSelectStatements {
         return result.toArray(new String[0]);
     }
 
-    public String[] getParagraphsList() {
+    public String[] getParagraphsList0() {
         ResultSet res = connector.query(new SQLStatement(
-                "select paragraph from paragraphen"
+                "select paragraph from paragraphen where typ = '0'"
+        ));
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            while (res.next()) {
+                result.add(res.getString("paragraph"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toArray(new String[0]);
+    }
+
+    public String[] getParagraphsList1() {
+        ResultSet res = connector.query(new SQLStatement(
+                "select paragraph from paragraphen where typ = '0'"
         ));
         ArrayList<String> result = new ArrayList<>();
         try {
@@ -814,5 +849,30 @@ public class SQLSelectStatements {
             e.printStackTrace();
         }
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    //@param name = benutzername eines users (z.B.: l.schmidt)
+    public ArrayList<IVObject> getUserObjects(String name) {
+        ArrayList<IVObject> objects = new ArrayList<>();
+
+        for (IVObjectType type : IVObjectType.values()) {
+            ResultSet res = connector.query(new SQLStatement(
+                    "select * from " + type.toString() + " where active = 1 and inventory_user_key = '" + name + "'"
+            ));
+
+            try {
+                while (res.next()) {
+                    ArrayList<String> resList = new ArrayList<>();
+                    for (String s : type.getAttributes()) {
+                        resList.add(String.valueOf(res.getObject(s)));
+                    }
+                    objects.add(new IVObject(resList.toArray(new String[0]), type));
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return objects;
     }
 }

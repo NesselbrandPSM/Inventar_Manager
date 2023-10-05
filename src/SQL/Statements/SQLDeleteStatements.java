@@ -11,7 +11,7 @@ public class SQLDeleteStatements {
     private SQLConnector connector;
 
     public void deleteTable(String table){
-        connector.query(new SQLStatement("delete from psm_inventory." + table));
+        connector.query(new SQLStatement("delete from usr_p530504_3." + table));
     }
 
     public void deleteUser(String name){

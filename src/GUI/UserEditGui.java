@@ -30,7 +30,10 @@ public class UserEditGui {
     private JButton inaktivButton;
     private JButton neuButton;
     private JButton löschenButton;
-    private JButton arbeitsmittelButton;
+    private JButton druckButton;
+    private JCheckBox überlassungCheckBox;
+    private JCheckBox homeOfficeCheckBox;
+    private JCheckBox arbeitsmittelCheckBox;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
@@ -89,12 +92,27 @@ public class UserEditGui {
                 }
             }
         });
-        arbeitsmittelButton.addActionListener(new ActionListener() {
+        druckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0]);
+                if (überlassungCheckBox.isSelected()){
+                    ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0], 0);
+                }
+                if (homeOfficeCheckBox.isSelected()){
+                    ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0], 1);
+                }
+                if (arbeitsmittelCheckBox.isSelected()){
+                    ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0], 2);
+                }
+                uncheckPrinterBoxes();
             }
         });
+    }
+
+    private void uncheckPrinterBoxes(){
+        arbeitsmittelCheckBox.setSelected(false);
+        homeOfficeCheckBox.setSelected(false);
+        überlassungCheckBox.setSelected(false);
     }
 
     private void changeStatus(int status) {

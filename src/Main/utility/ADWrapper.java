@@ -10,6 +10,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 

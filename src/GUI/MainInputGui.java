@@ -24,6 +24,7 @@ public class MainInputGui {
     private JButton abbrechenButton;
     private JPanel inputPanel;
     private JCheckBox DeskCheckBox;
+    private JCheckBox miscCheckBox;
 
     private Dockingstation_Form dockingstationForm;
     private Headset_Form headsetForm;
@@ -33,6 +34,7 @@ public class MainInputGui {
     private Scanner_Form scannerForm;
     private Telephone_Form telephoneForm;
     private Desk_Form deskForm;
+    private Miscellaneous_Form miscellaneousForm;
 
     private SQLSelectStatements sqlSelectStatements;
     private SQLInsertStatements sqlInsertStatements;
@@ -59,6 +61,7 @@ public class MainInputGui {
                 case "Monitor" -> show(monitorForm.getMonitorPanel());
                 case "Telephone" -> show(telephoneForm.getTelephonePanel());
                 case "Desk" -> show(deskForm.getDeskPanel());
+                case "Misc" -> show(miscellaneousForm.getPanel());
             }
         };
 
@@ -70,6 +73,7 @@ public class MainInputGui {
         MonitorCheckBox.addActionListener(listener);
         TelephoneCheckBox.addActionListener(listener);
         DeskCheckBox.addActionListener(listener);
+        miscCheckBox.addActionListener(listener);
 
         einfuegenButton.addActionListener(e -> inputEntry());
         abbrechenButton.addActionListener(e -> close());
@@ -99,6 +103,7 @@ public class MainInputGui {
                 case "monitor" -> sqlInsertStatements.inputMOEntry(monitorForm.getArgs(currentIVNumber));
                 case "telephone" -> sqlInsertStatements.inputTEEntry(telephoneForm.getArgs(currentIVNumber));
                 case "desk" -> sqlInsertStatements.inputDKEntry(deskForm.getArgs(currentIVNumber));
+                case "miscellaneous" -> sqlInsertStatements.inputMCEntry(miscellaneousForm.getArgs(currentIVNumber));
             }
         }
     }
@@ -127,6 +132,8 @@ public class MainInputGui {
         telephoneForm.getTelephonePanel().setName("telephone");
         deskForm = new Desk_Form();
         deskForm.getDeskPanel().setName("desk");
+        miscellaneousForm = new Miscellaneous_Form();
+        miscellaneousForm.getPanel().setName("miscellaneous");
     }
 
     public void init() {
@@ -151,6 +158,7 @@ public class MainInputGui {
         MonitorCheckBox.setSelected(false);
         TelephoneCheckBox.setSelected(false);
         DeskCheckBox.setSelected(false);
+        miscCheckBox.setSelected(false);
     }
 
     private void createUIComponents() {

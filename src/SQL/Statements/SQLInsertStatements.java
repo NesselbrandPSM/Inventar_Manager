@@ -14,6 +14,12 @@ public class SQLInsertStatements {
         connector.query(new SQLStatement(statement));
     }
 
+    public void insertTyp(String typ){
+        connector.query(new SQLStatement(
+                "insert into misctype (typ) values ('" + typ + "')"
+        ));
+    }
+
     public void inputPCEntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into pc (" +
@@ -246,6 +252,26 @@ public class SQLInsertStatements {
                         "'" + args[22] + "', " +
                         "'" + args[23] + "', " +
                         "'" + args[24] + "'" +
+                        ")"
+        );
+
+        System.out.println(s);
+        connector.query(s);
+    }
+
+    public void inputMCEntry(String[] args){
+        SQLStatement s = new SQLStatement(
+                "insert into miscellaneous (" +
+                        "iv_number, inventory_user_key, inventory_company_key, c_status, c_note, typ, name, note" +
+                        ") values (" +
+                        "'" + args[0] + "', " +
+                        "'" + args[1] + "', " +
+                        "'" + args[2] + "', " +
+                        "'" + args[3] + "', " +
+                        "'" + args[4] + "', " +
+                        "'" + args[5] + "', " +
+                        "'" + args[6] + "', " +
+                        "'" + args[7] + "'" +
                         ")"
         );
 
