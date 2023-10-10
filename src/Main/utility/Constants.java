@@ -27,4 +27,9 @@ public class Constants {
         SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         typs = sqlSelectStatements.getTyps();
     }
+
+    public static void refreshParagraphsHome(){
+        SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+        paragraphsHomeOffice = sqlSelectStatements.getParagraphsList1();
+    }
 }

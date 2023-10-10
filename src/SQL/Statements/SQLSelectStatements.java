@@ -895,7 +895,7 @@ public class SQLSelectStatements {
             result.add(res.getString(7)); //working_hours
             result.add(res.getString(8)); //working_days
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return result.toArray(new String[0]);
     }

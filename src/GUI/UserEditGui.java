@@ -103,7 +103,7 @@ public class UserEditGui {
             }
         });
         druckButton.addActionListener(e -> {
-            String name = ADWrapper.getFullName(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0]);
+            String name = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
             if (überlassungCheckBox.isSelected()){
                 ArbeitsmittelPrinter.print(name, 0);
             }

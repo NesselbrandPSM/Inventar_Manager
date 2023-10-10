@@ -14,9 +14,7 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.print.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 
@@ -298,6 +296,8 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitnehmer", xMargin, 0, standardF, 0, 0));
                     pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitgeber", width - getTextWidth("____________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
+
+                    Constants.refreshParagraphsHome();
                 }
                 case 2 -> {
                     int maxLines = 51;
