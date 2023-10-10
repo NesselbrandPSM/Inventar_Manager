@@ -392,11 +392,6 @@ public class SQLSelectStatements {
                         "where pc.pc_key = " + key
         ));
 
-        System.out.println(                "select * from pc " +
-                "join company on pc.inventory_company_key=company.company_key " +
-                "join user on pc.inventory_user_key=user.name " +
-                "where pc.pc_key = " + key);
-
         try {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
