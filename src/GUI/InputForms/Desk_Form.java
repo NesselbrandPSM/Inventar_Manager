@@ -158,7 +158,6 @@ public class Desk_Form {
         manufacturer.setText("");
         modell.setText("");
         s_number.setText("");
-        users.setSelectedIndex(0);
         purchaseDate.setText("");
         purchasePrice.setText("");
         warranty.setText("");

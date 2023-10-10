@@ -131,6 +131,7 @@ public class MainGui {
                 switch (selRow[0].substring(0, 2).toLowerCase()) {
                     case "pc" -> {
                         setTextField1(ColumNames.allAttributesPC);
+                        System.out.println(selRow[2]);
                         setTextField2(sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[2]))[0]);
                     }
                     case "pr" -> {
