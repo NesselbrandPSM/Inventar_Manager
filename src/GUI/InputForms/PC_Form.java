@@ -29,7 +29,6 @@ public class PC_Form {
     private JTextField purchaseDate;
     private JTextField purchasePrice;
     private JTextField warranty;
-    private JComboBox users;
     private JComboBox companys;
     public JTextField dguv;
     private JComboBox status;
@@ -45,7 +44,6 @@ public class PC_Form {
     private SQLSelectStatements sqlSelectStatements;
 
     private String[][] companySet;
-    private String[][] userSet;
 
     public PC_Form() {
         sqlConnector = new SQLConnector();
@@ -60,15 +58,8 @@ public class PC_Form {
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
         }
-        users.removeAllItems();
-        userSet = sqlSelectStatements.getAllUsers();
-        String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(" - "));
-        for (String s : usersArr) {
-            users.addItem(new ComboBoxItem(s));
-        }
 
-        for (String s : Constants.conditionList){
+        for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
 
@@ -76,7 +67,7 @@ public class PC_Form {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             uncheckBoxes();
             checkBox.setSelected(true);
-            switch (checkBox.getText()){
+            switch (checkBox.getText()) {
                 case "PC" -> pcType = "PC";
                 case "Laptop" -> pcType = "NB";
                 case "Tablet" -> pcType = "TB";
@@ -98,20 +89,9 @@ public class PC_Form {
                 }
             }
         });
-        users.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                users.removeAllItems();
-                String[] usersArr = userSet[0];
-                users.addItem(new ComboBoxItem(""));
-                for (String s : usersArr) {
-                    users.addItem(new ComboBoxItem(s));
-                }
-            }
-        });
     }
 
-    private void uncheckBoxes(){
+    private void uncheckBoxes() {
         laptopCheckBox.setSelected(false);
         PCCheckBox.setSelected(false);
         tabletCheckBox.setSelected(false);
@@ -151,21 +131,12 @@ public class PC_Form {
 
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
-            if (currentComp.equals(companySet[0][i])){
+            if (currentComp.equals(companySet[0][i])) {
                 args.add(companySet[1][i]);
             }
         }
-        boolean hasUser = false;
-        String currentUser = users.getSelectedItem().toString();
-        for (int x = 0; x < userSet[0].length; x++) {
-            if (currentUser.equals(userSet[0][x])){
-                args.add(userSet[0][x]);
-                hasUser = true;
-            }
-        }
-        if (!hasUser){
-            args.add("-1");
-        }
+
+        args.add("-1");
 
         args.add(purchaseDate.getText());
         args.add(purchasePrice.getText());
@@ -178,7 +149,7 @@ public class PC_Form {
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
-            if (arguments[j].equals("")){
+            if (arguments[j].equals("")) {
                 arguments[j] = " - ";
             }
         }
@@ -187,7 +158,7 @@ public class PC_Form {
         return arguments;
     }
 
-    private void resetInputFields(){
+    private void resetInputFields() {
         uncheckBoxes();
         manufacturer.setText("");
         modell.setText("");

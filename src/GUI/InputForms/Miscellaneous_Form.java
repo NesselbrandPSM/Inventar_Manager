@@ -15,7 +15,6 @@ public class Miscellaneous_Form {
     private JPanel mcPanel;
     private JComboBox status;
     private JComboBox condition;
-    private JComboBox users;
     private JTextArea conditionNote;
     private JButton newButton;
     private JComboBox type;
@@ -24,7 +23,6 @@ public class Miscellaneous_Form {
     private JTextArea note;
 
     private String[][] companySet;
-    private String[][] userSet;
 
     private SQLConnector sqlConnector;
     private SQLSelectStatements sqlSelectStatements;
@@ -35,7 +33,7 @@ public class Miscellaneous_Form {
         sqlSelectStatements = new SQLSelectStatements(sqlConnector);
         sqlInsertStatements = new SQLInsertStatements(sqlConnector);
 
-        for (String s : Constants.typs){
+        for (String s : Constants.typs) {
             type.addItem(new ComboBoxItem(s));
         }
 
@@ -48,15 +46,8 @@ public class Miscellaneous_Form {
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
         }
-        users.removeAllItems();
-        userSet = sqlSelectStatements.getAllUsers();
-        String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(" - "));
-        for (String s : usersArr) {
-            users.addItem(new ComboBoxItem(s));
-        }
 
-        for (String s : Constants.conditionList){
+        for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
 
@@ -65,11 +56,11 @@ public class Miscellaneous_Form {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String m = JOptionPane.showInputDialog("Neuen Typ hinzufügen:");
-                if (m != null){
+                if (m != null) {
                     sqlInsertStatements.insertTyp(m);
                     Constants.refreshTyp();
                     type.removeAllItems();
-                    for (String s : Constants.typs){
+                    for (String s : Constants.typs) {
                         type.addItem(new ComboBoxItem(s));
                     }
                 }
@@ -77,29 +68,20 @@ public class Miscellaneous_Form {
         });
     }
 
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         return mcPanel;
     }
 
-    public String[] getArgs(String iv_number){
+    public String[] getArgs(String iv_number) {
         ArrayList<String> args = new ArrayList<>();
 
         args.add(iv_number);
 
-        boolean hasUser = false;
-        String currentUser = users.getSelectedItem().toString();
-        for (int x = 0; x < userSet[0].length; x++) {
-            if (currentUser.equals(userSet[0][x])){
-                args.add(userSet[0][x]);
-                hasUser = true;
-            }
-        }
-        if (!hasUser){
-            args.add("-1");
-        }
+        args.add("-1");
+
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
-            if (currentComp.equals(companySet[0][i])){
+            if (currentComp.equals(companySet[0][i])) {
                 args.add(companySet[1][i]);
             }
         }
@@ -111,11 +93,10 @@ public class Miscellaneous_Form {
         args.add(note.getText());
 
 
-
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
-            if (arguments[j].equals("")){
+            if (arguments[j].equals("")) {
                 arguments[j] = " - ";
             }
         }
@@ -124,7 +105,7 @@ public class Miscellaneous_Form {
         return arguments;
     }
 
-    private void resetInputFields(){
+    private void resetInputFields() {
         conditionNote.setText("");
         name.setText("");
         note.setText("");

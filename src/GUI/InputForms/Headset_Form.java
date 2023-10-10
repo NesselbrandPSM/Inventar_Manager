@@ -19,7 +19,6 @@ public class Headset_Form {
     private JTextField purchaseDate;
     private JTextField purchasePrice;
     private JTextField warranty;
-    private JComboBox users;
     private JTextField dguv;
     private JComboBox status;
     private JComboBox condition;
@@ -29,12 +28,11 @@ public class Headset_Form {
     private SQLSelectStatements sqlSelectStatements;
 
     private String[][] companySet;
-    private String[][] userSet;
 
     public Headset_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
-        for (String s : Constants.conditionList){
+        for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
 
@@ -47,13 +45,6 @@ public class Headset_Form {
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
         }
-        users.removeAllItems();
-        userSet = sqlSelectStatements.getAllUsers();
-        String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(" - "));
-        for (String s : usersArr) {
-            users.addItem(new ComboBoxItem(s));
-        }
 
         companys.addFocusListener(new FocusAdapter() {
             @Override
@@ -62,17 +53,6 @@ public class Headset_Form {
                 String[] companysArr = companySet[0];
                 for (String s : companysArr) {
                     companys.addItem(new ComboBoxItem(s));
-                }
-            }
-        });
-        users.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                users.removeAllItems();
-                String[] usersArr = userSet[0];
-                users.addItem(new ComboBoxItem(""));
-                for (String s : usersArr) {
-                    users.addItem(new ComboBoxItem(s));
                 }
             }
         });
@@ -94,7 +74,7 @@ public class Headset_Form {
 
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
-            if (currentComp.equals(companySet[0][i])){
+            if (currentComp.equals(companySet[0][i])) {
                 args.add(companySet[1][i]);
             }
         }
@@ -103,17 +83,7 @@ public class Headset_Form {
         args.add(purchasePrice.getText());
         args.add(warranty.getText());
 
-        boolean hasUser = false;
-        String currentUser = users.getSelectedItem().toString();
-        for (int x = 0; x < userSet[0].length; x++) {
-            if (currentUser.equals(userSet[0][x])){
-                args.add(userSet[0][x]);
-                hasUser = true;
-            }
-        }
-        if (!hasUser){
-            args.add("-1");
-        }
+        args.add("-1");
 
         args.add(note.getText());
         args.add(condition.getSelectedItem().toString());
@@ -122,7 +92,7 @@ public class Headset_Form {
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
-            if (arguments[j].equals("")){
+            if (arguments[j].equals("")) {
                 arguments[j] = " - ";
             }
         }
@@ -131,7 +101,7 @@ public class Headset_Form {
         return arguments;
     }
 
-    private void resetInputFields(){
+    private void resetInputFields() {
         manufacturer.setText("");
         modell.setText("");
         s_number.setText("");

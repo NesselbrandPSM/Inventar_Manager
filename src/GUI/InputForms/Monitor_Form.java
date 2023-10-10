@@ -20,7 +20,6 @@ public class Monitor_Form {
     private JTextField purchaseDate;
     private JTextField purchasePrice;
     private JTextField warranty;
-    private JComboBox users;
     private JTextField hdmi;
     private JTextField dp;
     private JTextField dvi;
@@ -34,12 +33,11 @@ public class Monitor_Form {
     private SQLSelectStatements sqlSelectStatements;
 
     private String[][] companySet;
-    private String[][] userSet;
 
     public Monitor_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
 
-        for (String s : Constants.conditionList){
+        for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
 
@@ -51,13 +49,6 @@ public class Monitor_Form {
         String[] companysArr = companySet[0];
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
-        }
-        users.removeAllItems();
-        userSet = sqlSelectStatements.getAllUsers();
-        String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(" - "));
-        for (String s : usersArr) {
-            users.addItem(new ComboBoxItem(s));
         }
 
         companys.addFocusListener(new FocusAdapter() {
@@ -71,18 +62,6 @@ public class Monitor_Form {
                 }
             }
         });
-        users.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                users.removeAllItems();
-                userSet = sqlSelectStatements.getAllUsers();
-                String[] usersArr = userSet[0];
-                users.addItem(new ComboBoxItem(""));
-                for (String s : usersArr) {
-                    users.addItem(new ComboBoxItem(s));
-                }
-            }
-        });
     }
 
     public String[] getArgs(String currentIVNumber) {
@@ -90,25 +69,16 @@ public class Monitor_Form {
 
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
-            if (currentComp.equals(companySet[0][i])){
+            if (currentComp.equals(companySet[0][i])) {
                 args.add(companySet[1][i]);
             }
         }
-        boolean hasUser = false;
-        String currentUser = users.getSelectedItem().toString();
-        for (int x = 0; x < userSet[0].length; x++) {
-            if (currentUser.equals(userSet[0][x])){
-                args.add(userSet[0][x]);
-                hasUser = true;
-            }
-        }
-        if (!hasUser){
-            args.add("-1");
-        }
+
+        args.add("-1");
 
         args.add(manufacturer.getText());
         args.add(s_number.getText());
-        args.add( status.getSelectedItem().toString());
+        args.add(status.getSelectedItem().toString());
         args.add(dguv.getText());
         args.add(resolution.getText());
         args.add(currentIVNumber);
@@ -127,7 +97,7 @@ public class Monitor_Form {
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
-            if (arguments[j].equals("")){
+            if (arguments[j].equals("")) {
                 arguments[j] = " - ";
             }
         }
@@ -136,7 +106,7 @@ public class Monitor_Form {
         return arguments;
     }
 
-    private void resetInputFields(){
+    private void resetInputFields() {
         manufacturer.setText("");
         modell.setText("");
         s_number.setText("");

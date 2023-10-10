@@ -20,7 +20,6 @@ public class Dockingstation_Form {
     private JTextField purchasePrice;
     private JTextField warranty;
     private JTextField dguv;
-    private JComboBox users;
     private JComboBox status;
     private JComboBox condition;
     private JTextArea note;
@@ -29,7 +28,6 @@ public class Dockingstation_Form {
     private SQLSelectStatements sqlSelectStatements;
 
     private String[][] companySet;
-    private String[][] userSet;
 
     public Dockingstation_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
@@ -43,15 +41,8 @@ public class Dockingstation_Form {
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
         }
-        users.removeAllItems();
-        userSet = sqlSelectStatements.getAllUsers();
-        String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(" - "));
-        for (String s : usersArr) {
-            users.addItem(new ComboBoxItem(s));
-        }
 
-        for (String s : Constants.conditionList){
+        for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
 
@@ -65,17 +56,6 @@ public class Dockingstation_Form {
                 }
             }
         });
-        users.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                users.removeAllItems();
-                String[] usersArr = userSet[0];
-                users.addItem(new ComboBoxItem(""));
-                for (String s : usersArr) {
-                    users.addItem(new ComboBoxItem(s));
-                }
-            }
-        });
     }
 
     public String[] getArgs(String currentIVNumber) {
@@ -83,25 +63,15 @@ public class Dockingstation_Form {
 
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
-            if (currentComp.equals(companySet[0][i])){
+            if (currentComp.equals(companySet[0][i])) {
                 args.add(companySet[1][i]);
             }
         }
-        boolean hasUser = false;
-        String currentUser = users.getSelectedItem().toString();
-        for (int x = 0; x < userSet[0].length; x++) {
-            if (currentUser.equals(userSet[0][x])){
-                args.add(userSet[0][x]);
-                hasUser = true;
-            }
-        }
-        if (!hasUser){
-            args.add("-1");
-        }
+        args.add("-1");
 
         args.add(currentIVNumber);
         args.add(manufacturer.getText());
-        args.add( status.getSelectedItem().toString());
+        args.add(status.getSelectedItem().toString());
         args.add(modell.getText());
         args.add(dguv.getText());
         args.add(s_number.getText());

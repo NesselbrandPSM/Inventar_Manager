@@ -17,7 +17,6 @@ public class Desk_Form {
     private JTextField manufacturer;
     private JTextField modell;
     private JTextField s_number;
-    private JComboBox users;
     private JTextField purchaseDate;
     private JTextField purchasePrice;
     private JTextField warranty;
@@ -39,13 +38,12 @@ public class Desk_Form {
     private SQLSelectStatements sqlSelectStatements;
 
     private String[][] companySet;
-    private String[][] userSet;
 
     public JPanel getDeskPanel() {
         return deskPanel;
     }
 
-    public Desk_Form(){
+    public Desk_Form() {
         sqlConnector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(sqlConnector);
 
@@ -57,13 +55,6 @@ public class Desk_Form {
         String[] companysArr = companySet[0];
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
-        }
-        users.removeAllItems();
-        userSet = sqlSelectStatements.getAllUsers();
-        String[] usersArr = userSet[0];
-        users.addItem(new ComboBoxItem(" - "));
-        for (String s : usersArr) {
-            users.addItem(new ComboBoxItem(s));
         }
 
         String[] ivNumbers = sqlSelectStatements.getAllIV_Numbers("pc");
@@ -99,7 +90,7 @@ public class Desk_Form {
             dsIVNumberBox.addItem(new ComboBoxItem(s));
         }
 
-        for (String s : Constants.conditionList){
+        for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
     }
@@ -109,21 +100,12 @@ public class Desk_Form {
 
         String currentComp = companys.getSelectedItem().toString();
         for (int i = 0; i < companySet[0].length; i++) {
-            if (currentComp.equals(companySet[0][i])){
+            if (currentComp.equals(companySet[0][i])) {
                 args.add(companySet[1][i]);
             }
         }
-        boolean hasUser = false;
-        String currentUser = users.getSelectedItem().toString();
-        for (int x = 0; x < userSet[0].length; x++) {
-            if (currentUser.equals(userSet[0][x])){
-                args.add(userSet[0][x]);
-                hasUser = true;
-            }
-        }
-        if (!hasUser){
-            args.add("-1");
-        }
+
+        args.add("-1");
 
         args.add(status.getSelectedItem().toString());
         args.add(roomNBTextField.getText());
@@ -152,7 +134,7 @@ public class Desk_Form {
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
             arguments[j] = args.get(j);
-            if (arguments[j].equals("")){
+            if (arguments[j].equals("")) {
                 arguments[j] = " - ";
             }
         }
@@ -161,13 +143,13 @@ public class Desk_Form {
         return arguments;
     }
 
-    private void uncheckBoxes(){
+    private void uncheckBoxes() {
         hasKeyboardCheckBox.setSelected(false);
         hasMouseCheckBox.setSelected(false);
         deskShareCheckBox.setSelected(false);
     }
 
-    private void resetInputFields(){
+    private void resetInputFields() {
         uncheckBoxes();
         status.setSelectedIndex(0);
         companys.setSelectedIndex(0);
