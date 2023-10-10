@@ -9,10 +9,14 @@ import SQL.Statements.SQLSelectStatements;
 import SQL.Statements.SQLUpdateStatements;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserEditGui {
     private JPanel userEditPanel;
@@ -34,6 +38,10 @@ public class UserEditGui {
     private JCheckBox überlassungCheckBox;
     private JCheckBox homeOfficeCheckBox;
     private JCheckBox arbeitsmittelCheckBox;
+    private JTextArea addressArea;
+    private JTextArea hoursArea;
+    private JTextArea daysArea;
+    private JButton editButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
@@ -41,6 +49,8 @@ public class UserEditGui {
     private SQLSelectStatements sqlSelectStatements;
     private SQLUpdateStatements sqlUpdateStatements;
     private SQLDeleteStatements sqlDeleteStatements;
+
+    private static int userDataEditState = 0;
 
     public UserEditGui() {
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
@@ -92,19 +102,84 @@ public class UserEditGui {
                 }
             }
         });
-        druckButton.addActionListener(new ActionListener() {
+        druckButton.addActionListener(e -> {
+            String name = ADWrapper.getFullName(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0]);
+            if (überlassungCheckBox.isSelected()){
+                ArbeitsmittelPrinter.print(name, 0);
+            }
+            if (homeOfficeCheckBox.isSelected()){
+                ArbeitsmittelPrinter.print(name, 1);
+            }
+            if (arbeitsmittelCheckBox.isSelected()){
+                ArbeitsmittelPrinter.print(name, 2);
+            }
+            uncheckPrinterBoxes();
+        });
+
+        ListSelectionModel selectionModel = userTable.getSelectionModel();
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = userTable.getSelectedRow();
+                if (selectedRow >= 0){
+                    String userName = userTableModell.getRow(selectedRow)[0].toString();
+                    String[] data = sqlSelectStatements.getUserInfos(userName);
+                    for (int i = 0; i < data.length; i++) {
+                        if (data[i] == null){
+                            data[i] = " - ";
+                        } else if (data[i].equals("")){
+                            data[i] = " - ";
+                        }
+                    }
+                    addressArea.setText(data[2]);
+                    hoursArea.setText(data[3]);
+                    daysArea.setText(data[4]);
+                }
+            }
+        });
+        editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (überlassungCheckBox.isSelected()){
-                    ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0], 0);
+                System.out.println(userDataEditState);
+                if (userDataEditState == 0){
+                    userDataEditState = 1;
+                    addressArea.setEnabled(true);
+                    addressArea.setEditable(true);
+                    hoursArea.setEnabled(true);
+                    hoursArea.setEditable(true);
+                    daysArea.setEditable(true);
+                    daysArea.setEnabled(true);
+
+                    addressArea.setForeground(Color.RED);
+                    hoursArea.setForeground(Color.RED);
+                    daysArea.setForeground(Color.RED);
+
+                    editButton.setForeground(Color.RED);
+
+                    editButton.setText("Fertig");
+                } else if (userDataEditState == 1){
+                    String[] updateData  = new String[3];
+                    updateData[0] = addressArea.getText();
+                    updateData[1] = hoursArea.getText();
+                    updateData[2] = daysArea.getText();
+
+                    sqlUpdateStatements.updateUserData(userTableModell.getRow(userTable.getSelectedRow())[0].toString(), updateData);
+
+                    userDataEditState = 0;
+                    editButton.setText("Edit");
+                    addressArea.setEnabled(false);
+                    addressArea.setEditable(false);
+                    hoursArea.setEnabled(false);
+                    hoursArea.setEditable(false);
+                    daysArea.setEditable(false);
+                    daysArea.setEnabled(false);
+
+                    addressArea.setForeground(Color.black);
+                    hoursArea.setForeground(Color.black);
+                    daysArea.setForeground(Color.black);
+
+                    editButton.setForeground(Color.BLACK);
                 }
-                if (homeOfficeCheckBox.isSelected()){
-                    ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0], 1);
-                }
-                if (arbeitsmittelCheckBox.isSelected()){
-                    ArbeitsmittelPrinter.print(((String[]) userTableModell.getRow(userTable.getSelectedRow()))[0], 2);
-                }
-                uncheckPrinterBoxes();
             }
         });
     }

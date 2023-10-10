@@ -3,11 +3,14 @@ package Main.utility;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
+import java.util.Arrays;
+
 public class Constants {
 
     public static String[] statusList;
     public static String[] conditionList;
-    public static String[] paragraphs;
+    public static String[] paragraphsUeberlassung;
+    public static String[][] paragraphsHomeOffice;
     public static String[] typs;
 
     public static void init(){
@@ -15,8 +18,9 @@ public class Constants {
 
         statusList = sqlSelectStatements.getStatusList();
         conditionList = sqlSelectStatements.getConditionList();
-        paragraphs = sqlSelectStatements.getParagraphsList0();
+        paragraphsUeberlassung = sqlSelectStatements.getParagraphsList0();
         typs = sqlSelectStatements.getTyps();
+        paragraphsHomeOffice = sqlSelectStatements.getParagraphsList1();
     }
 
     public static void refreshTyp(){

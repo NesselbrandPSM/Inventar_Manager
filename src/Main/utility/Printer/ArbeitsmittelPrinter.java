@@ -1,19 +1,23 @@
 package Main.utility.Printer;
 
+import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.UtilPrintables.IVObject;
-import Main.utility.UtilPrintables.IVObjectType;
 import Main.utility.UtilPrintables.Line;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
+import javax.imageio.metadata.IIOMetadataFormatImpl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.print.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 
 public class ArbeitsmittelPrinter {
@@ -53,6 +57,9 @@ public class ArbeitsmittelPrinter {
         private Font tableHeaderF;
         private Font tableF;
 
+        private Font bigF;
+        private Font mediumF;
+
         private int xMargin;
         private int yMargin;
         private int lineHeight;
@@ -66,6 +73,8 @@ public class ArbeitsmittelPrinter {
 
         private final int max_width_secondColumn = 290;
 
+        private SQLSelectStatements sqlSelectStatements;
+
         ArrayList<ArrayList<Line>> pageLineList;
         ArrayList<ArrayList<IVObject>> objectPageList;
 
@@ -74,6 +83,8 @@ public class ArbeitsmittelPrinter {
         // 2 -> Arbeitsmittelliste
         // 3 -> Arbeitsmittelliste mit Rueckgabe
         public void init(int flag) {
+            sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+
             this.flag = flag;
             titleF = new Font(font, Font.BOLD, 13);
             standardF = new Font(font, Font.PLAIN, 10);
@@ -81,6 +92,9 @@ public class ArbeitsmittelPrinter {
             footF = new Font(font, Font.PLAIN, 7);
             tableHeaderF = new Font(font, Font.BOLD, 12);
             tableF = new Font(font, Font.PLAIN, 12);
+            bigF = new Font(font, Font.PLAIN, 28);
+            mediumF = new Font(font, Font.PLAIN, 19);
+
 
             xMargin = 40;
             yMargin = 60;
@@ -97,6 +111,7 @@ public class ArbeitsmittelPrinter {
                     pageLineList = new ArrayList<>();
                     //page 1 with default
                     pageLineList.add(new ArrayList<>());
+                    name = ADWrapper.getFullName(name);
                     pageLineList.get(0).add(new Line("Überlassung von Arbeitsmitteln", Double.POSITIVE_INFINITY, 4, titleF, 5, 0));
                     pageLineList.get(0).add(new Line("Zwischen", xMargin, 2, standardF));
                     pageLineList.get(0).add(new Line("Apocare GmbH - Im Gewerbepark 11, 96155 Buttenheim", xMargin + 10, 0, standardF));
@@ -110,8 +125,8 @@ public class ArbeitsmittelPrinter {
                     int paraIndex = 1;
                     int internalWidth = width - xMargin;
 
-                    for (int i = 0; i < Constants.paragraphs.length; i++) {
-                        String paragraphC = Constants.paragraphs[i];
+                    for (int i = 0; i < Constants.paragraphsUeberlassung.length; i++) {
+                        String paragraphC = Constants.paragraphsUeberlassung[i];
                         if ((2 + currentLine + calcParaLines(paragraphC, internalWidth, standardF)) < maxLines) {
                             pageLineList.get(page).add(new Line("§ " + paraIndex, xMargin, 2, paragraphF));
                             currentLine += 2;
@@ -150,13 +165,139 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Buttenheim, _____________", xMargin, 5, standardF));
                     pageLineList.get(page).add(new Line("________________________________", xMargin, 0, standardF));
                     pageLineList.get(page).add(new Line("________________________________", width - getTextWidth("________________________________", standardF) - 20, 1.5, standardF, 0, -10));
-                    pageLineList.get(page).add(new Line("Unterschrift Arbeitnemer", xMargin, 0, standardF));
+                    pageLineList.get(page).add(new Line("Unterschrift Arbeitnehmer", xMargin, 0, standardF));
                     pageLineList.get(page).add(new Line("Unterschrift Arbeitgeber", width - getTextWidth("________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
 
                 }
-                case 1 -> {
 
+                // Replacementitems:
+                    // - <<working_days>> => arbeitstage
+                    // - <<working_hours>> => arbeitszeit
+                    // - <<ret>> => zeilenumbruch
+                case 1 -> {
+                    String[] userData = sqlSelectStatements.getUserInfos(name);
+
+                    int maxLines = 76;
+                    int xAddon = 2;
+                    pageLineList = new ArrayList<>();
+                    //page 1 with default
+                    pageLineList.add(new ArrayList<>());
+                    pageLineList.get(0).add(new Line("Vereinbarung über zeitanteilige", Double.POSITIVE_INFINITY, 7.5, bigF, 40, xAddon));
+                    pageLineList.get(0).add(new Line("Arbeit im Homeoffice", Double.POSITIVE_INFINITY, 4, bigF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("- nachfolgend Homeoffice Vereinbarung genannt -", Double.POSITIVE_INFINITY, 5, mediumF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("Zwischen", Double.POSITIVE_INFINITY, 2.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("Apocare GmbH", Double.POSITIVE_INFINITY, 1.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("im Gewerbepark 11", Double.POSITIVE_INFINITY, 1.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("96158 Buttenheim", Double.POSITIVE_INFINITY, 2.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("- nachfolgend Arbeitgeber genannt -", Double.POSITIVE_INFINITY, 6, standardF, 0, xAddon));
+
+                    pageLineList.get(0).add(new Line("Und", Double.POSITIVE_INFINITY, 2.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line(ADWrapper.getFullName(name), Double.POSITIVE_INFINITY, 1.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line(userData[2], Double.POSITIVE_INFINITY, 2.5, standardF, 0, xAddon));
+                    pageLineList.get(0).add(new Line("- nachfolgend Arbeitnehmer/in genannt -", Double.POSITIVE_INFINITY, 2.5, standardF, 0, xAddon));
+
+
+                    double currentLine = 1;
+                    int page = 1;
+                    pageLineList.add(new ArrayList<>());
+                    int paraIndex = 0;
+                    int internalWidth = width - xMargin;
+
+                    String[][] paragraphsHO = Constants.paragraphsHomeOffice.clone();
+                    for (int i = 0; i < paragraphsHO.length; i++) {
+                        if (paragraphsHO[i][1].contains("<<working_days>>")){
+                            paragraphsHO[i][1] = paragraphsHO[i][1].replace("<<working_days>>", " " + userData[4] + " ");
+                        }
+                        if (paragraphsHO[i][1].contains("<<working_hours>>")){
+                            paragraphsHO[i][1] = paragraphsHO[i][1].replace("<<working_hours>>", " " + userData[3] + " ");
+                        }
+                    }
+
+                    for (int i = 0; i < paragraphsHO.length; i++) {
+                        String paragraphC = paragraphsHO[i][1];
+                        if ((2 + currentLine + calcParaLines(paragraphC, internalWidth, standardF)) < maxLines) {
+                            if (paraIndex == 0){
+                                pageLineList.get(page).add(new Line(paragraphsHO[i][0], xMargin, 2, paragraphF));
+                            } else {
+                                pageLineList.get(page).add(new Line("§ " + paraIndex + " " + paragraphsHO[i][0], xMargin, 2, paragraphF));
+                            }
+                            currentLine += 2;
+
+                            String paragraph = paragraphC;
+                            if (paragraph.contains("<<ret>>")){
+                                ArrayList<String> subparagraphList = new ArrayList<>();
+                                paragraph = paragraph.replaceAll("\n", "");
+                                while (paragraph.length() > 0){
+                                    subparagraphList.add(paragraph.substring(0, paragraph.indexOf("<<ret>>")));
+                                    paragraph = paragraph.substring(paragraph.indexOf("<<ret>>") + 7);
+                                    if (!paragraph.contains("<<ret>>")){
+                                        subparagraphList.add(paragraph);
+                                        paragraph = "";
+                                    }
+                                }
+                                String[] subparagraphs = subparagraphList.toArray(new String[0]);
+                                for (int j = 0; j < subparagraphs.length; j++) {
+                                    if(subparagraphs[j].indexOf(" ") == 0){
+                                        subparagraphs[j] = subparagraphs[j].substring(1);
+                                    }
+                                }
+                                subparagraphList.clear();
+                                Collections.addAll(subparagraphList, subparagraphs);
+
+                                for (String s : subparagraphList) {
+                                    while (s.length() > 0) {
+                                        String line = s;
+                                        while (getTextWidth(line, standardF) > internalWidth) {
+                                            line = line.substring(0, line.lastIndexOf(" "));
+                                        }
+                                        s = s.substring(line.length());
+                                        if (line.substring(0, 1).equals(" ")) {
+                                            line = line.substring(1);
+                                        }
+                                        pageLineList.get(page).add(new Line(line, xMargin, 1.3, standardF));
+                                        currentLine += 1.3;
+                                    }
+                                    pageLineList.get(page).get(pageLineList.get(page).size() - 1).lineAdd = 2;
+                                    currentLine += 0.7;
+                                }
+                            } else {
+                                while (paragraph.length() > 0) {
+                                    String line = paragraph;
+                                    while (getTextWidth(line, standardF) > internalWidth) {
+                                        line = line.substring(0, line.lastIndexOf(" "));
+                                    }
+                                    paragraph = paragraph.substring(line.length());
+                                    if (line.substring(0, 1).equals(" ")) {
+                                        line = line.substring(1);
+                                    }
+                                    pageLineList.get(page).add(new Line(line, xMargin, 1.3, standardF));
+                                    currentLine += 1.3;
+                                }
+                                pageLineList.get(page).get(pageLineList.get(page).size() - 1).lineAdd = 2;
+                                currentLine += 0.7;
+                            }
+                            paraIndex++;
+                        } else {
+                            pageLineList.add(new ArrayList<>());
+                            page++;
+                            currentLine = 1;
+                            i--;
+                        }
+                    }
+
+                    double tempLineAddon = 6.5;
+                    if ((currentLine + tempLineAddon) > maxLines) {
+                        page++;
+                        currentLine = 1;
+                        pageLineList.add(new ArrayList<>());
+                    }
+                    pageLineList.get(page).add(new Line("", xMargin, 5, standardF));
+                    pageLineList.get(page).add(new Line("____________________________________", xMargin, 0, standardF));
+                    pageLineList.get(page).add(new Line("____________________________________", width - getTextWidth("____________________________________", standardF) - 20, 1.5, standardF, 0, -10));
+                    pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitnehmer", xMargin, 0, standardF, 0, 0));
+                    pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitgeber", width - getTextWidth("____________________________________", standardF) - 20, 3, standardF, 0, -10));
+                    currentLine += tempLineAddon;
                 }
                 case 2 -> {
                     int maxLines = 51;
@@ -257,6 +398,70 @@ public class ArbeitsmittelPrinter {
                     return NO_SUCH_PAGE;
                 }
                 case 1 -> {
+                    int pagesGes = pageLineList.size();
+                    if (pageIndex == 0) {
+                        double line = 0;
+                        g.setFont(standardF);
+                        for (Line l : pageLineList.get(0)) {
+                            if (l.x == Math.PI) {
+                                int y = (int) ((line * lineHeight) + yMargin);
+                                g.drawLine(xMargin, y, width, y);
+                            } else {
+                                g.setFont(l.font);
+                                if (l.x == Double.POSITIVE_INFINITY) {
+                                    l.x = getXMiddle(l.line, g.getFontMetrics());
+                                } else if (l.x == Double.NEGATIVE_INFINITY) {
+                                    l.x = getXRight(l.line, g.getFontMetrics());
+                                }
+
+                                l.x += l.xAddon;
+                                int y = (int) ((line * lineHeight) + yMargin);
+                                g.drawString(l.line, (int) l.x, (int) (y + l.yAddon));
+                            }
+                            line += l.lineAdd;
+                        }
+                        //Footer
+                        g.setFont(footF);
+                        g.drawString("Homeoffice Vereinbarung", xMargin, height - 30);
+                        int showIndex = pageIndex + 1;
+                        g.drawString("Seite " + showIndex + "/" + pagesGes, (int) getXRight("Seite " + pageIndex + "/" + pagesGes, g.getFontMetrics()), height - 30);
+                        Color temp = g.getColor();
+                        g.setColor(new Color(169, 169, 169));
+                        g.drawLine(xMargin, height - 40, width, height - 40);
+                        g.setColor(temp);
+
+                        return PAGE_EXISTS;
+                    } else if (pageIndex > 0 && pageIndex < pageLineList.size()) {
+                        double line = 0;
+                        for (Line l : pageLineList.get(pageIndex)) {
+                            if (l.x == Math.PI) {
+                                int y = (int) ((line * lineHeight) + yMargin);
+                                g.drawLine(xMargin, y, width, y);
+                            } else {
+                                g.setFont(l.font);
+                                if (l.x == Double.POSITIVE_INFINITY) {
+                                    l.x = getXMiddle(l.line, g.getFontMetrics());
+                                } else if (l.x == Double.NEGATIVE_INFINITY) {
+                                    l.x = getXRight(l.line, g.getFontMetrics());
+                                }
+                                l.x += l.xAddon;
+                                int y = (int) ((line * lineHeight) + yMargin);
+                                g.drawString(l.line, (int) l.x, (int) (y + l.yAddon));
+                            }
+                            line += l.lineAdd;
+                        }
+                        //Footer
+                        g.setFont(footF);
+                        g.drawString("Homeoffice Vereinbarung", xMargin, height - 30);
+                        int showIndex = pageIndex + 1;
+                        g.drawString("Seite " + showIndex + "/" + pagesGes, (int) getXRight("Seite " + pageIndex + "/" + pagesGes, g.getFontMetrics()), height - 30);
+                        Color temp = g.getColor();
+                        g.setColor(new Color(169, 169, 169));
+                        g.drawLine(xMargin, height - 40, width, height - 40);
+                        g.setColor(temp);
+
+                        return PAGE_EXISTS;
+                    }
                     return NO_SUCH_PAGE;
                 }
                 case 2, 3 -> {

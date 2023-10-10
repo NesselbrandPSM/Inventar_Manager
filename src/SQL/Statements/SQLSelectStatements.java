@@ -808,19 +808,23 @@ public class SQLSelectStatements {
         return result.toArray(new String[0]);
     }
 
-    public String[] getParagraphsList1() {
+    public String[][] getParagraphsList1() {
         ResultSet res = connector.query(new SQLStatement(
-                "select paragraph from paragraphen where typ = '0'"
+                "select * from paragraphen where typ = '1'"
         ));
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
         try {
             while (res.next()) {
-                result.add(res.getString("paragraph"));
+                ArrayList<String> temp = new ArrayList<>();
+                temp.add(res.getString("title"));
+                temp.add(res.getString("paragraph"));
+                result.add(temp);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return result.toArray(new String[0]);
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(result);
     }
 
     public String[][] getCorospondingDesk(String iv_number) {
@@ -874,5 +878,25 @@ public class SQLSelectStatements {
         }
 
         return objects;
+    }
+
+    public String[] getUserInfos(String userName){
+        ResultSet res = connector.query(new SQLStatement(
+                "select * from user where name = '" + userName + "'"
+        ));
+
+        ArrayList<String> result = new ArrayList<>();
+        try {
+            res.next();
+
+            result.add(res.getString(2)); //username
+            result.add(res.getString(3)); //email
+            result.add(res.getString(6)); //address
+            result.add(res.getString(7)); //working_hours
+            result.add(res.getString(8)); //working_days
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toArray(new String[0]);
     }
 }

@@ -46,6 +46,32 @@ public class ADWrapper {
         }
     }
 
+    public static String getFullName(String userName){
+        try {
+            SearchControls searchControls = new SearchControls();
+            searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE); // Subtree durchsuchen
+
+            String searchBase = "DC=LCG,DC=LOCAL"; // Basis-DN des Active Directory
+            String searchFilter = "(objectClass=person)"; // Filter für Benutzer
+
+            NamingEnumeration<SearchResult> results = ctx.search(searchBase, searchFilter, searchControls);
+
+            SearchResult searchResult;
+            while ((searchResult = results.next()) != null) {
+                Attributes attrs = searchResult.getAttributes();
+                Attribute accountName = attrs.get("sAMAccountName");
+
+                if (accountName.get().toString().equals(userName)){
+                    String name = attrs.get("name").toString();
+                    return name.substring(name.indexOf(" "));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static String[][] getUsers() {
         ArrayList<ArrayList<String>> users = new ArrayList<>();
         try {
@@ -76,6 +102,7 @@ public class ADWrapper {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return Utils.convertArrayList_ArrayList_StringTo2DArray(users);
     }

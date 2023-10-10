@@ -26,16 +26,24 @@
     <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
-    <rowspec value="top:10dlu:noGrow"/>
+    <rowspec value="top:13dlu:noGrow"/>
     <rowspec value="center:25px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
+    <rowspec value="top:0dlu:noGrow"/>
+    <rowspec value="center:35px:noGrow"/>
+    <rowspec value="top:0dlu:noGrow"/>
+    <rowspec value="center:min(m;100px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:20px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:20px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:d:grow"/>
+    <rowspec value="top:5dlu:noGrow"/>
+    <rowspec value="center:m:grow"/>
     <colspec value="fill:100px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:100px:noGrow"/>
@@ -60,14 +68,14 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:5px:noGrow"/>
     <constraints>
-      <xy x="22" y="24" width="1329" height="871"/>
+      <xy x="22" y="24" width="1329" height="920"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <scrollpane id="3b154" binding="userTableScrollPane">
         <constraints>
-          <grid row="2" column="0" row-span="33" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="41" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -201,7 +209,7 @@
       </component>
       <vspacer id="7d400">
         <constraints>
-          <grid row="32" column="16" row-span="3" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="42" column="16" row-span="1" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -223,7 +231,7 @@
       <component id="6a465" class="javax.swing.JSeparator">
         <constraints>
           <grid row="25" column="16" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <forms top="10" left="0" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+          <forms top="13" left="0" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
       </component>
@@ -295,6 +303,91 @@
         </constraints>
         <properties>
           <text value="Arbeitsmittel"/>
+        </properties>
+      </component>
+      <component id="4d57e" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="32" column="16" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="15" left="0" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="9341f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="34" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Addresse:"/>
+        </properties>
+      </component>
+      <component id="57af9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="36" column="16" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Arbeitsstunden:"/>
+        </properties>
+      </component>
+      <component id="72db5" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="38" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Arbeitstage:"/>
+        </properties>
+      </component>
+      <component id="a0564" class="javax.swing.JTextArea" binding="addressArea">
+        <constraints>
+          <grid row="34" column="18" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="2" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="false"/>
+          <lineWrap value="true"/>
+          <wrapStyleWord value="true"/>
+        </properties>
+      </component>
+      <component id="eb1cb" class="javax.swing.JTextArea" binding="hoursArea">
+        <constraints>
+          <grid row="36" column="18" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="false"/>
+          <lineWrap value="true"/>
+          <wrapStyleWord value="true"/>
+        </properties>
+      </component>
+      <component id="d167a" class="javax.swing.JTextArea" binding="daysArea">
+        <constraints>
+          <grid row="38" column="18" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <enabled value="false"/>
+          <lineWrap value="true"/>
+          <wrapStyleWord value="true"/>
+        </properties>
+      </component>
+      <component id="82efd" class="javax.swing.JButton" binding="editButton" default-binding="true">
+        <constraints>
+          <grid row="40" column="16" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="0" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Edit"/>
         </properties>
       </component>
     </children>

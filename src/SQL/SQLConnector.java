@@ -6,13 +6,13 @@ import java.sql.*;
 
 public class SQLConnector {
 
-    private static final String URL = "jdbc:mysql://10.10.1.16:33063/psm_inventory";
-    private static final String USER = "psm_inventory";
-    private static final String PWD = "+e6.aYuqx4zzsz";
+//    private static final String URL = "jdbc:mysql://10.10.1.16:33063/psm_inventory";
+//    private static final String USER = "psm_inventory";
+//    private static final String PWD = "+e6.aYuqx4zzsz";
 
-//    private static final String URL = "jdbc:mysql://db1620.mydbserver.com/usr_p530504_3";
-//    private static final String USER = "p530504d1";
-//    private static final String PWD = "4*,mxzi8maGquf";
+    private static final String URL = "jdbc:mysql://db1620.mydbserver.com/usr_p530504_3";
+    private static final String USER = "p530504d1";
+    private static final String PWD = "4*,mxzi8maGquf";
 
     private Connection connection;
     private Statement statement;

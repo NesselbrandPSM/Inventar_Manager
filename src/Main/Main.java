@@ -22,7 +22,8 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
+    private static final String startup_configuration = "testing1";
+    //private static final String startup_configuration = "testing6";
 
     public static Main m;
 
@@ -31,7 +32,7 @@ public class Main {
         m.init();
     }
 
-    private void init()  {
+    private void init() {
         Constants.init();
         ADWrapper.init();
         try {
@@ -41,16 +42,16 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        switch (startup_configuration){
+        switch (startup_configuration) {
             case "main" -> {
                 connector = new SQLConnector();
                 sqlSelectStatements = new SQLSelectStatements(connector);
                 sqlDeleteStatements = new SQLDeleteStatements(connector);
-                mainGui= new MainGui(connector, sqlSelectStatements, sqlDeleteStatements);
+                mainGui = new MainGui(connector, sqlSelectStatements, sqlDeleteStatements);
                 mainGui.init();
             }
             case "testing1" -> {
-                ArbeitsmittelPrinter.print("l.schmidt", 2);
+                ArbeitsmittelPrinter.print("l.schmidt", 1);
             }
             case "testing2" -> {
                 UserEditGui gui = new UserEditGui();
@@ -68,6 +69,14 @@ public class Main {
             }
             case "testing4" -> {
                 LabelPrinter.print("NB-0001");
+            }
+            case "testing5" -> {
+                System.out.println(ADWrapper.getFullName("d.vitale"));
+            }
+            case "testing6" -> {
+                String s = "askdfj asdfjals aslkjfdjjdj<<ret>>";
+                if (s.substring(s.length() - 7).equals("<<ret>>")){
+                }
             }
         }
     }
