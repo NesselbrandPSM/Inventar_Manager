@@ -74,6 +74,7 @@ public class Utils {
             case "Tarif" -> ret = "tariff";
             case "Sim Nummer" -> ret = "sim_number";
             case "Sim Pin" -> ret = "sim_pin";
+            case "Letzte Änderung" -> ret = "last_modified";
         }
         return ret;
     }
