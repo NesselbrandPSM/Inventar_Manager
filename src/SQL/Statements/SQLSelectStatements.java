@@ -139,7 +139,7 @@ public class SQLSelectStatements {
             }
             //endregion
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
