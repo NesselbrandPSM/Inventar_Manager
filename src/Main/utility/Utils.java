@@ -110,7 +110,6 @@ public class Utils {
 
     public static String getTableFromShortCut(String shortCut){
         String ret = "";
-        System.out.println(shortCut);
         switch (shortCut.toLowerCase()){
             case "pc" -> ret = "pc";
             case "mo" -> ret = "monitor";

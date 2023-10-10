@@ -8,7 +8,6 @@ import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
-import javax.imageio.metadata.IIOMetadataFormatImpl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -92,7 +91,6 @@ public class ArbeitsmittelPrinter {
             tableF = new Font(font, Font.PLAIN, 12);
             bigF = new Font(font, Font.PLAIN, 28);
             mediumF = new Font(font, Font.PLAIN, 19);
-
 
             xMargin = 40;
             yMargin = 60;

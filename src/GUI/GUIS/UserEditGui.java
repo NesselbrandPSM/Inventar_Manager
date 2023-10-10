@@ -1,4 +1,4 @@
-package GUI;
+package GUI.GUIS;
 
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
@@ -15,8 +15,6 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class UserEditGui {
     private JPanel userEditPanel;

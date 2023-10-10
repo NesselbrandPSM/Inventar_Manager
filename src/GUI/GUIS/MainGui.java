@@ -1,4 +1,4 @@
-package GUI;
+package GUI.GUIS;
 
 import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
@@ -330,7 +330,7 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    //TODO edit
+                    //TODO bearbeiten
                 }
             }
         });

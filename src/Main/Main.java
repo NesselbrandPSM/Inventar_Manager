@@ -1,7 +1,7 @@
 package Main;
 
-import GUI.MainGui;
-import GUI.UserEditGui;
+import GUI.GUIS.MainGui;
+import GUI.GUIS.UserEditGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.Printer.ArbeitsmittelPrinter;
