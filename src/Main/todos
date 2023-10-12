@@ -7,3 +7,7 @@
  - //TODO Rückgegeben am + Unterschrift + wer angenommen hat bei Arbeitsmittelliste hinzufügen + neuer status + zustand
 
  - //TODO User vervollständigen
+
+ -------------------------------------------------------------------------------------------
+ Settings:
+  - standard status after loan of device (currently always: "in verwendung (homeoffice || am standort)"
