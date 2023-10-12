@@ -4,7 +4,7 @@
     <rowspec value="center:d:grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="48" y="54" width="927" height="623"/>
+      <xy x="48" y="54" width="458" height="623"/>
     </constraints>
     <properties/>
     <border type="none"/>
