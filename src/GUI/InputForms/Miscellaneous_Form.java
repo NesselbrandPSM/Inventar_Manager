@@ -87,6 +87,7 @@ public class Miscellaneous_Form {
         }
 
         args.add(status.getSelectedItem().toString());
+        args.add(condition.getSelectedItem().toString());
         args.add(conditionNote.getText());
         args.add(type.getSelectedItem().toString());
         args.add(name.getText());

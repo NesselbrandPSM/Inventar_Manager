@@ -262,7 +262,7 @@ public class SQLInsertStatements {
     public void inputMCEntry(String[] args){
         SQLStatement s = new SQLStatement(
                 "insert into miscellaneous (" +
-                        "iv_number, inventory_user_key, inventory_company_key, c_status, c_note, typ, name, note" +
+                        "iv_number, inventory_user_key, inventory_company_key, current_status, c_status, c_note, typ, name, note" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -271,11 +271,12 @@ public class SQLInsertStatements {
                         "'" + args[4] + "', " +
                         "'" + args[5] + "', " +
                         "'" + args[6] + "', " +
-                        "'" + args[7] + "'" +
+                        "'" + args[7] + "', " +
+                        "'" + args[8] + "'" +
                         ")"
         );
 
-        System.out.println(s);
+        System.out.println(s.getStatement());
         connector.query(s);
     }
 }

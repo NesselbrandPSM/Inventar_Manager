@@ -6,6 +6,7 @@ import Main.utility.UtilPrintables.IVObjectType;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.SQLStatement;
+import org.apache.commons.collections4.iterators.SingletonIterator;
 
 import javax.swing.*;
 import java.sql.ResultSet;
@@ -741,9 +742,9 @@ public class SQLSelectStatements {
         return getStrings(resultSet);
     }
 
-    public Collection<? extends String> getAllIV_NumbersActive(String table) {
+    public Collection<? extends String> getAllIV_NumbersActiveAndGiveable(String table) {
         ResultSet resultSet = connector.query(new SQLStatement(
-                "select iv_number from " + table + " where active = 1"
+                "select iv_number from " + table + " where active = 1 and current_status = 'edv eingelagert'"
         ));
         return List.of(getStrings(resultSet));
     }
@@ -760,7 +761,7 @@ public class SQLSelectStatements {
         return iv_numbers.toArray(new String[]{});
     }
 
-    public String[] getTyps(){
+    public String[] getTyps() {
         ResultSet res = connector.query(new SQLStatement(
                 "select typ, p_key from misctype"
         ));
@@ -892,7 +893,7 @@ public class SQLSelectStatements {
         return objects;
     }
 
-    public String[] getUserInfos(String userName){
+    public String[] getUserInfos(String userName) {
         ResultSet res = connector.query(new SQLStatement(
                 "select * from user where name = '" + userName + "'"
         ));
@@ -912,11 +913,11 @@ public class SQLSelectStatements {
         return result.toArray(new String[0]);
     }
 
-    public String[] getAllFreeEntrys(){
+    public String[] getAllFreeEntrys() {
         ArrayList<String> iv_numberList = new ArrayList<>();
 
         for (IVObjectType type : IVObjectType.values()) {
-            iv_numberList.addAll(getAllIV_NumbersActive(type.toString()));
+            iv_numberList.addAll(getAllIV_NumbersActiveAndGiveable(type.toString()));
         }
 
         return iv_numberList.toArray(new String[0]);

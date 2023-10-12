@@ -24,13 +24,13 @@
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:30px:noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:max(d;100px):grow"/>
+        <rowspec value="center:max(d;120px):grow"/>
         <rowspec value="top:5dlu:noGrow"/>
         <rowspec value="center:20px:noGrow"/>
         <rowspec value="top:0dlu:noGrow"/>
         <rowspec value="center:20px:noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:max(d;100px):grow"/>
+        <rowspec value="center:max(d;120px):grow"/>
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:40px:noGrow"/>
         <rowspec value="top:20px:noGrow"/>
