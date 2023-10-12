@@ -922,4 +922,25 @@ public class SQLSelectStatements {
 
         return iv_numberList.toArray(new String[0]);
     }
+
+    public String[] getUserAttributes(String userName){
+        ArrayList<String> attr = new ArrayList<>();
+
+        ResultSet res = connector.query(new SQLStatement(
+                "select * from user where name = '" + userName + "'"
+        ));
+
+        try {
+            res.next();
+            attr.add(res.getString("address"));
+            attr.add(res.getString("working_hours"));
+            attr.add(res.getString("working_days"));
+            attr.add(res.getString("homeoffice"));
+            attr.add(res.getString("entrytransfer"));
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+
+        return attr.toArray(new String[0]);
+    }
 }

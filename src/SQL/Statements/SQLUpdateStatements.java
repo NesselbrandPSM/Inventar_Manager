@@ -33,7 +33,14 @@ public class SQLUpdateStatements {
 
         sb.append("working_days = '");
         sb.append(data[2]);
-        sb.append("'");
+        sb.append("', ");
+
+        sb.append("homeoffice = ");
+        sb.append(data[3]);
+        sb.append(", ");
+
+        sb.append("entrytransfer = ");
+        sb.append(data[4]);
 
         sb.append(" where name = ");
         sb.append("'");

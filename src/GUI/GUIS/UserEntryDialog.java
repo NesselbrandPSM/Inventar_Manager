@@ -3,11 +3,13 @@ package GUI.GUIS;
 import Main.utility.UtilPrintables.IVObject;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
+import SQL.Statements.SQLUpdateStatements;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class UserEntryDialog extends JDialog {
     private JPanel contentPane;
@@ -23,20 +25,45 @@ public class UserEntryDialog extends JDialog {
     private JList userEntryList;
     private JButton toUserListButton;
     private JButton removeFromUserList;
+    private JTextArea workingDays;
+    private JTextArea workingHours;
+    private JCheckBox entryTransferCheckbox;
 
     private DefaultListModel<String> userEntryListModel;
     private DefaultListModel<String> arbeitsmittelListModel;
 
     private SQLSelectStatements sqlSelectStatements;
+    private SQLUpdateStatements sqlUpdateStatements;
 
     private ArrayList<String> addedIV_Numbers;
 
     public UserEntryDialog(String user) {
         addedIV_Numbers = new ArrayList<>();
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
+        sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        String[] userData = sqlSelectStatements.getUserAttributes(user);
+
+        if (userData[0] != null) {
+            streetNRField.setText(userData[0].substring(0, userData[0].indexOf(" | ")));
+            userData[0] = userData[0].substring(userData[0].indexOf(" | ") + 3);
+            plzField.setText(userData[0].substring(0, userData[0].indexOf(" | ")));
+            userData[0] = userData[0].substring(userData[0].indexOf(" | ") + 3);
+            cityField.setText(userData[0]);
+        }
+
+        workingHours.setText(userData[1]);
+        workingDays.setText(userData[2]);
+
+        if (Objects.equals(userData[3], "1")){
+            homeofficeCheckBox.setSelected(true);
+        }
+        if (Objects.equals(userData[4], "1")){
+            entryTransferCheckbox.setSelected(true);
+        }
 
         ArrayList<IVObject> userEntrys = sqlSelectStatements.getUserObjects(user);
         userEntryListModel = new DefaultListModel<>();
@@ -98,9 +125,9 @@ public class UserEntryDialog extends JDialog {
                         userEntryListModel.add(0, entrys[i]);
                         addedIV_Numbers.add(entrys[i]);
                     }
-
-                    arbeitsmittelList.setSelectedIndex(-1);
                 }
+                arbeitsmittelList.setSelectedIndex(-1);
+                userEntryList.setSelectedIndex(-1);
             }
         });
 
@@ -118,16 +145,34 @@ public class UserEntryDialog extends JDialog {
                         userEntryListModel.removeElement(s);
                         arbeitsmittelListModel.add(0, s);
                     } else {
-                        //TODO statusänderung von zurückgegebenen items
+                        //TODO statusänderung von zurückgegebenen items in liste mit sqlabfragen
                     }
                 }
             }
+            arbeitsmittelList.setSelectedIndex(-1);
+            userEntryList.setSelectedIndex(-1);
         });
     }
 
     private void onOK() {
-        //TODO user bearbeiten
         //TODO alle iv_nummern aus liste bearbeiten
+        String[] userData = new String[5];
+        userData[0] = streetNRField.getText() + " | " + plzField.getText() + " | " + cityField.getText();
+        userData[1] = workingHours.getText();
+        userData[2] = workingDays.getText();
+        if (homeofficeCheckBox.isSelected()){
+            userData[3] = "1";
+        } else {
+            userData[3] = "0";
+        }
+        if (entryTransferCheckbox.isSelected()){
+            userData[4] = "1";
+        } else {
+            userData[4] = "0";
+        }
+
+        sqlUpdateStatements.updateUserData(userlabel.getText(), userData);
+
         dispose();
     }
 
