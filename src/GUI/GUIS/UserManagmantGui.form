@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.GUIS.UserEditGui">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.GUIS.UserManagmantGui">
   <grid id="27dc6" binding="userEditPanel" layout-manager="FormLayout">
     <rowspec value="center:20px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
@@ -27,7 +27,7 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:13dlu:noGrow"/>
-    <rowspec value="center:25px:noGrow"/>
+    <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
@@ -209,7 +209,7 @@
       </component>
       <vspacer id="7d400">
         <constraints>
-          <grid row="42" column="16" row-span="1" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="32" column="16" row-span="11" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -244,150 +244,13 @@
           <text value="Drucken"/>
         </properties>
       </component>
-      <component id="14c56" class="javax.swing.JCheckBox" binding="überlassungCheckBox" default-binding="true">
+      <component id="5e6ff" class="javax.swing.JButton" binding="nutzerBearbeitenButton" default-binding="true">
         <constraints>
-          <grid row="26" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms top="10" left="0" bottom="0" right="0"/>
-        </constraints>
-        <properties>
-          <horizontalAlignment value="0"/>
-          <horizontalTextPosition value="0"/>
-          <label value=""/>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="5e792" class="javax.swing.JCheckBox" binding="homeOfficeCheckBox">
-        <constraints>
-          <grid row="26" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms top="10" left="0" bottom="0" right="0"/>
-        </constraints>
-        <properties>
-          <horizontalAlignment value="0"/>
-          <label value=""/>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="a54ab" class="javax.swing.JCheckBox" binding="arbeitsmittelCheckBox">
-        <constraints>
-          <grid row="26" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms top="10" left="0" bottom="0" right="0"/>
-        </constraints>
-        <properties>
-          <horizontalAlignment value="0"/>
-          <label value=""/>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="db317" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="28" column="16" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Überlassung"/>
-        </properties>
-      </component>
-      <component id="2b41b" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="28" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="HomeOffice"/>
-        </properties>
-      </component>
-      <component id="f859b" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="28" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-horz="false"/>
-        </constraints>
-        <properties>
-          <text value="Arbeitsmittel"/>
-        </properties>
-      </component>
-      <component id="4d57e" class="javax.swing.JSeparator">
-        <constraints>
-          <grid row="32" column="16" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <forms top="15" left="0" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="9341f" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="34" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="Addresse:"/>
-        </properties>
-      </component>
-      <component id="57af9" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="36" column="16" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="Arbeitsstunden:"/>
-        </properties>
-      </component>
-      <component id="72db5" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="38" column="16" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <text value="Arbeitstage:"/>
-        </properties>
-      </component>
-      <component id="a0564" class="javax.swing.JTextArea" binding="addressArea">
-        <constraints>
-          <grid row="34" column="18" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="2" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <enabled value="false"/>
-          <lineWrap value="true"/>
-          <wrapStyleWord value="true"/>
-        </properties>
-      </component>
-      <component id="eb1cb" class="javax.swing.JTextArea" binding="hoursArea">
-        <constraints>
-          <grid row="36" column="18" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <enabled value="false"/>
-          <lineWrap value="true"/>
-          <wrapStyleWord value="true"/>
-        </properties>
-      </component>
-      <component id="d167a" class="javax.swing.JTextArea" binding="daysArea">
-        <constraints>
-          <grid row="38" column="18" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <enabled value="false"/>
-          <lineWrap value="true"/>
-          <wrapStyleWord value="true"/>
-        </properties>
-      </component>
-      <component id="82efd" class="javax.swing.JButton" binding="editButton" default-binding="true">
-        <constraints>
-          <grid row="40" column="16" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="26" column="16" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="10" left="0" bottom="0" right="10" defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <text value="Edit"/>
+          <text value="Nutzer Bearbeiten"/>
         </properties>
       </component>
     </children>

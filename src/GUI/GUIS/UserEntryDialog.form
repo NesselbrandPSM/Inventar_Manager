@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.GUIS.UserEntryDialog">
+  <grid id="cbd77" binding="contentPane" layout-manager="FormLayout">
+    <rowspec value="center:d:grow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="48" y="54" width="927" height="623"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="d8667" binding="panel1" layout-manager="FormLayout">
+        <rowspec value="center:40px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:10px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:20px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:20px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:20px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:30px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;100px):grow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:20px:noGrow"/>
+        <rowspec value="top:0dlu:noGrow"/>
+        <rowspec value="center:20px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;100px):grow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:40px:noGrow"/>
+        <rowspec value="top:20px:noGrow"/>
+        <rowspec value="center:max(d;0px):noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:5dlu:noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:2dlu:noGrow"/>
+        <colspec value="fill:40px:noGrow"/>
+        <colspec value="left:2dlu:noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:5dlu:noGrow"/>
+        <colspec value="fill:85px:noGrow"/>
+        <colspec value="left:5dlu:noGrow"/>
+        <colspec value="fill:max(m;0px):grow"/>
+        <colspec value="left:5dlu:noGrow"/>
+        <colspec value="fill:30px:noGrow"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="10" bottom="5" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none" title="">
+          <title-color color="-2104859"/>
+        </border>
+        <children>
+          <component id="83df4" class="javax.swing.JButton" binding="buttonOK">
+            <constraints>
+              <grid row="22" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms top="10" left="10" bottom="0" right="10" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <text value="Einfügen"/>
+            </properties>
+          </component>
+          <component id="cfc4b" class="javax.swing.JButton" binding="buttonCancel">
+            <constraints>
+              <grid row="22" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms top="10" left="10" bottom="0" right="10" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <text value="Abbrechen"/>
+            </properties>
+          </component>
+          <component id="d791f" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="Nutzer:"/>
+            </properties>
+          </component>
+          <component id="cc506" class="javax.swing.JTextField" binding="userlabel">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <disabledTextColor color="-16777216"/>
+              <editable value="false"/>
+              <enabled value="false"/>
+            </properties>
+          </component>
+          <component id="8d5cf" class="javax.swing.JSeparator">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="12" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="3aa9c" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="Straße, Hausnummer:"/>
+            </properties>
+          </component>
+          <component id="2274d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="PLZ:"/>
+            </properties>
+          </component>
+          <component id="4c71a" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="Stadt:"/>
+            </properties>
+          </component>
+          <component id="96b5b" class="javax.swing.JTextArea" binding="streetNRField">
+            <constraints>
+              <grid row="4" column="6" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="9b9e0" class="javax.swing.JTextArea" binding="plzField">
+            <constraints>
+              <grid row="6" column="6" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="58e16" class="javax.swing.JTextArea" binding="cityField">
+            <constraints>
+              <grid row="8" column="6" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="d0410" class="javax.swing.JCheckBox" binding="homeofficeCheckBox" default-binding="true">
+            <constraints>
+              <grid row="10" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="9" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <horizontalTextPosition value="2"/>
+              <text value="Homeoffice:"/>
+            </properties>
+          </component>
+          <component id="4ea32" class="javax.swing.JCheckBox" default-binding="true">
+            <constraints>
+              <grid row="10" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="9" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <horizontalTextPosition value="2"/>
+              <text value="Überlassung:"/>
+            </properties>
+          </component>
+          <component id="7e1eb" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="12" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="10" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="Arbeitsmittelliste:"/>
+            </properties>
+          </component>
+          <component id="3f748" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="12" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="10" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="Überlassene Arbeitsmittel:"/>
+            </properties>
+          </component>
+          <scrollpane id="2b8c5">
+            <constraints>
+              <grid row="14" column="0" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="a2eb0" class="javax.swing.JList" binding="arbeitsmittelList">
+                <constraints/>
+                <properties>
+                  <model/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+          <scrollpane id="9773d">
+            <constraints>
+              <grid row="14" column="6" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="6e9a3" class="javax.swing.JList" binding="userEntryList">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+          <component id="efad6" class="javax.swing.JButton" binding="toUserListButton">
+            <constraints>
+              <grid row="16" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <borderPainted value="true"/>
+              <contentAreaFilled value="true"/>
+              <text value="&gt;"/>
+            </properties>
+          </component>
+          <component id="e817c" class="javax.swing.JButton" binding="removeFromUserList">
+            <constraints>
+              <grid row="18" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <borderPainted value="true"/>
+              <contentAreaFilled value="true"/>
+              <text value="&lt;"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

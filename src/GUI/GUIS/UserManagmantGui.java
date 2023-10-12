@@ -2,7 +2,6 @@ package GUI.GUIS;
 
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
-import Main.utility.Printer.ArbeitsmittelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
@@ -16,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserEditGui {
+public class UserManagmantGui {
     private JPanel userEditPanel;
     private JCheckBox aktivCheckBox;
     private JCheckBox neuCheckBox;
@@ -33,13 +32,7 @@ public class UserEditGui {
     private JButton neuButton;
     private JButton löschenButton;
     private JButton druckButton;
-    private JCheckBox überlassungCheckBox;
-    private JCheckBox homeOfficeCheckBox;
-    private JCheckBox arbeitsmittelCheckBox;
-    private JTextArea addressArea;
-    private JTextArea hoursArea;
-    private JTextArea daysArea;
-    private JButton editButton;
+    private JButton nutzerBearbeitenButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
@@ -48,9 +41,7 @@ public class UserEditGui {
     private SQLUpdateStatements sqlUpdateStatements;
     private SQLDeleteStatements sqlDeleteStatements;
 
-    private static int userDataEditState = 0;
-
-    public UserEditGui() {
+    public UserManagmantGui() {
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
         sqlDeleteStatements = new SQLDeleteStatements(new SQLConnector());
 
@@ -79,7 +70,11 @@ public class UserEditGui {
             update();
         });
 
-        aktivButton.addActionListener(e -> changeStatus(1));
+        aktivButton.addActionListener(e -> {
+            UserEntryDialog.start((String) userTableModell.getRow(userTable.getSelectedRow())[0]);
+
+            //changeStatus(1);
+        });
         inaktivButton.addActionListener(e -> changeStatus(-1));
         neuButton.addActionListener(e -> changeStatus(0));
         löschenButton.addActionListener(new ActionListener() {
@@ -100,92 +95,25 @@ public class UserEditGui {
                 }
             }
         });
-        druckButton.addActionListener(e -> {
-            String name = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
-            if (überlassungCheckBox.isSelected()){
-                ArbeitsmittelPrinter.print(name, 0);
-            }
-            if (homeOfficeCheckBox.isSelected()){
-                ArbeitsmittelPrinter.print(name, 1);
-            }
-            if (arbeitsmittelCheckBox.isSelected()){
-                ArbeitsmittelPrinter.print(name, 2);
-            }
-            uncheckPrinterBoxes();
-        });
 
         ListSelectionModel selectionModel = userTable.getSelectionModel();
         selectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int selectedRow = userTable.getSelectedRow();
-                if (selectedRow >= 0){
+                if (selectedRow >= 0) {
                     String userName = userTableModell.getRow(selectedRow)[0].toString();
                     String[] data = sqlSelectStatements.getUserInfos(userName);
                     for (int i = 0; i < data.length; i++) {
-                        if (data[i] == null){
+                        if (data[i] == null) {
                             data[i] = " - ";
-                        } else if (data[i].equals("")){
+                        } else if (data[i].equals("")) {
                             data[i] = " - ";
                         }
                     }
-                    addressArea.setText(data[2]);
-                    hoursArea.setText(data[3]);
-                    daysArea.setText(data[4]);
                 }
             }
         });
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(userDataEditState);
-                if (userDataEditState == 0){
-                    userDataEditState = 1;
-                    addressArea.setEnabled(true);
-                    addressArea.setEditable(true);
-                    hoursArea.setEnabled(true);
-                    hoursArea.setEditable(true);
-                    daysArea.setEditable(true);
-                    daysArea.setEnabled(true);
-
-                    addressArea.setForeground(Color.RED);
-                    hoursArea.setForeground(Color.RED);
-                    daysArea.setForeground(Color.RED);
-
-                    editButton.setForeground(Color.RED);
-
-                    editButton.setText("Fertig");
-                } else if (userDataEditState == 1){
-                    String[] updateData  = new String[3];
-                    updateData[0] = addressArea.getText();
-                    updateData[1] = hoursArea.getText();
-                    updateData[2] = daysArea.getText();
-
-                    sqlUpdateStatements.updateUserData(userTableModell.getRow(userTable.getSelectedRow())[0].toString(), updateData);
-
-                    userDataEditState = 0;
-                    editButton.setText("Edit");
-                    addressArea.setEnabled(false);
-                    addressArea.setEditable(false);
-                    hoursArea.setEnabled(false);
-                    hoursArea.setEditable(false);
-                    daysArea.setEditable(false);
-                    daysArea.setEnabled(false);
-
-                    addressArea.setForeground(Color.black);
-                    hoursArea.setForeground(Color.black);
-                    daysArea.setForeground(Color.black);
-
-                    editButton.setForeground(Color.BLACK);
-                }
-            }
-        });
-    }
-
-    private void uncheckPrinterBoxes(){
-        arbeitsmittelCheckBox.setSelected(false);
-        homeOfficeCheckBox.setSelected(false);
-        überlassungCheckBox.setSelected(false);
     }
 
     private void changeStatus(int status) {
@@ -200,7 +128,7 @@ public class UserEditGui {
 
     public void init() {
         frame = new JFrame("UserEditGui");
-        frame.setContentPane(new UserEditGui().userEditPanel);
+        frame.setContentPane(new UserManagmantGui().userEditPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);

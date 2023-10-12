@@ -11,8 +11,8 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.RecursiveTask;
+import java.util.Collection;
+import java.util.List;
 
 public class SQLSelectStatements {
     public SQLSelectStatements(SQLConnector connector) {
@@ -738,6 +738,17 @@ public class SQLSelectStatements {
                 "select iv_number from " + table
         ));
 
+        return getStrings(resultSet);
+    }
+
+    public Collection<? extends String> getAllIV_NumbersActive(String table) {
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select iv_number from " + table + " where active = 1"
+        ));
+        return List.of(getStrings(resultSet));
+    }
+
+    private String[] getStrings(ResultSet resultSet) {
         ArrayList<String> iv_numbers = new ArrayList<>();
         try {
             while (resultSet.next()) {
@@ -899,5 +910,15 @@ public class SQLSelectStatements {
             e.printStackTrace();
         }
         return result.toArray(new String[0]);
+    }
+
+    public String[] getAllFreeEntrys(){
+        ArrayList<String> iv_numberList = new ArrayList<>();
+
+        for (IVObjectType type : IVObjectType.values()) {
+            iv_numberList.addAll(getAllIV_NumbersActive(type.toString()));
+        }
+
+        return iv_numberList.toArray(new String[0]);
     }
 }

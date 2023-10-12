@@ -1,6 +1,5 @@
 package GUI.util;
 
-import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.table.AbstractTableModel;

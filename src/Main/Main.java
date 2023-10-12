@@ -1,7 +1,8 @@
 package Main;
 
 import GUI.GUIS.MainGui;
-import GUI.GUIS.UserEditGui;
+import GUI.GUIS.UserEntryDialog;
+import GUI.GUIS.UserManagmantGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.Printer.ArbeitsmittelPrinter;
@@ -22,9 +23,11 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
+    //private static final String startup_configuration = "main";
+    //private static final String startup_configuration = "testing2";
     //private static final String startup_configuration = "testing1";
     //private static final String startup_configuration = "testing6";
+    private static final String startup_configuration = "testing7";
 
     public static Main m;
 
@@ -35,7 +38,7 @@ public class Main {
 
     private void init() {
         Constants.init();
-        ADWrapper.init();
+        //ADWrapper.init();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
@@ -55,7 +58,7 @@ public class Main {
                 ArbeitsmittelPrinter.print("l.schmidt", 1);
             }
             case "testing2" -> {
-                UserEditGui gui = new UserEditGui();
+                UserManagmantGui gui = new UserManagmantGui();
                 gui.init();
             }
             case "testing3" -> {
@@ -78,6 +81,9 @@ public class Main {
                 String s = "askdfj asdfjals aslkjfdjjdj<<ret>>";
                 if (s.substring(s.length() - 7).equals("<<ret>>")){
                 }
+            }
+            case "testing7" -> {
+                UserEntryDialog.start("l.schmidt");
             }
         }
     }

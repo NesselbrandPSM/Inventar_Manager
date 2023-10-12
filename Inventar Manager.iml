@@ -10,5 +10,7 @@
     <orderEntry type="library" name="JGoodies Forms" level="project" />
     <orderEntry type="library" name="mysql-connector-j-8.0.33" level="project" />
     <orderEntry type="library" name="jar_files" level="project" />
+    <orderEntry type="library" name="zxing" level="project" />
+    <orderEntry type="library" name="mysql-connector-j-8.1.0" level="project" />
   </component>
 </module>

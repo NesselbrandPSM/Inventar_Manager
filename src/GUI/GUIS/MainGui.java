@@ -204,8 +204,8 @@ public class MainGui {
         editUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UserEditGui userEditGui = new UserEditGui();
-                userEditGui.init();
+                UserManagmantGui userManagmantGui = new UserManagmantGui();
+                userManagmantGui.init();
             }
         });
 
