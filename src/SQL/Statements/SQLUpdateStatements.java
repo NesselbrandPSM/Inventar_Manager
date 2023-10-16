@@ -52,4 +52,10 @@ public class SQLUpdateStatements {
            sb.toString()
         ));
     }
+
+    public void updateEntryUserAndStatus(String userName, String iv_number, String status, String table){
+        connector.query(new SQLStatement(
+                "update " + table + " SET inventory_user_key = '" + userName + "', current_status = '" + status + "' where iv_number = '" + iv_number + "'"
+        ));
+    }
 }

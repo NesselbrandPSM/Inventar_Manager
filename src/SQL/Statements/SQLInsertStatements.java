@@ -279,4 +279,20 @@ public class SQLInsertStatements {
         System.out.println(s.getStatement());
         connector.query(s);
     }
+
+    public void inputUDStatement(String[] args){
+        SQLStatement s = new SQLStatement(
+                "insert into udmapping (" +
+                        "user, iv_number, l_date, r_date" +
+                        ") values (" +
+                        "'" + args[0] + "', " +
+                        "'" + args[1] + "', " +
+                        "'" + args[2] + "', " +
+                        "'" + "-1" + "'" +
+                        ")"
+        );
+
+        System.out.println(s.getStatement());
+        connector.query(s);
+    }
 }

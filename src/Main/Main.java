@@ -1,7 +1,7 @@
 package Main;
 
 import GUI.GUIS.MainGui;
-import GUI.GUIS.UserEntryDialog;
+import GUI.GUIS.Dialogs.UserEntryDialog;
 import GUI.GUIS.UserManagmantGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
@@ -23,11 +23,11 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    //private static final String startup_configuration = "main";
+    private static final String startup_configuration = "main";
     //private static final String startup_configuration = "testing2";
     //private static final String startup_configuration = "testing1";
     //private static final String startup_configuration = "testing6";
-    private static final String startup_configuration = "testing7";
+    //private static final String startup_configuration = "7";
 
     public static Main m;
 
@@ -65,9 +65,7 @@ public class Main {
                 try {
                     URI uri = new URL("https://example.com").toURI();
                     java.awt.Desktop.getDesktop().browse(uri);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (URISyntaxException e) {
+                } catch (IOException | URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -82,9 +80,11 @@ public class Main {
                 if (s.substring(s.length() - 7).equals("<<ret>>")){
                 }
             }
-            case "testing7" -> {
+            case "7" -> {
                 UserEntryDialog.start("l.schmidt");
             }
+            case "8" -> {
+         }
         }
     }
 }

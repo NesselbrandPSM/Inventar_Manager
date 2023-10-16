@@ -125,6 +125,11 @@ public class ADWrapper {
                     temp.add(oldUsers[3][i]);
                     temp.add(oldUsers[2][i]);
                     temp.add(oldUsers[4][i]);
+                    temp.add(oldUsers[5][i]);
+                    temp.add(oldUsers[6][i]);
+                    temp.add(oldUsers[7][i]);
+                    temp.add(oldUsers[8][i]);
+                    temp.add(oldUsers[9][i]);
                     newUsers.add(temp);
                 }
             }
@@ -144,6 +149,11 @@ public class ADWrapper {
                 temp.add(users[i][1]); //email
                 temp.add("0"); //status
                 temp.add("1"); //active
+                temp.add("-1");
+                temp.add("-1");
+                temp.add("-1");
+                temp.add("-1");
+                temp.add("-1");
                 newUsers.add(temp);
             }
         }
@@ -162,17 +172,27 @@ public class ADWrapper {
             temp.add(" - ");
             temp.add("1");
             temp.add("1");
+            temp.add("-1");
+            temp.add("-1");
+            temp.add("-1");
+            temp.add("-1");
+            temp.add("-1");
             newUsers.add(temp);
         }
 
         sqlDeleteStatements.deleteTable("user");
 
         for (ArrayList<String> list : newUsers) {
-            sqlInsertStatements.insert("insert into user (name, mail, current_status, active) values (" +
+            sqlInsertStatements.insert("insert into user (name, mail, current_status, active, address, working_hours, working_days, homeoffice, entrytransfer) values (" +
                     "'" + list.get(0) + "', " +
                     "'" + list.get(1) + "', " +
                     "'" + list.get(2) + "', " +
-                    "'" + list.get(3) + "'" +
+                    "'" + list.get(3) + "', " +
+                    "'" + list.get(4) + "', " +
+                    "'" + list.get(5) + "', " +
+                    "'" + list.get(6) + "', " +
+                    "'" + list.get(7) + "', " +
+                    "'" + list.get(8) + "'" +
                     ")");
         }
 

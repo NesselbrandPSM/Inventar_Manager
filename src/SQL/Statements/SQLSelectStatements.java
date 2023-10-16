@@ -681,7 +681,7 @@ public class SQLSelectStatements {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
         ResultSet resultSet = connector.query(new SQLStatement(
-                "select name, user_key, current_status, mail, active from user"
+                "select name, user_key, current_status, mail, active, address, working_hours, working_days, homeoffice, entrytransfer from user"
         ));
         try {
             resultList.add(new ArrayList<>());
@@ -942,5 +942,22 @@ public class SQLSelectStatements {
         }
 
         return attr.toArray(new String[0]);
+    }
+
+    public String[] getConditions(String iv_number){
+        ResultSet res = connector.query(new SQLStatement(
+                "select c_status, c_note from " + Utils.getTableFromShortCut(iv_number.substring(0, 2)) + " where iv_number = '" + iv_number + "'"
+        ));
+        System.out.println(                "select c_status, c_note from " + Utils.getTableFromShortCut(iv_number.substring(0, 2)) + " where iv_number = '" + iv_number + "'"
+        );
+        String[] data = new String[2];
+        try {
+            res.next();
+            data[0] = res.getString(1);
+            data[1] = res.getString(2);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
     }
 }

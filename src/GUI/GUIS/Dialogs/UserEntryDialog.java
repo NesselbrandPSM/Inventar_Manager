@@ -1,14 +1,16 @@
-package GUI.GUIS;
+package GUI.GUIS.Dialogs;
 
 import Main.utility.UtilPrintables.IVObject;
+import Main.utility.Utils;
 import SQL.SQLConnector;
+import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 import SQL.Statements.SQLUpdateStatements;
+import SQL.util.SQLStatement;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class UserEntryDialog extends JDialog {
@@ -34,13 +36,17 @@ public class UserEntryDialog extends JDialog {
 
     private SQLSelectStatements sqlSelectStatements;
     private SQLUpdateStatements sqlUpdateStatements;
+    private SQLInsertStatements sqlInsertStatements;
 
     private ArrayList<String> addedIV_Numbers;
+    private ArrayList<SQLStatement> retrievedIV_NumbersStatements;
 
     public UserEntryDialog(String user) {
         addedIV_Numbers = new ArrayList<>();
+        retrievedIV_NumbersStatements = new ArrayList<>();
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
+        sqlInsertStatements = new SQLInsertStatements(new SQLConnector());
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -145,7 +151,24 @@ public class UserEntryDialog extends JDialog {
                         userEntryListModel.removeElement(s);
                         arbeitsmittelListModel.add(0, s);
                     } else {
-                        //TODO statusänderung von zurückgegebenen items in liste mit sqlabfragen
+                        ConditionModifyDialog.init(s);
+                        if (!Utils.newConditionStatus.equals("null")){
+                            addedIV_Numbers.remove(s);
+                            userEntryListModel.removeElement(s);
+                            arbeitsmittelListModel.add(0, s);
+
+                            SQLStatement statement = new SQLStatement(
+                                    "update " + Utils.getTableFromShortCut(s.substring(0, 2)) + " SET inventory_user_key = '-1', current_status = 'edv eingelagert', c_note = '" + Utils.newConditionNote + "', c_status = '" + Utils.newConditionStatus + "' " +
+                                            "where iv_number = '" + s + "'"
+                            );
+                            retrievedIV_NumbersStatements.add(statement);
+                            statement = new SQLStatement(
+                                    "update udmapping SET r_date = '" + Utils.getDateTimeNow() + "' where user = '" + userlabel.getText() + "' and iv_number = '" + s + "' and r_date = '-1'"
+                            );
+                            retrievedIV_NumbersStatements.add(statement);
+                            Utils.newConditionStatus = "null";
+                            Utils.newConditionNote = "null";
+                        }
                     }
                 }
             }
@@ -155,7 +178,21 @@ public class UserEntryDialog extends JDialog {
     }
 
     private void onOK() {
-        //TODO alle iv_nummern aus liste bearbeiten
+        SQLConnector sqlConnector = new SQLConnector();
+        for (SQLStatement statement : retrievedIV_NumbersStatements) {
+            sqlConnector.query(statement);
+        }
+
+        for (String iv_number : addedIV_Numbers) {
+            String[] data = new String[4];
+            data[0] = userlabel.getText();
+            data[1] = iv_number;
+            data[2] = Utils.getDateTimeNow();
+            String status = "in verwendung (hybrid)";
+            sqlInsertStatements.inputUDStatement(data);
+            sqlUpdateStatements.updateEntryUserAndStatus(data[0], iv_number, status, Utils.getTableFromShortCut(iv_number.substring(0, 2)));
+        }
+
         String[] userData = new String[5];
         userData[0] = streetNRField.getText() + " | " + plzField.getText() + " | " + cityField.getText();
         userData[1] = workingHours.getText();

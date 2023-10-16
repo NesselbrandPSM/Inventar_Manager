@@ -1,8 +1,13 @@
 package Main.utility;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Utils {
+    public static String newConditionNote = "null";
+    public static String newConditionStatus = "null";
+
     public static String[][] convertArrayList_ArrayList_StringTo2DArray(ArrayList<ArrayList<String>> in) {
         String[][] ret = new String[in.size()][];
 
@@ -142,5 +147,11 @@ public class Utils {
             case "typ" -> ret = "Typ:";
         }
         return ret;
+    }
+
+    public static String getDateTimeNow(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 }

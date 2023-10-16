@@ -1,5 +1,6 @@
 package GUI.GUIS;
 
+import GUI.GUIS.Dialogs.UserEntryDialog;
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
 import SQL.SQLConnector;
@@ -72,8 +73,7 @@ public class UserManagmantGui {
 
         aktivButton.addActionListener(e -> {
             UserEntryDialog.start((String) userTableModell.getRow(userTable.getSelectedRow())[0]);
-
-            //changeStatus(1);
+            changeStatus(1);
         });
         inaktivButton.addActionListener(e -> changeStatus(-1));
         neuButton.addActionListener(e -> changeStatus(0));
