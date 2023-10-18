@@ -88,10 +88,10 @@ public class PrinterDialog extends JDialog {
                 homeofficeCheckBox.setSelected(true);
                 lastCheckBox = 1;
             } else {
-                if (e.getSource() == ueberlassungCheckBox && lastCheckBox == 0){
+                if (e.getSource() == ueberlassungCheckBox && lastCheckBox == 0) {
                     ueberlassungCheckBox.setSelected(true);
                 }
-                if (e.getSource() == homeofficeCheckBox && lastCheckBox == 1){
+                if (e.getSource() == homeofficeCheckBox && lastCheckBox == 1) {
                     homeofficeCheckBox.setSelected(true);
                 }
             }
