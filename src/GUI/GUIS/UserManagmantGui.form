@@ -32,6 +32,8 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:50px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:50px:noGrow"/>
     <rowspec value="top:0dlu:noGrow"/>
     <rowspec value="center:35px:noGrow"/>
     <rowspec value="top:0dlu:noGrow"/>
@@ -68,14 +70,14 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:5px:noGrow"/>
     <constraints>
-      <xy x="22" y="24" width="1329" height="920"/>
+      <xy x="22" y="24" width="1329" height="941"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <scrollpane id="3b154" binding="userTableScrollPane">
         <constraints>
-          <grid row="2" column="0" row-span="41" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="43" col-span="15" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="10" left="10" bottom="10" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -209,7 +211,7 @@
       </component>
       <vspacer id="7d400">
         <constraints>
-          <grid row="32" column="16" row-span="11" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="34" column="16" row-span="11" col-span="5" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -251,6 +253,15 @@
         </constraints>
         <properties>
           <text value="Nutzer Bearbeiten"/>
+        </properties>
+      </component>
+      <component id="9c1e6" class="javax.swing.JButton" binding="druckansichtButton" default-binding="true">
+        <constraints>
+          <grid row="32" column="16" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="0" bottom="0" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Druckansicht"/>
         </properties>
       </component>
     </children>

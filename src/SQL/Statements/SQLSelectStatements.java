@@ -948,8 +948,6 @@ public class SQLSelectStatements {
         ResultSet res = connector.query(new SQLStatement(
                 "select c_status, c_note from " + Utils.getTableFromShortCut(iv_number.substring(0, 2)) + " where iv_number = '" + iv_number + "'"
         ));
-        System.out.println(                "select c_status, c_note from " + Utils.getTableFromShortCut(iv_number.substring(0, 2)) + " where iv_number = '" + iv_number + "'"
-        );
         String[] data = new String[2];
         try {
             res.next();

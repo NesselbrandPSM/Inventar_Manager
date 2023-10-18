@@ -23,11 +23,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
-    //private static final String startup_configuration = "testing2";
-    //private static final String startup_configuration = "testing1";
-    //private static final String startup_configuration = "testing6";
-    //private static final String startup_configuration = "7";
+    private static final String startup_configuration = "2";
 
     public static Main m;
 
@@ -54,14 +50,14 @@ public class Main {
                 mainGui = new MainGui(connector, sqlSelectStatements, sqlDeleteStatements);
                 mainGui.init();
             }
-            case "testing1" -> {
+            case "1" -> {
                 ArbeitsmittelPrinter.print("l.schmidt", 1);
             }
-            case "testing2" -> {
+            case "2" -> {
                 UserManagmantGui gui = new UserManagmantGui();
                 gui.init();
             }
-            case "testing3" -> {
+            case "3" -> {
                 try {
                     URI uri = new URL("https://example.com").toURI();
                     java.awt.Desktop.getDesktop().browse(uri);
@@ -69,13 +65,13 @@ public class Main {
                     throw new RuntimeException(e);
                 }
             }
-            case "testing4" -> {
+            case "4" -> {
                 LabelPrinter.print("NB-0001");
             }
-            case "testing5" -> {
+            case "5" -> {
                 System.out.println(ADWrapper.getFullName("d.vitale"));
             }
-            case "testing6" -> {
+            case "6" -> {
                 String s = "askdfj asdfjals aslkjfdjjdj<<ret>>";
                 if (s.substring(s.length() - 7).equals("<<ret>>")){
                 }

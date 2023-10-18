@@ -3,6 +3,7 @@ package GUI.GUIS;
 import GUI.GUIS.Dialogs.UserEntryDialog;
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
+import Main.utility.Printer.ArbeitsmittelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
@@ -15,6 +16,7 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class UserManagmantGui {
     private JPanel userEditPanel;
@@ -34,6 +36,7 @@ public class UserManagmantGui {
     private JButton löschenButton;
     private JButton druckButton;
     private JButton nutzerBearbeitenButton;
+    private JButton druckansichtButton;
     private static JFrame frame;
 
     private UserTableModell userTableModell;
@@ -112,6 +115,23 @@ public class UserManagmantGui {
                         }
                     }
                 }
+            }
+        });
+        nutzerBearbeitenButton.addActionListener(e -> UserEntryDialog.start((String) userTableModell.getRow(userTable.getSelectedRow())[0]));
+        druckButton.addActionListener(e -> {
+            String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
+            String[] data = sqlSelectStatements.getUserAttributes(user);
+            boolean printArbeitsmittelList = false;
+            if (Objects.equals(data[3], "1")) {
+                printArbeitsmittelList = true;
+                ArbeitsmittelPrinter.print(user, 1);
+            }
+            if (Objects.equals(data[4], "1")) {
+                printArbeitsmittelList = true;
+                ArbeitsmittelPrinter.print(user, 0);
+            }
+            if (printArbeitsmittelList){
+                ArbeitsmittelPrinter.print(user, 2);
             }
         });
     }
