@@ -121,8 +121,8 @@ public class ArbeitsmittelPrinter {
                     int paraIndex = 1;
                     int internalWidth = width - xMargin;
 
-                    for (int i = 0; i < Constants.paragraphsUeberlassung.length; i++) {
-                        String paragraphC = Constants.paragraphsUeberlassung[i];
+                    for (int i = 0; i < Constants.PRINT_paragraphsUeberlassung.length; i++) {
+                        String paragraphC = Constants.PRINT_paragraphsUeberlassung[i];
                         if ((2 + currentLine + calcParaLines(paragraphC, internalWidth, standardF)) < maxLines) {
                             pageLineList.get(page).add(new Line("§ " + paraIndex, xMargin, 2, paragraphF));
                             currentLine += 2;
@@ -165,6 +165,7 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Unterschrift Arbeitgeber", width - getTextWidth("________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
 
+                    Constants.resetParagraphsUeberlassung();
                 }
 
                 // Replacementitems:
@@ -200,7 +201,7 @@ public class ArbeitsmittelPrinter {
                     int paraIndex = 0;
                     int internalWidth = width - xMargin;
 
-                    String[][] paragraphsHO = Constants.paragraphsHomeOffice.clone();
+                    String[][] paragraphsHO = Constants.PRINT_paragraphsHomeOffice.clone();
                     for (int i = 0; i < paragraphsHO.length; i++) {
                         if (paragraphsHO[i][1].contains("<<working_days>>")){
                             paragraphsHO[i][1] = paragraphsHO[i][1].replace("<<working_days>>", " " + userData[4] + " ");
@@ -295,7 +296,7 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitgeber", width - getTextWidth("____________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
 
-                    Constants.refreshParagraphsHome();
+                    Constants.resetParagraphsHome();
                 }
                 case 2 -> {
                     int maxLines = 51;

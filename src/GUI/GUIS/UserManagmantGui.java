@@ -1,8 +1,10 @@
 package GUI.GUIS;
 
+import GUI.GUIS.Dialogs.PrinterDialog;
 import GUI.GUIS.Dialogs.UserEntryDialog;
 import GUI.util.UserTableModell;
 import Main.utility.ADWrapper;
+import Main.utility.Constants;
 import Main.utility.Printer.ArbeitsmittelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
@@ -132,6 +134,31 @@ public class UserManagmantGui {
             }
             if (printArbeitsmittelList){
                 ArbeitsmittelPrinter.print(user, 2);
+            }
+        });
+
+        druckansichtButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
+                String[] data = sqlSelectStatements.getUserAttributes(user);
+
+                PrinterDialog.start(user, data);
+                if (Constants.printable){
+                    boolean printArbeitsmittelList = false;
+                    if (Objects.equals(data[3], "1")) {
+                        printArbeitsmittelList = true;
+                        ArbeitsmittelPrinter.print(user, 1);
+                    }
+                    if (Objects.equals(data[4], "1")) {
+                        printArbeitsmittelList = true;
+                        ArbeitsmittelPrinter.print(user, 0);
+                    }
+                    if (printArbeitsmittelList){
+                        ArbeitsmittelPrinter.print(user, 2);
+                    }
+                }
+                Constants.printable = false;
             }
         });
     }

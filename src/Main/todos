@@ -7,6 +7,7 @@
  - //TODO Rückgegeben am + Unterschrift + wer angenommen hat bei Arbeitsmittelliste hinzufügen + neuer status + zustand
 
  - //TODO Bei Löschen von Benutzer müssen alle Items behandelt (eingelagert werden)
+ - //TODO Bei PrinterDialog die Paragraphen in Liste aus Checkboxen umwandeln und dann bei fertig nur paragraphen mit Checkbox.selected() == true in drucken String[] reinspeichern
 
  -------------------------------------------------------------------------------------------
  Settings:

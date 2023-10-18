@@ -1,5 +1,6 @@
 package Main;
 
+import GUI.GUIS.Dialogs.PrinterDialog;
 import GUI.GUIS.MainGui;
 import GUI.GUIS.Dialogs.UserEntryDialog;
 import GUI.GUIS.UserManagmantGui;
@@ -23,7 +24,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "2";
+    private static final String startup_configuration = "7";
 
     public static Main m;
 
@@ -35,6 +36,11 @@ public class Main {
     private void init() {
         Constants.init();
         //ADWrapper.init();
+
+        connector = new SQLConnector();
+        sqlSelectStatements = new SQLSelectStatements(connector);
+        sqlDeleteStatements = new SQLDeleteStatements(connector);
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
@@ -44,9 +50,6 @@ public class Main {
 
         switch (startup_configuration) {
             case "main" -> {
-                connector = new SQLConnector();
-                sqlSelectStatements = new SQLSelectStatements(connector);
-                sqlDeleteStatements = new SQLDeleteStatements(connector);
                 mainGui = new MainGui(connector, sqlSelectStatements, sqlDeleteStatements);
                 mainGui.init();
             }
@@ -77,7 +80,7 @@ public class Main {
                 }
             }
             case "7" -> {
-                UserEntryDialog.start("l.schmidt");
+                PrinterDialog.start("l.schmidt", sqlSelectStatements.getUserAttributes("l.schmidt"));
             }
             case "8" -> {
          }
