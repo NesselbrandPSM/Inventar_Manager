@@ -4,7 +4,7 @@
     <rowspec value="center:d:grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="48" y="54" width="1116" height="671"/>
+      <xy x="48" y="54" width="1186" height="671"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -23,19 +23,21 @@
         <rowspec value="center:max(d;4px):noGrow"/>
         <rowspec value="top:5dlu:noGrow"/>
         <rowspec value="center:d:grow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:400px:noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:50px:noGrow"/>
         <colspec value="fill:max(m;150px):noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
-        <colspec value="fill:150px:noGrow"/>
+        <colspec value="fill:max(m;130px):noGrow"/>
         <colspec value="left:10dlu:noGrow"/>
         <colspec value="fill:100px:noGrow"/>
         <colspec value="left:5dlu:noGrow"/>
-        <colspec value="fill:50px:noGrow"/>
+        <colspec value="fill:max(d;50px):noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
-        <colspec value="fill:500px:noGrow"/>
+        <colspec value="fill:max(d;500px):noGrow"/>
         <colspec value="left:5dlu:noGrow"/>
-        <colspec value="fill:10px:grow(0.1)"/>
+        <colspec value="fill:150px:grow(0.1)"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
@@ -45,7 +47,7 @@
         <children>
           <component id="bb54e" class="javax.swing.JButton" binding="buttonCancel">
             <constraints>
-              <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <forms/>
             </constraints>
             <properties>
@@ -54,7 +56,7 @@
           </component>
           <component id="74cad" class="javax.swing.JButton" binding="buttonOK">
             <constraints>
-              <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="0"/>
             </constraints>
             <properties>
@@ -196,7 +198,7 @@
           </component>
           <scrollpane id="86485">
             <constraints>
-              <grid row="12" column="2" row-span="1" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="12" column="2" row-span="3" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="10" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
             </constraints>
             <properties/>
@@ -213,7 +215,7 @@
           </scrollpane>
           <component id="dfa25" class="javax.swing.JList" binding="paragraphList" custom-create="true">
             <constraints>
-              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="12" column="0" row-span="3" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="10" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
             </constraints>
             <properties/>
