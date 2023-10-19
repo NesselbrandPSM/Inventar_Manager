@@ -158,6 +158,8 @@ public class UserManagmantGui {
                         ArbeitsmittelPrinter.print(user, 2);
                     }
                 }
+                Constants.resetParagraphsHome();
+                Constants.resetParagraphsUeberlassung();
                 Constants.printable = false;
             }
         });

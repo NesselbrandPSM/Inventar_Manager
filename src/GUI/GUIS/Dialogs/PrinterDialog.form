@@ -4,7 +4,7 @@
     <rowspec value="center:d:grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="48" y="54" width="1016" height="671"/>
+      <xy x="48" y="54" width="1116" height="671"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -25,7 +25,7 @@
         <rowspec value="center:d:grow"/>
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:50px:noGrow"/>
-        <colspec value="fill:150px:noGrow"/>
+        <colspec value="fill:max(m;150px):noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:150px:noGrow"/>
         <colspec value="left:10dlu:noGrow"/>
@@ -204,19 +204,20 @@
             <children>
               <component id="5a956" class="javax.swing.JTextArea" binding="paragraphArea">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <lineWrap value="true"/>
+                  <wrapStyleWord value="true"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
-          <scrollpane id="f029e">
+          <component id="dfa25" class="javax.swing.JList" binding="paragraphList" custom-create="true">
             <constraints>
               <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="10" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
             </constraints>
             <properties/>
-            <border type="none"/>
-            <children/>
-          </scrollpane>
+          </component>
         </children>
       </grid>
     </children>

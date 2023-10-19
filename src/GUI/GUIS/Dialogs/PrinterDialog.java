@@ -1,7 +1,15 @@
 package GUI.GUIS.Dialogs;
 
+import Main.utility.Constants;
+import Main.utility.Printer.ArbeitsmittelPrinter;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class PrinterDialog extends JDialog {
     private JPanel contentPane;
@@ -17,11 +25,14 @@ public class PrinterDialog extends JDialog {
     private JCheckBox ueberlassungCheckBox;
     private JCheckBox homeofficeCheckBox;
     private JTextArea paragraphArea;
+    private JList paragraphList;
 
     private int ueberlassung;
     private int homeoffice;
 
     private int lastCheckBox;
+
+    private DefaultListModel<String> paraListModel;
 
     public PrinterDialog(String user, String[] data) {
         ueberlassung = 0;
@@ -61,7 +72,6 @@ public class PrinterDialog extends JDialog {
             ueberlassungCheckBox.setSelected(true);
         }
 
-
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -95,15 +105,73 @@ public class PrinterDialog extends JDialog {
                     homeofficeCheckBox.setSelected(true);
                 }
             }
-            //TODO update
+
+            paralistUpdate();
+            paragraphArea.setText("");
         };
         ueberlassungCheckBox.addActionListener(listener);
         homeofficeCheckBox.addActionListener(listener);
+
+        paralistUpdate();
+
+        paragraphList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (paragraphList.getSelectedIndex() >= 0) {
+                    if (ueberlassungCheckBox.isSelected()) {
+                        paragraphArea.setText(Constants.PRINT_paragraphsUeberlassung[paragraphList.getSelectedIndex()]);
+                    } else { //Home-office
+                        paragraphArea.setText(Constants.PRINT_paragraphsHomeOffice[paragraphList.getSelectedIndex()][1]);
+                    }
+                }
+            }
+        });
+        paragraphArea.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (paragraphList.getSelectedIndex() > -1) {
+                    if (homeofficeCheckBox.isSelected()){
+                        Constants.PRINT_paragraphsHomeOffice[paragraphList.getSelectedIndex()][1] = paragraphArea.getText();
+                    } else {
+                        Constants.PRINT_paragraphsUeberlassung[paragraphList.getSelectedIndex()] = paragraphArea.getText();
+                    }
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (paragraphList.getSelectedIndex() > -1) {
+                    if (homeofficeCheckBox.isSelected()){
+                        Constants.PRINT_paragraphsHomeOffice[paragraphList.getSelectedIndex()][1] = paragraphArea.getText();
+                    } else {
+                        Constants.PRINT_paragraphsUeberlassung[paragraphList.getSelectedIndex()] = paragraphArea.getText();
+                    }
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+    }
+
+    private void paralistUpdate() {
+        paraListModel.removeAllElements();
+
+        if (homeofficeCheckBox.isSelected()) {
+            for (int i = Constants.paragraphsHomeOffice.length - 1; i >= 0; i--) {
+                paraListModel.add(0, Constants.paragraphsHomeOffice[i][0]);
+            }
+        } else {
+            for (int i = Constants.paragraphsUeberlassung.length - 1; i >= 0; i--) {
+                paraListModel.add(0, "Paragraph " + (i + 1));
+            }
+        }
+        paragraphList.setSelectedIndex(-1);
     }
 
     private void onOK() {
-        //TODO write everything in printarrays
-        //TODO set Constants.printable = true;
+        Constants.printable = true;
         dispose();
     }
 
@@ -115,5 +183,11 @@ public class PrinterDialog extends JDialog {
         PrinterDialog dialog = new PrinterDialog(user, data);
         dialog.pack();
         dialog.setVisible(true);
+    }
+
+    private void createUIComponents() {
+        paraListModel = new DefaultListModel<>();
+        paragraphList = new JList<String>();
+        paragraphList.setModel(paraListModel);
     }
 }
