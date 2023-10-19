@@ -126,6 +126,7 @@ public class PrinterDialog extends JDialog {
                 }
             }
         });
+
         paragraphArea.getDocument().addDocumentListener(new DocumentListener() {
             //TODO wenn feld leer ist entfernen
             @Override
