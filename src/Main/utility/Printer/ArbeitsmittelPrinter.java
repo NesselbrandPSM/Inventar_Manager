@@ -14,6 +14,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.print.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 
@@ -103,6 +104,14 @@ public class ArbeitsmittelPrinter {
 
             switch (flag) {
                 case 0 -> {
+                    ArrayList<String> temp = new ArrayList<>();
+                    for (String s : Constants.PRINT_paragraphsUeberlassung) {
+                        if (!s.equals("")){
+                            temp.add(s);
+                        }
+                    }
+                    Constants.PRINT_paragraphsUeberlassung = temp.toArray(new String[0]);
+
                     int maxLines = 76;
                     pageLineList = new ArrayList<>();
                     //page 1 with default
@@ -171,9 +180,20 @@ public class ArbeitsmittelPrinter {
                     // - <<working_hours>> => arbeitszeit
                     // - <<ret>> => zeilenumbruch
                 case 1 -> {
+                    ArrayList<ArrayList<String>> temp = new ArrayList<>();
+                    for (int i = 0; i < Constants.PRINT_paragraphsHomeOffice.length; i++) {
+                        if (!Constants.PRINT_paragraphsHomeOffice[i][1].equals("")){
+                            ArrayList<String> temp2 = new ArrayList<>();
+                            temp2.add(Constants.PRINT_paragraphsHomeOffice[i][0]);
+                            temp2.add(Constants.PRINT_paragraphsHomeOffice[i][1]);
+                            temp.add(temp2);
+                        }
+                    }
+                    Constants.PRINT_paragraphsHomeOffice = Utils.convertArrayList_ArrayList_StringTo2DArray(temp);
+
                     String[] userData = sqlSelectStatements.getUserInfos(name);
 
-                    int maxLines = 76;
+                    int maxLines = 65;
                     int xAddon = 2;
                     pageLineList = new ArrayList<>();
                     //page 1 with default

@@ -24,7 +24,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "7";
+    private static final String startup_configuration = "2";
 
     public static Main m;
 
@@ -35,7 +35,7 @@ public class Main {
 
     private void init() {
         Constants.init();
-        //ADWrapper.init();
+        ADWrapper.init();
 
         connector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(connector);
