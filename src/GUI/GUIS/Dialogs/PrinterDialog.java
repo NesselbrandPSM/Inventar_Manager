@@ -35,6 +35,7 @@ public class PrinterDialog extends JDialog {
     private DefaultListModel<String> paraListModel;
 
     public PrinterDialog(String user, String[] data) {
+        this.setTitle("Druckansicht");
         ueberlassung = 0;
         homeoffice = 0;
 
@@ -128,7 +129,6 @@ public class PrinterDialog extends JDialog {
         });
 
         paragraphArea.getDocument().addDocumentListener(new DocumentListener() {
-            //TODO wenn feld leer ist entfernen
             @Override
             public void insertUpdate(DocumentEvent e) {
                 if (paragraphList.getSelectedIndex() > -1) {

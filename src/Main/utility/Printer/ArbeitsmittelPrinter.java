@@ -3,6 +3,8 @@ package Main.utility.Printer;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.UtilPrintables.IVObject;
+import Main.utility.UtilPrintables.IVObjectRet;
+import Main.utility.UtilPrintables.IVObjectType;
 import Main.utility.UtilPrintables.Line;
 import Main.utility.Utils;
 import SQL.SQLConnector;
@@ -75,6 +77,7 @@ public class ArbeitsmittelPrinter {
 
         ArrayList<ArrayList<Line>> pageLineList;
         ArrayList<ArrayList<IVObject>> objectPageList;
+        ArrayList<ArrayList<IVObjectRet>> objectPageListRet;
 
         // 0 -> überlassung
         // 1 -> HomeOffice
@@ -103,14 +106,28 @@ public class ArbeitsmittelPrinter {
             height = (int) pageFormat.getImageableHeight();
 
             switch (flag) {
+                // Replacementitems:
+                // - <<working_days>> => arbeitstage
+                // - <<working_hours>> => arbeitszeit
+                // - <<contract_date>> => Arbeitsvertragsdatum
+                // - <<ret>> => zeilenumbruch
+
                 case 0 -> {
                     ArrayList<String> temp = new ArrayList<>();
                     for (String s : Constants.PRINT_paragraphsUeberlassung) {
-                        if (!s.equals("")){
+                        if (!s.equals("")) {
                             temp.add(s);
                         }
                     }
                     Constants.PRINT_paragraphsUeberlassung = temp.toArray(new String[0]);
+
+                    String[] userData = sqlSelectStatements.getUserAttributes(name);
+
+                    for (int i = 0; i < Constants.PRINT_paragraphsUeberlassung.length; i++) {
+                        if (Constants.PRINT_paragraphsUeberlassung[i].contains("<<contract_date>>")) {
+                            Constants.PRINT_paragraphsUeberlassung[i] = Constants.PRINT_paragraphsUeberlassung[i].replace("<<contract_date>>", " " + userData[5] + " ");
+                        }
+                    }
 
                     int maxLines = 76;
                     pageLineList = new ArrayList<>();
@@ -174,15 +191,10 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Unterschrift Arbeitgeber", width - getTextWidth("________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
                 }
-
-                // Replacementitems:
-                    // - <<working_days>> => arbeitstage
-                    // - <<working_hours>> => arbeitszeit
-                    // - <<ret>> => zeilenumbruch
                 case 1 -> {
                     ArrayList<ArrayList<String>> temp = new ArrayList<>();
                     for (int i = 0; i < Constants.PRINT_paragraphsHomeOffice.length; i++) {
-                        if (!Constants.PRINT_paragraphsHomeOffice[i][1].equals("")){
+                        if (!Constants.PRINT_paragraphsHomeOffice[i][1].equals("")) {
                             ArrayList<String> temp2 = new ArrayList<>();
                             temp2.add(Constants.PRINT_paragraphsHomeOffice[i][0]);
                             temp2.add(Constants.PRINT_paragraphsHomeOffice[i][1]);
@@ -221,10 +233,10 @@ public class ArbeitsmittelPrinter {
 
                     String[][] paragraphsHO = Constants.PRINT_paragraphsHomeOffice.clone();
                     for (int i = 0; i < paragraphsHO.length; i++) {
-                        if (paragraphsHO[i][1].contains("<<working_days>>")){
+                        if (paragraphsHO[i][1].contains("<<working_days>>")) {
                             paragraphsHO[i][1] = paragraphsHO[i][1].replace("<<working_days>>", " " + userData[4] + " ");
                         }
-                        if (paragraphsHO[i][1].contains("<<working_hours>>")){
+                        if (paragraphsHO[i][1].contains("<<working_hours>>")) {
                             paragraphsHO[i][1] = paragraphsHO[i][1].replace("<<working_hours>>", " " + userData[3] + " ");
                         }
                     }
@@ -232,7 +244,7 @@ public class ArbeitsmittelPrinter {
                     for (int i = 0; i < paragraphsHO.length; i++) {
                         String paragraphC = paragraphsHO[i][1];
                         if ((2 + currentLine + calcParaLines(paragraphC, internalWidth, standardF)) < maxLines) {
-                            if (paraIndex == 0){
+                            if (paraIndex == 0) {
                                 pageLineList.get(page).add(new Line(paragraphsHO[i][0], xMargin, 2, paragraphF));
                             } else {
                                 pageLineList.get(page).add(new Line("§ " + paraIndex + " " + paragraphsHO[i][0], xMargin, 2, paragraphF));
@@ -240,20 +252,20 @@ public class ArbeitsmittelPrinter {
                             currentLine += 2;
 
                             String paragraph = paragraphC;
-                            if (paragraph.contains("<<ret>>")){
+                            if (paragraph.contains("<<ret>>")) {
                                 ArrayList<String> subparagraphList = new ArrayList<>();
                                 paragraph = paragraph.replaceAll("\n", "");
-                                while (paragraph.length() > 0){
+                                while (paragraph.length() > 0) {
                                     subparagraphList.add(paragraph.substring(0, paragraph.indexOf("<<ret>>")));
                                     paragraph = paragraph.substring(paragraph.indexOf("<<ret>>") + 7);
-                                    if (!paragraph.contains("<<ret>>")){
+                                    if (!paragraph.contains("<<ret>>")) {
                                         subparagraphList.add(paragraph);
                                         paragraph = "";
                                     }
                                 }
                                 String[] subparagraphs = subparagraphList.toArray(new String[0]);
                                 for (int j = 0; j < subparagraphs.length; j++) {
-                                    if(subparagraphs[j].indexOf(" ") == 0){
+                                    if (subparagraphs[j].indexOf(" ") == 0) {
                                         subparagraphs[j] = subparagraphs[j].substring(1);
                                     }
                                 }
@@ -325,7 +337,7 @@ public class ArbeitsmittelPrinter {
                     for (int i = 0; i < objects.size(); i++) {
                         IVObject object = objects.get(i);
                         int calcLines = (int) Math.ceil(calcTableLines(object, max_width_secondColumn));
-                        if ((currentLine + calcLines) < maxLines){
+                        if ((currentLine + calcLines) < maxLines) {
                             objectPageList.get(page).add(object);
                             currentLine += calcLines;
                         } else {
@@ -335,6 +347,40 @@ public class ArbeitsmittelPrinter {
                             i--;
                         }
                     }
+
+                    if ((currentLine + 8) > maxLines) {
+                        page++;
+                        objectPageList.add(new ArrayList<>());
+                    }
+                    objectPageList.get(page).add(new IVObject(new String[]{"sign"}, IVObjectType.pc));
+                }
+                case 3 -> {
+                    int maxLines = 51;
+                    ArrayList<IVObjectRet> objects = Constants.returnList;
+                    int currentLine = 1;
+                    int page = 0;
+                    objectPageListRet = new ArrayList<>();
+                    objectPageListRet.add(new ArrayList<>());
+
+                    for (int i = 0; i < objects.size(); i++) {
+                        IVObjectRet object = objects.get(i);
+                        int calcLines = (int) Math.ceil(calcTableLines(object, max_width_secondColumn));
+                        if ((currentLine + calcLines) < maxLines) {
+                            objectPageListRet.get(page).add(object);
+                            currentLine += calcLines;
+                        } else {
+                            objectPageListRet.add(new ArrayList<>());
+                            page++;
+                            currentLine = 1;
+                            i--;
+                        }
+                    }
+
+                    if ((currentLine + 8) > maxLines) {
+                        page++;
+                        objectPageListRet.add(new ArrayList<>());
+                    }
+                    objectPageListRet.get(page).add(new IVObjectRet(new String[]{"sign"}, new String[]{"sign"}));
                 }
             }
         }
@@ -479,7 +525,7 @@ public class ArbeitsmittelPrinter {
                     }
                     return NO_SUCH_PAGE;
                 }
-                case 2, 3 -> {
+                case 2 -> {
                     double line = 1;
                     if (pageIndex == 0) {
                         g.setFont(titleF);
@@ -490,49 +536,62 @@ public class ArbeitsmittelPrinter {
                         line += 3;
 
                         for (IVObject ob : objectPageList.get(pageIndex)) {
-                            int yStart;
-                            g.setFont(tableHeaderF);
-                            line += 2;
-                            x = xMargin + 10;
-                            int secondColumnOffset = 200;
-                            y = (int) ((line * lineHeight) + yMargin);
-                            yStart = y - 15;
-                            g.drawString("Arbeitsmittel:", x, y);
-                            g.drawString(ob.values[0], x + secondColumnOffset, y);
-                            g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
-                            g.setFont(tableF);
-                            line += 1.8;
-                            for (int i = 1; i < ob.values.length; i++) {
-                                if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
-                                    y = (int) ((line * lineHeight) + yMargin);
-                                    g.drawString(Utils.ivObjectToDisplayable(ob.objectType.getAttributes()[i]), x, y);
+                            if (!ob.values[0].equals("sign")) {
+                                int yStart;
+                                g.setFont(tableHeaderF);
+                                line += 2;
+                                x = xMargin + 10;
+                                int secondColumnOffset = 200;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                yStart = y - 15;
+                                g.drawString("Arbeitsmittel:", x, y);
+                                g.drawString(ob.values[0], x + secondColumnOffset, y);
+                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
+                                g.setFont(tableF);
+                                line += 1.8;
+                                for (int i = 1; i < ob.values.length; i++) {
+                                    if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
+                                        y = (int) ((line * lineHeight) + yMargin);
+                                        g.drawString(Utils.ivObjectToDisplayable(ob.objectType.getAttributes()[i]), x, y);
 
-                                    if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn){
-                                        String paragraph = ob.values[i];
-                                        while (paragraph.length() > 0) {
-                                            String lines = paragraph;
-                                            while (getTextWidth(lines, tableF) > max_width_secondColumn) {
-                                                lines = lines.substring(0, lines.lastIndexOf(" "));
+                                        if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn) {
+                                            String paragraph = ob.values[i];
+                                            while (paragraph.length() > 0) {
+                                                String lines = paragraph;
+                                                while (getTextWidth(lines, tableF) > max_width_secondColumn) {
+                                                    lines = lines.substring(0, lines.lastIndexOf(" "));
+                                                }
+                                                paragraph = paragraph.substring(lines.length());
+                                                if (lines.substring(0, 1).equals(" ")) {
+                                                    lines = lines.substring(1);
+                                                }
+                                                y = (int) ((line * lineHeight) + yMargin);
+                                                g.drawString(lines, x + secondColumnOffset, y);
+                                                line += 1.8;
                                             }
-                                            paragraph = paragraph.substring(lines.length());
-                                            if (lines.substring(0, 1).equals(" ")) {
-                                                lines = lines.substring(1);
+                                        } else {
+                                            g.drawString(ob.values[i], x + secondColumnOffset, y);
+                                            if (!(i == ob.values.length - 1)) {
+                                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
                                             }
-                                            y = (int) ((line * lineHeight) + yMargin);
-                                            g.drawString(lines, x + secondColumnOffset, y);
                                             line += 1.8;
                                         }
-                                    } else {
-                                        g.drawString(ob.values[i], x + secondColumnOffset, y);
-                                        if (!(i == ob.values.length - 1)) {
-                                            g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
-                                        }
-                                        line += 1.8;
                                     }
+
                                 }
+                                g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
+                                g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
+                            } else {
+                                line+= 4;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                x = 40;
+                                g.drawString("____________________________", x, y);
+                                g.drawString("____________________________", width - 220, y);
+                                line += 1.7;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                g.drawString("Unterschrift Arbeitnehmer", x, y);
+                                g.drawString("Unterschrift Arbeitgeber", width - 220, y);
                             }
-                            g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
-                            g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
                         }
 
                         //Footer
@@ -551,49 +610,62 @@ public class ArbeitsmittelPrinter {
                         int y;
 
                         for (IVObject ob : objectPageList.get(pageIndex)) {
-                            int yStart;
-                            g.setFont(tableHeaderF);
-                            line += 2;
-                            x = xMargin + 10;
-                            int secondColumnOffset = 200;
-                            y = (int) ((line * lineHeight) + yMargin);
-                            yStart = y - 15;
-                            g.drawString("Arbeitsmittel:", x, y);
-                            g.drawString(ob.values[0], x + secondColumnOffset, y);
-                            g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
-                            g.setFont(tableF);
-                            line += 1.8;
-                            for (int i = 1; i < ob.values.length; i++) {
-                                if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
-                                    y = (int) ((line * lineHeight) + yMargin);
-                                    g.drawString(Utils.ivObjectToDisplayable(ob.objectType.getAttributes()[i]), x, y);
+                            if (!ob.values[0].equals("sign")) {
 
-                                    if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn){
-                                        String paragraph = ob.values[i];
-                                        while (paragraph.length() > 0) {
-                                            String lines = paragraph;
-                                            while (getTextWidth(lines, tableF) > max_width_secondColumn) {
-                                                lines = lines.substring(0, lines.lastIndexOf(" "));
+                                int yStart;
+                                g.setFont(tableHeaderF);
+                                line += 2;
+                                x = xMargin + 10;
+                                int secondColumnOffset = 200;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                yStart = y - 15;
+                                g.drawString("Arbeitsmittel:", x, y);
+                                g.drawString(ob.values[0], x + secondColumnOffset, y);
+                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
+                                g.setFont(tableF);
+                                line += 1.8;
+                                for (int i = 1; i < ob.values.length; i++) {
+                                    if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
+                                        y = (int) ((line * lineHeight) + yMargin);
+                                        g.drawString(Utils.ivObjectToDisplayable(ob.objectType.getAttributes()[i]), x, y);
+
+                                        if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn) {
+                                            String paragraph = ob.values[i];
+                                            while (paragraph.length() > 0) {
+                                                String lines = paragraph;
+                                                while (getTextWidth(lines, tableF) > max_width_secondColumn) {
+                                                    lines = lines.substring(0, lines.lastIndexOf(" "));
+                                                }
+                                                paragraph = paragraph.substring(lines.length());
+                                                if (lines.substring(0, 1).equals(" ")) {
+                                                    lines = lines.substring(1);
+                                                }
+                                                y = (int) ((line * lineHeight) + yMargin);
+                                                g.drawString(lines, x + secondColumnOffset, y);
+                                                line += 1.8;
                                             }
-                                            paragraph = paragraph.substring(lines.length());
-                                            if (lines.substring(0, 1).equals(" ")) {
-                                                lines = lines.substring(1);
+                                        } else {
+                                            g.drawString(ob.values[i], x + secondColumnOffset, y);
+                                            if (!(i == ob.values.length - 1)) {
+                                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
                                             }
-                                            y = (int) ((line * lineHeight) + yMargin);
-                                            g.drawString(lines, x + secondColumnOffset, y);
                                             line += 1.8;
                                         }
-                                    } else {
-                                        g.drawString(ob.values[i], x + secondColumnOffset, y);
-                                        if (!(i == ob.values.length - 1)) {
-                                            g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
-                                        }
-                                        line += 1.8;
                                     }
                                 }
+                                g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
+                                g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
+                            } else {
+                                line+= 4;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                x = 40;
+                                g.drawString("____________________________", x, y);
+                                g.drawString("____________________________", width - 220, y);
+                                line += 1.7;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                g.drawString("Unterschrift Arbeitnehmer", x, y);
+                                g.drawString("Unterschrift Arbeitgeber", width - 220, y);
                             }
-                            g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
-                            g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
                         }
 
                         //Footer
@@ -601,6 +673,167 @@ public class ArbeitsmittelPrinter {
                         g.drawString("Arbeitsmittelanhang", xMargin, height - 30);
                         int showIndex = pageIndex + 1;
                         g.drawString("Seite " + showIndex + "/" + objectPageList.size(), (int) getXRight("Seite " + pageIndex + "/" + objectPageList.size(), g.getFontMetrics()), height - 30);
+                        Color temp = g.getColor();
+                        g.setColor(new Color(169, 169, 169));
+                        g.drawLine(xMargin, height - 40, width, height - 40);
+                        g.setColor(temp);
+
+                        return PAGE_EXISTS;
+                    }
+                    return NO_SUCH_PAGE;
+                }
+                case 3 -> {
+                    double line = 1;
+                    if (pageIndex == 0) {
+                        g.setFont(titleF);
+                        int y = (int) ((line * lineHeight) + yMargin);
+                        int x = (int) getXMiddle("Arbeitsmittelrückgabe", g.getFontMetrics());
+
+                        g.drawString("Arbeitsmittelrückgabe", x, y);
+                        line += 2;
+                        g.setFont(standardF);
+                        y = (int) ((line * lineHeight) + yMargin);
+                        x = (int) getXMiddle("Datum: " + Utils.getDateTimeNowDay(), g.getFontMetrics());
+                        g.drawString("Datum: " + Utils.getDateTimeNowDay(), x, y);
+                        line += 3;
+
+                        for (IVObjectRet ob : objectPageListRet.get(pageIndex)) {
+                            if (!ob.values[0].equals("sign")) {
+                                int yStart;
+                                g.setFont(tableHeaderF);
+                                line += 2;
+                                x = xMargin + 10;
+                                int secondColumnOffset = 200;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                yStart = y - 15;
+                                g.drawString("Arbeitsmittel:", x, y);
+                                g.drawString(ob.values[0], x + secondColumnOffset, y);
+                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
+                                g.setFont(tableF);
+                                line += 1.8;
+                                for (int i = 1; i < ob.values.length; i++) {
+                                    if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
+                                        y = (int) ((line * lineHeight) + yMargin);
+                                        g.drawString(Utils.ivObjectRetToDisplayable(ob.objectTypes[i]), x, y);
+
+                                        if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn) {
+                                            String paragraph = ob.values[i];
+                                            while (paragraph.length() > 0) {
+                                                String lines = paragraph;
+                                                while (getTextWidth(lines, tableF) > max_width_secondColumn) {
+                                                    lines = lines.substring(0, lines.lastIndexOf(" "));
+                                                }
+                                                paragraph = paragraph.substring(lines.length());
+                                                if (lines.substring(0, 1).equals(" ")) {
+                                                    lines = lines.substring(1);
+                                                }
+                                                y = (int) ((line * lineHeight) + yMargin);
+                                                g.drawString(lines, x + secondColumnOffset, y);
+                                                line += 1.8;
+                                            }
+                                        } else {
+                                            g.drawString(ob.values[i], x + secondColumnOffset, y);
+                                            if (!(i == ob.values.length - 1)) {
+                                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
+                                            }
+                                            line += 1.8;
+                                        }
+                                    }
+                                }
+                                g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
+                                g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
+                            } else {
+                                line+= 4;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                x = 40;
+                                g.drawString("____________________________", x, y);
+                                g.drawString("____________________________", width - 220, y);
+                                line += 1.7;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                g.drawString("Unterschrift Arbeitnehmer", x, y);
+                                g.drawString("Unterschrift Arbeitgeber", width - 220, y);
+                            }
+                        }
+
+                        //Footer
+                        g.setFont(footF);
+                        g.drawString("Arbeitsmittelrückgabe", xMargin, height - 30);
+                        int showIndex = pageIndex + 1;
+                        g.drawString("Seite " + showIndex + "/" + objectPageListRet.size(), (int) getXRight("Seite " + pageIndex + "/" + objectPageListRet.size(), g.getFontMetrics()), height - 30);
+                        Color temp = g.getColor();
+                        g.setColor(new Color(169, 169, 169));
+                        g.drawLine(xMargin, height - 40, width, height - 40);
+                        g.setColor(temp);
+
+                        return PAGE_EXISTS;
+                    } else if (pageIndex < objectPageListRet.size()) {
+                        int x;
+                        int y;
+
+                        for (IVObjectRet ob : objectPageListRet.get(pageIndex)) {
+                            if (!ob.values[0].equals("sign")) {
+
+                                int yStart;
+                                g.setFont(tableHeaderF);
+                                line += 2;
+                                x = xMargin + 10;
+                                int secondColumnOffset = 200;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                yStart = y - 15;
+                                g.drawString("Arbeitsmittel:", x, y);
+                                g.drawString(ob.values[0], x + secondColumnOffset, y);
+                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
+                                g.setFont(tableF);
+                                line += 1.8;
+                                for (int i = 1; i < ob.values.length; i++) {
+                                    if (!Objects.equals(ob.values[i], "null") && !Objects.equals(ob.values[i], " - ")) {
+                                        y = (int) ((line * lineHeight) + yMargin);
+                                        g.drawString(Utils.ivObjectRetToDisplayable(ob.objectTypes[i]), x, y);
+
+                                        if (getTextWidth(ob.values[i], tableF) > max_width_secondColumn) {
+                                            String paragraph = ob.values[i];
+                                            while (paragraph.length() > 0) {
+                                                String lines = paragraph;
+                                                while (getTextWidth(lines, tableF) > max_width_secondColumn) {
+                                                    lines = lines.substring(0, lines.lastIndexOf(" "));
+                                                }
+                                                paragraph = paragraph.substring(lines.length());
+                                                if (lines.substring(0, 1).equals(" ")) {
+                                                    lines = lines.substring(1);
+                                                }
+                                                y = (int) ((line * lineHeight) + yMargin);
+                                                g.drawString(lines, x + secondColumnOffset, y);
+                                                line += 1.8;
+                                            }
+                                        } else {
+                                            g.drawString(ob.values[i], x + secondColumnOffset, y);
+                                            if (!(i == ob.values.length - 1)) {
+                                                g.drawLine(xMargin + 5, y + 5, width - xMargin + 25, y + 5);
+                                            }
+                                            line += 1.8;
+                                        }
+                                    }
+                                }
+                                g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
+                                g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
+                            } else {
+                                line+= 4;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                x = 40;
+                                g.drawString("____________________________", x, y);
+                                g.drawString("____________________________", width - 220, y);
+                                line += 1.7;
+                                y = (int) ((line * lineHeight) + yMargin);
+                                g.drawString("Unterschrift Arbeitnehmer", x, y);
+                                g.drawString("Unterschrift Arbeitgeber", width - 220, y);
+                            }
+                        }
+
+                        //Footer
+                        g.setFont(footF);
+                        g.drawString("Arbeitsmittelrückgabe", xMargin, height - 30);
+                        int showIndex = pageIndex + 1;
+                        g.drawString("Seite " + showIndex + "/" + objectPageListRet.size(), (int) getXRight("Seite " + pageIndex + "/" + objectPageListRet.size(), g.getFontMetrics()), height - 30);
                         Color temp = g.getColor();
                         g.setColor(new Color(169, 169, 169));
                         g.drawLine(xMargin, height - 40, width, height - 40);
@@ -652,7 +885,43 @@ public class ArbeitsmittelPrinter {
         private double calcTableLines(IVObject ivObject, int width) {
             double lines = 0;
             for (String par : ivObject.values) {
-                if (getTextWidth(par, tableF) > width){
+                if (getTextWidth(par, tableF) > width) {
+
+                    double temp = 0;
+                    while (par.length() > 0) {
+                        String s = par;
+                        int cutOff = 0;
+                        if (getTextWidth(s, tableF) > (width)) {
+                            while (getTextWidth(s, tableF) > (width)) {
+                                cutOff = s.lastIndexOf(" ");
+                                s = s.substring(0, cutOff);
+                            }
+                            if (s.indexOf(" ") == 0) {
+                                s = s.substring(1);
+                            }
+                            temp += 1.8;
+                            par = par.substring(cutOff);
+                        } else {
+                            if (s.indexOf(" ") == 0) {
+                                s = s.substring(1);
+                            }
+                            temp += 1.8;
+                            par = "";
+                        }
+                    }
+                    lines += temp;
+
+                } else if (!par.equals("null") && !par.equals(" - ")) {
+                    lines += 1.8;
+                }
+            }
+            return lines;
+        }
+
+        private double calcTableLines(IVObjectRet ivObject, int width) {
+            double lines = 0;
+            for (String par : ivObject.values) {
+                if (getTextWidth(par, tableF) > width) {
 
                     double temp = 0;
                     while (par.length() > 0) {

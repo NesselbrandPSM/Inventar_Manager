@@ -1,6 +1,9 @@
 package GUI.GUIS.Dialogs;
 
+import Main.utility.Constants;
+import Main.utility.Printer.ArbeitsmittelPrinter;
 import Main.utility.UtilPrintables.IVObject;
+import Main.utility.UtilPrintables.ReturnTripel;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLInsertStatements;
@@ -30,6 +33,7 @@ public class UserEntryDialog extends JDialog {
     private JTextArea workingDays;
     private JTextArea workingHours;
     private JCheckBox entryTransferCheckbox;
+    private JTextArea workContractDate;
 
     private DefaultListModel<String> userEntryListModel;
     private DefaultListModel<String> arbeitsmittelListModel;
@@ -40,9 +44,12 @@ public class UserEntryDialog extends JDialog {
 
     private ArrayList<String> addedIV_Numbers;
     private ArrayList<SQLStatement> retrievedIV_NumbersStatements;
+    private ArrayList<ReturnTripel> returnTripels;
 
     public UserEntryDialog(String user) {
+        this.setTitle("Nutzer Bearbeiten");
         addedIV_Numbers = new ArrayList<>();
+        returnTripels = new ArrayList<>();
         retrievedIV_NumbersStatements = new ArrayList<>();
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
@@ -63,6 +70,7 @@ public class UserEntryDialog extends JDialog {
 
         workingHours.setText(userData[1]);
         workingDays.setText(userData[2]);
+        workContractDate.setText(userData[5]);
 
         if (Objects.equals(userData[3], "1")){
             homeofficeCheckBox.setSelected(true);
@@ -107,6 +115,7 @@ public class UserEntryDialog extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                Constants.setActive = false;
                 dispose();
             }
         });
@@ -166,6 +175,9 @@ public class UserEntryDialog extends JDialog {
                                     "update udmapping SET r_date = '" + Utils.getDateTimeNow() + "' where user = '" + userlabel.getText() + "' and iv_number = '" + s + "' and r_date = '-1'"
                             );
                             retrievedIV_NumbersStatements.add(statement);
+                            ReturnTripel ret = new ReturnTripel(s, Utils.newConditionStatus, Utils.newConditionNote);
+                            returnTripels.add(ret);
+
                             Utils.newConditionStatus = "null";
                             Utils.newConditionNote = "null";
                         }
@@ -178,7 +190,14 @@ public class UserEntryDialog extends JDialog {
     }
 
     private void onOK() {
+        Constants.setActive = true;
         SQLConnector sqlConnector = new SQLConnector();
+
+        if (returnTripels.size() > 0){
+            Constants.returnList = sqlSelectStatements.getReturnList(returnTripels);
+            ArbeitsmittelPrinter.print("", 3);
+        }
+
         for (SQLStatement statement : retrievedIV_NumbersStatements) {
             sqlConnector.query(statement);
         }
@@ -193,7 +212,7 @@ public class UserEntryDialog extends JDialog {
             sqlUpdateStatements.updateEntryUserAndStatus(data[0], iv_number, status, Utils.getTableFromShortCut(iv_number.substring(0, 2)));
         }
 
-        String[] userData = new String[5];
+        String[] userData = new String[6];
         userData[0] = streetNRField.getText() + " | " + plzField.getText() + " | " + cityField.getText();
         userData[1] = workingHours.getText();
         userData[2] = workingDays.getText();
@@ -207,6 +226,7 @@ public class UserEntryDialog extends JDialog {
         } else {
             userData[4] = "0";
         }
+        userData[5] = workContractDate.getText();
 
         sqlUpdateStatements.updateUserData(userlabel.getText(), userData);
 

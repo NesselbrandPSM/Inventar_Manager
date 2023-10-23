@@ -2,11 +2,12 @@ package SQL.Statements;
 
 import GUI.util.ColumNames;
 import Main.utility.UtilPrintables.IVObject;
+import Main.utility.UtilPrintables.IVObjectRet;
 import Main.utility.UtilPrintables.IVObjectType;
+import Main.utility.UtilPrintables.ReturnTripel;
 import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.util.SQLStatement;
-import org.apache.commons.collections4.iterators.SingletonIterator;
 
 import javax.swing.*;
 import java.sql.ResultSet;
@@ -131,6 +132,20 @@ public class SQLSelectStatements {
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
                     "where desk.active = 1"));
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
+            //region Misc
+            resultSet = connector.query(new SQLStatement("select miscellaneous.iv_number, company.company, miscellaneous.mc_key " +
+                    "from company " +
+                    "join miscellaneous " +
+                    "on miscellaneous.inventory_company_key = company.company_key " +
+                    "where miscellaneous.active = 1"));
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
@@ -604,6 +619,33 @@ public class SQLSelectStatements {
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 
+    public String[][] getAllFromMCView(int key) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select * from miscellaneous " +
+                        "join company on miscellaneous.inventory_company_key=company.company_key " +
+                        "join user on miscellaneous.inventory_user_key=user.name " +
+                        "where miscellaneous.mc_key = " + key
+        ));
+        try {
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : ColumNames.allAttributesMC) {
+                    if (s.equals("Primärschlüssel")) {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "mc"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
     public String[][] getAllCompanys() {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
@@ -923,7 +965,7 @@ public class SQLSelectStatements {
         return iv_numberList.toArray(new String[0]);
     }
 
-    public String[] getUserAttributes(String userName){
+    public String[] getUserAttributes(String userName) {
         ArrayList<String> attr = new ArrayList<>();
 
         ResultSet res = connector.query(new SQLStatement(
@@ -937,6 +979,7 @@ public class SQLSelectStatements {
             attr.add(res.getString("working_days"));
             attr.add(res.getString("homeoffice"));
             attr.add(res.getString("entrytransfer"));
+            attr.add(res.getString("contractDate"));
         } catch (SQLException e) {
             throw new RuntimeException();
         }
@@ -944,7 +987,7 @@ public class SQLSelectStatements {
         return attr.toArray(new String[0]);
     }
 
-    public String[] getConditions(String iv_number){
+    public String[] getConditions(String iv_number) {
         ResultSet res = connector.query(new SQLStatement(
                 "select c_status, c_note from " + Utils.getTableFromShortCut(iv_number.substring(0, 2)) + " where iv_number = '" + iv_number + "'"
         ));
@@ -957,5 +1000,32 @@ public class SQLSelectStatements {
             throw new RuntimeException(e);
         }
         return data;
+    }
+
+    public ArrayList<IVObjectRet> getReturnList(ArrayList<ReturnTripel> retTripelList){
+        ArrayList<IVObjectRet> objects = new ArrayList<>();
+
+        try {
+            for (ReturnTripel retTripel : retTripelList) {
+                String iv_number = retTripel.iv_number;
+                String table = Utils.getTableFromShortCut(iv_number.substring(0, 2));
+
+                ResultSet res = connector.query(new SQLStatement("select * from " + table + " where active = 1 and iv_number = '" + iv_number + "'"));
+                res.next();
+
+                ArrayList<String> resList = new ArrayList<>();
+                for (String s : IVObjectType.getAttributes(table)) {
+                    resList.add(String.valueOf(res.getObject(s)));
+                }
+                resList.add(retTripel.new_condition);
+                resList.add(retTripel.new_condition_note);
+
+                objects.add(new IVObjectRet(resList.toArray(new String[0]), IVObjectRet.getAttributes(table)));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return objects;
     }
 }

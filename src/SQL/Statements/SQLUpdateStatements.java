@@ -39,6 +39,10 @@ public class SQLUpdateStatements {
         sb.append(data[3]);
         sb.append(", ");
 
+        sb.append("contractDate = '");
+        sb.append(data[5]);
+        sb.append("', ");
+
         sb.append("entrytransfer = ");
         sb.append(data[4]);
 

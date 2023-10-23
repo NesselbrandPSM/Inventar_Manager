@@ -25,6 +25,7 @@ public class ConditionModifyDialog extends JDialog {
     private static String iv_number;
 
     public ConditionModifyDialog() {
+        this.setTitle("Zustandsänderung: " + iv_number);
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         setContentPane(contentPane);
         setModal(true);

@@ -24,7 +24,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "2";
+    private static final String startup_configuration = "main";
 
     public static Main m;
 
@@ -72,7 +72,7 @@ public class Main {
                 LabelPrinter.print("NB-0001");
             }
             case "5" -> {
-                System.out.println(ADWrapper.getFullName("d.vitale"));
+                System.out.println(ADWrapper.getFullName("m.wolf"));
             }
             case "6" -> {
                 String s = "askdfj asdfjals aslkjfdjjdj<<ret>>";

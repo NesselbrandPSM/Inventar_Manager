@@ -1,7 +1,11 @@
 package Main.utility;
 
+import Main.utility.UtilPrintables.IVObject;
+import Main.utility.UtilPrintables.IVObjectRet;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
+
+import java.util.ArrayList;
 
 public class Constants {
 
@@ -16,6 +20,9 @@ public class Constants {
     public static String[] typs;
 
     public static boolean printable = false;
+    public static boolean setActive = false;
+
+    public static ArrayList<IVObjectRet> returnList;
 
     public static void init(){
         SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());

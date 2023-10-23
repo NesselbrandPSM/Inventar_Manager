@@ -80,6 +80,8 @@ public class Utils {
             case "Sim Nummer" -> ret = "sim_number";
             case "Sim Pin" -> ret = "sim_pin";
             case "Letzte Änderung" -> ret = "last_modified";
+            case "Bezeichner" -> ret = "name";
+            case "Typ" -> ret = "typ";
         }
         return ret;
     }
@@ -125,6 +127,7 @@ public class Utils {
             case "pr" -> ret = "printer";
             case "ds" -> ret = "dockingstation";
             case "dk" -> ret = "desk";
+            case "mc" -> ret = "miscellaneous";
         }
         return ret;
     }
@@ -149,8 +152,37 @@ public class Utils {
         return ret;
     }
 
+    public static String ivObjectRetToDisplayable(String s) {
+        String ret = "";
+        switch (s) {
+            case "modell" -> ret = "Modell:";
+            case "manufacturer" -> ret = "Hersteller:";
+            case "s_number" -> ret = "Seriennummer:";
+            case "c_status" -> ret = "Alter Zustand:";
+            case "c_note" -> ret = "Alte Zustandsbemerkung:";
+            case "new_c_note" -> ret = "Neue Zustandsbemerkung";
+            case "new_c_status" -> ret = "Neuer Zustand:";
+            case "esim_number" -> ret = "E-Sim Nummer:";
+            case "esim_pin" -> ret = "E-Sim Pin:";
+            case "call_number" -> ret = "Rufnummer:";
+            case "tariff" -> ret = "Tarif:";
+            case "sim_pin" -> ret = "Simkarten Pin:";
+            case "display_pin" -> ret = "Display Pin:";
+            case "name" -> ret = "Bezeichner:";
+            case "typ" -> ret = "Typ:";
+        }
+        return ret;
+    }
+
+
     public static String getDateTimeNow(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
+    public static String getDateTimeNowDay(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }

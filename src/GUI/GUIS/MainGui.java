@@ -161,6 +161,10 @@ public class MainGui {
                         setTextField1(ColumNames.allAttributesDK);
                         setTextField2(sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[2]))[0]);
                     }
+                    case "mc" -> {
+                        setTextField1(ColumNames.allAttributesMC);
+                        setTextField2(sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[2]))[0]);
+                    }
                 }
             }
         });

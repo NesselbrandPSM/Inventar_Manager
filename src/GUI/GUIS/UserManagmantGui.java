@@ -78,7 +78,10 @@ public class UserManagmantGui {
 
         aktivButton.addActionListener(e -> {
             UserEntryDialog.start((String) userTableModell.getRow(userTable.getSelectedRow())[0]);
-            changeStatus(1);
+            if (Constants.setActive){
+                changeStatus(1);
+                Constants.setActive = false;
+            }
         });
         inaktivButton.addActionListener(e -> changeStatus(-1));
         neuButton.addActionListener(e -> changeStatus(0));
@@ -143,24 +146,26 @@ public class UserManagmantGui {
                 String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
                 String[] data = sqlSelectStatements.getUserAttributes(user);
 
-                PrinterDialog.start(user, data);
-                if (Constants.printable){
-                    boolean printArbeitsmittelList = false;
-                    if (Objects.equals(data[3], "1")) {
-                        printArbeitsmittelList = true;
-                        ArbeitsmittelPrinter.print(user, 1);
+                if (data[3].equals("1") || data[4].equals("1")){
+                    PrinterDialog.start(user, data);
+                    if (Constants.printable){
+                        boolean printArbeitsmittelList = false;
+                        if (Objects.equals(data[3], "1")) {
+                            printArbeitsmittelList = true;
+                            ArbeitsmittelPrinter.print(user, 1);
+                        }
+                        if (Objects.equals(data[4], "1")) {
+                            printArbeitsmittelList = true;
+                            ArbeitsmittelPrinter.print(user, 0);
+                        }
+                        if (printArbeitsmittelList){
+                            ArbeitsmittelPrinter.print(user, 2);
+                        }
                     }
-                    if (Objects.equals(data[4], "1")) {
-                        printArbeitsmittelList = true;
-                        ArbeitsmittelPrinter.print(user, 0);
-                    }
-                    if (printArbeitsmittelList){
-                        ArbeitsmittelPrinter.print(user, 2);
-                    }
+                    Constants.resetParagraphsHome();
+                    Constants.resetParagraphsUeberlassung();
+                    Constants.printable = false;
                 }
-                Constants.resetParagraphsHome();
-                Constants.resetParagraphsUeberlassung();
-                Constants.printable = false;
             }
         });
     }

@@ -26,6 +26,8 @@
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:max(d;4px):noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:30px:noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:max(d;120px):grow"/>
@@ -63,7 +65,7 @@
         <children>
           <component id="83df4" class="javax.swing.JButton" binding="buttonOK">
             <constraints>
-              <grid row="26" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="28" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="0" right="10" defaultalign-vert="false"/>
             </constraints>
             <properties>
@@ -72,7 +74,7 @@
           </component>
           <component id="cfc4b" class="javax.swing.JButton" binding="buttonCancel">
             <constraints>
-              <grid row="26" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="28" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="0" right="10" defaultalign-vert="false"/>
             </constraints>
             <properties>
@@ -155,7 +157,7 @@
           </component>
           <component id="d0410" class="javax.swing.JCheckBox" binding="homeofficeCheckBox" default-binding="true">
             <constraints>
-              <grid row="14" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="16" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="9" bottom="0" right="0"/>
             </constraints>
             <properties>
@@ -165,7 +167,7 @@
           </component>
           <component id="4ea32" class="javax.swing.JCheckBox" binding="entryTransferCheckbox">
             <constraints>
-              <grid row="14" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="16" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="9" bottom="0" right="0"/>
             </constraints>
             <properties>
@@ -175,7 +177,7 @@
           </component>
           <component id="7e1eb" class="javax.swing.JLabel">
             <constraints>
-              <grid row="16" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="18" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="0" right="0"/>
             </constraints>
             <properties>
@@ -184,7 +186,7 @@
           </component>
           <component id="3f748" class="javax.swing.JLabel">
             <constraints>
-              <grid row="16" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="18" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="10" left="10" bottom="0" right="0"/>
             </constraints>
             <properties>
@@ -193,7 +195,7 @@
           </component>
           <scrollpane id="2b8c5">
             <constraints>
-              <grid row="18" column="0" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="20" column="0" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
             </constraints>
             <properties/>
@@ -209,7 +211,7 @@
           </scrollpane>
           <scrollpane id="9773d">
             <constraints>
-              <grid row="18" column="6" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="20" column="6" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="10" defaultalign-horz="false" defaultalign-vert="false"/>
             </constraints>
             <properties/>
@@ -225,7 +227,7 @@
           </scrollpane>
           <component id="efad6" class="javax.swing.JButton" binding="toUserListButton">
             <constraints>
-              <grid row="20" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="22" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <forms/>
             </constraints>
             <properties>
@@ -236,7 +238,7 @@
           </component>
           <component id="e817c" class="javax.swing.JButton" binding="removeFromUserList">
             <constraints>
-              <grid row="22" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="24" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <forms/>
             </constraints>
             <properties>
@@ -284,6 +286,24 @@
           <component id="7ff05" class="javax.swing.JTextArea" binding="workingHours">
             <constraints>
               <grid row="12" column="6" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="83ae7" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="14" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="10" bottom="0" right="0"/>
+            </constraints>
+            <properties>
+              <text value="Arbeitsvertragsdatum:"/>
+            </properties>
+          </component>
+          <component id="10202" class="javax.swing.JTextArea" binding="workContractDate">
+            <constraints>
+              <grid row="14" column="6" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
               <forms defaultalign-horz="false" defaultalign-vert="false"/>

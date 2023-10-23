@@ -42,4 +42,8 @@ public class ColumNames {
             "PC-IV-Nummer","HD-IV-Nummer","TE-IV-Nummer","DS-IV-Nummer","SC-IV-Nummer","MO1-IV-Nummer","MO2-IV-Nummer","Maus","Tastatur",
             "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
+
+    public static final String[] allAttributesMC = new String[]{
+            "Primärschlüssel", "Inventar Nummer", "Nutzer", "Nutzer Email", "Firma", "Typ", "Bezeichner", "Status", "Zustand", "Zustandsbemerkung", "Bemerkung", "Letzte Änderung"
+    };
 }
