@@ -110,8 +110,12 @@ public class MainGui {
                 } else {
                     setShowAll(false);
                     switch (searchSelectorComboBox.getSelectedItem().toString()) {
-                        case "Inventar Nummer" -> updateShowAllTableModel(1);
-                        case "Firma" -> updateShowAllTableModel(2);
+                        case "Inventar Nummer":
+                            updateShowAllTableModel(1);
+                            break;
+                        case "Firma":
+                            updateShowAllTableModel(2);
+                            break;
                     }
                     searchTextField.setText("");
                 }
@@ -129,41 +133,50 @@ public class MainGui {
                 String[] selRow = (String[]) tableModel.getRow(selectedRow);
                 selectedItemTextPane.setText(selRow[0]);
                 switch (selRow[0].substring(0, 2).toLowerCase()) {
-                    case "pc" -> {
+                    case "pc": {
                         setTextField1(ColumNames.allAttributesPC);
                         setTextField2(sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "pr" -> {
+                    case "pr": {
                         setTextField1(ColumNames.allAttributesPR);
                         setTextField2(sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "sc" -> {
+                    case "sc": {
                         setTextField1(ColumNames.allAttributesSC);
                         setTextField2(sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "mo" -> {
+                    case "mo": {
                         setTextField1(ColumNames.allAttributesMO);
                         setTextField2(sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "te" -> {
+                    case "te": {
                         setTextField1(ColumNames.allAttributesTE);
                         setTextField2(sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "hd" -> {
+                    case "hd": {
                         setTextField1(ColumNames.allAttributesHD);
                         setTextField2(sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "ds" -> {
+                    case "ds": {
                         setTextField1(ColumNames.allAttributesDS);
                         setTextField2(sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "dk" -> {
+                    case "dk": {
                         setTextField1(ColumNames.allAttributesDK);
                         setTextField2(sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
-                    case "mc" -> {
+                    case "mc": {
                         setTextField1(ColumNames.allAttributesMC);
                         setTextField2(sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[2]))[0]);
+                        break;
                     }
                 }
             }
@@ -240,7 +253,7 @@ public class MainGui {
 
     public void updateShowAllTableModel(int flags) {
         switch (flags) {
-            case 0 -> { // show Default View
+            case 0: { // show Default View
                 if (lastactivefilterbox.equals("")) {
                     statusList.add("updating table ...", 0.3);
                     tableModel.update(sqlSelectStatements.getDefaultView());
@@ -248,8 +261,9 @@ public class MainGui {
                 } else {
                     updateShowAllTableModel(3);
                 }
+                break;
             }
-            case 1 -> { // show Search View for iv_number
+            case 1 : { // show Search View for iv_number
                 statusList.add("searching ...", 0.2);
                 String[][] result = sqlSelectStatements.getSelectViewIV_Number(searchTextField.getText());
                 if (result == null) {
@@ -261,8 +275,9 @@ public class MainGui {
                     tableModel.update(result);
                 }
                 showAllTableModelFlag = 1;
+                break;
             }
-            case 2 -> { // show search View for company
+            case 2 : { // show search View for company
                 statusList.add("searching ...", 0.2);
                 String[][] result;
                 if (lastactivefilterbox.equals("")) {
@@ -279,8 +294,9 @@ public class MainGui {
                     tableModel.update(result);
                 }
                 showAllTableModelFlag = 2;
+                break;
             }
-            case 3 -> { // show search View for type
+            case 3 : { // show search View for type
                 statusList.add("searching ...", 0.2);
                 String[][] result = sqlSelectStatements.getSelectViewType(Utils.filterBoxTextToAccordingDataTable(lastactivefilterbox));
                 if (result == null) {
@@ -292,6 +308,7 @@ public class MainGui {
                     tableModel.update(result);
                 }
                 showAllTableModelFlag = 3;
+                break;
             }
         }
     }
@@ -301,7 +318,7 @@ public class MainGui {
         if (r >= 0 && r < table1.getRowCount()) {
             table1.setRowSelectionInterval(0, r);
             if (((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk") ||
-                    ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr")){
+                    ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr")) {
                 JPopupMenu popupMenu = createLeftClickPopUpForTable(1);
                 popupMenu.show(e.getComponent(), e.getX(), e.getY());
             } else {
@@ -367,7 +384,7 @@ public class MainGui {
         });
         //endregion
 
-        if (flag != 1){
+        if (flag != 1) {
             popupMenu.add("Zugehöriges Desk Finden");
             //region desk finden
             popupMenu.getComponent(2).addMouseListener(new MouseAdapter() {
@@ -375,22 +392,22 @@ public class MainGui {
                 public void mouseReleased(MouseEvent e) {
                     if (e.getButton() == MouseEvent.BUTTON1) {
                         if (((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("pr") ||
-                                ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk")){
-                            JOptionPane.showConfirmDialog(null, "Das angeschaute Objekt hat keine Deskzugehörigkeit!", "Desk",JOptionPane.DEFAULT_OPTION);
+                                ((String[]) tableModel.getRow(table1.getSelectedRow()))[0].substring(0, 2).equalsIgnoreCase("dk")) {
+                            JOptionPane.showConfirmDialog(null, "Das angeschaute Objekt hat keine Deskzugehörigkeit!", "Desk", JOptionPane.DEFAULT_OPTION);
                             return;
                         }
                         String[][] result = sqlSelectStatements.getCorospondingDesk(((String[]) tableModel.getRow(table1.getSelectedRow()))[0]);
                         StringBuilder s = new StringBuilder();
                         for (String[] st : result) {
                             s.append(st[0]);
-                            if (result.length > 1){
+                            if (result.length > 1) {
                                 s.append(", ");
                             }
                         }
-                        if (s.toString().equals("")){
-                            JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " hat kein zugehöriges Desk!" + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
+                        if (s.toString().equals("")) {
+                            JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " hat kein zugehöriges Desk!" + s.toString(), "Desk", JOptionPane.DEFAULT_OPTION);
                         } else {
-                            JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " gehört zu Desk: " + s.toString(), "Desk",JOptionPane.DEFAULT_OPTION);
+                            JOptionPane.showConfirmDialog(null, "Die Inventarnummer: " + ((String[]) tableModel.getRow(table1.getSelectedRow()))[0] + " gehört zu Desk: " + s.toString(), "Desk", JOptionPane.DEFAULT_OPTION);
                         }
                     }
                 }

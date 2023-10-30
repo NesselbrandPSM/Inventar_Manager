@@ -68,10 +68,18 @@ public class PC_Form {
             uncheckBoxes();
             checkBox.setSelected(true);
             switch (checkBox.getText()) {
-                case "PC" -> pcType = "PC";
-                case "Laptop" -> pcType = "NB";
-                case "Tablet" -> pcType = "TB";
-                case "ThinClient" -> pcType = "TC";
+                case "PC":
+                    pcType = "PC";
+                    break;
+                case "Laptop":
+                    pcType = "NB";
+                    break;
+                case "Tablet":
+                    pcType = "TB";
+                    break;
+                case "ThinClient":
+                    pcType = "TC";
+                    break;
             }
         };
 

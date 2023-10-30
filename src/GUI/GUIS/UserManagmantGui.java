@@ -78,7 +78,7 @@ public class UserManagmantGui {
 
         aktivButton.addActionListener(e -> {
             UserEntryDialog.start((String) userTableModell.getRow(userTable.getSelectedRow())[0]);
-            if (Constants.setActive){
+            if (Constants.setActive) {
                 changeStatus(1);
                 Constants.setActive = false;
             }
@@ -135,7 +135,7 @@ public class UserManagmantGui {
                 printArbeitsmittelList = true;
                 ArbeitsmittelPrinter.print(user, 0);
             }
-            if (printArbeitsmittelList){
+            if (printArbeitsmittelList) {
                 ArbeitsmittelPrinter.print(user, 2);
             }
         });
@@ -146,9 +146,9 @@ public class UserManagmantGui {
                 String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
                 String[] data = sqlSelectStatements.getUserAttributes(user);
 
-                if (data[3].equals("1") || data[4].equals("1")){
+                if (data[3].equals("1") || data[4].equals("1")) {
                     PrinterDialog.start(user, data);
-                    if (Constants.printable){
+                    if (Constants.printable) {
                         boolean printArbeitsmittelList = false;
                         if (Objects.equals(data[3], "1")) {
                             printArbeitsmittelList = true;
@@ -158,7 +158,7 @@ public class UserManagmantGui {
                             printArbeitsmittelList = true;
                             ArbeitsmittelPrinter.print(user, 0);
                         }
-                        if (printArbeitsmittelList){
+                        if (printArbeitsmittelList) {
                             ArbeitsmittelPrinter.print(user, 2);
                         }
                     }
@@ -220,9 +220,15 @@ public class UserManagmantGui {
         String[][] data = sqlSelectStatements.getAllUsersTableModel(x);
         for (int i = 0; i < data.length; i++) {
             switch (data[i][2]) {
-                case "0" -> data[i][2] = "neu";
-                case "-1" -> data[i][2] = "inaktiv";
-                case "1" -> data[i][2] = "aktiv";
+                case "0":
+                    data[i][2] = "neu";
+                    break;
+                case "-1":
+                    data[i][2] = "inaktiv";
+                    break;
+                case "1":
+                    data[i][2] = "aktiv";
+                    break;
             }
         }
         userTableModell.update(data);

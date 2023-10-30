@@ -50,15 +50,33 @@ public class MainInputGui {
             checkBox.setSelected(true);
 
             switch (checkBox.getText()) {
-                case "PC" -> show(pcForm.getPcPanel());
-                case "Printer" -> show(printerForm.getPrinterPanel());
-                case "Scanner" -> show(scannerForm.getScannerPanel());
-                case "Dockingstation" -> show(dockingstationForm.getDockingPanel());
-                case "Headset" -> show(headsetForm.getHeadsetPanel());
-                case "Monitor" -> show(monitorForm.getMonitorPanel());
-                case "Telephone" -> show(telephoneForm.getTelephonePanel());
-                case "Desk" -> show(deskForm.getDeskPanel());
-                case "Misc" -> show(miscellaneousForm.getPanel());
+                case "PC":
+                    show(pcForm.getPcPanel());
+                    break;
+                case "Printer":
+                    show(printerForm.getPrinterPanel());
+                    break;
+                case "Scanner":
+                    show(scannerForm.getScannerPanel());
+                    break;
+                case "Dockingstation":
+                    show(dockingstationForm.getDockingPanel());
+                    break;
+                case "Headset":
+                    show(headsetForm.getHeadsetPanel());
+                    break;
+                case "Monitor":
+                    show(monitorForm.getMonitorPanel());
+                    break;
+                case "Telephone":
+                    show(telephoneForm.getTelephonePanel());
+                    break;
+                case "Desk":
+                    show(deskForm.getDeskPanel());
+                    break;
+                case "Misc":
+                    show(miscellaneousForm.getPanel());
+                    break;
             }
         };
 
@@ -92,15 +110,33 @@ public class MainInputGui {
                 0);
         if (i == 0) {
             switch (currentTable) {
-                case "pc" -> sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
-                case "scanner" -> sqlInsertStatements.inputSCEntry(scannerForm.getArgs(currentIVNumber));
-                case "printer" -> sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
-                case "dockingstation" -> sqlInsertStatements.inputDSEntry(dockingstationForm.getArgs(currentIVNumber));
-                case "headset" -> sqlInsertStatements.inputHDEntry(headsetForm.getArgs(currentIVNumber));
-                case "monitor" -> sqlInsertStatements.inputMOEntry(monitorForm.getArgs(currentIVNumber));
-                case "telephone" -> sqlInsertStatements.inputTEEntry(telephoneForm.getArgs(currentIVNumber));
-                case "desk" -> sqlInsertStatements.inputDKEntry(deskForm.getArgs(currentIVNumber));
-                case "miscellaneous" -> sqlInsertStatements.inputMCEntry(miscellaneousForm.getArgs(currentIVNumber));
+                case "pc":
+                    sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
+                    break;
+                case "scanner":
+                    sqlInsertStatements.inputSCEntry(scannerForm.getArgs(currentIVNumber));
+                    break;
+                case "printer":
+                    sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
+                    break;
+                case "dockingstation":
+                    sqlInsertStatements.inputDSEntry(dockingstationForm.getArgs(currentIVNumber));
+                    break;
+                case "headset":
+                    sqlInsertStatements.inputHDEntry(headsetForm.getArgs(currentIVNumber));
+                    break;
+                case "monitor":
+                    sqlInsertStatements.inputMOEntry(monitorForm.getArgs(currentIVNumber));
+                    break;
+                case "telephone":
+                    sqlInsertStatements.inputTEEntry(telephoneForm.getArgs(currentIVNumber));
+                    break;
+                case "desk":
+                    sqlInsertStatements.inputDKEntry(deskForm.getArgs(currentIVNumber));
+                    break;
+                case "miscellaneous":
+                    sqlInsertStatements.inputMCEntry(miscellaneousForm.getArgs(currentIVNumber));
+                    break;
             }
         }
     }

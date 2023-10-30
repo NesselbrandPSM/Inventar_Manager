@@ -112,7 +112,7 @@ public class ArbeitsmittelPrinter {
                 // - <<contract_date>> => Arbeitsvertragsdatum
                 // - <<ret>> => zeilenumbruch
 
-                case 0 -> {
+                case 0: {
                     ArrayList<String> temp = new ArrayList<>();
                     for (String s : Constants.PRINT_paragraphsUeberlassung) {
                         if (!s.equals("")) {
@@ -190,8 +190,9 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Unterschrift Arbeitnehmer", xMargin, 0, standardF));
                     pageLineList.get(page).add(new Line("Unterschrift Arbeitgeber", width - getTextWidth("________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
+                    break;
                 }
-                case 1 -> {
+                case 1: {
                     ArrayList<ArrayList<String>> temp = new ArrayList<>();
                     for (int i = 0; i < Constants.PRINT_paragraphsHomeOffice.length; i++) {
                         if (!Constants.PRINT_paragraphsHomeOffice[i][1].equals("")) {
@@ -325,8 +326,9 @@ public class ArbeitsmittelPrinter {
                     pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitnehmer", xMargin, 0, standardF, 0, 0));
                     pageLineList.get(page).add(new Line("Ort/Datum/Unterschrift Arbeitgeber", width - getTextWidth("____________________________________", standardF) - 20, 3, standardF, 0, -10));
                     currentLine += tempLineAddon;
+                    break;
                 }
-                case 2 -> {
+                case 2: {
                     int maxLines = 51;
                     ArrayList<IVObject> objects = new SQLSelectStatements(new SQLConnector()).getUserObjects(name);
                     int currentLine = 1;
@@ -353,8 +355,9 @@ public class ArbeitsmittelPrinter {
                         objectPageList.add(new ArrayList<>());
                     }
                     objectPageList.get(page).add(new IVObject(new String[]{"sign"}, IVObjectType.pc));
+                    break;
                 }
-                case 3 -> {
+                case 3: {
                     int maxLines = 51;
                     ArrayList<IVObjectRet> objects = Constants.returnList;
                     int currentLine = 1;
@@ -381,6 +384,7 @@ public class ArbeitsmittelPrinter {
                         objectPageListRet.add(new ArrayList<>());
                     }
                     objectPageListRet.get(page).add(new IVObjectRet(new String[]{"sign"}, new String[]{"sign"}));
+                    break;
                 }
             }
         }
@@ -391,7 +395,7 @@ public class ArbeitsmittelPrinter {
             g.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
             switch (flag) {
-                case 0 -> {
+                case 0: {
                     int pagesGes = pageLineList.size();
                     if (pageIndex == 0) {
                         double line = 0;
@@ -458,7 +462,7 @@ public class ArbeitsmittelPrinter {
                     }
                     return NO_SUCH_PAGE;
                 }
-                case 1 -> {
+                case 1: {
                     int pagesGes = pageLineList.size();
                     if (pageIndex == 0) {
                         double line = 0;
@@ -525,7 +529,7 @@ public class ArbeitsmittelPrinter {
                     }
                     return NO_SUCH_PAGE;
                 }
-                case 2 -> {
+                case 2: {
                     double line = 1;
                     if (pageIndex == 0) {
                         g.setFont(titleF);
@@ -582,7 +586,7 @@ public class ArbeitsmittelPrinter {
                                 g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
                                 g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
                             } else {
-                                line+= 4;
+                                line += 4;
                                 y = (int) ((line * lineHeight) + yMargin);
                                 x = 40;
                                 g.drawString("____________________________", x, y);
@@ -656,7 +660,7 @@ public class ArbeitsmittelPrinter {
                                 g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
                                 g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
                             } else {
-                                line+= 4;
+                                line += 4;
                                 y = (int) ((line * lineHeight) + yMargin);
                                 x = 40;
                                 g.drawString("____________________________", x, y);
@@ -682,7 +686,7 @@ public class ArbeitsmittelPrinter {
                     }
                     return NO_SUCH_PAGE;
                 }
-                case 3 -> {
+                case 3: {
                     double line = 1;
                     if (pageIndex == 0) {
                         g.setFont(titleF);
@@ -743,7 +747,7 @@ public class ArbeitsmittelPrinter {
                                 g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
                                 g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
                             } else {
-                                line+= 4;
+                                line += 4;
                                 y = (int) ((line * lineHeight) + yMargin);
                                 x = 40;
                                 g.drawString("____________________________", x, y);
@@ -817,7 +821,7 @@ public class ArbeitsmittelPrinter {
                                 g.drawRect(xMargin + 5, yStart, width - xMargin - 20, y - yStart + 10);
                                 g.drawLine(xMargin + secondColumnOffset - 3, yStart, xMargin + secondColumnOffset - 3, y + 10);
                             } else {
-                                line+= 4;
+                                line += 4;
                                 y = (int) ((line * lineHeight) + yMargin);
                                 x = 40;
                                 g.drawString("____________________________", x, y);

@@ -49,41 +49,50 @@ public class Main {
         }
 
         switch (startup_configuration) {
-            case "main" -> {
+            case "main": {
                 mainGui = new MainGui(connector, sqlSelectStatements, sqlDeleteStatements);
                 mainGui.init();
+                break;
             }
-            case "1" -> {
+            case "1": {
                 ArbeitsmittelPrinter.print("l.schmidt", 1);
+                break;
             }
-            case "2" -> {
+            case "2": {
                 UserManagmantGui gui = new UserManagmantGui();
                 gui.init();
+                break;
             }
-            case "3" -> {
+            case "3": {
                 try {
                     URI uri = new URL("https://example.com").toURI();
                     java.awt.Desktop.getDesktop().browse(uri);
                 } catch (IOException | URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
+                break;
             }
-            case "4" -> {
+            case "4": {
                 LabelPrinter.print("NB-0001");
+                break;
             }
-            case "5" -> {
+            case "5": {
                 System.out.println(ADWrapper.getFullName("m.wolf"));
+                break;
             }
-            case "6" -> {
+            case "6": {
                 String s = "askdfj asdfjals aslkjfdjjdj<<ret>>";
-                if (s.substring(s.length() - 7).equals("<<ret>>")){
+                if (s.substring(s.length() - 7).equals("<<ret>>")) {
                 }
+                break;
             }
-            case "7" -> {
+            case "7": {
                 PrinterDialog.start("l.schmidt", sqlSelectStatements.getUserAttributes("l.schmidt"));
+                break;
             }
-            case "8" -> {
-         }
+            case "8": {
+                break;
+            }
         }
     }
 }
