@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -739,9 +740,15 @@ public class SQLSelectStatements {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
         ResultSet resultSet = connector.query(new SQLStatement(
-                "select name, user_key, current_status, mail, active, address, working_hours, working_days, homeoffice, entrytransfer from user"
+                "select name, user_key, current_status, mail, active, address, working_hours, working_days, homeoffice, entrytransfer, contractDate from user"
         ));
         try {
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
+            resultList.add(new ArrayList<>());
             resultList.add(new ArrayList<>());
             resultList.add(new ArrayList<>());
             resultList.add(new ArrayList<>());
@@ -753,6 +760,12 @@ public class SQLSelectStatements {
                 resultList.get(2).add(String.valueOf(resultSet.getObject("current_status")));
                 resultList.get(3).add(String.valueOf(resultSet.getObject("mail")));
                 resultList.get(4).add(String.valueOf(resultSet.getObject("active")));
+                resultList.get(5).add(String.valueOf(resultSet.getObject("address")));
+                resultList.get(6).add(String.valueOf(resultSet.getObject("working_hours")));
+                resultList.get(7).add(String.valueOf(resultSet.getObject("working_days")));
+                resultList.get(8).add(String.valueOf(resultSet.getObject("homeoffice")));
+                resultList.get(9).add(String.valueOf(resultSet.getObject("entrytransfer")));
+                resultList.get(10).add(String.valueOf(resultSet.getObject("contractDate")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -822,7 +835,7 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select iv_number from " + table + " where active = 1 and current_status = 'edv eingelagert'"
         ));
-        return List.of(getStrings(resultSet));
+        return Arrays.asList(getStrings(resultSet));
     }
 
     private String[] getStrings(ResultSet resultSet) {

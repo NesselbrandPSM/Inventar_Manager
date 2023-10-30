@@ -60,7 +60,7 @@ public class UserEntryDialog extends JDialog {
 
         String[] userData = sqlSelectStatements.getUserAttributes(user);
 
-        if (userData[0] != null) {
+        if (!Objects.equals(userData[0], "-1")) {
             streetNRField.setText(userData[0].substring(0, userData[0].indexOf(" | ")));
             userData[0] = userData[0].substring(userData[0].indexOf(" | ") + 3);
             plzField.setText(userData[0].substring(0, userData[0].indexOf(" | ")));

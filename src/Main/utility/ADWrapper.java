@@ -130,6 +130,7 @@ public class ADWrapper {
                     temp.add(oldUsers[7][i]);
                     temp.add(oldUsers[8][i]);
                     temp.add(oldUsers[9][i]);
+                    temp.add(oldUsers[10][i]);
                     newUsers.add(temp);
                 }
             }
@@ -149,6 +150,7 @@ public class ADWrapper {
                 temp.add(users[i][1]); //email
                 temp.add("0"); //status
                 temp.add("1"); //active
+                temp.add("-1");
                 temp.add("-1");
                 temp.add("-1");
                 temp.add("-1");
@@ -177,13 +179,14 @@ public class ADWrapper {
             temp.add("-1");
             temp.add("-1");
             temp.add("-1");
+            temp.add("-1");
             newUsers.add(temp);
         }
 
         sqlDeleteStatements.deleteTable("user");
 
         for (ArrayList<String> list : newUsers) {
-            sqlInsertStatements.insert("insert into user (name, mail, current_status, active, address, working_hours, working_days, homeoffice, entrytransfer) values (" +
+            sqlInsertStatements.insert("insert into user (name, mail, current_status, active, address, working_hours, working_days, homeoffice, entrytransfer, contractDate) values (" +
                     "'" + list.get(0) + "', " +
                     "'" + list.get(1) + "', " +
                     "'" + list.get(2) + "', " +
@@ -192,7 +195,8 @@ public class ADWrapper {
                     "'" + list.get(5) + "', " +
                     "'" + list.get(6) + "', " +
                     "'" + list.get(7) + "', " +
-                    "'" + list.get(8) + "'" +
+                    "'" + list.get(8) + "', " +
+                    "'" + list.get(9) + "'" +
                     ")");
         }
 
