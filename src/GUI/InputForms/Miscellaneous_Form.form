@@ -16,7 +16,7 @@
     <rowspec value="center:100px:noGrow"/>
     <colspec value="fill:150px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
-    <colspec value="fill:150px:noGrow"/>
+    <colspec value="fill:225px:noGrow"/>
     <colspec value="left:5dlu:noGrow"/>
     <colspec value="fill:50px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
@@ -24,7 +24,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:230px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="675" height="529"/>
+      <xy x="20" y="20" width="709" height="529"/>
     </constraints>
     <properties/>
     <border type="none"/>
