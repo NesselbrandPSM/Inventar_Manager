@@ -32,10 +32,16 @@ public class UserEntryDialog extends JDialog {
     private JList userEntryList;
     private JButton toUserListButton;
     private JButton removeFromUserList;
-    private JTextArea workingDays;
     private JTextArea workingHours;
     private JCheckBox entryTransferCheckbox;
     private JTextArea workContractDate;
+    private JCheckBox moCheckBox;
+    private JCheckBox diCheckBox;
+    private JCheckBox miCheckBox;
+    private JCheckBox doCheckBox;
+    private JCheckBox frCheckBox;
+    private JCheckBox saCheckBox;
+    private JCheckBox soCheckBox;
 
     private DefaultListModel<String> userEntryListModel;
     private DefaultListModel<String> arbeitsmittelListModel;
@@ -71,7 +77,17 @@ public class UserEntryDialog extends JDialog {
         }
 
         workingHours.setText(userData[1]);
-        workingDays.setText(userData[2]);
+
+        String workingDaysDataString = userData[2];
+        if (workingDaysDataString.contains("Mo")){moCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("Di")){diCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("Mi")){miCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("Do")){doCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("Fr")){frCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("Sa")){saCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("So")){soCheckBox.setSelected(true);}
+
+
         workContractDate.setText(userData[5]);
 
         if (Objects.equals(userData[3], "1")) {
@@ -290,7 +306,32 @@ public class UserEntryDialog extends JDialog {
         String[] userData = new String[6];
         userData[0] = streetNRField.getText() + " | " + plzField.getText() + " | " + cityField.getText();
         userData[1] = workingHours.getText();
-        userData[2] = workingDays.getText();
+
+        StringBuilder wd = new StringBuilder();
+        if (moCheckBox.isSelected()) {
+            wd.append("<Mo>");
+        }
+        if (diCheckBox.isSelected()) {
+            wd.append("<Di>");
+        }
+        if (miCheckBox.isSelected()) {
+            wd.append("<Mi>");
+        }
+        if (doCheckBox.isSelected()) {
+            wd.append("<Do>");
+        }
+        if (frCheckBox.isSelected()) {
+            wd.append("<Fr>");
+        }
+        if (saCheckBox.isSelected()) {
+            wd.append("<Sa>");
+        }
+        if (soCheckBox.isSelected()) {
+            wd.append("<So>");
+        }
+
+        userData[2] = wd.toString();
+
         if (homeofficeCheckBox.isSelected()) {
             userData[3] = "1";
         } else {
