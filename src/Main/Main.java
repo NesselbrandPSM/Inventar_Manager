@@ -24,7 +24,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "main";
+    private static final String startup_configuration = "2";
 
     public static Main m;
 
@@ -88,9 +88,6 @@ public class Main {
             }
             case "7": {
                 PrinterDialog.start("l.schmidt", sqlSelectStatements.getUserAttributes("l.schmidt"));
-                break;
-            }
-            case "8": {
                 break;
             }
         }

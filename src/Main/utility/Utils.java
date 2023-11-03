@@ -396,4 +396,13 @@ public class Utils {
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
+
+    public static boolean contains(String c, String[] data){
+        for (String s : data) {
+            if (s.equals(c)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

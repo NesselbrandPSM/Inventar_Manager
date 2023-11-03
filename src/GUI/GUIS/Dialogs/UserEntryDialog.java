@@ -12,6 +12,8 @@ import SQL.Statements.SQLUpdateStatements;
 import SQL.util.SQLStatement;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -72,10 +74,10 @@ public class UserEntryDialog extends JDialog {
         workingDays.setText(userData[2]);
         workContractDate.setText(userData[5]);
 
-        if (Objects.equals(userData[3], "1")){
+        if (Objects.equals(userData[3], "1")) {
             homeofficeCheckBox.setSelected(true);
         }
-        if (Objects.equals(userData[4], "1")){
+        if (Objects.equals(userData[4], "1")) {
             entryTransferCheckbox.setSelected(true);
         }
 
@@ -99,7 +101,7 @@ public class UserEntryDialog extends JDialog {
         arbeitsmittelList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2){
+                if (e.getClickCount() == 2) {
                     //Doubleclicklistener
                 }
             }
@@ -128,14 +130,14 @@ public class UserEntryDialog extends JDialog {
         toUserListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (arbeitsmittelList.getSelectedIndex() >= 0){
+                if (arbeitsmittelList.getSelectedIndex() >= 0) {
                     int[] indizes = arbeitsmittelList.getSelectedIndices();
                     String[] entrys = new String[indizes.length];
                     for (int i = 0; i < indizes.length; i++) {
                         entrys[i] = arbeitsmittelListModel.get(indizes[i]);
                     }
 
-                    for (int i = entrys.length -1; i >= 0; i--) {
+                    for (int i = entrys.length - 1; i >= 0; i--) {
                         arbeitsmittelListModel.removeElement(entrys[i]);
                         userEntryListModel.add(0, entrys[i]);
                         addedIV_Numbers.add(entrys[i]);
@@ -147,7 +149,7 @@ public class UserEntryDialog extends JDialog {
         });
 
         removeFromUserList.addActionListener(e -> {
-            if (userEntryList.getSelectedIndex() >= 0){
+            if (userEntryList.getSelectedIndex() >= 0) {
                 int[] indizes = userEntryList.getSelectedIndices();
                 String[] entrys = new String[indizes.length];
                 for (int i1 = 0; i1 < indizes.length; i1++) {
@@ -155,13 +157,13 @@ public class UserEntryDialog extends JDialog {
                 }
 
                 for (String s : entrys) {
-                    if (addedIV_Numbers.contains(s)){
+                    if (addedIV_Numbers.contains(s)) {
                         addedIV_Numbers.remove(s);
                         userEntryListModel.removeElement(s);
                         arbeitsmittelListModel.add(0, s);
                     } else {
                         ConditionModifyDialog.init(s);
-                        if (!Utils.newConditionStatus.equals("null")){
+                        if (!Utils.newConditionStatus.equals("null")) {
                             addedIV_Numbers.remove(s);
                             userEntryListModel.removeElement(s);
                             arbeitsmittelListModel.add(0, s);
@@ -187,13 +189,86 @@ public class UserEntryDialog extends JDialog {
             arbeitsmittelList.setSelectedIndex(-1);
             userEntryList.setSelectedIndex(-1);
         });
+
+        workingHours.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = workingHours.getText();
+
+                if (text.length() == 2 || text.length() == 10) {
+                    addCharWorkHours(":");
+                }
+                if (text.length() == 5) {
+                    addCharWorkHours(" - ");
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
+
+
+        workContractDate.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = workContractDate.getText();
+                if (text.length() == 2) {
+                    addSlashToContractTextField();
+                }
+                if (text.length() == 5) {
+                    addSlashToContractTextField();
+                }
+                if (text.length() > 10) {
+                    trimContractTextField();
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
+    }
+
+    private void addCharWorkHours(String s) {
+        String text;
+        if (s.equals("-1")) {
+            text = workingHours.getText() + s;
+        } else {
+            text = workingHours.getText().substring(0, workingHours.getText().length() - 1);
+        }
+        Runnable add = () -> workingHours.setText(text);
+        SwingUtilities.invokeLater(add);
+    }
+
+    private void trimContractTextField() {
+        String text = workContractDate.getText().substring(0, 10);
+        Runnable trim = () -> workContractDate.setText(text);
+        SwingUtilities.invokeLater(trim);
+    }
+
+    private void addSlashToContractTextField() {
+        String text = workContractDate.getText() + "/";
+        Runnable add = () -> workContractDate.setText(text);
+        SwingUtilities.invokeLater(add);
     }
 
     private void onOK() {
         Constants.setActive = true;
         SQLConnector sqlConnector = new SQLConnector();
 
-        if (returnTripels.size() > 0){
+        if (returnTripels.size() > 0) {
             Constants.returnList = sqlSelectStatements.getReturnList(returnTripels);
             ArbeitsmittelPrinter.print("", 3);
         }
@@ -216,12 +291,12 @@ public class UserEntryDialog extends JDialog {
         userData[0] = streetNRField.getText() + " | " + plzField.getText() + " | " + cityField.getText();
         userData[1] = workingHours.getText();
         userData[2] = workingDays.getText();
-        if (homeofficeCheckBox.isSelected()){
+        if (homeofficeCheckBox.isSelected()) {
             userData[3] = "1";
         } else {
             userData[3] = "0";
         }
-        if (entryTransferCheckbox.isSelected()){
+        if (entryTransferCheckbox.isSelected()) {
             userData[4] = "1";
         } else {
             userData[4] = "0";

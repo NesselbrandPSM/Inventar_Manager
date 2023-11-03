@@ -1,11 +1,15 @@
 package GUI.GUIS;
 
 import GUI.InputForms.*;
+import Main.utility.Printer.ArbeitsmittelPrinter;
+import Main.utility.Printer.LabelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLInsertStatements;
 import SQL.Statements.SQLSelectStatements;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainInputGui {
@@ -22,6 +26,7 @@ public class MainInputGui {
     private JPanel inputPanel;
     private JCheckBox DeskCheckBox;
     private JCheckBox miscCheckBox;
+    private JButton einfuegenLabelDruckenButton;
 
     private Dockingstation_Form dockingstationForm;
     private Headset_Form headsetForm;
@@ -92,6 +97,12 @@ public class MainInputGui {
 
         einfuegenButton.addActionListener(e -> inputEntry());
         abbrechenButton.addActionListener(e -> close());
+        einfuegenLabelDruckenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inputEntryLabel();
+            }
+        });
     }
 
     private void inputEntry() {
@@ -140,6 +151,55 @@ public class MainInputGui {
             }
         }
     }
+
+    private void inputEntryLabel() {
+        String currentTable = inputPanel.getComponent(0).getName();
+        String currentIVNumber = sqlSelectStatements.getCurrentIV_number(currentTable);
+        if (currentIVNumber == null) {
+            return;
+        }
+        String[] options = {"JA", "NEIN"};
+        int i = JOptionPane.showOptionDialog(null, "Einfügen des Datensatztes mit Inventar Nummer: " + currentIVNumber,
+                "Einfügen",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                0);
+        if (i == 0) {
+            LabelPrinter.print(currentIVNumber);
+            switch (currentTable) {
+                case "pc":
+                    sqlInsertStatements.inputPCEntry(pcForm.getArgs(currentIVNumber));
+                    break;
+                case "scanner":
+                    sqlInsertStatements.inputSCEntry(scannerForm.getArgs(currentIVNumber));
+                    break;
+                case "printer":
+                    sqlInsertStatements.inputPREntry(printerForm.getArgs(currentIVNumber));
+                    break;
+                case "dockingstation":
+                    sqlInsertStatements.inputDSEntry(dockingstationForm.getArgs(currentIVNumber));
+                    break;
+                case "headset":
+                    sqlInsertStatements.inputHDEntry(headsetForm.getArgs(currentIVNumber));
+                    break;
+                case "monitor":
+                    sqlInsertStatements.inputMOEntry(monitorForm.getArgs(currentIVNumber));
+                    break;
+                case "telephone":
+                    sqlInsertStatements.inputTEEntry(telephoneForm.getArgs(currentIVNumber));
+                    break;
+                case "desk":
+                    sqlInsertStatements.inputDKEntry(deskForm.getArgs(currentIVNumber));
+                    break;
+                case "miscellaneous":
+                    sqlInsertStatements.inputMCEntry(miscellaneousForm.getArgs(currentIVNumber));
+                    break;
+            }
+        }
+    }
+
 
     private void show(JPanel panel) {
         inputPanel.removeAll();
