@@ -24,7 +24,7 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String startup_configuration = "2";
+    private static final String startup_configuration = "main";
 
     public static Main m;
 

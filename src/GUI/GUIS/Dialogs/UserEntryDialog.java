@@ -79,13 +79,27 @@ public class UserEntryDialog extends JDialog {
         workingHours.setText(userData[1]);
 
         String workingDaysDataString = userData[2];
-        if (workingDaysDataString.contains("Mo")){moCheckBox.setSelected(true);}
-        if (workingDaysDataString.contains("Di")){diCheckBox.setSelected(true);}
-        if (workingDaysDataString.contains("Mi")){miCheckBox.setSelected(true);}
-        if (workingDaysDataString.contains("Do")){doCheckBox.setSelected(true);}
-        if (workingDaysDataString.contains("Fr")){frCheckBox.setSelected(true);}
-        if (workingDaysDataString.contains("Sa")){saCheckBox.setSelected(true);}
-        if (workingDaysDataString.contains("So")){soCheckBox.setSelected(true);}
+        if (workingDaysDataString.contains("Mo")) {
+            moCheckBox.setSelected(true);
+        }
+        if (workingDaysDataString.contains("Di")) {
+            diCheckBox.setSelected(true);
+        }
+        if (workingDaysDataString.contains("Mi")) {
+            miCheckBox.setSelected(true);
+        }
+        if (workingDaysDataString.contains("Do")) {
+            doCheckBox.setSelected(true);
+        }
+        if (workingDaysDataString.contains("Fr")) {
+            frCheckBox.setSelected(true);
+        }
+        if (workingDaysDataString.contains("Sa")) {
+            saCheckBox.setSelected(true);
+        }
+        if (workingDaysDataString.contains("So")) {
+            soCheckBox.setSelected(true);
+        }
 
 
         workContractDate.setText(userData[5]);
@@ -210,18 +224,20 @@ public class UserEntryDialog extends JDialog {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String text = workingHours.getText();
-
-                if (text.length() == 2 || text.length() == 10) {
-                    addCharWorkHours(":");
-                }
-                if (text.length() == 5) {
-                    addCharWorkHours(" - ");
+                if (text.length() > 13) {
+                    trimWorkHoursField(1);
+                } else {
+                    if (text.length() == 2 || text.length() == 10) {
+                        addCharWorkHours(":");
+                    }
+                    if (text.length() == 5) {
+                        addCharWorkHours(" - ");
+                    }
                 }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-
             }
 
             @Override
@@ -259,13 +275,15 @@ public class UserEntryDialog extends JDialog {
 
     private void addCharWorkHours(String s) {
         String text;
-        if (s.equals("-1")) {
-            text = workingHours.getText() + s;
-        } else {
-            text = workingHours.getText().substring(0, workingHours.getText().length() - 1);
-        }
+        text = workingHours.getText() + s;
         Runnable add = () -> workingHours.setText(text);
         SwingUtilities.invokeLater(add);
+    }
+
+    private void trimWorkHoursField(int i) {
+        String text = workingHours.getText().substring(0, workingHours.getText().length() - i);
+        Runnable trim = () -> workingHours.setText(text);
+        SwingUtilities.invokeLater(trim);
     }
 
     private void trimContractTextField() {

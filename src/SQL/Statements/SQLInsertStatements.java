@@ -125,7 +125,8 @@ public class SQLInsertStatements {
                         "'" + args[10] + "', " +
                         "'" + args[11] + "', " +
                         "'" + args[12] + "', " +
-                        "'" + args[13] + "'" +
+                        "'" + args[13] + "', " +
+                        "'" + args[14] + "'" +
                         ")"
         );
 
