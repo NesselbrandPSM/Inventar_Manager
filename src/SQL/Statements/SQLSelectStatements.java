@@ -831,6 +831,14 @@ public class SQLSelectStatements {
         return getStrings(resultSet);
     }
 
+    public String[] getAllIV_NumbersEingelagert(String table) {
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select iv_number from " + table + " where current_status = 'edv eingelagert'"
+        ));
+
+        return getStrings(resultSet);
+    }
+
     public Collection<? extends String> getAllIV_NumbersActiveAndGiveable(String table) {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select iv_number from " + table + " where active = 1 and current_status = 'edv eingelagert'"

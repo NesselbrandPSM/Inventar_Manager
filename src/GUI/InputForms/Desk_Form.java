@@ -4,6 +4,7 @@ import GUI.util.ComboBoxItem;
 import Main.utility.Constants;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
+import SQL.Statements.SQLUpdateStatements;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class Desk_Form {
 
     private SQLConnector sqlConnector;
     private SQLSelectStatements sqlSelectStatements;
+    private SQLUpdateStatements sqlUpdateStatements;
 
     private String[][] companySet;
 
@@ -46,6 +48,7 @@ public class Desk_Form {
     public Desk_Form() {
         sqlConnector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(sqlConnector);
+        sqlUpdateStatements = new SQLUpdateStatements(sqlConnector);
 
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
@@ -57,34 +60,34 @@ public class Desk_Form {
             companys.addItem(new ComboBoxItem(s));
         }
 
-        String[] ivNumbers = sqlSelectStatements.getAllIV_Numbers("pc");
+        String[] ivNumbers = sqlSelectStatements.getAllIV_NumbersEingelagert("pc");
         pcIVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             pcIVNumberBox.addItem(new ComboBoxItem(s));
         }
-        ivNumbers = sqlSelectStatements.getAllIV_Numbers("monitor");
+        ivNumbers = sqlSelectStatements.getAllIV_NumbersEingelagert("monitor");
         mo1IVNumberBox.addItem(new ComboBoxItem(" - "));
         mo2IVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             mo1IVNumberBox.addItem(new ComboBoxItem(s));
             mo2IVNumberBox.addItem(new ComboBoxItem(s));
         }
-        ivNumbers = sqlSelectStatements.getAllIV_Numbers("scanner");
+        ivNumbers = sqlSelectStatements.getAllIV_NumbersEingelagert("scanner");
         scIVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             scIVNumberBox.addItem(new ComboBoxItem(s));
         }
-        ivNumbers = sqlSelectStatements.getAllIV_Numbers("headset");
+        ivNumbers = sqlSelectStatements.getAllIV_NumbersEingelagert("headset");
         hdIVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             hdIVNumberBox.addItem(new ComboBoxItem(s));
         }
-        ivNumbers = sqlSelectStatements.getAllIV_Numbers("telephone");
+        ivNumbers = sqlSelectStatements.getAllIV_NumbersEingelagert("telephone");
         teIVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             teIVNumberBox.addItem(new ComboBoxItem(s));
         }
-        ivNumbers = sqlSelectStatements.getAllIV_Numbers("dockingstation");
+        ivNumbers = sqlSelectStatements.getAllIV_NumbersEingelagert("dockingstation");
         dsIVNumberBox.addItem(new ComboBoxItem(" - "));
         for (String s : ivNumbers) {
             dsIVNumberBox.addItem(new ComboBoxItem(s));
@@ -130,6 +133,26 @@ public class Desk_Form {
         args.add(note.getText());
         args.add(condition.getSelectedItem().toString());
         args.add(conditionNote.getText());
+
+        if (!teIVNumberBox.getSelectedItem().toString().equals(" - ")) {
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "telephone", teIVNumberBox.getSelectedItem().toString());
+        }
+        if (!scIVNumberBox.getSelectedItem().toString().equals(" - ")) {
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "scanner", scIVNumberBox.getSelectedItem().toString());
+
+        }
+        if (!hdIVNumberBox.getSelectedItem().toString().equals(" - ")) {
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "headset", hdIVNumberBox.getSelectedItem().toString());
+
+        }
+        if (!dsIVNumberBox.getSelectedItem().toString().equals(" - ")) {
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "dockingstation", dsIVNumberBox.getSelectedItem().toString());
+
+        }
+        if (!pcIVNumberBox.getSelectedItem().toString().equals(" - ")) {
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "pc", pcIVNumberBox.getSelectedItem().toString());
+
+        }
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {

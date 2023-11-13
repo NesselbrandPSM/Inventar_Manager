@@ -62,4 +62,10 @@ public class SQLUpdateStatements {
                 "update " + table + " SET inventory_user_key = '" + userName + "', current_status = '" + status + "' where iv_number = '" + iv_number + "'"
         ));
     }
+
+    public void changeCurrentStatus(String newStatus, String table, String iv_number){
+        connector.query(new SQLStatement(
+                "update " + table + " SET current_status = '" + newStatus + "' where iv_number = '" + iv_number + "'"
+        ));
+    }
 }
