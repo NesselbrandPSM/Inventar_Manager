@@ -18,6 +18,7 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class UserManagmantGui {
@@ -46,6 +47,9 @@ public class UserManagmantGui {
     private SQLSelectStatements sqlSelectStatements;
     private SQLUpdateStatements sqlUpdateStatements;
     private SQLDeleteStatements sqlDeleteStatements;
+
+    private HashMap<String, String> getFullName;
+    private HashMap<String, String> getShortCut;
 
     public UserManagmantGui() {
         sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
@@ -110,7 +114,7 @@ public class UserManagmantGui {
             public void valueChanged(ListSelectionEvent e) {
                 int selectedRow = userTable.getSelectedRow();
                 if (selectedRow >= 0) {
-                    String userName = userTableModell.getRow(selectedRow)[0].toString();
+                    String userName = getShortCut.get(userTableModell.getRow(selectedRow)[0].toString());
                     String[] data = sqlSelectStatements.getUserInfos(userName);
                     for (int i = 0; i < data.length; i++) {
                         if (data[i] == null) {
@@ -168,6 +172,18 @@ public class UserManagmantGui {
                 }
             }
         });
+        update();
+        getFullName = new HashMap<>();
+        getShortCut = new HashMap<>();
+
+        String[][] s = userTableModell.getData();
+        for (String[] strings : s) {
+            String shortCut = strings[0];
+            String fullName = ADWrapper.getFullName(shortCut);
+
+            getFullName.put(shortCut, fullName);
+            getShortCut.put(fullName, shortCut);
+        }
     }
 
     private void changeStatus(int status) {
@@ -218,19 +234,25 @@ public class UserManagmantGui {
 
     public void update(int x) {
         String[][] data = sqlSelectStatements.getAllUsersTableModel(x);
-        for (int i = 0; i < data.length; i++) {
-            switch (data[i][2]) {
-                case "0":
-                    data[i][2] = "neu";
-                    break;
-                case "-1":
-                    data[i][2] = "inaktiv";
-                    break;
-                case "1":
-                    data[i][2] = "aktiv";
-                    break;
+        if (getFullName != null){
+            for (int i = 0; i < data.length; i++) {
+                data[i][0] = getFullName.get(data[i][0]);
+            }
+            for (int i = 0; i < data.length; i++) {
+                switch (data[i][2]) {
+                    case "0":
+                        data[i][2] = "neu";
+                        break;
+                    case "-1":
+                        data[i][2] = "inaktiv";
+                        break;
+                    case "1":
+                        data[i][2] = "aktiv";
+                        break;
+                }
             }
         }
+
         userTableModell.update(data);
     }
 

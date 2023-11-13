@@ -44,5 +44,7 @@ public class UserTableModell extends AbstractTableModel {
         return columnNames[column];
     }
 
-
+    public String[][] getData(){
+        return (String[][]) data;
+    }
 }
