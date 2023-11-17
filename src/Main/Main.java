@@ -10,7 +10,7 @@ import Main.utility.Printer.LabelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
-import jdk.nashorn.internal.scripts.JO;
+import SQL.util.SQLStatement;
 
 import javax.swing.*;
 import java.io.File;
@@ -18,12 +18,16 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Main {
     private SQLConnector connector;
     public SQLSelectStatements sqlSelectStatements;
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
+
+    private static final String version_code = "0.1";
 
     private static final String startup_configuration = "main";
 
@@ -42,9 +46,12 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        if (maintainenceTest()){
-            JOptionPane.showMessageDialog(null, "Die Datenbank befindet sich gerade in Wartungsarbeiten.\nBitte probieren sie es später " +
-                    "noch einmal oder\nwenden sie sich an ihren Systemadministrator.");
+        if (maintainenceTest()) {
+            JOptionPane.showMessageDialog(null, "Die Datenbank befindet sich gerade in Wartungsarbeiten.\nBitte probieren sie es später " + "noch einmal oder\nwenden sie sich an ihren Systemadministrator.");
+            return;
+        }
+
+        if (versionTest()) {
             return;
         }
 
@@ -98,6 +105,27 @@ public class Main {
                 break;
             }
         }
+    }
+
+    private boolean versionTest() {
+        String s;
+        try {
+            SQLConnector con = new SQLConnector();
+            ResultSet res = con.query(new SQLStatement("select p_value from properties where p_name = 'version'"));
+            res.next();
+            s = res.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if (!s.equals(version_code)){
+            JOptionPane.showMessageDialog(null, "Sie verwenden eine alte Version der Inventarisierungssoftware: "
+                    + version_code + "\n" + "Es wird Version " + s + " benötigt, um auf die Datenbank zugreifen zu können.");
+        }
+        return !s.equals(version_code);
+    }
+
+    private boolean versionTestDummy() {
+        return false;
     }
 
     private boolean maintainenceTest() {
