@@ -23,13 +23,13 @@ public class SQLSelectStatements {
     }
 
     private SQLConnector connector;
-    private final int attributeNumber = 3; //Number of attributes to get
+    private final int attributeNumber = 5; //Number of attributes to get
 
     public String[][] getDefaultView() {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
         try {
             //region PC
-            ResultSet resultSet = connector.query(new SQLStatement("select pc.iv_number, company.company, pc.pc_key " +
+            ResultSet resultSet = connector.query(new SQLStatement("select pc.iv_number, company.company, pc.current_status, pc.c_status, pc.pc_key " +
                     "from company " +
                     "join pc on " +
                     "pc.inventory_company_key = company.company_key " +
@@ -44,7 +44,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Printer
-            resultSet = connector.query(new SQLStatement("select printer.iv_number, company.company, printer.pr_key " +
+            resultSet = connector.query(new SQLStatement("select printer.iv_number, company.company, printer.current_status, printer.c_status, printer.pr_key  " +
                     "from company " +
                     "join printer " +
                     "on printer.inventory_company_key = company.company_key " +
@@ -58,7 +58,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Scanner
-            resultSet = connector.query(new SQLStatement("select scanner.iv_number, company.company, scanner.sc_key " +
+            resultSet = connector.query(new SQLStatement("select scanner.iv_number, company.company, scanner.current_status, scanner.c_status, scanner.sc_key " +
                     "from company " +
                     "join scanner " +
                     "on scanner.inventory_company_key = company.company_key " +
@@ -72,7 +72,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Monitor
-            resultSet = connector.query(new SQLStatement("select monitor.iv_number, company.company, monitor.mo_key " +
+            resultSet = connector.query(new SQLStatement("select monitor.iv_number, company.company, monitor.current_status, monitor.c_status, monitor.mo_key " +
                     "from company " +
                     "join monitor " +
                     "on monitor.inventory_company_key = company.company_key " +
@@ -86,7 +86,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Telephone
-            resultSet = connector.query(new SQLStatement("select telephone.iv_number, company.company, telephone.te_key " +
+            resultSet = connector.query(new SQLStatement("select telephone.iv_number, company.company, telephone.current_status, telephone.c_status, telephone.te_key " +
                     "from company " +
                     "join telephone " +
                     "on telephone.inventory_company_key = company.company_key " +
@@ -100,7 +100,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Headset
-            resultSet = connector.query(new SQLStatement("select headset.iv_number, company.company, headset.hd_key " +
+            resultSet = connector.query(new SQLStatement("select headset.iv_number, company.company, headset.current_status, headset.c_status, headset.hd_key " +
                     "from company " +
                     "join headset " +
                     "on headset.inventory_company_key = company.company_key " +
@@ -114,7 +114,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Dockingstation
-            resultSet = connector.query(new SQLStatement("select dockingstation.iv_number, company.company, dockingstation.ds_key " +
+            resultSet = connector.query(new SQLStatement("select dockingstation.iv_number, company.company, dockingstation.current_status, dockingstation.c_status, dockingstation.ds_key " +
                     "from company " +
                     "join dockingstation " +
                     "on dockingstation.inventory_company_key = company.company_key " +
@@ -128,7 +128,7 @@ public class SQLSelectStatements {
             }
             //endregion
             // region Desk
-            resultSet = connector.query(new SQLStatement("select desk.iv_number, company.company, desk.dk_key " +
+            resultSet = connector.query(new SQLStatement("select desk.iv_number, company.company, desk.current_status, desk.c_status, desk.dk_key " +
                     "from company " +
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
@@ -142,7 +142,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Misc
-            resultSet = connector.query(new SQLStatement("select miscellaneous.iv_number, company.company, miscellaneous.mc_key " +
+            resultSet = connector.query(new SQLStatement("select miscellaneous.iv_number, company.company, miscellaneous.current_status, miscellaneous.c_status, miscellaneous.mc_key " +
                     "from company " +
                     "join miscellaneous " +
                     "on miscellaneous.inventory_company_key = company.company_key " +
@@ -164,7 +164,7 @@ public class SQLSelectStatements {
 
     public String[][] getSelectViewIV_Number(String iv_number) {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
-        String[] columnList = new String[]{"Inventar Nummer", "Firma", "Primärschlüssel"};
+        String[] columnList = new String[]{"Inventar Nummer", "Firma", "Status", "Zustand", "Primärschlüssel"};
 
         ResultSet resultSet = null;
         try {
@@ -248,7 +248,7 @@ public class SQLSelectStatements {
 
             final int attributeNumber = 3; //Number of attributes to get
             //region PC
-            resultSet = connector.query(new SQLStatement("select pc.iv_number, company.company, pc.pc_key " +
+            resultSet = connector.query(new SQLStatement("select pc.iv_number, company.company, pc.current_status, pc.c_status, pc.pc_key " +
                     "from company " +
                     "join pc on " +
                     "pc.inventory_company_key = company.company_key " +
@@ -263,7 +263,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Printer
-            resultSet = connector.query(new SQLStatement("select printer.iv_number, company.company, printer.pr_key " +
+            resultSet = connector.query(new SQLStatement("select printer.iv_number, company.company, printer.current_status, printer.c_status, printer.pr_key " +
                     "from company " +
                     "join printer " +
                     "on printer.inventory_company_key = company.company_key " +
@@ -277,7 +277,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Scanner
-            resultSet = connector.query(new SQLStatement("select scanner.iv_number, company.company, scanner.sc_key " +
+            resultSet = connector.query(new SQLStatement("select scanner.iv_number, company.company, scanner.current_status, scanner.c_status, scanner.sc_key " +
                     "from company " +
                     "join scanner " +
                     "on scanner.inventory_company_key = company.company_key " +
@@ -291,7 +291,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Monitor
-            resultSet = connector.query(new SQLStatement("select monitor.iv_number, company.company, monitor.mo_key " +
+            resultSet = connector.query(new SQLStatement("select monitor.iv_number, company.company, monitor.current_status, monitor.c_status, monitor.mo_key " +
                     "from company " +
                     "join monitor " +
                     "on monitor.inventory_company_key = company.company_key " +
@@ -305,7 +305,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Telephone
-            resultSet = connector.query(new SQLStatement("select telephone.iv_number, company.company, telephone.te_key " +
+            resultSet = connector.query(new SQLStatement("select telephone.iv_number, company.company, telephone.current_status, telephone.c_status, telephone.te_key " +
                     "from company " +
                     "join telephone " +
                     "on telephone.inventory_company_key = company.company_key " +
@@ -319,7 +319,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Headset
-            resultSet = connector.query(new SQLStatement("select headset.iv_number, company.company, headset.hd_key " +
+            resultSet = connector.query(new SQLStatement("select headset.iv_number, company.company, headset.current_status, headset.c_status, headset.hd_key " +
                     "from company " +
                     "join headset " +
                     "on headset.inventory_company_key = company.company_key " +
@@ -333,7 +333,7 @@ public class SQLSelectStatements {
             }
             //endregion
             //region Dockingstation
-            resultSet = connector.query(new SQLStatement("select dockingstation.iv_number, company.company, dockingstation.ds_key " +
+            resultSet = connector.query(new SQLStatement("select dockingstation.iv_number, company.company, dockingstation.current_status, dockingstation.c_status, dockingstation.ds_key " +
                     "from company " +
                     "join dockingstation " +
                     "on dockingstation.inventory_company_key = company.company_key " +
@@ -347,7 +347,7 @@ public class SQLSelectStatements {
             }
             //endregion
             // region Desk
-            resultSet = connector.query(new SQLStatement("select desk.iv_number, company.company, desk.dk_key " +
+            resultSet = connector.query(new SQLStatement("select desk.iv_number, company.company, desk.current_status, desk.c_status, desk.dk_key " +
                     "from company " +
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
@@ -372,7 +372,7 @@ public class SQLSelectStatements {
 
         ResultSet resultSet = null;
         try {
-            resultSet = connector.query(new SQLStatement("select " + table + ".iv_number, company.company, " + table + "." + Utils.getShortCutFromTable(table) + "_key " +
+            resultSet = connector.query(new SQLStatement("select " + table + ".iv_number, company.company, " + table + ".current_status, " + table + ".c_status," + table + "." + Utils.getShortCutFromTable(table) + "_key " +
                     "from company " +
                     "join " + table + " on " +
                     table + ".inventory_company_key = company.company_key " +
@@ -396,7 +396,7 @@ public class SQLSelectStatements {
     public String[][] getSelectViewType(String table) {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
         try {
-            ResultSet resultSet = connector.query(new SQLStatement("select " + table + ".iv_number, company.company, " + table + "." + Utils.getShortCutFromTable(table) + "_key " +
+            ResultSet resultSet = connector.query(new SQLStatement("select " + table + ".iv_number, company.company, " + table + ".current_status, " + table + ".c_status, " + table + "." + Utils.getShortCutFromTable(table) + "_key " +
                     "from " + table + " " +
                     "join company on " + table +
                     ".inventory_company_key = company.company_key " +

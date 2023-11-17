@@ -3,7 +3,7 @@ package GUI.util;
 public class ColumNames {
 
     public static final String[] columnNamesStandardView = new String[]{
-            "Inventar Nummer", "Firma", "p_key"
+            "Inventar Nummer", "Firma", "Status", "Zustand", "P_Key"
     };
 
     public static final String[] allAttributesPC = new String[]{

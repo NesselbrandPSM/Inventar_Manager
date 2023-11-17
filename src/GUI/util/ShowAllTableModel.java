@@ -38,7 +38,12 @@ public class ShowAllTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data[rowIndex][columnIndex];
+        try {
+            return data[rowIndex][columnIndex];
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

@@ -135,47 +135,47 @@ public class MainGui {
                 switch (selRow[0].substring(0, 2).toLowerCase()) {
                     case "pc": {
                         setTextField1(ColumNames.allAttributesPC);
-                        setTextField2(sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "pr": {
                         setTextField1(ColumNames.allAttributesPR);
-                        setTextField2(sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "sc": {
                         setTextField1(ColumNames.allAttributesSC);
-                        setTextField2(sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "mo": {
                         setTextField1(ColumNames.allAttributesMO);
-                        setTextField2(sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "te": {
                         setTextField1(ColumNames.allAttributesTE);
-                        setTextField2(sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "hd": {
                         setTextField1(ColumNames.allAttributesHD);
-                        setTextField2(sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "ds": {
                         setTextField1(ColumNames.allAttributesDS);
-                        setTextField2(sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "dk": {
                         setTextField1(ColumNames.allAttributesDK);
-                        setTextField2(sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                     case "mc": {
                         setTextField1(ColumNames.allAttributesMC);
-                        setTextField2(sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[2]))[0]);
+                        setTextField2(sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
                 }
