@@ -139,19 +139,15 @@ public class Desk_Form {
         }
         if (!scIVNumberBox.getSelectedItem().toString().equals(" - ")) {
             sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "scanner", scIVNumberBox.getSelectedItem().toString());
-
         }
         if (!hdIVNumberBox.getSelectedItem().toString().equals(" - ")) {
             sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "headset", hdIVNumberBox.getSelectedItem().toString());
-
         }
         if (!dsIVNumberBox.getSelectedItem().toString().equals(" - ")) {
             sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "dockingstation", dsIVNumberBox.getSelectedItem().toString());
-
         }
         if (!pcIVNumberBox.getSelectedItem().toString().equals(" - ")) {
             sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "pc", pcIVNumberBox.getSelectedItem().toString());
-
         }
 
         String[] arguments = new String[args.size()];

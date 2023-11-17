@@ -2,7 +2,6 @@ package Main;
 
 import GUI.GUIS.Dialogs.PrinterDialog;
 import GUI.GUIS.MainGui;
-import GUI.GUIS.Dialogs.UserEntryDialog;
 import GUI.GUIS.UserManagmantGui;
 import Main.utility.ADWrapper;
 import Main.utility.Constants;
@@ -11,8 +10,10 @@ import Main.utility.Printer.LabelPrinter;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -34,19 +35,25 @@ public class Main {
     }
 
     private void init() {
-        Constants.init();
-        ADWrapper.init();
-
-        connector = new SQLConnector();
-        sqlSelectStatements = new SQLSelectStatements(connector);
-        sqlDeleteStatements = new SQLDeleteStatements(connector);
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                  UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
+
+        if (maintainenceTest()){
+            JOptionPane.showMessageDialog(null, "Die Datenbank befindet sich gerade in Wartungsarbeiten.\nBitte probieren sie es später " +
+                    "noch einmal oder\nwenden sie sich an ihren Systemadministrator.");
+            return;
+        }
+
+        Constants.init();
+        ADWrapper.init();
+
+        connector = new SQLConnector();
+        sqlSelectStatements = new SQLSelectStatements(connector);
+        sqlDeleteStatements = new SQLDeleteStatements(connector);
 
         switch (startup_configuration) {
             case "main": {
@@ -91,5 +98,10 @@ public class Main {
                 break;
             }
         }
+    }
+
+    private boolean maintainenceTest() {
+        File f = new File("\\\\Apocare-data\\it\\Inventarisierung\\maintenance - true");
+        return f.exists();
     }
 }

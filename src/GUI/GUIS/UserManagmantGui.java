@@ -126,7 +126,7 @@ public class UserManagmantGui {
                 }
             }
         });
-        nutzerBearbeitenButton.addActionListener(e -> UserEntryDialog.start((String) userTableModell.getRow(userTable.getSelectedRow())[0]));
+        nutzerBearbeitenButton.addActionListener(e -> UserEntryDialog.start(getShortCut.get((String) userTableModell.getRow(userTable.getSelectedRow())[0])));
         druckButton.addActionListener(e -> {
             String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
             String[] data = sqlSelectStatements.getUserAttributes(user);
@@ -184,6 +184,7 @@ public class UserManagmantGui {
             getFullName.put(shortCut, fullName);
             getShortCut.put(fullName, shortCut);
         }
+        update();
     }
 
     private void changeStatus(int status) {
@@ -234,7 +235,7 @@ public class UserManagmantGui {
 
     public void update(int x) {
         String[][] data = sqlSelectStatements.getAllUsersTableModel(x);
-        if (getFullName != null){
+        if (getFullName != null) {
             for (int i = 0; i < data.length; i++) {
                 data[i][0] = getFullName.get(data[i][0]);
             }

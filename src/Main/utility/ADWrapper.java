@@ -107,6 +107,7 @@ public class ADWrapper {
         return Utils.convertArrayList_ArrayList_StringTo2DArray(users);
     }
 
+    //TODO fix error
     public static void syncDatabase() {
         SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         SQLInsertStatements sqlInsertStatements = new SQLInsertStatements(new SQLConnector());
