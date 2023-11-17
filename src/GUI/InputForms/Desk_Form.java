@@ -150,10 +150,10 @@ public class Desk_Form {
             sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "pc", pcIVNumberBox.getSelectedItem().toString());
         }
         if (!mo1IVNumberBox.getSelectedItem().toString().equals(" - ")) {
-            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "mo", mo1IVNumberBox.getSelectedItem().toString());
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "monitor", mo1IVNumberBox.getSelectedItem().toString());
         }
         if (!mo2IVNumberBox.getSelectedItem().toString().equals(" - ")) {
-            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "mo", mo2IVNumberBox.getSelectedItem().toString());
+            sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "monitor", mo2IVNumberBox.getSelectedItem().toString());
         }
 
         String[] arguments = new String[args.size()];
