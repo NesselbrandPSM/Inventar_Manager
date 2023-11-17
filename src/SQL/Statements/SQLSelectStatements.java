@@ -707,16 +707,16 @@ public class SQLSelectStatements {
 
         switch (status) {
             case -1: // inaktiv
-                statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = -1");
+                statement.setStatement("select * from user where active = 1 and current_status = -1");
                 break;
             case 0: // neu
-                statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = 0");
+                statement.setStatement("select * from user where active = 1 and current_status = 0");
                 break;
             case 1: // aktiv
-                statement.setStatement("select name, mail, current_status from user where active = 1 and current_status = 1");
+                statement.setStatement("select * from user where active = 1 and current_status = 1");
                 break;
             case 2: // all
-                statement.setStatement("select name, mail, current_status from user where active = 1");
+                statement.setStatement("select * from user where active = 1");
                 break;
         }
 
@@ -727,6 +727,10 @@ public class SQLSelectStatements {
                 temp.add(String.valueOf(resultSet.getObject("name")));
                 temp.add(String.valueOf(resultSet.getObject("mail")));
                 temp.add(String.valueOf(resultSet.getObject("current_status")));
+                temp.add(String.valueOf(resultSet.getObject("address")));
+                temp.add(String.valueOf(resultSet.getObject("working_hours")));
+                temp.add(String.valueOf(resultSet.getObject("working_days")));
+                temp.add(String.valueOf(resultSet.getObject("homeoffice")));
                 resultList.add(temp);
             }
         } catch (SQLException e) {

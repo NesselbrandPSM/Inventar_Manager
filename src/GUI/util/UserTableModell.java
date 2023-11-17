@@ -11,7 +11,7 @@ public class UserTableModell extends AbstractTableModel {
     final SQLSelectStatements sqlSelectStatements;
 
     public UserTableModell(SQLSelectStatements sqlSelectStatements) {
-        columnNames = new String[]{"Name", "Email", "Status"};
+        columnNames = new String[]{"Name", "Email", "Status", "Addresse", "Kernarbeitszeit", "Arbeitstage", "Homeoffice"};
         this.sqlSelectStatements = sqlSelectStatements;
     }
 

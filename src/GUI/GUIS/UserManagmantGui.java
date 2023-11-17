@@ -113,7 +113,7 @@ public class UserManagmantGui {
             int selectedRow = userTable.getSelectedRow();
             if (selectedRow >= 0) {
                 String userName = "";
-                if (userTableModell.getRow(selectedRow)[0].toString() != null){
+                if (userTableModell.getRow(selectedRow)[0].toString() != null) {
                     userName = getShortCut.get(userTableModell.getRow(selectedRow)[0].toString());
                     String[] data = sqlSelectStatements.getUserInfos(userName);
                     for (int i = 0; i < data.length; i++) {
@@ -126,7 +126,10 @@ public class UserManagmantGui {
                 }
             }
         });
-        nutzerBearbeitenButton.addActionListener(e -> UserEntryDialog.start(getShortCut.get((String) userTableModell.getRow(userTable.getSelectedRow())[0])));
+        nutzerBearbeitenButton.addActionListener(e -> {
+            UserEntryDialog.start(getShortCut.get((String) userTableModell.getRow(userTable.getSelectedRow())[0]));
+            update();
+        });
         druckButton.addActionListener(e -> {
             String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
             String[] data = sqlSelectStatements.getUserAttributes(user);
@@ -250,6 +253,20 @@ public class UserManagmantGui {
                     case "1":
                         data[i][2] = "aktiv";
                         break;
+                }
+                switch (data[i][6]) {
+                    case "0":
+                        data[i][6] = "nein";
+                        break;
+                    case "1":
+                        data[i][6] = "ja";
+                        break;
+                    case "-1":
+                        data[i][6] = "nicht festgelegt";
+                        break;
+                }
+                if (data[i][3].equals("-1")) {
+                    data[i][3] = " - ";
                 }
             }
         }

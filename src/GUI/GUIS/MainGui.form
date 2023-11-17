@@ -122,6 +122,7 @@
         </constraints>
         <properties>
           <text value="Element Bearbeiten"/>
+          <visible value="false"/>
         </properties>
       </component>
       <component id="ed6d5" class="javax.swing.JButton" binding="aktuallisierenButton" default-binding="true">
