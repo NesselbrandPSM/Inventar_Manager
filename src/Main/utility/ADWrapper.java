@@ -38,7 +38,7 @@ public class ADWrapper {
         }
     }
 
-    public static void close(){
+    public static void close() {
         try {
             ctx.close();
         } catch (NamingException e) {
@@ -46,7 +46,7 @@ public class ADWrapper {
         }
     }
 
-    public static String getFullName(String userName){
+    public static String getFullName(String userName) {
         try {
             SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE); // Subtree durchsuchen
@@ -61,7 +61,7 @@ public class ADWrapper {
                 Attributes attrs = searchResult.getAttributes();
                 Attribute accountName = attrs.get("sAMAccountName");
 
-                if (accountName.get().toString().equals(userName)){
+                if (accountName.get().toString().equals(userName)) {
                     String name = attrs.get("name").toString();
                     return name.substring(name.indexOf(" "));
                 }
@@ -88,14 +88,13 @@ public class ADWrapper {
                 Attributes attrs = searchResult.getAttributes();
                 Attribute accountName = attrs.get("sAMAccountName");
 
-                if (accountName.get().toString().substring(1, 2).equals(".")){
+                if (accountName.get().toString().substring(1, 2).equals(".")) {
                     ArrayList<String> temp = new ArrayList<>();
                     temp.add(accountName.get().toString());
                     try {
                         Attribute mail = attrs.get("mail");
                         temp.add(mail.get().toString());
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         temp.add("");
                     }
                     users.add(temp);
@@ -107,8 +106,8 @@ public class ADWrapper {
         return Utils.convertArrayList_ArrayList_StringTo2DArray(users);
     }
 
-    //TODO fix error
     public static void syncDatabase() {
+        System.out.println("user merge started!");
         SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         SQLInsertStatements sqlInsertStatements = new SQLInsertStatements(new SQLConnector());
         SQLDeleteStatements sqlDeleteStatements = new SQLDeleteStatements(new SQLConnector());
@@ -119,8 +118,8 @@ public class ADWrapper {
 
         //alte user mergen
         for (int i = 0; i < oldUsers[0].length; i++) {
-            for (String[] adUser : users){
-                if (oldUsers[0][i].equals(adUser[0])){
+            for (String[] adUser : users) {
+                if (oldUsers[0][i].equals(adUser[0])) {
                     ArrayList<String> temp = new ArrayList<>();
                     temp.add(oldUsers[0][i]);
                     temp.add(oldUsers[3][i]);
@@ -141,11 +140,12 @@ public class ADWrapper {
         for (int i = 0; i < users.length; i++) {
             boolean is = false;
             for (ArrayList<String> userList : newUsers) {
-                if (userList.get(0).equals(users[i][0])){
+                if (userList.get(0).equals(users[i][0])) {
                     is = true;
+                    break;
                 }
             }
-            if (!is){
+            if (!is) {
                 ArrayList<String> temp = new ArrayList<>();
                 temp.add(users[i][0]); //name
                 temp.add(users[i][1]); //email
@@ -161,28 +161,18 @@ public class ADWrapper {
             }
         }
 
-        //nicht vorhandener user eintrag
-        boolean dummyPresent = false;
-        for (int i = 0; i < oldUsers[0].length; i++) {
-            if (oldUsers[0][i].equals("-1")){
-                dummyPresent = true;
-                break;
-            }
-        }
-        if (!dummyPresent){
-            ArrayList<String> temp = new ArrayList<>();
-            temp.add("-1");
-            temp.add(" - ");
-            temp.add("1");
-            temp.add("1");
-            temp.add("-1");
-            temp.add("-1");
-            temp.add("-1");
-            temp.add("-1");
-            temp.add("-1");
-            temp.add("-1");
-            newUsers.add(temp);
-        }
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add("-1");
+        temp.add(" - ");
+        temp.add("1");
+        temp.add("1");
+        temp.add("-1");
+        temp.add("-1");
+        temp.add("-1");
+        temp.add("-1");
+        temp.add("-1");
+        temp.add("-1");
+        newUsers.add(temp);
 
         sqlDeleteStatements.deleteTable("user");
 

@@ -109,12 +109,12 @@ public class UserManagmantGui {
         });
 
         ListSelectionModel selectionModel = userTable.getSelectionModel();
-        selectionModel.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                int selectedRow = userTable.getSelectedRow();
-                if (selectedRow >= 0) {
-                    String userName = getShortCut.get(userTableModell.getRow(selectedRow)[0].toString());
+        selectionModel.addListSelectionListener(e -> {
+            int selectedRow = userTable.getSelectedRow();
+            if (selectedRow >= 0) {
+                String userName = "";
+                if (userTableModell.getRow(selectedRow)[0].toString() != null){
+                    userName = getShortCut.get(userTableModell.getRow(selectedRow)[0].toString());
                     String[] data = sqlSelectStatements.getUserInfos(userName);
                     for (int i = 0; i < data.length; i++) {
                         if (data[i] == null) {

@@ -439,8 +439,6 @@ public class SQLSelectStatements {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(Arrays.deepToString(Utils.convertArrayList_ArrayList_StringTo2DArray(resultList)));
-
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 
@@ -771,6 +769,7 @@ public class SQLSelectStatements {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 

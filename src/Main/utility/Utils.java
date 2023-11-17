@@ -3,6 +3,7 @@ package Main.utility;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Utils {
     public static String newConditionNote = "null";
@@ -404,5 +405,9 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    public static void systemOutPrintln(ArrayList<ArrayList<String>> in){
+        System.out.println(Arrays.deepToString(convertArrayList_ArrayList_StringTo2DArray(in)));
     }
 }

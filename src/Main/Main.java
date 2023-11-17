@@ -104,4 +104,8 @@ public class Main {
         File f = new File("\\\\Apocare-data\\it\\Inventarisierung\\maintenance - true");
         return f.exists();
     }
+
+    private boolean maintainenceTestDummy() {
+        return false;
+    }
 }
