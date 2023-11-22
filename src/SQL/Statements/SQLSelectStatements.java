@@ -1053,6 +1053,18 @@ public class SQLSelectStatements {
         return attr.toArray(new String[0]);
     }
 
+    public String getSetting(String sp_name){
+        ResultSet res = connector.query(new SQLStatement(
+                "select sp_value from settings where sp_name = '" + sp_name + "'"
+        ));
+        try {
+            res.next();
+            return res.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public String[] getConditions(String iv_number) {
         ResultSet res = connector.query(new SQLStatement(
                 "select c_status, c_note from " + Utils.getTableFromShortCut(iv_number.substring(0, 2)) + " where iv_number = '" + iv_number + "'"

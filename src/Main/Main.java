@@ -7,6 +7,7 @@ import Main.utility.ADWrapper;
 import Main.utility.Constants;
 import Main.utility.Printer.ArbeitsmittelPrinter;
 import Main.utility.Printer.LabelPrinter;
+import Main.utility.Settings;
 import SQL.SQLConnector;
 import SQL.Statements.SQLDeleteStatements;
 import SQL.Statements.SQLSelectStatements;
@@ -27,13 +28,16 @@ public class Main {
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String version_code = "0.1";
+    private static final String version_code = "0.1.2";
 
     private static final String startup_configuration = "main";
 
     public static Main m;
 
     public static void main(String[] args) {
+        main();
+    }
+    private static void main(){
         m = new Main();
         m.init();
     }
@@ -57,6 +61,7 @@ public class Main {
 
         Constants.init();
         ADWrapper.init();
+        Settings.init();
 
         connector = new SQLConnector();
         sqlSelectStatements = new SQLSelectStatements(connector);
@@ -135,5 +140,12 @@ public class Main {
 
     private boolean maintainenceTestDummy() {
         return false;
+    }
+
+    private static void updateVersion(){
+        SQLConnector connector = new SQLConnector();
+        connector.query(new SQLStatement(
+                "update properties set p_value = '" + version_code + "' where p_name = 'version'"
+        ));
     }
 }

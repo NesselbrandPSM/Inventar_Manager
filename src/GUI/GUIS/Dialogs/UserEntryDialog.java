@@ -2,6 +2,7 @@ package GUI.GUIS.Dialogs;
 
 import Main.utility.Constants;
 import Main.utility.Printer.ArbeitsmittelPrinter;
+import Main.utility.Settings;
 import Main.utility.UtilPrintables.IVObject;
 import Main.utility.UtilPrintables.ReturnTripel;
 import Main.utility.Utils;
@@ -316,9 +317,8 @@ public class UserEntryDialog extends JDialog {
             data[0] = userlabel.getText();
             data[1] = iv_number;
             data[2] = Utils.getDateTimeNow();
-            String status = "in verwendung (hybrid)";
             sqlInsertStatements.inputUDStatement(data);
-            sqlUpdateStatements.updateEntryUserAndStatus(data[0], iv_number, status, Utils.getTableFromShortCut(iv_number.substring(0, 2)));
+            sqlUpdateStatements.updateEntryUserAndStatus(data[0], iv_number, Settings.standardStatusAfterDeviceLoan, Utils.getTableFromShortCut(iv_number.substring(0, 2)));
         }
 
         String[] userData = new String[6];

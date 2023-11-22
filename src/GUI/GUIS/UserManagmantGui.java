@@ -131,7 +131,7 @@ public class UserManagmantGui {
             update();
         });
         druckButton.addActionListener(e -> {
-            String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
+            String user = getShortCut.get((String) userTableModell.getRow(userTable.getSelectedRow())[0]);
             String[] data = sqlSelectStatements.getUserAttributes(user);
             boolean printArbeitsmittelList = false;
             if (Objects.equals(data[3], "1")) {
@@ -150,7 +150,7 @@ public class UserManagmantGui {
         druckansichtButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String user = (String) userTableModell.getRow(userTable.getSelectedRow())[0];
+                String user = getShortCut.get((String) userTableModell.getRow(userTable.getSelectedRow())[0]);
                 String[] data = sqlSelectStatements.getUserAttributes(user);
 
                 if (data[3].equals("1") || data[4].equals("1")) {

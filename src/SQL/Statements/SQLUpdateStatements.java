@@ -68,4 +68,10 @@ public class SQLUpdateStatements {
                 "update " + table + " SET current_status = '" + newStatus + "' where iv_number = '" + iv_number + "'"
         ));
     }
+
+    public void updateSetting(String sp_name, String sp_value){
+        connector.query(new SQLStatement(
+                "update settings SET sp_value = '" + sp_value + "' where sp_name = '" + sp_name + "'"
+        ));
+    }
 }

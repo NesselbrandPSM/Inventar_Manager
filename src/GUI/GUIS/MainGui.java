@@ -1,5 +1,6 @@
 package GUI.GUIS;
 
+import GUI.GUIS.Dialogs.SettingsDialog;
 import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
@@ -40,6 +41,7 @@ public class MainGui {
     private JCheckBox monitorBox;
     private JCheckBox dockingstationBox;
     private JCheckBox telephoneBox;
+    private JButton einstellungenButton;
     private SQLConnector connector;
     private SQLSelectStatements sqlSelectStatements;
     private SQLDeleteStatements sqlDeleteStatements;
@@ -249,6 +251,14 @@ public class MainGui {
         monitorBox.addActionListener(listener);
         dockingstationBox.addActionListener(listener);
         telephoneBox.addActionListener(listener);
+
+        einstellungenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingsDialog settingsDialog = new SettingsDialog();
+                settingsDialog.init();
+            }
+        });
     }
 
     public void updateShowAllTableModel(int flags) {
