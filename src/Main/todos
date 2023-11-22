@@ -1,11 +1,6 @@
- - //TODO Fehlerausgabe bei Einfuegen von neuen Entrys
  - //TODO Dokumentenpfad(Von "Überlassung von Arbeitsmitteln") + Speichern + Verzeichnis
  - //TODO Foto von Geräten in Verzeichnis mit iv_number als titel
  - //TODO "Überlassung von Arbeitsmitteln" per email
 
  - //TODO Rückgegeben am + Unterschrift + wer angenommen hat bei Arbeitsmittelliste hinzufügen + neuer status + zustand
  - //TODO Bei Löschen von Benutzer müssen alle Items behandelt (eingelagert werden)
-
- -------------------------------------------------------------------------------------------
- Settings:
-  - standard status after loan of device (currently always: "in verwendung (homeoffice || am standort)"
