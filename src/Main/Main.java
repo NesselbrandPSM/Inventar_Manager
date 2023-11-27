@@ -53,7 +53,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        if (maintainenceTestDummy()) {
+        if (maintainenceTest()) {
             JOptionPane.showMessageDialog(null, "Die Datenbank befindet sich gerade in Wartungsarbeiten.\nBitte probieren sie es später " + "noch einmal oder\nwenden sie sich an ihren Systemadministrator.");
             return;
         }

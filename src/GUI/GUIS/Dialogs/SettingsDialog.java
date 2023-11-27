@@ -1,6 +1,8 @@
 package GUI.GUIS.Dialogs;
 
+import GUI.GUIS.MainGui;
 import GUI.util.ComboBoxItem;
+import Main.Main;
 import Main.utility.Constants;
 import Main.utility.Settings;
 import SQL.SQLConnector;
