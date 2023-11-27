@@ -40,15 +40,9 @@ public class PC_Form {
 
     private String pcType = "";
 
-    private SQLConnector sqlConnector;
-    private SQLSelectStatements sqlSelectStatements;
-
     private String[][] companySet;
 
     public PC_Form() {
-        sqlConnector = new SQLConnector();
-        sqlSelectStatements = new SQLSelectStatements(sqlConnector);
-
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
@@ -184,5 +178,6 @@ public class PC_Form {
         dguv.setText("");
         eSimNumber.setText("");
         eSimPin.setText("");
+        conditionNote.setText("");
     }
 }

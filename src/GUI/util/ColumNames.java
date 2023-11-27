@@ -46,4 +46,12 @@ public class ColumNames {
     public static final String[] allAttributesMC = new String[]{
             "Primärschlüssel", "Inventar Nummer", "Nutzer", "Nutzer Email", "Firma", "Typ", "Bezeichner", "Status", "Zustand", "Zustandsbemerkung", "Bemerkung", "Letzte Änderung"
     };
+
+    public static final String[] allAtributesTV = new String[]{
+            "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Name", "Seriennummer", "Auflösung", "Touchframe-Version","Systemversion","Android-Version", "Arbeitsspeicher", "Festplattenspeicher", "Kaufdatum", "KaufPreis","Garantie", "Status", "Raum Nummer", "Etage", "DGUV", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+    };
+
+    public static final String[] allAttributesRT = new String[]{
+            "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Seriennummer", "IP-Addresse", "Patchbox-Nummer", "Raum Nummer", "Etage", "Status", "DGUV", "Bemerkung", "Kaufdatum", "Kaufpreis", "Garantie", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+    };
 }

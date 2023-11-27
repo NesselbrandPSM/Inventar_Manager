@@ -155,6 +155,34 @@ public class SQLSelectStatements {
                 i++;
             }
             //endregion
+            //region Router
+            resultSet = connector.query(new SQLStatement("select router.iv_number, company.company, router.current_status, router.c_status, router.rt_key " +
+                    "from company " +
+                    "join router " +
+                    "on router.inventory_company_key = company.company_key " +
+                    "where router.active = 1"));
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
+            //region TV
+            resultSet = connector.query(new SQLStatement("select tv.iv_number, company.company, tv.current_status, tv.c_status, tv.tv_key " +
+                    "from company " +
+                    "join tv " +
+                    "on tv.inventory_company_key = company.company_key " +
+                    "where tv.active = 1"));
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -216,6 +244,18 @@ public class SQLSelectStatements {
                             "select * from desk " +
                                     "join company on desk.inventory_company_key=company.company_key " +
                                     "where desk.active = 1 and desk.iv_number = \"" + iv_number + "\""));
+                    break;
+                case "tv":
+                    resultSet = connector.query(new SQLStatement(
+                            "select * from tv " +
+                                    "join company on tv.inventory_company_key=company.company_key " +
+                                    "where tv.active = 1 and tv.iv_number = \"" + iv_number + "\""));
+                    break;
+                case "rt":
+                    resultSet = connector.query(new SQLStatement(
+                            "select * from router " +
+                                    "join company on router.inventory_company_key=company.company_key " +
+                                    "where router.active = 1 and router.iv_number = \"" + iv_number + "\""));
                     break;
             }
 
@@ -352,6 +392,34 @@ public class SQLSelectStatements {
                     "join desk " +
                     "on desk.inventory_company_key = company.company_key " +
                     "where desk.active = 1 and company.company = \"" + company + "\""));
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
+            // region router
+            resultSet = connector.query(new SQLStatement("select router.iv_number, company.company, router.current_status, router.c_status, router.rt_key " +
+                    "from company " +
+                    "join router " +
+                    "on router.inventory_company_key = company.company_key " +
+                    "where router.active = 1 and company.company = \"" + company + "\""));
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
+                    resultList.get(i).add(String.valueOf(resultSet.getObject(attr_number)));
+                }
+                i++;
+            }
+            //endregion
+            // region tv
+            resultSet = connector.query(new SQLStatement("select tv.iv_number, company.company, tv.current_status, tv.c_status, tv.tv_key " +
+                    "from company " +
+                    "join tv " +
+                    "on tv.inventory_company_key = company.company_key " +
+                    "where tv.active = 1 and company.company = \"" + company + "\""));
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
                 for (int attr_number = 1; attr_number <= attributeNumber; attr_number++) {
@@ -662,6 +730,60 @@ public class SQLSelectStatements {
         return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
     }
 
+    public String[][] getAllFromRTView(int key) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select * from router " +
+                        "join company on router.inventory_company_key=company.company_key " +
+                        "join user on router.inventory_user_key=user.name " +
+                        "where router.rt_key = " + key
+        ));
+        try {
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : ColumNames.allAttributesRT) {
+                    if (s.equals("Primärschlüssel")) {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "rt"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
+    public String[][] getAllFromTVView(int key) {
+        ArrayList<ArrayList<String>> resultList = new ArrayList<>();
+
+        ResultSet resultSet = connector.query(new SQLStatement(
+                "select * from tv " +
+                        "join company on tv.inventory_company_key=company.company_key " +
+                        "join user on tv.inventory_user_key=user.name " +
+                        "where tv.tv_key = " + key
+        ));
+        try {
+            while (resultSet.next()) {
+                resultList.add(new ArrayList<>());
+                for (String s : ColumNames.allAttributesMC) {
+                    if (s.equals("Primärschlüssel")) {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "tv"))));
+                    } else {
+                        resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s))));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return Utils.convertArrayList_ArrayList_StringTo2DArray(resultList);
+    }
+
     public String[][] getAllCompanys() {
         ArrayList<ArrayList<String>> resultList = new ArrayList<>();
 
@@ -822,6 +944,12 @@ public class SQLSelectStatements {
                 break;
             case "miscellaneous":
                 ret.insert(0, "MC-");
+                break;
+            case "router":
+                ret.insert(0, "RT-");
+                break;
+            case "tv":
+                ret.insert(0, "TV-");
                 break;
         }
         return ret.toString();
@@ -1053,7 +1181,7 @@ public class SQLSelectStatements {
         return attr.toArray(new String[0]);
     }
 
-    public String getSetting(String sp_name){
+    public String getSetting(String sp_name) {
         ResultSet res = connector.query(new SQLStatement(
                 "select sp_value from settings where sp_name = '" + sp_name + "'"
         ));

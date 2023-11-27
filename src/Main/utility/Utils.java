@@ -187,6 +187,21 @@ public class Utils {
             case "Typ":
                 ret = "typ";
                 break;
+            case "Name":
+                ret = "device_name";
+                break;
+            case "Touchframe-Version":
+                ret = "touchframe_vs";
+                break;
+            case "Systemversion":
+                ret = "system_vs";
+                break;
+            case "Android-Version":
+                ret = "android_vs";
+                break;
+            case "Patchbox-Nummer":
+                ret = "patchbox_nr";
+                break;
         }
         return ret;
     }
@@ -218,6 +233,12 @@ public class Utils {
             case "Dockingstationen":
                 ret = "dockingstation";
                 break;
+            case "TVs":
+                ret = "tv";
+                break;
+            case "Router":
+                ret = "router";
+                break;
         }
         return ret;
     }
@@ -248,6 +269,12 @@ public class Utils {
                 break;
             case "desk":
                 ret = "dk";
+                break;
+            case "tv":
+                ret = "tv";
+                break;
+            case "router":
+                ret = "tr";
                 break;
         }
         return ret;
@@ -282,6 +309,12 @@ public class Utils {
                 break;
             case "mc":
                 ret = "miscellaneous";
+                break;
+            case "tv":
+                ret = "tv";
+                break;
+            case "rt":
+                ret = "router";
                 break;
         }
         return ret;
@@ -406,6 +439,7 @@ public class Utils {
         }
         return false;
     }
+
 
     //new Throwable().getStackTrace()[0].getLineNumber(
 
