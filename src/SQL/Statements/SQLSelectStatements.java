@@ -12,12 +12,10 @@ import SQL.util.SQLStatement;
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class SQLSelectStatements {
+
     public SQLSelectStatements(SQLConnector connector) {
         this.connector = connector;
     }
