@@ -1,5 +1,6 @@
 package SQL;
 
+import GUI.GUIS.LoadingScreen;
 import Main.Main;
 import Main.utility.Utils;
 import SQL.util.SQLStatement;
@@ -34,8 +35,8 @@ public class SQLConnector {
         try {
             switch (query.getStatement().substring(0, query.getStatement().indexOf(" "))) {
                 case "select":
-                    if (Main.startup){
-
+                    if (Main.startup) {
+                        LoadingScreen.print(query.getStatement());
                     }
                     Utils.systemOutPrintln(query.getStatement());
                     result = statement.executeQuery(query.getStatement());
@@ -43,8 +44,8 @@ public class SQLConnector {
                 case "insert":
                 case "delete":
                 case "update":
-                    if (Main.startup){
-
+                    if (Main.startup) {
+                        LoadingScreen.print(query.getStatement());
                     }
                     Utils.systemOutPrintln(query.getStatement());
                     statement.executeUpdate(query.getStatement());

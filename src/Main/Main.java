@@ -1,6 +1,7 @@
 package Main;
 
 import GUI.GUIS.Dialogs.PrinterDialog;
+import GUI.GUIS.LoadingScreen;
 import GUI.GUIS.MainGui;
 import GUI.GUIS.UserManagmantGui;
 import Main.utility.ADWrapper;
@@ -61,6 +62,7 @@ public class Main {
             return;
         }
 
+        LoadingScreen.init();
         Constants.init();
         ADWrapper.init();
         Settings.init();
@@ -111,6 +113,9 @@ public class Main {
                 PrinterDialog.start("l.schmidt", sqlSelectStatements.getUserAttributes("l.schmidt"));
                 break;
             }
+            case "9":{
+                break;
+            }
         }
     }
 
@@ -149,5 +154,9 @@ public class Main {
         connector.query(new SQLStatement(
                 "update properties set p_value = '" + version_code + "' where p_name = 'version'"
         ));
+    }
+
+    public static String getVersion(){
+        return version_code;
     }
 }

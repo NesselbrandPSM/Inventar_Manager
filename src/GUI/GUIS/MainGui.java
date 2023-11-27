@@ -493,6 +493,7 @@ public class MainGui {
         frame.setVisible(true);
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         Main.startup = false;
+        LoadingScreen.dispose();
     }
     //endregion
 }
