@@ -28,6 +28,7 @@ public class Router_Form {
     private String[][] companySet;
 
     public Router_Form() {
+        status.removeAllItems();
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }

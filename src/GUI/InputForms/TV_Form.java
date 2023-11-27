@@ -33,6 +33,7 @@ public class TV_Form {
     private String[][] companySet;
 
     public TV_Form() {
+        status.removeAllItems();
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }

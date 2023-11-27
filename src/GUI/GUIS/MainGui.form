@@ -195,8 +195,10 @@
         <colspec value="fill:85px:noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:115px:noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms top="0" left="20" bottom="10" right="0"/>
         </constraints>
         <properties/>
@@ -272,6 +274,24 @@
             </constraints>
             <properties>
               <text value="Telefone"/>
+            </properties>
+          </component>
+          <component id="f283d" class="javax.swing.JCheckBox" binding="tvBox">
+            <constraints>
+              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="TVs"/>
+            </properties>
+          </component>
+          <component id="d15a9" class="javax.swing.JCheckBox" binding="routerBox">
+            <constraints>
+              <grid row="2" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Router"/>
             </properties>
           </component>
         </children>

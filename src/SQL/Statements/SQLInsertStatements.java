@@ -274,6 +274,68 @@ public class SQLInsertStatements {
         connector.query(s);
     }
 
+    public void inputRTEntry(String[] args){
+        SQLStatement s = new SQLStatement(
+                "insert into router (" +
+                        "iv_number, inventory_company_key, s_number, room_nb, floor, patchbox_nr, current_status, dguv, note, manufacturer, modell, ip, purchase_date, purchase_price, warranty, c_status, c_note" +
+                        ") values (" +
+                        "'" + args[0] + "', " +
+                        "'" + args[1] + "', " +
+                        "'" + args[2] + "', " +
+                        "'" + args[3] + "', " +
+                        "'" + args[4] + "', " +
+                        "'" + args[5] + "', " +
+                        "'" + args[6] + "', " +
+                        "'" + args[7] + "', " +
+                        "'" + args[8] + "', " +
+                        "'" + args[9] + "', " +
+                        "'" + args[10] + "', " +
+                        "'" + args[11] + "', " +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "', " +
+                        "'" + args[14] + "', " +
+                        "'" + args[15] + "', " +
+                        "'" + args[16] + "'" +
+                        ")"
+        );
+
+        connector.query(s);
+    }
+
+    public void inputTVEntry(String[] args){
+        SQLStatement s = new SQLStatement(
+                "insert into tv (" +
+                        "iv_number, touchframe_vs, system_vs, android_vs, device_name, s_number, ram, rom, resolution, purchase_date, purchase_price, note, c_status, c_note, inventory_company_key, manufacturer, modell, current_status, dguv, warranty, room_nb, floor" +
+                        ") values (" +
+                        "'" + args[0] + "', " +
+                        "'" + args[1] + "', " +
+                        "'" + args[2] + "', " +
+                        "'" + args[3] + "', " +
+                        "'" + args[4] + "', " +
+                        "'" + args[5] + "', " +
+                        "'" + args[6] + "', " +
+                        "'" + args[7] + "', " +
+                        "'" + args[8] + "', " +
+                        "'" + args[9] + "', " +
+                        "'" + args[10] + "', " +
+                        "'" + args[11] + "', " +
+                        "'" + args[12] + "', " +
+                        "'" + args[13] + "', " +
+                        "'" + args[14] + "', " +
+                        "'" + args[15] + "', " +
+                        "'" + args[16] + "', " +
+                        "'" + args[17] + "', " +
+                        "'" + args[18] + "', " +
+                        "'" + args[19] + "', " +
+                        "'" + args[20] + "', " +
+                        "'" + args[21] + "'" +
+                        ")"
+        );
+
+        connector.query(s);
+    }
+
+
     public void inputUDStatement(String[] args){
         SQLStatement s = new SQLStatement(
                 "insert into udmapping (" +

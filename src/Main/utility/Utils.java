@@ -274,7 +274,7 @@ public class Utils {
                 ret = "tv";
                 break;
             case "router":
-                ret = "tr";
+                ret = "rt";
                 break;
         }
         return ret;

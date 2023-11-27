@@ -27,6 +27,8 @@ public class MainInputGui {
     private JCheckBox DeskCheckBox;
     private JCheckBox miscCheckBox;
     private JButton einfuegenLabelDruckenButton;
+    private JCheckBox tvCheckBox;
+    private JCheckBox routerCheckBox;
 
     private Dockingstation_Form dockingstationForm;
     private Headset_Form headsetForm;
@@ -37,6 +39,8 @@ public class MainInputGui {
     private Telephone_Form telephoneForm;
     private Desk_Form deskForm;
     private Miscellaneous_Form miscellaneousForm;
+    private TV_Form tvForm;
+    private Router_Form routerForm;
 
     private SQLSelectStatements sqlSelectStatements;
     private SQLInsertStatements sqlInsertStatements;
@@ -82,6 +86,11 @@ public class MainInputGui {
                 case "Misc":
                     show(miscellaneousForm.getPanel());
                     break;
+                case "Router":
+                    show(routerForm.getRtPanel());
+                    break;
+                case "TV":
+                    show(tvForm.getTVPanel());
             }
         };
 
@@ -94,15 +103,12 @@ public class MainInputGui {
         TelephoneCheckBox.addActionListener(listener);
         DeskCheckBox.addActionListener(listener);
         miscCheckBox.addActionListener(listener);
+        tvCheckBox.addActionListener(listener);
+        routerCheckBox.addActionListener(listener);
 
         einfuegenButton.addActionListener(e -> inputEntry());
         abbrechenButton.addActionListener(e -> close());
-        einfuegenLabelDruckenButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                inputEntryLabel();
-            }
-        });
+        einfuegenLabelDruckenButton.addActionListener(e -> inputEntryLabel());
     }
 
     private void inputEntry() {
@@ -147,6 +153,12 @@ public class MainInputGui {
                     break;
                 case "miscellaneous":
                     sqlInsertStatements.inputMCEntry(miscellaneousForm.getArgs(currentIVNumber));
+                    break;
+                case "tv":
+                    sqlInsertStatements.inputTVEntry(tvForm.getArgs(currentIVNumber));
+                    break;
+                case "router":
+                    sqlInsertStatements.inputRTEntry(routerForm.getArgs(currentIVNumber));
                     break;
             }
         }
@@ -196,6 +208,12 @@ public class MainInputGui {
                 case "miscellaneous":
                     sqlInsertStatements.inputMCEntry(miscellaneousForm.getArgs(currentIVNumber));
                     break;
+                case "tv":
+                    sqlInsertStatements.inputTVEntry(tvForm.getArgs(currentIVNumber));
+                    break;
+                case "router":
+                    sqlInsertStatements.inputRTEntry(routerForm.getArgs(currentIVNumber));
+                    break;
             }
         }
     }
@@ -227,6 +245,10 @@ public class MainInputGui {
         deskForm.getDeskPanel().setName("desk");
         miscellaneousForm = new Miscellaneous_Form();
         miscellaneousForm.getPanel().setName("miscellaneous");
+        tvForm = new TV_Form();
+        tvForm.getTVPanel().setName("tv");
+        routerForm = new Router_Form();
+        routerForm.getRtPanel().setName("router");
     }
 
     public void init() {
@@ -256,6 +278,8 @@ public class MainInputGui {
         TelephoneCheckBox.setSelected(false);
         DeskCheckBox.setSelected(false);
         miscCheckBox.setSelected(false);
+        tvCheckBox.setSelected(false);
+        routerCheckBox.setSelected(false);
     }
 
     private void createUIComponents() {

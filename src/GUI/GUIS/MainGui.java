@@ -42,6 +42,8 @@ public class MainGui {
     private JCheckBox dockingstationBox;
     private JCheckBox telephoneBox;
     private JButton einstellungenButton;
+    private JCheckBox tvBox;
+    private JCheckBox routerBox;
     private SQLConnector connector;
     private SQLSelectStatements sqlSelectStatements;
     private SQLDeleteStatements sqlDeleteStatements;
@@ -185,6 +187,16 @@ public class MainGui {
                         setTextField2(sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[4]))[0]);
                         break;
                     }
+                    case "tv": {
+                        setTextField1(ColumNames.allAtributesTV);
+                        setTextField2(sqlSelectStatements.getAllFromTVView(Integer.parseInt(selRow[4]))[0]);
+                        break;
+                    }
+                    case "rt": {
+                        setTextField1(ColumNames.allAttributesRT);
+                        setTextField2(sqlSelectStatements.getAllFromRTView(Integer.parseInt(selRow[4]))[0]);
+                        break;
+                    }
                 }
             }
         });
@@ -255,6 +267,8 @@ public class MainGui {
         monitorBox.addActionListener(listener);
         dockingstationBox.addActionListener(listener);
         telephoneBox.addActionListener(listener);
+        tvBox.addActionListener(listener);
+        routerBox.addActionListener(listener);
 
         einstellungenButton.addActionListener(new ActionListener() {
             @Override
@@ -354,6 +368,8 @@ public class MainGui {
         monitorBox.setSelected(false);
         dockingstationBox.setSelected(false);
         telephoneBox.setSelected(false);
+        tvBox.setSelected(false);
+        routerBox.setSelected(false);
     }
 
     private JPopupMenu createLeftClickPopUpForTable(int flag) {

@@ -736,7 +736,6 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from router " +
                         "join company on router.inventory_company_key=company.company_key " +
-                        "join user on router.inventory_user_key=user.name " +
                         "where router.rt_key = " + key
         ));
         try {
@@ -763,13 +762,12 @@ public class SQLSelectStatements {
         ResultSet resultSet = connector.query(new SQLStatement(
                 "select * from tv " +
                         "join company on tv.inventory_company_key=company.company_key " +
-                        "join user on tv.inventory_user_key=user.name " +
                         "where tv.tv_key = " + key
         ));
         try {
             while (resultSet.next()) {
                 resultList.add(new ArrayList<>());
-                for (String s : ColumNames.allAttributesMC) {
+                for (String s : ColumNames.allAtributesTV) {
                     if (s.equals("Primärschlüssel")) {
                         resultList.get(0).add(String.valueOf(resultSet.getObject(Utils.toDataBaseAttributeName(s, "tv"))));
                     } else {

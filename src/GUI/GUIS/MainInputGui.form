@@ -27,8 +27,12 @@
     <colspec value="fill:105px:noGrow"/>
     <colspec value="left:5dlu:noGrow"/>
     <colspec value="fill:105px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:105px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:105px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="1157" height="660"/>
+      <xy x="20" y="20" width="1240" height="660"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -128,7 +132,7 @@
       </component>
       <component id="6fa54" class="javax.swing.JSeparator">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="17" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="21" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
@@ -167,6 +171,24 @@
         </constraints>
         <properties>
           <text value="Einfuegen + Label Drucken"/>
+        </properties>
+      </component>
+      <component id="3a0e8" class="javax.swing.JCheckBox" binding="tvCheckBox">
+        <constraints>
+          <grid row="2" column="18" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="5" left="10" bottom="0" right="0"/>
+        </constraints>
+        <properties>
+          <text value="TV"/>
+        </properties>
+      </component>
+      <component id="f5925" class="javax.swing.JCheckBox" binding="routerCheckBox">
+        <constraints>
+          <grid row="2" column="20" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="5" left="10" bottom="0" right="0"/>
+        </constraints>
+        <properties>
+          <text value="Router"/>
         </properties>
       </component>
     </children>
