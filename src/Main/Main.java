@@ -24,7 +24,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Main {
-    private static final String version_code = "0.1.2";
+    private static final String version_code = "0.2.1";
     private static final String startup_configuration = "main";
 
     public static boolean startup = true;
