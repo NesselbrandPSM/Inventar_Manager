@@ -4,6 +4,7 @@ import GUI.util.ComboBoxItem;
 import Main.utility.Constants;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import javax.swing.*;
 import java.awt.event.FocusAdapter;
@@ -36,7 +37,7 @@ public class Dockingstation_Form {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
-        companySet = sqlSelectStatements.getAllCompanys();
+        companySet = Constants.getCompanySet();
         String[] companysArr = companySet[0];
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));

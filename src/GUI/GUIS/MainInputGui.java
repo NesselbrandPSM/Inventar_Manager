@@ -233,13 +233,17 @@ public class MainInputGui {
         try {
             frame = new JFrame("Einfügen");
             frame.setContentPane(new MainInputGui().panel1);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             frame.pack();
-            frame.setVisible(true);
+            frame.setVisible(false);
             frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void show(boolean bool){
+        frame.setVisible(bool);
     }
 
     private void uncheckBoxes() {

@@ -14,7 +14,7 @@ public class ColumNames {
 
     public static final String[] allAttributesPR = new String[]{
             "Primärschlüssel", "Inventar Nummer", "Hersteller", "Modell", "Firma", "Kaufdatum", "KaufPreis","Garantie",
-            "Equipment Nummer", "Serien Nummer", "Status", "DGUV", "IP-Addresse", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Equipment Nummer", "Serien Nummer", "Status", "DGUV", "IP-Addresse", "Etage", "Raum Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesSC = new String[]{

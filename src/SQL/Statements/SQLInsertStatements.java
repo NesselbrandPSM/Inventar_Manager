@@ -50,14 +50,13 @@ public class SQLInsertStatements {
                         "'" + args[28] + "'" +
                         ")"
         );
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
     public void inputPREntry(String[] args) {
         SQLStatement s = new SQLStatement(
                 "insert into printer (" +
-                        "current_status, inventory_company_key, manufacturer, modell, s_number, eq_number, ip, purchase_date, purchase_price, warranty, dguv, iv_number, note, c_status, c_note" +
+                        "current_status, inventory_company_key, manufacturer, modell, s_number, eq_number, ip, purchase_date, purchase_price, warranty, dguv, iv_number, note, c_status, c_note, room_nb, floor" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -73,11 +72,12 @@ public class SQLInsertStatements {
                         "'" + args[11] + "', " +
                         "'" + args[12] + "', " +
                         "'" + args[13] + "', " +
-                        "'" + args[14] + "'" +
+                        "'" + args[14] + "', " +
+                        "'" + args[15] + "', " +
+                        "'" + args[16] + "'" +
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -103,7 +103,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -130,7 +129,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -156,7 +154,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -187,7 +184,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -219,7 +215,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -256,7 +251,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s);
         connector.query(s);
     }
 
@@ -277,7 +271,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 
@@ -293,7 +286,6 @@ public class SQLInsertStatements {
                         ")"
         );
 
-        System.out.println(s.getStatement());
         connector.query(s);
     }
 }

@@ -23,6 +23,7 @@ public class Constants {
     public static boolean setActive = false;
 
     public static ArrayList<IVObjectRet> returnList;
+    private static String[][] companySet;
 
     public static void init(){
         SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
@@ -34,6 +35,7 @@ public class Constants {
         paragraphsHomeOffice = sqlSelectStatements.getParagraphsList1();
         resetParagraphsHome();
         resetParagraphsUeberlassung();
+        companySet = sqlSelectStatements.getAllCompanys();
     }
 
     public static void refreshTyp(){
@@ -49,5 +51,13 @@ public class Constants {
     public static void resetParagraphsUeberlassung(){
         SQLSelectStatements sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
         PRINT_paragraphsUeberlassung = sqlSelectStatements.getParagraphsList0();
+    }
+
+    public static String[][] getCompanySet(){
+        String[][] set = new String[companySet.length][companySet[0].length];
+        for (int i = 0; i < companySet.length; i++) {
+            System.arraycopy(companySet[i], 0, set[i], 0, companySet[0].length);
+        }
+        return set;
     }
 }

@@ -1,5 +1,7 @@
 package SQL;
 
+import Main.Main;
+import Main.utility.Utils;
 import SQL.util.SQLStatement;
 
 import java.sql.*;
@@ -32,11 +34,19 @@ public class SQLConnector {
         try {
             switch (query.getStatement().substring(0, query.getStatement().indexOf(" "))) {
                 case "select":
+                    if (Main.startup){
+
+                    }
+                    Utils.systemOutPrintln(query.getStatement());
                     result = statement.executeQuery(query.getStatement());
                     break;
                 case "insert":
                 case "delete":
                 case "update":
+                    if (Main.startup){
+
+                    }
+                    Utils.systemOutPrintln(query.getStatement());
                     statement.executeUpdate(query.getStatement());
                     break;
             }

@@ -54,7 +54,7 @@ public class Desk_Form {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
-        companySet = sqlSelectStatements.getAllCompanys();
+        companySet = Constants.getCompanySet();
         String[] companysArr = companySet[0];
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));

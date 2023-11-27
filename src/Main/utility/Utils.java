@@ -407,7 +407,29 @@ public class Utils {
         return false;
     }
 
+    //new Throwable().getStackTrace()[0].getLineNumber(
+
     public static void systemOutPrintln(ArrayList<ArrayList<String>> in){
         System.out.println(Arrays.deepToString(convertArrayList_ArrayList_StringTo2DArray(in)));
+    }
+
+    public static void systemOutPrintln(String out){
+        System.out.println(out);
+    }
+
+    public static void systemErrPrintln(String err){
+        System.err.println(err);
+    }
+
+    public static void systemOutPrintln(ArrayList<ArrayList<String>> in, int line){
+        System.out.println(line + ": " + Arrays.deepToString(convertArrayList_ArrayList_StringTo2DArray(in)));
+    }
+
+    public static void systemOutPrintln(String out, int line){
+        System.out.println(line + ": " + out);
+    }
+
+    public static void systemErrPrintln(String err, int line){
+        System.err.println(line + ": " + err);
     }
 }

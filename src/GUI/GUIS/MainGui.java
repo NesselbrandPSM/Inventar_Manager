@@ -52,6 +52,8 @@ public class MainGui {
 
     private static int showAllTableModelFlag = 0;
     private static boolean showAll = true;
+
+    private MainInputGui mainInputGui;
     //endregion
 
     public MainGui(SQLConnector connector, SQLSelectStatements sqlSelectStatements, SQLDeleteStatements sqlDeleteStatements) {
@@ -100,6 +102,9 @@ public class MainGui {
             updateShowAllTableModel(showAllTableModelFlag);
             table1.getSelectionModel().setSelectionInterval(0, i);
         });
+
+        mainInputGui = new MainInputGui();
+        mainInputGui.init();
         //endregion
 
         //region searchactionListener
@@ -215,8 +220,7 @@ public class MainGui {
 
         //region einfügenListener
         elementEinfügenButton.addActionListener(e -> {
-            MainInputGui gui = new MainInputGui();
-            gui.init();
+            mainInputGui.show(true);
         });
         //endregion
 
@@ -488,6 +492,7 @@ public class MainGui {
         frame.pack();
         frame.setVisible(true);
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        Main.startup = false;
     }
     //endregion
 }

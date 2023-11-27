@@ -23,16 +23,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Main {
+    private static final String version_code = "0.1.2";
+    private static final String startup_configuration = "main";
+
+    public static boolean startup = true;
+
+    public static Main m;
+
     private SQLConnector connector;
     public SQLSelectStatements sqlSelectStatements;
     private SQLDeleteStatements sqlDeleteStatements;
     public MainGui mainGui;
 
-    private static final String version_code = "0.1.2";
-
-    private static final String startup_configuration = "main";
-
-    public static Main m;
 
     public static void main(String[] args) {
         main();
@@ -50,7 +52,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        if (maintainenceTest()) {
+        if (maintainenceTestDummy()) {
             JOptionPane.showMessageDialog(null, "Die Datenbank befindet sich gerade in Wartungsarbeiten.\nBitte probieren sie es später " + "noch einmal oder\nwenden sie sich an ihren Systemadministrator.");
             return;
         }

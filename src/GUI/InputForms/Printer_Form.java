@@ -26,6 +26,8 @@ public class Printer_Form {
     private JComboBox condition;
     private JTextArea conditionNote;
     private JTextArea note;
+    private JTextField roomNBTextField;
+    private JTextField floorTextField;
 
     private String[][] companySet;
 
@@ -42,7 +44,7 @@ public class Printer_Form {
             status.addItem(new ComboBoxItem(s));
         }
         companys.removeAllItems();
-        companySet = sqlSelectStatements.getAllCompanys();
+        companySet = Constants.getCompanySet();
         String[] companysArr = companySet[0];
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
@@ -89,6 +91,8 @@ public class Printer_Form {
         args.add(note.getText());
         args.add(condition.getSelectedItem().toString());
         args.add(conditionNote.getText());
+        args.add(roomNBTextField.getText());
+        args.add(floorTextField.getText());
 
         String[] arguments = new String[args.size()];
         for (int j = 0; j < arguments.length; j++) {
@@ -113,5 +117,7 @@ public class Printer_Form {
         warranty.setText("");
         dguv.setText("");
         note.setText("");
+        floorTextField.setText("");
+        roomNBTextField.setText("");
     }
 }
