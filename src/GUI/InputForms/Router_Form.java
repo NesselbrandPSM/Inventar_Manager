@@ -103,4 +103,44 @@ public class Router_Form {
         roomNb.setText("");
         conditionNote.setText("");
     }
+
+    public void initData(String[] data) {
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            if (data[2].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        manufacturer.setText(data[3]);
+        modell.setText(data[4]);
+        s_number.setText(data[5]);
+        ip.setText(data[6]);
+        patchBoxNbr.setText(data[7]);
+        roomNb.setText(data[8]);
+        floor.setText(data[9]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[10].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        dguv.setText(data[11]);
+        note.setText(data[12]);
+        purchaseDate.setText(data[13]);
+        purchasePrice.setText(data[14]);
+        warranty.setText(data[15]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[16].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[17]);
+    }
 }

@@ -119,4 +119,51 @@ public class TV_Form {
         warranty.setText("");
         dguv.setText("");
     }
+
+    public void initData(String[] data) {
+        manufacturer.setText(data[3]);
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            System.out.println(companySet[0][i]);
+            if (data[2].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        modell.setText(data[4]);
+        device_name.setText(data[5]);
+        s_number.setText(data[6]);
+        resolution.setText(data[7]);
+        tframe_version.setText(data[8]);
+        s_version.setText(data[9]);
+        a_version.setText(data[10]);
+        ram.setText(data[11]);
+        rom.setText(data[12]);
+        purchase_date.setText(data[13]);
+        price.setText(data[14]);
+        warranty.setText(data[15]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[16].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        room_nb.setText(data[17]);
+        floor.setText(data[18]);
+        dguv.setText(data[19]);
+        note.setText(data[20]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[21].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[22]);
+    }
 }

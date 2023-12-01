@@ -71,11 +71,11 @@ public class ShowEditDialog extends JDialog {
                 show(telephoneForm.getTelephonePanel());
                 break;
             case "headset":
-                //headsetForm.initData(data);
+                headsetForm.initData(data);
                 show(headsetForm.getHeadsetPanel());
                 break;
             case "tv":
-                //tvForm.initData(data);
+                tvForm.initData(data);
                 show(tvForm.getTVPanel());
                 break;
             case "scanner":
@@ -83,19 +83,19 @@ public class ShowEditDialog extends JDialog {
                 show(scannerForm.getScannerPanel());
                 break;
             case "router":
-                //routerForm.initData(data);
+                routerForm.initData(data);
                 show(routerForm.getRtPanel());
                 break;
             case "dockingstation":
-                //dockingstationForm.initData(data);
+                dockingstationForm.initData(data);
                 show(dockingstationForm.getDockingPanel());
                 break;
             case "desk":
-                //deskForm.initData(data);
+                deskForm.initData(data);
                 show(deskForm.getDeskPanel());
                 break;
             case "miscellaneous":
-                //miscellaneousForm.initData(data);
+                miscellaneousForm.initData(data);
                 show(miscellaneousForm.getPanel());
                 break;
             case "monitor":

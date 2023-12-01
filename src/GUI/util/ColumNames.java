@@ -38,14 +38,14 @@ public class ColumNames {
     };
 
     public static final String[] allAttributesDS = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status",
-            "DGUV", "Serien Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV",
+            "Serien Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesDK = new String[]{
             "Primärschlüssel", "Inventar Nummer", "Hersteller", "Modell", "Serien Nummer", "Firma", "Kaufdatum", "KaufPreis","Garantie", "Status", "Raum Nummer", "Etage", "Desk Sharing", "Nutzer", "Nutzer Email",
-            "PC-IV-Nummer","HD-IV-Nummer","TE-IV-Nummer","DS-IV-Nummer","SC-IV-Nummer","MO1-IV-Nummer","MO2-IV-Nummer","Maus","Tastatur",
-            "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "PC-IV-Nummer","HD-IV-Nummer","TE-IV-Nummer","DS-IV-Nummer","SC-IV-Nummer","MO1-IV-Nummer","MO2-IV-Nummer",
+            "Maus","Tastatur", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesMC = new String[]{

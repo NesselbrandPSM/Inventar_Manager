@@ -195,4 +195,89 @@ public class Desk_Form {
         mo1IVNumberBox.setSelectedIndex(0);
         mo2IVNumberBox.setSelectedIndex(0);
     }
+
+    public void initData(String[] data) {
+        //TODO LOGIC FÜR WENN EIN ITEM VERÄNDERT WIRD MUSS DER STATUS ANGEMESSEN VERÄNDERT WERDEN
+        manufacturer.setText(data[2]);
+        modell.setText(data[3]);
+        s_number.setText(data[4]);
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            if (data[5].equals(companySet[0][i])) {
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        purchaseDate.setText(data[6]);
+        purchasePrice.setText(data[7]);
+        warranty.setText(data[8]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[9].equals(Constants.statusList[i])) {
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        roomNBTextField.setText(data[10]);
+        floorTextField.setText(data[11]);
+        if (data[12].equals("true")) {
+            deskShareCheckBox.setSelected(true);
+        }
+
+        if (!data[15].equals(" - ")){
+            pcIVNumberBox.addItem(new ComboBoxItem(data[15]));
+            pcIVNumberBox.setSelectedIndex(pcIVNumberBox.getItemCount() - 1);
+        }
+
+        if (!data[16].equals(" - ")){
+            hdIVNumberBox.addItem(new ComboBoxItem(data[16]));
+            hdIVNumberBox.setSelectedIndex(hdIVNumberBox.getItemCount() - 1);
+        }
+
+        if (!data[17].equals(" - ")){
+            teIVNumberBox.addItem(new ComboBoxItem(data[17]));
+            teIVNumberBox.setSelectedIndex(teIVNumberBox.getItemCount() - 1);
+        }
+
+        if (!data[18].equals(" - ")){
+            dsIVNumberBox.addItem(new ComboBoxItem(data[18]));
+            dsIVNumberBox.setSelectedIndex(dsIVNumberBox.getItemCount() - 1);
+        }
+
+        if (!data[19].equals(" - ")){
+            scIVNumberBox.addItem(new ComboBoxItem(data[19]));
+            scIVNumberBox.setSelectedIndex(scIVNumberBox.getItemCount() - 1);
+        }
+
+        if (!data[20].equals(" - ")){
+            mo1IVNumberBox.addItem(new ComboBoxItem(data[20]));
+            mo1IVNumberBox.setSelectedIndex(mo1IVNumberBox.getItemCount() - 1);
+        }
+
+        if (!data[21].equals(" - ")){
+            mo2IVNumberBox.addItem(new ComboBoxItem(data[21]));
+            mo2IVNumberBox.setSelectedIndex(mo2IVNumberBox.getItemCount() - 1);
+        }
+
+
+        if (data[22].equals("true")) {
+            hasMouseCheckBox.setSelected(true);
+        }
+        if (data[23].equals("true")) {
+            hasKeyboardCheckBox.setSelected(true);
+        }
+        note.setText(data[24]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[25].equals(Constants.conditionList[i])) {
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[26]);
+    }
 }

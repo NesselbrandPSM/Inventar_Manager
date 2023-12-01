@@ -109,4 +109,43 @@ public class Dockingstation_Form {
     public JPanel getDockingPanel() {
         return dockingPanel;
     }
+
+    public void initData(String[] data) {
+        manufacturer.setText(data[2]);
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            System.out.println(companySet[0][i]);
+            if (data[3].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        modell.setText(data[4]);
+
+        purchaseDate.setText(data[7]);
+        purchasePrice.setText(data[8]);
+        warranty.setText(data[9]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[10].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        dguv.setText(data[11]);
+        s_number.setText(data[12]);
+        note.setText(data[13]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[14].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[15]);
+    }
 }

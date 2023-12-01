@@ -111,4 +111,39 @@ public class Miscellaneous_Form {
         name.setText("");
         note.setText("");
     }
+
+    public void initData(String[] data) {
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            if (data[4].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        for (i = 0; i < Constants.typs.length; i++) {
+            if (data[7].equals(Constants.typs[i])){
+                break;
+            }
+        }
+        type.setSelectedIndex(i);
+
+        name.setText(data[6]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[7].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[8].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[9]);
+        note.setText(data[10]);
+    }
 }
