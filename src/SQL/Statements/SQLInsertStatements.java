@@ -305,7 +305,7 @@ public class SQLInsertStatements {
     public void inputTVEntry(String[] args){
         SQLStatement s = new SQLStatement(
                 "insert into tv (" +
-                        "iv_number, touchframe_vs, system_vs, android_vs, device_name, s_number, ram, rom, resolution, purchase_date, purchase_price, note, c_status, c_note, inventory_company_key, manufacturer, modell, current_status, dguv, warranty, room_nb, floor" +
+                        "iv_number, touchframe_vs, system_vs, android_vs, device_name, s_number, memory_ram_size_gb, memory_rom_size_gb, resolution, purchase_date, purchase_price, note, c_status, c_note, inventory_company_key, manufacturer, modell, current_status, dguv, warranty, room_nb, floor" +
                         ") values (" +
                         "'" + args[0] + "', " +
                         "'" + args[1] + "', " +
@@ -334,7 +334,6 @@ public class SQLInsertStatements {
 
         connector.query(s);
     }
-
 
     public void inputUDStatement(String[] args){
         SQLStatement s = new SQLStatement(

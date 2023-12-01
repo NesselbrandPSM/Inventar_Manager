@@ -6,7 +6,6 @@ import Main.utility.Utils;
 import SQL.util.SQLStatement;
 
 import java.sql.*;
-import java.util.HashMap;
 
 public class SQLConnector {
 
@@ -39,7 +38,7 @@ public class SQLConnector {
                     if (Main.startup) {
                         LoadingScreen.print(query.getStatement());
                     }
-                    Utils.systemOutPrintln(query.getStatement());
+                    Utils.systemOutYelPrintln(query.getStatement());
                     result = statement.executeQuery(query.getStatement());
                     break;
                 case "insert":
@@ -48,7 +47,7 @@ public class SQLConnector {
                     if (Main.startup) {
                         LoadingScreen.print(query.getStatement());
                     }
-                    Utils.systemOutPrintln(query.getStatement());
+                    Utils.systemOutYelPrintln(query.getStatement());
                     statement.executeUpdate(query.getStatement());
                     break;
             }

@@ -442,7 +442,6 @@ public class Utils {
 
 
     //new Throwable().getStackTrace()[0].getLineNumber(
-
     public static void systemOutPrintln(ArrayList<ArrayList<String>> in){
         System.out.println(Arrays.deepToString(convertArrayList_ArrayList_StringTo2DArray(in)));
     }
@@ -451,15 +450,19 @@ public class Utils {
         System.out.println(out);
     }
 
+    public static void systemOutYelPrintln(String out){
+        System.out.println("\033[33m" + out + "\033[0m");
+    }
+
     public static void systemErrPrintln(String err){
         System.err.println(err);
     }
 
-    public static void systemOutPrintln(ArrayList<ArrayList<String>> in, int line){
+    public static void systemOutYelPrintln(ArrayList<ArrayList<String>> in, int line){
         System.out.println(line + ": " + Arrays.deepToString(convertArrayList_ArrayList_StringTo2DArray(in)));
     }
 
-    public static void systemOutPrintln(String out, int line){
+    public static void systemOutYelPrintln(String out, int line){
         System.out.println(line + ": " + out);
     }
 
