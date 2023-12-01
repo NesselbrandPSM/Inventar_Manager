@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PC_Form {
     private JPanel pcPanel;
@@ -43,14 +44,15 @@ public class PC_Form {
     private String[][] companySet;
 
     public PC_Form() {
-        for (String s : Constants.statusList) {
-            status.addItem(new ComboBoxItem(s));
-        }
         companys.removeAllItems();
         companySet = Constants.getCompanySet();
         String[] companysArr = companySet[0];
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
+        }
+
+        for (String s : Constants.statusList) {
+            status.addItem(new ComboBoxItem(s));
         }
 
         for (String s : Constants.conditionList) {
@@ -179,5 +181,65 @@ public class PC_Form {
         eSimNumber.setText("");
         eSimPin.setText("");
         conditionNote.setText("");
+    }
+
+    public void initData(String[] data) {
+        switch (data[2]){
+            case "PC":
+                PCCheckBox.setSelected(true);
+                break;
+            case "NB":
+                laptopCheckBox.setSelected(true);
+                break;
+            case "TB":
+                tabletCheckBox.setSelected(true);
+                break;
+            case "TC":
+                thinclientCheckBox.setSelected(true);
+                break;
+        }
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            System.out.println(companySet[0][i]);
+            if (data[3].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        manufacturer.setText(data[4]);
+        modell.setText(data[5]);
+        purchaseDate.setText(data[6]);
+        purchasePrice.setText(data[7]);
+        warranty.setText(data[8]);
+        ram.setText(data[9]);
+        rom.setText(data[10]);
+        cpu.setText(data[11]);
+        os.setText(data[12]);
+        ip.setText(data[13]);
+        lastUpdate.setText(data[14]);
+        s_number.setText(data[17]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[18].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        dguv.setText(data[19]);
+        eSimNumber.setText(data[20]);
+        eSimPin.setText(data[21]);
+        note.setText(data[22]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[23].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[24]);
     }
 }

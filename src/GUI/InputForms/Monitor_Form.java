@@ -125,4 +125,47 @@ public class Monitor_Form {
     public JPanel getMonitorPanel() {
         return monitorPanel;
     }
+
+    public void initData(String[] data) {
+        manufacturer.setText(data[2]);
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            System.out.println(companySet[0][i]);
+            if (data[3].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        modell.setText(data[4]);
+        resolution.setText(data[5]);
+        purchaseDate.setText(data[6]);
+        purchasePrice.setText(data[7]);
+        warranty.setText(data[8]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[9].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        dguv.setText(data[10]);
+        s_number.setText(data[11]);
+        hdmi.setText(data[12]);
+        dp.setText(data[13]);
+        dvi.setText(data[14]);
+        vga.setText(data[15]);
+        note.setText(data[16]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[17].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[18]);
+    }
 }

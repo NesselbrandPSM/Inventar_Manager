@@ -130,4 +130,49 @@ public class Telephone_Form {
     public JPanel getTelephonePanel() {
         return telephonePanel;
     }
+
+    public void initData(String[] data) {
+        manufacturer.setText(data[2]);
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            System.out.println(companySet[0][i]);
+            if (data[3].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        modell.setText(data[4]);
+
+        purchaseDate.setText(data[7]);
+        purchasePrice.setText(data[8]);
+        warranty.setText(data[9]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[10].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        dguv.setText(data[11]);
+        s_number.setText(data[12]);
+        ip.setText(data[13]);
+        rufNummer.setText(data[14]);
+        tarif.setText(data[15]);
+        dpPin.setText(data[16]);
+        simNummer.setText(data[17]);
+        simPin.setText(data[18]);
+        note.setText(data[19]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[20].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        condition.setToolTipText(data[21]);
+    }
 }

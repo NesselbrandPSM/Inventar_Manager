@@ -18,23 +18,28 @@ public class ColumNames {
     };
 
     public static final String[] allAttributesSC = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis", "Garantie","Status", "DGUV", "Serien Nummer", "IP-Addresse", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis", "Garantie","Status", "DGUV",
+            "Serien Nummer", "IP-Addresse", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesMO = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Auflösung", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer", "HDMI", "DisplayPort", "DVI", "VGA", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Auflösung", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer",
+            "HDMI", "DisplayPort", "DVI", "VGA", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesTE = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer", "IP-Addresse", "Rufnummer", "Tarif", "Display Pin", "Sim Nummer", "Sim Pin", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV",
+            "Serien Nummer", "IP-Addresse", "Rufnummer", "Tarif", "Display Pin", "Sim Nummer", "Sim Pin", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesHD = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV",
+            "Serien Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesDS = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status", "DGUV", "Serien Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Hersteller", "Firma", "Modell", "Nutzer", "Nutzer Email", "Kaufdatum", "KaufPreis","Garantie", "Status",
+            "DGUV", "Serien Nummer", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesDK = new String[]{
@@ -48,10 +53,12 @@ public class ColumNames {
     };
 
     public static final String[] allAtributesTV = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Name", "Serien Nummer", "Auflösung", "Touchframe-Version","Systemversion","Android-Version", "Arbeitsspeicher", "Festplattenspeicher", "Kaufdatum", "KaufPreis","Garantie", "Status", "Raum Nummer", "Etage", "DGUV", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Name", "Serien Nummer", "Auflösung", "Touchframe-Version","Systemversion","Android-Version",
+            "Arbeitsspeicher", "Festplattenspeicher", "Kaufdatum", "KaufPreis","Garantie", "Status", "Raum Nummer", "Etage", "DGUV", "Bemerkung", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 
     public static final String[] allAttributesRT = new String[]{
-            "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Serien Nummer", "IP-Addresse", "Patchbox-Nummer", "Raum Nummer", "Etage", "Status", "DGUV", "Bemerkung", "Kaufdatum", "KaufPreis", "Garantie", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
+            "Primärschlüssel", "Inventar Nummer", "Firma", "Hersteller", "Modell", "Serien Nummer", "IP-Addresse", "Patchbox-Nummer", "Raum Nummer", "Etage", "Status", "DGUV",
+            "Bemerkung", "Kaufdatum", "KaufPreis", "Garantie", "Zustand", "Zustandsbemerkung", "Letzte Änderung"
     };
 }

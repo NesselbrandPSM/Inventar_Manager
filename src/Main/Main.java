@@ -1,6 +1,7 @@
 package Main;
 
 import GUI.GUIS.Dialogs.PrinterDialog;
+import GUI.GUIS.Dialogs.ShowEditDialog;
 import GUI.GUIS.LoadingScreen;
 import GUI.GUIS.MainGui;
 import GUI.GUIS.UserManagmantGui;

@@ -1,6 +1,7 @@
 package GUI.GUIS;
 
 import GUI.GUIS.Dialogs.SettingsDialog;
+import GUI.GUIS.Dialogs.ShowEditDialog;
 import GUI.util.ColumNames;
 import GUI.util.ShowAllTableModel;
 import GUI.util.StatusList;
@@ -15,6 +16,7 @@ import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class MainGui {
     //region attributes
@@ -212,8 +214,45 @@ public class MainGui {
             @Override //DoubleClickListener
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    openLeftClickPopUpForTable(e);
-                }
+                    String[] selRow = (String[]) tableModel.getRow(table1.getSelectedRow());
+                    String[][] data = null;
+                    switch (Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase()){
+                        case "pc":
+                            data = sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "telephone":
+                            data = sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "headset":
+                            data = sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "tv":
+                            data = sqlSelectStatements.getAllFromTVView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "scanner":
+                            data = sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "router":
+                            data = sqlSelectStatements.getAllFromRTView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "dockingstation":
+                            data = sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "desk":
+                            data = sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "miscellaneous":
+                            data = sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "monitor":
+                            data = sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "printer":
+                            data = sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[4]));
+                            break;
+                    }
+                    assert data != null;
+                    ShowEditDialog.init(Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase(), data[0], selRow[0]);                }
             }
         });
 
@@ -381,7 +420,45 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    //TODO bearbeiten
+                    String[] selRow = (String[]) tableModel.getRow(table1.getSelectedRow());
+                    String[][] data = null;
+                    switch (Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase()){
+                        case "pc":
+                            data = sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "telephone":
+                            data = sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "headset":
+                            data = sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "tv":
+                            data = sqlSelectStatements.getAllFromTVView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "scanner":
+                            data = sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "router":
+                            data = sqlSelectStatements.getAllFromRTView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "dockingstation":
+                            data = sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "desk":
+                            data = sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "miscellaneous":
+                            data = sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "monitor":
+                            data = sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[4]));
+                            break;
+                        case "printer":
+                            data = sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[4]));
+                            break;
+                    }
+                    assert data != null;
+                    ShowEditDialog.init(Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase(), data[0], selRow[0]);
                 }
             }
         });
@@ -393,12 +470,11 @@ public class MainGui {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    int selectedRow = table1.getSelectedRow();
-                    String[] selRow = (String[]) tableModel.getRow(selectedRow);
+                    String[] selRow = (String[]) tableModel.getRow(table1.getSelectedRow());
                     String[] options = {"JA", "NEIN"};
                     int i = JOptionPane.showOptionDialog(null, "Soll der Datensatz mit\n    " +
                                     "Inventarnummer: " + selRow[0] + "\n    " +
-                                    "Primärschlüssel: " + selRow[2] + "\nwirklich gelöscht werden?",
+                                    "Primärschlüssel: " + selRow[4] + "\nwirklich gelöscht werden?",
                             "Löschen",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.INFORMATION_MESSAGE,

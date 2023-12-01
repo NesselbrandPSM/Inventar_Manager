@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.GUIS.Dialogs.ShowEditDialog">
+  <grid id="cbd77" binding="contentPane" custom-create="true" layout-manager="FormLayout">
+    <rowspec value="center:max(m;800px):grow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:30px:noGrow"/>
+    <colspec value="fill:d:grow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="48" y="54" width="436" height="948"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="e7465" class="javax.swing.JButton" binding="buttonOK">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="10" bottom="10" right="0" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Fertig"/>
+        </properties>
+      </component>
+      <component id="5723f" class="javax.swing.JButton" binding="buttonCancel">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="0" left="0" bottom="10" right="10" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Abbrechen"/>
+        </properties>
+      </component>
+      <grid id="8e884" binding="content" custom-create="true" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="10" left="10" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+    </children>
+  </grid>
+</form>

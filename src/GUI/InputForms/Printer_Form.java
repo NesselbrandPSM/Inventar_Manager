@@ -43,6 +43,7 @@ public class Printer_Form {
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
+
         companys.removeAllItems();
         companySet = Constants.getCompanySet();
         String[] companysArr = companySet[0];
@@ -119,5 +120,47 @@ public class Printer_Form {
         note.setText("");
         floorTextField.setText("");
         roomNBTextField.setText("");
+    }
+
+    public void initData(String[] data) {
+        manufacturer.setText(data[2]);
+        modell.setText(data[3]);
+
+        int i;
+        for (i = 0; i < companySet[0].length; i++) {
+            System.out.println(companySet[0][i]);
+            if (data[4].equals(companySet[0][i])){
+                break;
+            }
+        }
+        companys.setSelectedIndex(i);
+
+        purchaseDate.setText(data[5]);
+        purchasePrice.setText(data[6]);
+        warranty.setText(data[7]);
+        eq_number.setText(data[8]);
+        s_number.setText(data[9]);
+
+        for (i = 0; i < Constants.statusList.length; i++) {
+            if (data[10].equals(Constants.statusList[i])){
+                break;
+            }
+        }
+        status.setSelectedIndex(i);
+
+        dguv.setText(data[11]);
+        ip.setText(data[12]);
+        floorTextField.setText(data[13]);
+        roomNBTextField.setText(data[14]);
+        note.setText(data[15]);
+
+        for (i = 0; i < Constants.conditionList.length; i++) {
+            if (data[16].equals(Constants.conditionList[i])){
+                break;
+            }
+        }
+        condition.setSelectedIndex(i);
+
+        conditionNote.setText(data[17]);
     }
 }
