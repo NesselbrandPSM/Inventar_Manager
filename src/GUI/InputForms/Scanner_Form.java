@@ -118,7 +118,6 @@ public class Scanner_Form {
 
         int i;
         for (i = 0; i < companySet[0].length; i++) {
-            System.out.println(companySet[0][i]);
             if (data[3].equals(companySet[0][i])){
                 break;
             }
