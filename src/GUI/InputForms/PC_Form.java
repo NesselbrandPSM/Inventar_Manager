@@ -112,7 +112,11 @@ public class PC_Form {
 
     public String[] getArgs(String currentIVNumber) {
         ArrayList<String> args = new ArrayList<>();
-        args.add(currentIVNumber);
+        if (currentIVNumber == null){
+            args.add("");
+        } else {
+            args.add(currentIVNumber);
+        }
         args.add(getPcType());
         args.add(status.getSelectedItem().toString());
         args.add("");

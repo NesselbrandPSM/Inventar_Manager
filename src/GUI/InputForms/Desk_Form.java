@@ -2,6 +2,7 @@ package GUI.InputForms;
 
 import GUI.util.ComboBoxItem;
 import Main.utility.Constants;
+import Main.utility.Utils;
 import SQL.SQLConnector;
 import SQL.Statements.SQLSelectStatements;
 import SQL.Statements.SQLUpdateStatements;
@@ -40,6 +41,8 @@ public class Desk_Form {
     private SQLUpdateStatements sqlUpdateStatements;
 
     private String[][] companySet;
+
+    private ArrayList<String> oldIV_numbers = null;
 
     public JPanel getDeskPanel() {
         return deskPanel;
@@ -134,6 +137,20 @@ public class Desk_Form {
         args.add(condition.getSelectedItem().toString());
         args.add(conditionNote.getText());
 
+        if (oldIV_numbers != null){
+            oldIV_numbers.remove(teIVNumberBox.getSelectedItem().toString());
+            oldIV_numbers.remove(scIVNumberBox.getSelectedItem().toString());
+            oldIV_numbers.remove(hdIVNumberBox.getSelectedItem().toString());
+            oldIV_numbers.remove(dsIVNumberBox.getSelectedItem().toString());
+            oldIV_numbers.remove(pcIVNumberBox.getSelectedItem().toString());
+            oldIV_numbers.remove(mo1IVNumberBox.getSelectedItem().toString());
+            oldIV_numbers.remove(mo2IVNumberBox.getSelectedItem().toString());
+
+            for (String s : oldIV_numbers) {
+                sqlUpdateStatements.changeCurrentStatus("edv eingelagert", Utils.getTableFromShortCut(s.substring(0, 2)), s);
+            }
+        }
+
         if (!teIVNumberBox.getSelectedItem().toString().equals(" - ")) {
             sqlUpdateStatements.changeCurrentStatus("in verwendung (am Standort)", "telephone", teIVNumberBox.getSelectedItem().toString());
         }
@@ -197,7 +214,8 @@ public class Desk_Form {
     }
 
     public void initData(String[] data) {
-        //TODO LOGIC FÜR WENN EIN ITEM VERÄNDERT WIRD MUSS DER STATUS ANGEMESSEN VERÄNDERT WERDEN
+        oldIV_numbers = new ArrayList<>();
+
         manufacturer.setText(data[2]);
         modell.setText(data[3]);
         s_number.setText(data[4]);
@@ -230,36 +248,44 @@ public class Desk_Form {
         if (!data[15].equals(" - ")){
             pcIVNumberBox.addItem(new ComboBoxItem(data[15]));
             pcIVNumberBox.setSelectedIndex(pcIVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[15]);
         }
+
 
         if (!data[16].equals(" - ")){
             hdIVNumberBox.addItem(new ComboBoxItem(data[16]));
             hdIVNumberBox.setSelectedIndex(hdIVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[16]);
         }
 
         if (!data[17].equals(" - ")){
             teIVNumberBox.addItem(new ComboBoxItem(data[17]));
             teIVNumberBox.setSelectedIndex(teIVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[17]);
         }
 
         if (!data[18].equals(" - ")){
             dsIVNumberBox.addItem(new ComboBoxItem(data[18]));
             dsIVNumberBox.setSelectedIndex(dsIVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[18]);
         }
 
         if (!data[19].equals(" - ")){
             scIVNumberBox.addItem(new ComboBoxItem(data[19]));
             scIVNumberBox.setSelectedIndex(scIVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[19]);
         }
 
         if (!data[20].equals(" - ")){
             mo1IVNumberBox.addItem(new ComboBoxItem(data[20]));
             mo1IVNumberBox.setSelectedIndex(mo1IVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[20]);
         }
 
         if (!data[21].equals(" - ")){
             mo2IVNumberBox.addItem(new ComboBoxItem(data[21]));
             mo2IVNumberBox.setSelectedIndex(mo2IVNumberBox.getItemCount() - 1);
+            oldIV_numbers.add(data[21]);
         }
 
 

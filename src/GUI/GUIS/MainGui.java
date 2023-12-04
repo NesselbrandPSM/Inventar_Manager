@@ -214,45 +214,8 @@ public class MainGui {
             @Override //DoubleClickListener
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    String[] selRow = (String[]) tableModel.getRow(table1.getSelectedRow());
-                    String[][] data = null;
-                    switch (Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase()){
-                        case "pc":
-                            data = sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "telephone":
-                            data = sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "headset":
-                            data = sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "tv":
-                            data = sqlSelectStatements.getAllFromTVView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "scanner":
-                            data = sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "router":
-                            data = sqlSelectStatements.getAllFromRTView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "dockingstation":
-                            data = sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "desk":
-                            data = sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "miscellaneous":
-                            data = sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "monitor":
-                            data = sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[4]));
-                            break;
-                        case "printer":
-                            data = sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[4]));
-                            break;
-                    }
-                    assert data != null;
-                    ShowEditDialog.init(Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase(), data[0], selRow[0]);                }
+                    showEditView();
+                }
             }
         });
 
@@ -316,6 +279,54 @@ public class MainGui {
                 settingsDialog.init();
             }
         });
+        elementBearbeitenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showEditView();
+            }
+        });
+    }
+
+    private void showEditView() {
+        String[] selRow = (String[]) tableModel.getRow(table1.getSelectedRow());
+        String[][] data = null;
+        switch (Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase()) {
+            case "pc":
+                data = sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[4]));
+                break;
+            case "telephone":
+                data = sqlSelectStatements.getAllFromTEView(Integer.parseInt(selRow[4]));
+                break;
+            case "headset":
+                data = sqlSelectStatements.getAllFromHDView(Integer.parseInt(selRow[4]));
+                break;
+            case "tv":
+                data = sqlSelectStatements.getAllFromTVView(Integer.parseInt(selRow[4]));
+                break;
+            case "scanner":
+                data = sqlSelectStatements.getAllFromSCView(Integer.parseInt(selRow[4]));
+                break;
+            case "router":
+                data = sqlSelectStatements.getAllFromRTView(Integer.parseInt(selRow[4]));
+                break;
+            case "dockingstation":
+                data = sqlSelectStatements.getAllFromDSView(Integer.parseInt(selRow[4]));
+                break;
+            case "desk":
+                data = sqlSelectStatements.getAllFromDKView(Integer.parseInt(selRow[4]));
+                break;
+            case "miscellaneous":
+                data = sqlSelectStatements.getAllFromMCView(Integer.parseInt(selRow[4]));
+                break;
+            case "monitor":
+                data = sqlSelectStatements.getAllFromMOView(Integer.parseInt(selRow[4]));
+                break;
+            case "printer":
+                data = sqlSelectStatements.getAllFromPRView(Integer.parseInt(selRow[4]));
+                break;
+        }
+        assert data != null;
+        ShowEditDialog.init(Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase(), data[0], selRow[0]);
     }
 
     public void updateShowAllTableModel(int flags) {
@@ -330,7 +341,7 @@ public class MainGui {
                 }
                 break;
             }
-            case 1 : { // show Search View for iv_number
+            case 1: { // show Search View for iv_number
                 statusList.add("searching ...", 0.2);
                 String[][] result = sqlSelectStatements.getSelectViewIV_Number(searchTextField.getText());
                 if (result == null) {
@@ -344,7 +355,7 @@ public class MainGui {
                 showAllTableModelFlag = 1;
                 break;
             }
-            case 2 : { // show search View for company
+            case 2: { // show search View for company
                 statusList.add("searching ...", 0.2);
                 String[][] result;
                 if (lastactivefilterbox.equals("")) {
@@ -363,7 +374,7 @@ public class MainGui {
                 showAllTableModelFlag = 2;
                 break;
             }
-            case 3 : { // show search View for type
+            case 3: { // show search View for type
                 statusList.add("searching ...", 0.2);
                 String[][] result = sqlSelectStatements.getSelectViewType(Utils.filterBoxTextToAccordingDataTable(lastactivefilterbox));
                 if (result == null) {
@@ -422,7 +433,7 @@ public class MainGui {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     String[] selRow = (String[]) tableModel.getRow(table1.getSelectedRow());
                     String[][] data = null;
-                    switch (Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase()){
+                    switch (Utils.getTableFromShortCut(selRow[0].substring(0, 2)).toLowerCase()) {
                         case "pc":
                             data = sqlSelectStatements.getAllFromPCView(Integer.parseInt(selRow[4]));
                             break;

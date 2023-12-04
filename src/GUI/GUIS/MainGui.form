@@ -128,7 +128,7 @@
         </constraints>
         <properties>
           <text value="Element Bearbeiten"/>
-          <visible value="false"/>
+          <visible value="true"/>
         </properties>
       </component>
       <component id="32614" class="javax.swing.JComboBox" binding="searchSelectorComboBox">

@@ -32,7 +32,6 @@ public class Scanner_Form {
 
     public Scanner_Form() {
         sqlSelectStatements = new SQLSelectStatements(new SQLConnector());
-
         for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }

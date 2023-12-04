@@ -39,7 +39,6 @@ public class Printer_Form {
         for (String s : Constants.conditionList){
             condition.addItem(new ComboBoxItem(s));
         }
-
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }
@@ -128,7 +127,6 @@ public class Printer_Form {
 
         int i;
         for (i = 0; i < companySet[0].length; i++) {
-            System.out.println(companySet[0][i]);
             if (data[4].equals(companySet[0][i])){
                 break;
             }

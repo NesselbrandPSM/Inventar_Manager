@@ -76,7 +76,6 @@ public class Miscellaneous_Form {
         ArrayList<String> args = new ArrayList<>();
 
         args.add(iv_number);
-
         args.add("-1");
 
         String currentComp = companys.getSelectedItem().toString();

@@ -172,7 +172,6 @@ public class Telephone_Form {
             }
         }
         condition.setSelectedIndex(i);
-
         condition.setToolTipText(data[21]);
     }
 }

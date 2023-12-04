@@ -40,7 +40,6 @@ public class Monitor_Form {
         for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }
-
         for (String s : Constants.statusList) {
             status.addItem(new ComboBoxItem(s));
         }

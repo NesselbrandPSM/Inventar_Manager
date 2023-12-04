@@ -2,6 +2,8 @@ package GUI.GUIS.Dialogs;
 
 import GUI.InputForms.*;
 import Main.utility.Utils;
+import SQL.SQLConnector;
+import SQL.Statements.SQLUpdateStatements;
 import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
@@ -26,7 +28,12 @@ public class ShowEditDialog extends JDialog {
     private TV_Form tvForm;
     private Router_Form routerForm;
 
-    public ShowEditDialog(String table) {
+    private String table;
+    private String iv_number;
+
+    public ShowEditDialog(String table, String iv_number) {
+        this.iv_number = iv_number;
+        this.table = table;
         initForms(table);
         setContentPane(contentPane);
         setModal(true);
@@ -117,7 +124,42 @@ public class ShowEditDialog extends JDialog {
     }
 
     private void onOK() {
-        //TODO update corrosponding table
+        SQLUpdateStatements sqlUpdateStatements = new SQLUpdateStatements(new SQLConnector());
+        switch (table){
+            case "pc":
+                 sqlUpdateStatements.updatePC(pcForm.getArgs(""), iv_number);
+                break;
+            case "telephone":
+                sqlUpdateStatements.updateTE(telephoneForm.getArgs(""), iv_number);
+                break;
+            case "headset":
+                sqlUpdateStatements.updateHD(headsetForm.getArgs(""), iv_number);
+                break;
+            case "tv":
+                sqlUpdateStatements.updateTV(tvForm.getArgs(""), iv_number);
+                break;
+            case "scanner":
+                sqlUpdateStatements.updateSC(scannerForm.getArgs(""), iv_number);
+                break;
+            case "router":
+                sqlUpdateStatements.updateRT(routerForm.getArgs(""), iv_number);
+                break;
+            case "dockingstation":
+                sqlUpdateStatements.updateDS(dockingstationForm.getArgs(""), iv_number);
+                break;
+            case "desk":
+                sqlUpdateStatements.updateDesk(deskForm.getArgs(""), iv_number);
+                break;
+            case "miscellaneous":
+                sqlUpdateStatements.updateMC(miscellaneousForm.getArgs(""), iv_number);
+                break;
+            case "monitor":
+                sqlUpdateStatements.updateMO(monitorForm.getArgs(""), iv_number);
+                break;
+            case "printer":
+                sqlUpdateStatements.updatePR(printerForm.getArgs(""), iv_number);
+                break;
+        }
         dispose();
     }
 
@@ -126,7 +168,7 @@ public class ShowEditDialog extends JDialog {
     }
 
     public static void init(String table, String[] data, String iv_number) {
-        ShowEditDialog dialog = new ShowEditDialog(table);
+        ShowEditDialog dialog = new ShowEditDialog(table, iv_number);
         dialog.setTitle(iv_number);
         dialog.switchTable(table, data);
         dialog.pack();

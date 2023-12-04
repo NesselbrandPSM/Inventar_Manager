@@ -42,7 +42,6 @@ public class Dockingstation_Form {
         for (String s : companysArr) {
             companys.addItem(new ComboBoxItem(s));
         }
-
         for (String s : Constants.conditionList) {
             condition.addItem(new ComboBoxItem(s));
         }

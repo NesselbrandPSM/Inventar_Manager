@@ -1,7 +1,6 @@
 package Main;
 
 import GUI.GUIS.Dialogs.PrinterDialog;
-import GUI.GUIS.Dialogs.ShowEditDialog;
 import GUI.GUIS.LoadingScreen;
 import GUI.GUIS.MainGui;
 import GUI.GUIS.UserManagmantGui;
@@ -16,16 +15,18 @@ import SQL.Statements.SQLSelectStatements;
 import SQL.util.SQLStatement;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Main {
-    private static final String version_code = "0.2.3";
+    private static final String version_code = "1.0.0";
     private static final String startup_configuration = "main";
 
     public static boolean startup = true;
@@ -112,9 +113,6 @@ public class Main {
             }
             case "7": {
                 PrinterDialog.start("l.schmidt", sqlSelectStatements.getUserAttributes("l.schmidt"));
-                break;
-            }
-            case "9":{
                 break;
             }
         }
