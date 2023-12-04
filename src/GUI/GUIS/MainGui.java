@@ -16,7 +16,6 @@ import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 
 public class MainGui {
     //region attributes
